@@ -324,6 +324,8 @@ defmodule LLMDB do
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
     `:minimum_vram_gb` from optional `extra.llmfit` metadata
   - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -355,6 +357,8 @@ defmodule LLMDB do
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
     `:minimum_vram_gb` from optional `extra.llmfit` metadata
   - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 

@@ -1,8 +1,8 @@
 defmodule LLMDB.Query do
   @moduledoc """
-  Query functions for selecting models based on capabilities and model size.
+  Query functions for selecting models by capability, architecture, and size.
 
-  Provides capability-based model selection with provider preferences and
+  Provides capability and architecture filters with provider preferences and
   optional hardware-related sorting.
   All queries operate on the filtered catalog loaded into the Store.
   """
@@ -35,6 +35,7 @@ defmodule LLMDB.Query do
   }
 
   @sort_fields [:total_parameters, :active_parameters, :minimum_ram_gb, :minimum_vram_gb]
+  @architecture_types [:dense, :moe, :unknown]
 
   @doc """
   Selects the first model matching capability requirements.
@@ -51,6 +52,8 @@ defmodule LLMDB.Query do
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
     `:minimum_vram_gb` from optional `extra.llmfit` metadata
   - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -72,6 +75,8 @@ defmodule LLMDB.Query do
       {:ok, {provider, model_id}} = Query.select(
         sort_by: :total_parameters
       )
+
+      {:ok, {provider, model_id}} = Query.select(architecture: :moe)
   """
   @spec select(keyword()) :: {:ok, {provider(), model_id()}} | {:error, :no_match}
   def select(opts \\ []) do
@@ -80,6 +85,7 @@ defmodule LLMDB.Query do
     scope = Keyword.get(opts, :scope, :all)
     sort_by = opts |> Keyword.get(:sort_by) |> validate_sort_by!()
     sort_order = opts |> Keyword.get(:sort_order, :asc) |> validate_sort_order!()
+    architecture = opts |> Keyword.get(:architecture, :all) |> validate_architecture!()
 
     # Use snapshot.prefer as default if :prefer not explicitly provided
     prefer =
@@ -95,11 +101,11 @@ defmodule LLMDB.Query do
 
     case sort_by do
       nil ->
-        find_first_match(providers, require_kw, forbid_kw)
+        find_first_match(providers, require_kw, forbid_kw, architecture)
 
       _ ->
         providers
-        |> find_all_matching_models(require_kw, forbid_kw)
+        |> find_all_matching_models(require_kw, forbid_kw, architecture)
         |> sort_candidates(sort_by, sort_order)
         |> case do
           [] -> {:error, :no_match}
@@ -124,6 +130,8 @@ defmodule LLMDB.Query do
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
     `:minimum_vram_gb` from optional `extra.llmfit` metadata
   - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -146,6 +154,8 @@ defmodule LLMDB.Query do
       local_candidates = Query.candidates(
         sort_by: :minimum_ram_gb
       )
+
+      moe_candidates = Query.candidates(architecture: :moe)
   """
   @spec candidates(keyword()) :: [{provider(), model_id()}]
   def candidates(opts \\ []) do
@@ -154,6 +164,7 @@ defmodule LLMDB.Query do
     scope = Keyword.get(opts, :scope, :all)
     sort_by = opts |> Keyword.get(:sort_by) |> validate_sort_by!()
     sort_order = opts |> Keyword.get(:sort_order, :asc) |> validate_sort_order!()
+    architecture = opts |> Keyword.get(:architecture, :all) |> validate_architecture!()
 
     prefer =
       case Keyword.fetch(opts, :prefer) do
@@ -167,7 +178,7 @@ defmodule LLMDB.Query do
     providers = build_provider_list(scope, prefer)
 
     providers
-    |> find_all_matching_models(require_kw, forbid_kw)
+    |> find_all_matching_models(require_kw, forbid_kw, architecture)
     |> sort_candidates(sort_by, sort_order)
     |> Enum.map(fn {provider, model} -> {provider, model.id} end)
   end
@@ -226,26 +237,62 @@ defmodule LLMDB.Query do
     [provider]
   end
 
-  defp find_all_matching_models(providers, require_kw, forbid_kw) do
+  defp find_all_matching_models(providers, require_kw, forbid_kw, architecture) do
     Enum.flat_map(providers, fn provider ->
       Catalog.models(provider)
       |> Enum.filter(&matches_require?(&1, require_kw))
       |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+      |> Enum.filter(&matches_architecture?(&1, architecture))
       |> Enum.map(&{provider, &1})
     end)
   end
 
-  defp find_first_match([], _require_kw, _forbid_kw), do: {:error, :no_match}
+  defp find_first_match([], _require_kw, _forbid_kw, _architecture), do: {:error, :no_match}
 
-  defp find_first_match([provider | rest], require_kw, forbid_kw) do
+  defp find_first_match([provider | rest], require_kw, forbid_kw, architecture) do
     models_list =
       Catalog.models(provider)
       |> Enum.filter(&matches_require?(&1, require_kw))
       |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+      |> Enum.filter(&matches_architecture?(&1, architecture))
 
     case models_list do
-      [] -> find_first_match(rest, require_kw, forbid_kw)
+      [] -> find_first_match(rest, require_kw, forbid_kw, architecture)
       [model | _] -> {:ok, {provider, model.id}}
+    end
+  end
+
+  defp validate_architecture!(:all), do: :all
+
+  defp validate_architecture!(architecture) when architecture in @architecture_types,
+    do: architecture
+
+  defp validate_architecture!(architecture) do
+    raise ArgumentError,
+          "architecture must be :dense, :moe, :unknown, or :all, got: #{inspect(architecture)}"
+  end
+
+  defp matches_architecture?(_model, :all), do: true
+  defp matches_architecture?(model, architecture), do: architecture_type(model) == architecture
+
+  defp architecture_type(model) do
+    case metadata_value(Map.get(model, :extra), :llmfit) do
+      llmfit when is_map(llmfit) ->
+        case metadata_value(metadata_value(llmfit, :moe), :is_moe) do
+          true -> :moe
+          false -> :dense
+          _ -> if usable_architecture?(llmfit), do: :dense, else: :unknown
+        end
+
+      _ ->
+        :unknown
+    end
+  end
+
+  defp usable_architecture?(llmfit) do
+    case metadata_value(llmfit, :architecture) do
+      architecture when is_binary(architecture) -> String.trim(architecture) != ""
+      _ -> false
     end
   end
 

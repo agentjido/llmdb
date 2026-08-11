@@ -24,6 +24,7 @@ defmodule LLMDB.APITest do
         provider: :openai,
         extra: %{
           llmfit: %{
+            architecture: "dense-transformer",
             parameters_raw: 100_000_000_000,
             memory: %{min_ram_gb: 60.0, min_vram_gb: 50.0}
           }
@@ -48,7 +49,10 @@ defmodule LLMDB.APITest do
           "llmfit" => %{
             "parameters_raw" => 200_000_000_000,
             "memory" => %{"min_ram_gb" => 120.0, "min_vram_gb" => 100.0},
-            "moe" => %{"active_parameters" => 20_000_000_000}
+            "moe" => %{
+              "active_parameters" => 20_000_000_000,
+              "is_moe" => true
+            }
           }
         },
         capabilities: %{chat: true, tools: %{enabled: true}, json: %{native: false}}
@@ -244,6 +248,43 @@ defmodule LLMDB.APITest do
 
       assert_raise ArgumentError, ~r/sort_order must be/, fn ->
         LLMDB.candidates(sort_order: :sideways)
+      end
+    end
+
+    test "filters by dense architecture" do
+      assert LLMDB.candidates(architecture: :dense) == [{:openai, "gpt-4o"}]
+    end
+
+    test "filters by MoE architecture with snapshot string keys" do
+      assert LLMDB.candidates(architecture: :moe) == [
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+    end
+
+    test "filters models with missing or unusable architecture metadata as unknown" do
+      assert LLMDB.candidates(architecture: :unknown) |> MapSet.new() ==
+               MapSet.new([
+                 {:openai, "gpt-4o-mini"},
+                 {:cohere, "rerank-v3.5"}
+               ])
+    end
+
+    test "combines architecture and capability filters" do
+      assert LLMDB.candidates(require: [chat: true], architecture: :moe) == [
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+
+      assert {:ok, {:anthropic, "claude-3-5-sonnet-20241022"}} =
+               LLMDB.select(
+                 require: [chat: true],
+                 architecture: :moe,
+                 sort_by: :total_parameters
+               )
+    end
+
+    test "rejects an invalid architecture filter" do
+      assert_raise ArgumentError, ~r/architecture must be/, fn ->
+        LLMDB.candidates(architecture: :sparse)
       end
     end
   end
