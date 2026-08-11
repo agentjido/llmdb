@@ -49,8 +49,8 @@ defmodule LLMDB.Query do
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
-    `:minimum_vram_gb` (optional)
-  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
+    `:minimum_vram_gb` from optional `extra.llmfit` metadata
+  - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
 
   ## Returns
 
@@ -100,10 +100,10 @@ defmodule LLMDB.Query do
       _ ->
         providers
         |> find_all_matching_models(require_kw, forbid_kw)
-        |> sort_models(sort_by, sort_order)
+        |> sort_candidates(sort_by, sort_order)
         |> case do
           [] -> {:error, :no_match}
-          [model | _] -> {:ok, {model.provider, model.id}}
+          [{provider, model} | _] -> {:ok, {provider, model.id}}
         end
     end
   end
@@ -122,8 +122,8 @@ defmodule LLMDB.Query do
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
-    `:minimum_vram_gb` (optional)
-  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
+    `:minimum_vram_gb` from optional `extra.llmfit` metadata
+  - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
 
   ## Returns
 
@@ -168,8 +168,8 @@ defmodule LLMDB.Query do
 
     providers
     |> find_all_matching_models(require_kw, forbid_kw)
-    |> sort_models(sort_by, sort_order)
-    |> Enum.map(&{&1.provider, &1.id})
+    |> sort_candidates(sort_by, sort_order)
+    |> Enum.map(fn {provider, model} -> {provider, model.id} end)
   end
 
   @doc """
@@ -231,6 +231,7 @@ defmodule LLMDB.Query do
       Catalog.models(provider)
       |> Enum.filter(&matches_require?(&1, require_kw))
       |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+      |> Enum.map(&{provider, &1})
     end)
   end
 
@@ -262,12 +263,12 @@ defmodule LLMDB.Query do
     raise ArgumentError, "sort_order must be :asc or :desc, got: #{inspect(sort_order)}"
   end
 
-  defp sort_models(models, nil, _sort_order), do: models
+  defp sort_candidates(candidates, nil, _sort_order), do: candidates
 
-  defp sort_models(models, sort_by, sort_order) do
-    models
+  defp sort_candidates(candidates, sort_by, sort_order) do
+    candidates
     |> Enum.with_index()
-    |> Enum.sort_by(fn {model, index} ->
+    |> Enum.sort_by(fn {{_provider, model}, index} ->
       case model_sort_value(model, sort_by) do
         value when is_number(value) ->
           ordered_value = if sort_order == :asc, do: value, else: -value

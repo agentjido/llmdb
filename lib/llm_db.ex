@@ -322,8 +322,8 @@ defmodule LLMDB do
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
-    `:minimum_vram_gb` (optional)
-  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
+    `:minimum_vram_gb` from optional `extra.llmfit` metadata
+  - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
 
   ## Returns
 
@@ -353,8 +353,8 @@ defmodule LLMDB do
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
   - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
-    `:minimum_vram_gb` (optional)
-  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
+    `:minimum_vram_gb` from optional `extra.llmfit` metadata
+  - `:sort_order` - `:asc` (default) or `:desc`; models without a numeric value are last
 
   ## Returns
 

@@ -114,7 +114,7 @@ model.id  #=> "claude-haiku-4-5-20251001" (canonical ID)
 )
 {:ok, model} = LLMDB.model({provider, id})
 
-# Sort model candidates by hardware-relevant model size
+# Sort by optional extra.llmfit size metadata; models without values are last
 smallest_models = LLMDB.candidates(
   sort_by: :total_parameters,
   sort_order: :asc
