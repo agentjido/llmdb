@@ -47,7 +47,8 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
-  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -101,7 +102,8 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
-  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -240,11 +242,19 @@ defmodule LLMDB.Query do
       llmfit when is_map(llmfit) ->
         case metadata_value(metadata_value(llmfit, :moe), :is_moe) do
           true -> :moe
-          _ -> :dense
+          false -> :dense
+          _ -> if usable_architecture?(llmfit), do: :dense, else: :unknown
         end
 
       _ ->
         :unknown
+    end
+  end
+
+  defp usable_architecture?(llmfit) do
+    case metadata_value(llmfit, :architecture) do
+      architecture when is_binary(architecture) -> String.trim(architecture) != ""
+      _ -> false
     end
   end
 

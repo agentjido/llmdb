@@ -28,6 +28,7 @@ defmodule LLMDB.APITest do
       %{
         id: "gpt-4o-mini",
         provider: :openai,
+        extra: %{llmfit: %{}},
         capabilities: %{chat: true, tools: %{enabled: true}, json: %{native: true}}
       },
       %{
@@ -190,7 +191,7 @@ defmodule LLMDB.APITest do
              ]
     end
 
-    test "filters models without architecture metadata as unknown" do
+    test "filters models with missing or unusable architecture metadata as unknown" do
       assert LLMDB.candidates(architecture: :unknown) |> MapSet.new() ==
                MapSet.new([
                  {:openai, "gpt-4o-mini"},

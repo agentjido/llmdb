@@ -321,7 +321,8 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
-  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 
@@ -350,7 +351,8 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
-  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`).
+    Models without usable llmfit architecture metadata are `:unknown`.
 
   ## Returns
 

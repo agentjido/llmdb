@@ -127,6 +127,9 @@ LLMDB.providers()
 LLMDB.allowed?("openai:gpt-4o-mini") #=> true
 ```
 
+Architecture classification uses optional llmfit metadata. Models without
+usable architecture metadata have the `:unknown` classification.
+
 ## API Cheatsheet
 
 - **`model/1`** — `"provider:model"`, `"model@provider"`, `{:provider, id}`, or `{"provider", id}` → `{:ok, %Model{}}` | `{:error, _}`
