@@ -311,7 +311,7 @@ defmodule LLMDB do
   # Selection (delegated to Query)
 
   @doc """
-  Selects the first model matching capability requirements.
+  Selects the first model matching capability and sort requirements.
 
   Delegates to `LLMDB.Query.select/1`.
 
@@ -321,6 +321,9 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
+    `:minimum_vram_gb` (optional)
+  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
 
   ## Returns
 
@@ -339,7 +342,7 @@ defmodule LLMDB do
   defdelegate select(opts), to: Query
 
   @doc """
-  Returns all models matching capability requirements.
+  Returns all models matching capability and sort requirements.
 
   Delegates to `LLMDB.Query.candidates/1`.
 
@@ -349,6 +352,9 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
+    `:minimum_vram_gb` (optional)
+  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
 
   ## Returns
 

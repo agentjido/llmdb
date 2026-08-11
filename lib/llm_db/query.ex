@@ -1,8 +1,9 @@
 defmodule LLMDB.Query do
   @moduledoc """
-  Query functions for selecting models based on capabilities and requirements.
+  Query functions for selecting models based on capabilities and model size.
 
-  Provides capability-based model selection with provider preferences.
+  Provides capability-based model selection with provider preferences and
+  optional hardware-related sorting.
   All queries operate on the filtered catalog loaded into the Store.
   """
 
@@ -33,11 +34,13 @@ defmodule LLMDB.Query do
     streaming_tool_calls: [:streaming, :tool_calls]
   }
 
+  @sort_fields [:total_parameters, :active_parameters, :minimum_ram_gb, :minimum_vram_gb]
+
   @doc """
   Selects the first model matching capability requirements.
 
-  Returns the first allowed model that matches the required capabilities,
-  in provider preference order.
+  Returns the first allowed model that matches the required capabilities.
+  Provider preference controls the order unless `:sort_by` is set.
 
   ## Options
 
@@ -45,6 +48,9 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
+    `:minimum_vram_gb` (optional)
+  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
 
   ## Returns
 
@@ -62,12 +68,18 @@ defmodule LLMDB.Query do
         require: [json_native: true],
         scope: :openai
       )
+
+      {:ok, {provider, model_id}} = Query.select(
+        sort_by: :total_parameters
+      )
   """
   @spec select(keyword()) :: {:ok, {provider(), model_id()}} | {:error, :no_match}
   def select(opts \\ []) do
     require_kw = Keyword.get(opts, :require, [])
     forbid_kw = Keyword.get(opts, :forbid, [])
     scope = Keyword.get(opts, :scope, :all)
+    sort_by = opts |> Keyword.get(:sort_by) |> validate_sort_by!()
+    sort_order = opts |> Keyword.get(:sort_order, :asc) |> validate_sort_order!()
 
     # Use snapshot.prefer as default if :prefer not explicitly provided
     prefer =
@@ -80,14 +92,28 @@ defmodule LLMDB.Query do
       end
 
     providers = build_provider_list(scope, prefer)
-    find_first_match(providers, require_kw, forbid_kw)
+
+    case sort_by do
+      nil ->
+        find_first_match(providers, require_kw, forbid_kw)
+
+      _ ->
+        providers
+        |> find_all_matching_models(require_kw, forbid_kw)
+        |> sort_models(sort_by, sort_order)
+        |> case do
+          [] -> {:error, :no_match}
+          [model | _] -> {:ok, {model.provider, model.id}}
+        end
+    end
   end
 
   @doc """
   Gets all allowed models matching capability requirements.
 
-  Returns all models that match the capability filters in preference order.
-  Similar to `select/1` but returns all matches instead of just the first.
+  Returns all models that match the capability filters. Provider preference
+  controls the order unless `:sort_by` is set. Similar to `select/1` but
+  returns all matches instead of only the first.
 
   ## Options
 
@@ -95,10 +121,13 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:sort_by` - `:total_parameters`, `:active_parameters`, `:minimum_ram_gb`, or
+    `:minimum_vram_gb` (optional)
+  - `:sort_order` - `:asc` (default) or `:desc`; missing values are always last
 
   ## Returns
 
-  List of `{provider, model_id}` tuples matching the criteria, in preference order.
+  List of `{provider, model_id}` tuples matching the criteria.
 
   ## Examples
 
@@ -113,12 +142,18 @@ defmodule LLMDB.Query do
         scope: :openai
       )
       #=> [{:openai, "gpt-4o"}, {:openai, "gpt-4o-mini"}, ...]
+
+      local_candidates = Query.candidates(
+        sort_by: :minimum_ram_gb
+      )
   """
   @spec candidates(keyword()) :: [{provider(), model_id()}]
   def candidates(opts \\ []) do
     require_kw = Keyword.get(opts, :require, [])
     forbid_kw = Keyword.get(opts, :forbid, [])
     scope = Keyword.get(opts, :scope, :all)
+    sort_by = opts |> Keyword.get(:sort_by) |> validate_sort_by!()
+    sort_order = opts |> Keyword.get(:sort_order, :asc) |> validate_sort_order!()
 
     prefer =
       case Keyword.fetch(opts, :prefer) do
@@ -130,7 +165,11 @@ defmodule LLMDB.Query do
       end
 
     providers = build_provider_list(scope, prefer)
-    find_all_matches(providers, require_kw, forbid_kw)
+
+    providers
+    |> find_all_matching_models(require_kw, forbid_kw)
+    |> sort_models(sort_by, sort_order)
+    |> Enum.map(&{&1.provider, &1.id})
   end
 
   @doc """
@@ -187,6 +226,14 @@ defmodule LLMDB.Query do
     [provider]
   end
 
+  defp find_all_matching_models(providers, require_kw, forbid_kw) do
+    Enum.flat_map(providers, fn provider ->
+      Catalog.models(provider)
+      |> Enum.filter(&matches_require?(&1, require_kw))
+      |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+    end)
+  end
+
   defp find_first_match([], _require_kw, _forbid_kw), do: {:error, :no_match}
 
   defp find_first_match([provider | rest], require_kw, forbid_kw) do
@@ -201,14 +248,73 @@ defmodule LLMDB.Query do
     end
   end
 
-  defp find_all_matches(providers, require_kw, forbid_kw) do
-    Enum.flat_map(providers, fn provider ->
-      Catalog.models(provider)
-      |> Enum.filter(&matches_require?(&1, require_kw))
-      |> Enum.reject(&matches_forbid?(&1, forbid_kw))
-      |> Enum.map(&{provider, &1.id})
-    end)
+  defp validate_sort_by!(nil), do: nil
+  defp validate_sort_by!(sort_by) when sort_by in @sort_fields, do: sort_by
+
+  defp validate_sort_by!(sort_by) do
+    raise ArgumentError,
+          "sort_by must be one of #{inspect(@sort_fields)}, got: #{inspect(sort_by)}"
   end
+
+  defp validate_sort_order!(sort_order) when sort_order in [:asc, :desc], do: sort_order
+
+  defp validate_sort_order!(sort_order) do
+    raise ArgumentError, "sort_order must be :asc or :desc, got: #{inspect(sort_order)}"
+  end
+
+  defp sort_models(models, nil, _sort_order), do: models
+
+  defp sort_models(models, sort_by, sort_order) do
+    models
+    |> Enum.with_index()
+    |> Enum.sort_by(fn {model, index} ->
+      case model_sort_value(model, sort_by) do
+        value when is_number(value) ->
+          ordered_value = if sort_order == :asc, do: value, else: -value
+          {0, ordered_value, index}
+
+        _ ->
+          {1, 0, index}
+      end
+    end)
+    |> Enum.map(&elem(&1, 0))
+  end
+
+  defp model_sort_value(model, :total_parameters) do
+    model |> llmfit_metadata() |> metadata_value(:parameters_raw)
+  end
+
+  defp model_sort_value(model, :active_parameters) do
+    model
+    |> llmfit_metadata()
+    |> metadata_value(:moe)
+    |> metadata_value(:active_parameters)
+  end
+
+  defp model_sort_value(model, :minimum_ram_gb) do
+    model
+    |> llmfit_metadata()
+    |> metadata_value(:memory)
+    |> metadata_value(:min_ram_gb)
+  end
+
+  defp model_sort_value(model, :minimum_vram_gb) do
+    model
+    |> llmfit_metadata()
+    |> metadata_value(:memory)
+    |> metadata_value(:min_vram_gb)
+  end
+
+  defp llmfit_metadata(model), do: metadata_value(Map.get(model, :extra), :llmfit)
+
+  defp metadata_value(map, key) when is_map(map) do
+    case Map.fetch(map, key) do
+      {:ok, value} -> value
+      :error -> Map.get(map, Atom.to_string(key))
+    end
+  end
+
+  defp metadata_value(_map, _key), do: nil
 
   defp matches_require?(_model, []), do: true
 
