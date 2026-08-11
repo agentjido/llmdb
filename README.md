@@ -114,6 +114,12 @@ model.id  #=> "claude-haiku-4-5-20251001" (canonical ID)
 )
 {:ok, model} = LLMDB.model({provider, id})
 
+# Sort by optional extra.llmfit size metadata; models without values are last
+smallest_models = LLMDB.candidates(
+  sort_by: :total_parameters,
+  sort_order: :asc
+)
+
 # Filter by model architecture
 moe_models = LLMDB.candidates(architecture: :moe)
 dense_models = LLMDB.candidates(architecture: :dense)
