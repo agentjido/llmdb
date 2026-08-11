@@ -114,6 +114,11 @@ model.id  #=> "claude-haiku-4-5-20251001" (canonical ID)
 )
 {:ok, model} = LLMDB.model({provider, id})
 
+# Filter by model architecture
+moe_models = LLMDB.candidates(architecture: :moe)
+dense_models = LLMDB.candidates(architecture: :dense)
+unclassified_models = LLMDB.candidates(architecture: :unknown)
+
 # List providers
 LLMDB.providers()
 #=> [%LLMDB.Provider{id: :anthropic, ...}, %LLMDB.Provider{id: :openai, ...}]
@@ -121,6 +126,9 @@ LLMDB.providers()
 # Check availability (allow/deny filters)
 LLMDB.allowed?("openai:gpt-4o-mini") #=> true
 ```
+
+Architecture classification uses optional llmfit metadata. Models without
+usable architecture metadata have the `:unknown` classification.
 
 ## API Cheatsheet
 
