@@ -33,6 +33,8 @@ defmodule LLMDB.Query do
     streaming_tool_calls: [:streaming, :tool_calls]
   }
 
+  @architecture_types [:dense, :moe, :unknown]
+
   @doc """
   Selects the first model matching capability requirements.
 
@@ -45,6 +47,7 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
 
   ## Returns
 
@@ -62,12 +65,15 @@ defmodule LLMDB.Query do
         require: [json_native: true],
         scope: :openai
       )
+
+      {:ok, {provider, model_id}} = Query.select(architecture: :moe)
   """
   @spec select(keyword()) :: {:ok, {provider(), model_id()}} | {:error, :no_match}
   def select(opts \\ []) do
     require_kw = Keyword.get(opts, :require, [])
     forbid_kw = Keyword.get(opts, :forbid, [])
     scope = Keyword.get(opts, :scope, :all)
+    architecture = opts |> Keyword.get(:architecture, :all) |> validate_architecture!()
 
     # Use snapshot.prefer as default if :prefer not explicitly provided
     prefer =
@@ -80,7 +86,7 @@ defmodule LLMDB.Query do
       end
 
     providers = build_provider_list(scope, prefer)
-    find_first_match(providers, require_kw, forbid_kw)
+    find_first_match(providers, require_kw, forbid_kw, architecture)
   end
 
   @doc """
@@ -95,6 +101,7 @@ defmodule LLMDB.Query do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order (e.g., `[:openai, :anthropic]`)
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
 
   ## Returns
 
@@ -113,12 +120,15 @@ defmodule LLMDB.Query do
         scope: :openai
       )
       #=> [{:openai, "gpt-4o"}, {:openai, "gpt-4o-mini"}, ...]
+
+      moe_candidates = Query.candidates(architecture: :moe)
   """
   @spec candidates(keyword()) :: [{provider(), model_id()}]
   def candidates(opts \\ []) do
     require_kw = Keyword.get(opts, :require, [])
     forbid_kw = Keyword.get(opts, :forbid, [])
     scope = Keyword.get(opts, :scope, :all)
+    architecture = opts |> Keyword.get(:architecture, :all) |> validate_architecture!()
 
     prefer =
       case Keyword.fetch(opts, :prefer) do
@@ -130,7 +140,7 @@ defmodule LLMDB.Query do
       end
 
     providers = build_provider_list(scope, prefer)
-    find_all_matches(providers, require_kw, forbid_kw)
+    find_all_matches(providers, require_kw, forbid_kw, architecture)
   end
 
   @doc """
@@ -187,28 +197,65 @@ defmodule LLMDB.Query do
     [provider]
   end
 
-  defp find_first_match([], _require_kw, _forbid_kw), do: {:error, :no_match}
+  defp find_first_match([], _require_kw, _forbid_kw, _architecture), do: {:error, :no_match}
 
-  defp find_first_match([provider | rest], require_kw, forbid_kw) do
+  defp find_first_match([provider | rest], require_kw, forbid_kw, architecture) do
     models_list =
       Catalog.models(provider)
       |> Enum.filter(&matches_require?(&1, require_kw))
       |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+      |> Enum.filter(&matches_architecture?(&1, architecture))
 
     case models_list do
-      [] -> find_first_match(rest, require_kw, forbid_kw)
+      [] -> find_first_match(rest, require_kw, forbid_kw, architecture)
       [model | _] -> {:ok, {provider, model.id}}
     end
   end
 
-  defp find_all_matches(providers, require_kw, forbid_kw) do
+  defp find_all_matches(providers, require_kw, forbid_kw, architecture) do
     Enum.flat_map(providers, fn provider ->
       Catalog.models(provider)
       |> Enum.filter(&matches_require?(&1, require_kw))
       |> Enum.reject(&matches_forbid?(&1, forbid_kw))
+      |> Enum.filter(&matches_architecture?(&1, architecture))
       |> Enum.map(&{provider, &1.id})
     end)
   end
+
+  defp validate_architecture!(:all), do: :all
+
+  defp validate_architecture!(architecture) when architecture in @architecture_types,
+    do: architecture
+
+  defp validate_architecture!(architecture) do
+    raise ArgumentError,
+          "architecture must be :dense, :moe, :unknown, or :all, got: #{inspect(architecture)}"
+  end
+
+  defp matches_architecture?(_model, :all), do: true
+  defp matches_architecture?(model, architecture), do: architecture_type(model) == architecture
+
+  defp architecture_type(model) do
+    case metadata_value(Map.get(model, :extra), :llmfit) do
+      llmfit when is_map(llmfit) ->
+        case metadata_value(metadata_value(llmfit, :moe), :is_moe) do
+          true -> :moe
+          _ -> :dense
+        end
+
+      _ ->
+        :unknown
+    end
+  end
+
+  defp metadata_value(map, key) when is_map(map) do
+    case Map.fetch(map, key) do
+      {:ok, value} -> value
+      :error -> Map.get(map, Atom.to_string(key))
+    end
+  end
+
+  defp metadata_value(_map, _key), do: nil
 
   defp matches_require?(_model, []), do: true
 

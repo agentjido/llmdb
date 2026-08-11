@@ -321,6 +321,7 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
 
   ## Returns
 
@@ -349,6 +350,7 @@ defmodule LLMDB do
   - `:forbid` - Keyword list of forbidden capabilities
   - `:prefer` - List of provider atoms in preference order
   - `:scope` - Either `:all` (default) or a specific provider atom
+  - `:architecture` - One of `:dense`, `:moe`, or `:unknown` (default: `:all`)
 
   ## Returns
 

@@ -114,6 +114,11 @@ model.id  #=> "claude-haiku-4-5-20251001" (canonical ID)
 )
 {:ok, model} = LLMDB.model({provider, id})
 
+# Filter by model architecture
+moe_models = LLMDB.candidates(architecture: :moe)
+dense_models = LLMDB.candidates(architecture: :dense)
+unclassified_models = LLMDB.candidates(architecture: :unknown)
+
 # List providers
 LLMDB.providers()
 #=> [%LLMDB.Provider{id: :anthropic, ...}, %LLMDB.Provider{id: :openai, ...}]
