@@ -27,7 +27,7 @@ capabilities without waiting for downstream libraries to catch up.
 
 LLM DB gives that moving catalog a refreshable snapshot pattern: pull upstream
 metadata, validate and normalize it, package it into releases, and let consumers
-query a stable local database at runtime. The site at [llmdb.xyz](https://llmdb.xyz)
+query a stable local database at runtime. The site at [llmcatalog.dev](https://llmcatalog.dev)
 showcases the live catalog and makes those ongoing changes easier to inspect.
 
 ## Runtime Metadata Contract
