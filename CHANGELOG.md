@@ -7,6 +7,15 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.8.2](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.2) (2026-08-12)
+
+
+
+
+### Features:
+
+* add xAI Grok 4.6 metadata (#299) by mikehostetler
+
 ## [2026.8.1](https://github.com/agentjido/llm_db/compare/2026.8.1...2026.8.1) (2026-08-11)
 
 
