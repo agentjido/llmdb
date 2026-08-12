@@ -7,6 +7,17 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.8.1](https://github.com/agentjido/llm_db/compare/2026.8.1...2026.8.1) (2026-08-11)
+
+
+
+
+### Features:
+
+* sort models by size (#295) by mikehostetler
+
+* filter models by architecture (#294) by mikehostetler
+
 ## [2026.8.0](https://github.com/agentjido/llm_db/compare/2026.8.0...2026.8.0) (2026-08-10)
 
 
