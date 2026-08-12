@@ -15,7 +15,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   alias LLMDB.Snapshot
 
-  @default_repo "agentjido/llm_db"
+  @default_repo "agentjido/llmdb"
   @default_index_tag "catalog-index"
   @default_cache_dir Path.join(["tmp", "llm_db", "snapshot_cache"])
   @github_api_version "2022-11-28"
