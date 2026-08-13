@@ -6,7 +6,7 @@ The default API loads one generated provider shard at a time. It performs no
 network requests. Provider modules are cached after their first use.
 
 This package is an NPM spike. The Elixir pipeline in
-[agentjido/llm_db](https://github.com/agentjido/llm_db) owns all metadata,
+[agentjido/llmdb](https://github.com/agentjido/llmdb) owns all metadata,
 validation, and snapshot integrity.
 
 ## Install

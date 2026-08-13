@@ -68,7 +68,9 @@ class LazyCatalog implements LLMDBClient {
     providerId: ProviderId,
   ): Promise<ProviderCatalog | undefined> {
     const normalizedId = normalizeProviderId(providerId);
-    const loader = this.#loaders[normalizedId];
+    const loader = Object.hasOwn(this.#loaders, normalizedId)
+      ? this.#loaders[normalizedId]
+      : undefined;
 
     if (loader === undefined) {
       return Promise.resolve(undefined);

@@ -1,7 +1,9 @@
 import { InvalidModelSpecError } from "./errors.js";
+import { manifest } from "./generated/manifest.js";
 import type { ParsedModelSpec, ProviderId } from "./types.js";
 
-const PROVIDER_PATTERN = /^[a-z0-9][a-z0-9_.:-]{0,63}$/;
+const PROVIDER_PATTERN = /^[a-z0-9][a-z0-9_.-]{0,63}$/;
+const KNOWN_PROVIDER_IDS = new Set(Object.keys(manifest.providers));
 
 export function parseModelSpec(spec: string): ParsedModelSpec {
   const input = spec.trim();
@@ -13,8 +15,12 @@ export function parseModelSpec(spec: string): ParsedModelSpec {
   const atIndex = input.lastIndexOf("@");
   if (atIndex > 0 && atIndex < input.length - 1) {
     const providerCandidate = input.slice(atIndex + 1).trim();
+    const providerId = normalizeProviderId(providerCandidate);
 
-    if (PROVIDER_PATTERN.test(providerCandidate)) {
+    if (
+      PROVIDER_PATTERN.test(providerId) &&
+      (!input.includes(":") || KNOWN_PROVIDER_IDS.has(providerId))
+    ) {
       return parseSegments(spec, providerCandidate, input.slice(0, atIndex));
     }
   }
@@ -44,7 +50,11 @@ export function formatModelSpec(
 }
 
 export function normalizeProviderId(providerId: ProviderId): ProviderId {
-  return providerId.trim().replaceAll("-", "_").replaceAll(".", "_");
+  const trimmed = providerId.trim();
+
+  return KNOWN_PROVIDER_IDS.has(trimmed)
+    ? trimmed
+    : trimmed.replaceAll("-", "_").replaceAll(".", "_");
 }
 
 function parseSegments(

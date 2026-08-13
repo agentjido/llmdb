@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  createLLMDB,
   formatModelSpec,
   InvalidModelSpecError,
   llmdb,
@@ -25,6 +26,27 @@ test("caches loaded providers", async () => {
   const second = await llmdb.provider("openai");
 
   assert.equal(first, second);
+});
+
+test("coalesces concurrent provider loads", async () => {
+  let callCount = 0;
+  const client = createLLMDB({
+    loaders: {
+      openai: async () => {
+        callCount += 1;
+        return openai;
+      },
+    },
+  });
+
+  const [first, second] = await Promise.all([
+    client.provider("openai"),
+    client.provider("openai"),
+  ]);
+
+  assert.equal(first, openai);
+  assert.equal(second, openai);
+  assert.equal(callCount, 1);
 });
 
 test("supports strict and optional lookups", async () => {
@@ -66,6 +88,31 @@ test("provides direct synchronous provider entrypoints", () => {
   assert.throws(() => openai.get("missing"), ModelNotFoundError);
 });
 
+test("does not read model or provider IDs from object prototypes", async () => {
+  const client = createLLMDB({ loaders: {} });
+
+  for (const reservedId of ["constructor", "toString", "__proto__"]) {
+    assert.equal(openai.find(reservedId), undefined);
+    assert.equal(openai.has(reservedId), false);
+    assert.throws(() => openai.get(reservedId), ModelNotFoundError);
+    assert.equal(await client.findProvider(reservedId), undefined);
+    await assert.rejects(
+      () => client.provider(reservedId),
+      ProviderNotFoundError,
+    );
+  }
+});
+
+test("gives model aliases precedence over deprecated canonical stubs", async () => {
+  const { default: xai } = await import("@jido/llmdb/providers/xai");
+
+  assert.equal(xai.get("grok-code-fast-1").id, "grok-build-0.1");
+  assert.equal(
+    xai.get("grok-imagine-image-pro").id,
+    "grok-imagine-image-quality",
+  );
+});
+
 test("provides an explicit synchronous full catalog", async () => {
   const { catalog } = await import("@jido/llmdb/full");
 
@@ -99,6 +146,37 @@ test("parses and formats both model spec forms", () => {
     "gpt-5.4@openai",
   );
   assert.throws(() => parseModelSpec("gpt-5.4"), InvalidModelSpecError);
+  assert.throws(() => parseModelSpec("model@open:ai"), InvalidModelSpecError);
+});
+
+test("uses known providers to resolve specs with both separators", () => {
+  assert.deepEqual(
+    parseModelSpec("google_vertex:claude-haiku-4-5@20251001"),
+    {
+      providerId: "google_vertex",
+      modelId: "claude-haiku-4-5@20251001",
+    },
+  );
+  assert.deepEqual(parseModelSpec("model:version@google_vertex"), {
+    providerId: "google_vertex",
+    modelId: "model:version",
+  });
+});
+
+test("round-trips every canonical provider:model spec", async () => {
+  const { snapshot } = await import("@jido/llmdb/snapshot");
+  let modelCount = 0;
+
+  for (const [providerId, provider] of Object.entries(snapshot.providers)) {
+    for (const modelId of Object.keys(provider.models)) {
+      const parsed = { providerId, modelId };
+
+      assert.deepEqual(parseModelSpec(formatModelSpec(parsed)), parsed);
+      modelCount += 1;
+    }
+  }
+
+  assert.equal(modelCount, manifest.model_count);
 });
 
 test("keeps colons inside model IDs", () => {

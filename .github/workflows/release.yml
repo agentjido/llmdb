@@ -37,6 +37,14 @@ jobs:
           fetch-tags: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Require the main branch
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::error::Run releases only from the main branch."
+            exit 1
+          fi
+
       - name: Disable git hooks
         run: git config core.hooksPath /dev/null
 
@@ -51,6 +59,11 @@ jobs:
         with:
           elixir-version: "1.18"
           otp-version: "27"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
 
       - name: Restore dependencies cache
         uses: actions/cache@v6
@@ -95,15 +108,16 @@ jobs:
         run: |
           set -euo pipefail
           mix llm_db.version
+          npm run npm:sync
           VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "### Version: $VERSION" >> "$GITHUB_STEP_SUMMARY"
 
           # Commit version bump with conventional commit format
-          if git diff --quiet mix.exs; then
+          if git diff --quiet -- mix.exs packages/llm-db/package.json package-lock.json; then
             echo "Version already up to date"
           else
-            git add mix.exs
+            git add mix.exs packages/llm-db/package.json package-lock.json
             git commit -m "chore: bump version to $VERSION"
           fi
 

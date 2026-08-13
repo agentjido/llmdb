@@ -23,6 +23,11 @@ The `mix llm_db.npm.export` task:
 Node.js generates only package entrypoints, loader tables, and declarations
 from those Elixir-owned files. It does not define or transform metadata.
 
+Provider IDs used as NPM subpaths can contain lowercase letters, digits,
+underscores, and hyphens. The exporter rejects other snapshot-valid characters,
+such as colons, because they are not safe in file names on all supported
+platforms.
+
 ## Package entrypoints
 
 | Entrypoint | Purpose |

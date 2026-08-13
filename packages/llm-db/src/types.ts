@@ -38,18 +38,18 @@ export interface PricingComponent {
     | null;
   readonly per: number | null;
   readonly rate: number | null;
-  readonly meter: string | null;
-  readonly tool: string | null;
-  readonly size_class: string | null;
-  readonly multiplier: number | null;
-  readonly derives_from: string | null;
-  readonly applies_to: readonly string[] | null;
-  readonly applies_when: Readonly<Record<string, JsonValue>> | null;
-  readonly excludes_when: Readonly<Record<string, JsonValue>> | null;
-  readonly mode: string | null;
-  readonly charge_scope: string | null;
-  readonly source: string | null;
-  readonly notes: string | null;
+  readonly meter?: string | null;
+  readonly tool?: string | null;
+  readonly size_class?: string | null;
+  readonly multiplier?: number | null;
+  readonly derives_from?: string | null;
+  readonly applies_to?: readonly string[] | null;
+  readonly applies_when?: Readonly<Record<string, JsonValue>> | null;
+  readonly excludes_when?: Readonly<Record<string, JsonValue>> | null;
+  readonly mode?: string | null;
+  readonly charge_scope?: string | null;
+  readonly source?: string | null;
+  readonly notes?: string | null;
   readonly [key: string]: unknown;
 }
 
@@ -175,15 +175,15 @@ export interface SupportedFeature {
   readonly features?: readonly string[];
 }
 
+export interface EmbeddingCapability {
+  readonly min_dimensions?: number | null;
+  readonly max_dimensions?: number | null;
+  readonly default_dimensions?: number | null;
+}
+
 export interface ModelCapabilities {
   readonly chat: boolean;
-  readonly embeddings:
-    | boolean
-    | {
-        readonly min_dimensions: number | null;
-        readonly max_dimensions: number | null;
-        readonly default_dimensions: number | null;
-      };
+  readonly embeddings: boolean | EmbeddingCapability;
   readonly reasoning: ReasoningCapability;
   readonly rerank: boolean;
   readonly tools: ToolCapability;

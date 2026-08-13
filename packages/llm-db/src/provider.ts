@@ -60,7 +60,15 @@ class ShardedProviderCatalog implements ProviderCatalog {
 
   find(modelId: string): Model | undefined {
     const lookupId = this.#stripBedrockPrefix(modelId);
-    return this.data.models[lookupId] ?? this.#aliases.get(lookupId);
+    const alias = this.#aliases.get(lookupId);
+
+    if (alias !== undefined) {
+      return alias;
+    }
+
+    return Object.hasOwn(this.data.models, lookupId)
+      ? this.data.models[lookupId]
+      : undefined;
   }
 
   has(modelId: string): boolean {
