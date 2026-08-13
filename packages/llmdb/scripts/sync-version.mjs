@@ -17,7 +17,7 @@ if (match === null || match[1] === undefined) {
 const elixirVersion = match[1];
 const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8"));
 const packageLock = JSON.parse(await readFile(rootPackageLockPath, "utf8"));
-const workspaceLock = packageLock.packages?.["packages/llm-db"];
+const workspaceLock = packageLock.packages?.["packages/llmdb"];
 
 if (
   packageJson.version === elixirVersion &&
@@ -36,7 +36,7 @@ if (checkOnly) {
 }
 
 if (workspaceLock === undefined) {
-  throw new Error("Could not find packages/llm-db in package-lock.json.");
+  throw new Error("Could not find packages/llmdb in package-lock.json.");
 }
 
 packageJson.version = elixirVersion;

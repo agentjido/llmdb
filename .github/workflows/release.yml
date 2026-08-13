@@ -114,10 +114,10 @@ jobs:
           echo "### Version: $VERSION" >> "$GITHUB_STEP_SUMMARY"
 
           # Commit version bump with conventional commit format
-          if git diff --quiet -- mix.exs packages/llm-db/package.json package-lock.json; then
+          if git diff --quiet -- mix.exs packages/llmdb/package.json package-lock.json; then
             echo "Version already up to date"
           else
-            git add mix.exs packages/llm-db/package.json package-lock.json
+            git add mix.exs packages/llmdb/package.json package-lock.json
             git commit -m "chore: bump version to $VERSION"
           fi
 

@@ -10,7 +10,7 @@ defmodule Mix.Tasks.LlmDb.Npm.Export do
   workspace.
 
       mix llm_db.npm.export
-      mix llm_db.npm.export --output packages/llm-db/generated
+      mix llm_db.npm.export --output packages/llmdb/generated
   """
 
   @switches [output: :string]
@@ -23,7 +23,7 @@ defmodule Mix.Tasks.LlmDb.Npm.Export do
       Mix.raise("usage: mix llm_db.npm.export [--output DIR]")
     end
 
-    output = Keyword.get(opts, :output, "packages/llm-db/generated")
+    output = Keyword.get(opts, :output, "packages/llmdb/generated")
     manifest = Exporter.export!(output)
 
     Mix.shell().info(

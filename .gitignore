@@ -28,9 +28,9 @@ llm_db-*.tar
 # NPM workspace artifacts. The NPM package is generated downstream from the
 # canonical Elixir snapshot and the repository license.
 /node_modules/
-/packages/llm-db/dist/
-/packages/llm-db/generated/
-/packages/llm-db/LICENSE
-/packages/llm-db/src/generated/
-/packages/llm-db/src/providers/
-/packages/llm-db/*.tgz
+/packages/llmdb/dist/
+/packages/llmdb/generated/
+/packages/llmdb/LICENSE
+/packages/llmdb/src/generated/
+/packages/llmdb/src/providers/
+/packages/llmdb/*.tgz

@@ -8,7 +8,7 @@ defmodule LLMDB.NPM.ExporterTest do
     output_dir =
       Path.join(
         System.tmp_dir!(),
-        "llm-db-npm-exporter-#{System.unique_integer([:positive])}"
+        "llmdb-npm-exporter-#{System.unique_integer([:positive])}"
       )
 
     on_exit(fn -> File.rm_rf!(output_dir) end)
@@ -37,7 +37,7 @@ defmodule LLMDB.NPM.ExporterTest do
     output_dir =
       Path.join(
         System.tmp_dir!(),
-        "llm-db-npm-exporter-unowned-#{System.unique_integer([:positive])}"
+        "llmdb-npm-exporter-unowned-#{System.unique_integer([:positive])}"
       )
 
     important_path = Path.join(output_dir, "important.txt")
@@ -127,7 +127,7 @@ defmodule LLMDB.NPM.ExporterTest do
   defp tmp_dir(name) do
     Path.join(
       System.tmp_dir!(),
-      "llm-db-npm-exporter-#{name}-#{System.unique_integer([:positive])}"
+      "llmdb-npm-exporter-#{name}-#{System.unique_integer([:positive])}"
     )
   end
 end
