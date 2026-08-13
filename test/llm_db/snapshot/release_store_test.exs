@@ -161,7 +161,7 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     printf '%s\\n' "$*" >> "#{log_path}"
 
     if [ "$1" = "release" ] && [ "$2" = "create" ]; then
-      echo "https://github.com/agentjido/llm_db/releases/tag/$3"
+      echo "https://github.com/agentjido/llmdb/releases/tag/$3"
       exit 0
     fi
 

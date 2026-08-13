@@ -2,8 +2,8 @@
 
 [![Hex.pm](https://img.shields.io/hexpm/v/llm_db.svg)](https://hex.pm/packages/llm_db)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/llm_db/)
-[![CI](https://github.com/agentjido/llm_db/actions/workflows/ci.yml/badge.svg)](https://github.com/agentjido/llm_db/actions/workflows/ci.yml)
-[![License](https://img.shields.io/hexpm/l/llm_db.svg)](https://github.com/agentjido/llm_db/blob/main/LICENSE)
+[![CI](https://github.com/agentjido/llmdb/actions/workflows/ci.yml/badge.svg)](https://github.com/agentjido/llmdb/actions/workflows/ci.yml)
+[![License](https://img.shields.io/hexpm/l/llm_db.svg)](https://github.com/agentjido/llmdb/blob/main/LICENSE)
 [![Website](https://img.shields.io/badge/website-jido.run-0f172a.svg)](https://jido.run)
 [![Ecosystem](https://img.shields.io/badge/ecosystem-jido.run-0ea5e9.svg)](https://jido.run/ecosystem)
 [![Discord](https://img.shields.io/badge/discord-join-5865F2.svg?logo=discord&logoColor=white)](https://jido.run/discord)
@@ -11,9 +11,9 @@
 LLM model metadata catalog with fast, capability-aware lookups. Use simple `"provider:model"` or `"model@provider"` specs, get validated Provider/Model structs, and select models by capabilities. Ships with a packaged snapshot; no network required by default.
 
 The packaged catalog loads lazily on the first query and starts no llm_db
-supervisor or worker. Use `LLMDB.load/1` when you need explicit control over
-loading or want an error tuple; a lazy first-use failure raises
-`LLMDB.LoadError`. Loading never pulls provider metadata or reads dotenv files.
+supervisor or worker. To keep catalog preparation outside the first request,
+call `LLMDB.load/0` from your application startup. Loading never pulls provider
+metadata or reads dotenv files.
 
 - **Primary interface**: `model_spec` — a string like `"openai:gpt-4o-mini"` or `"gpt-4o-mini@openai"` (filename-safe)
 - **Fast O(1) reads** via `:persistent_term`
@@ -27,7 +27,7 @@ capabilities without waiting for downstream libraries to catch up.
 
 LLM DB gives that moving catalog a refreshable snapshot pattern: pull upstream
 metadata, validate and normalize it, package it into releases, and let consumers
-query a stable local database at runtime. The site at [llmdb.xyz](https://llmdb.xyz)
+query a stable local database at runtime. The site at [llmcatalog.dev](https://llmcatalog.dev)
 showcases the live catalog and makes those ongoing changes easier to inspect.
 
 ## Runtime Metadata Contract
@@ -114,6 +114,17 @@ model.id  #=> "claude-haiku-4-5-20251001" (canonical ID)
 )
 {:ok, model} = LLMDB.model({provider, id})
 
+# Sort by optional extra.llmfit size metadata; models without values are last
+smallest_models = LLMDB.candidates(
+  sort_by: :total_parameters,
+  sort_order: :asc
+)
+
+# Filter by model architecture
+moe_models = LLMDB.candidates(architecture: :moe)
+dense_models = LLMDB.candidates(architecture: :dense)
+unclassified_models = LLMDB.candidates(architecture: :unknown)
+
 # List providers
 LLMDB.providers()
 #=> [%LLMDB.Provider{id: :anthropic, ...}, %LLMDB.Provider{id: :openai, ...}]
@@ -121,6 +132,9 @@ LLMDB.providers()
 # Check availability (allow/deny filters)
 LLMDB.allowed?("openai:gpt-4o-mini") #=> true
 ```
+
+Architecture classification uses optional llmfit metadata. Models without
+usable architecture metadata have the `:unknown` classification.
 
 ## API Cheatsheet
 
@@ -229,6 +243,24 @@ config :llm_db,
     ]
   }
 ```
+
+### Preload Before Requests
+
+Lazy loading keeps normal application startup small. If the first request must
+not pay the catalog preparation cost, preload the catalog in your consumer
+application before you start its supervision tree:
+
+```elixir
+def start(_type, _args) do
+  with {:ok, _snapshot} <- LLMDB.load() do
+    MyApp.Supervisor.start_link(name: MyApp.Supervisor)
+  end
+end
+```
+
+This is opt-in. It uses the same configured snapshot, filters, and custom data
+as lazy loading. Do not call the deprecated `LLMDB.Application` compatibility
+module directly.
 
 **Runtime environment:** Starting or querying LLM DB never reads a host `.env`
 file. Applications own their runtime configuration and may use Dotenvy, direnv,

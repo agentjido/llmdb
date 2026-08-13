@@ -49,6 +49,14 @@ defmodule LLMDB.Engine.NormalizeTest do
       assert {:error, :bad_provider} = Normalize.normalize_provider_id("has@special")
     end
 
+    test "does not create atoms for unknown provider strings" do
+      provider_id = "normalize_unknown_provider_#{System.unique_integer([:positive])}"
+
+      assert_raise ArgumentError, fn -> String.to_existing_atom(provider_id) end
+      assert {:error, :unknown_provider} = Normalize.normalize_provider_id(provider_id)
+      assert_raise ArgumentError, fn -> String.to_existing_atom(provider_id) end
+    end
+
     test "returns error for excessively long strings" do
       long_string = String.duplicate("a", 300)
       assert {:error, :bad_provider} = Normalize.normalize_provider_id(long_string)

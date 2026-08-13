@@ -24,9 +24,21 @@ source and applies the same filters and custom data as `LLMDB.load/1`. It never
 pulls upstream provider metadata or loads dotenv files. Set
 `skip_packaged_load: true` to leave the catalog empty until an explicit load.
 
-With strict integrity checking, an invalid snapshot now fails on first query as
-`LLMDB.LoadError`, rather than during application startup. Call `LLMDB.load/1`
-explicitly to receive `{:error, reason}` instead.
+To keep the load outside the first request, call `LLMDB.load/0` at the start of
+your consumer application's `start/2` callback, before you start its supervision
+tree:
+
+```elixir
+def start(_type, _args) do
+  with {:ok, _snapshot} <- LLMDB.load() do
+    MyApp.Supervisor.start_link(name: MyApp.Supervisor)
+  end
+end
+```
+
+With strict integrity checking, an invalid snapshot fails this explicit preload
+with `{:error, reason}`. Without a preload, it raises `LLMDB.LoadError` on the
+first query.
 
 ## Configuration Model
 

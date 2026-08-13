@@ -42,9 +42,10 @@ automatic dotenv boundary.
 
 The catalog initializes on the first public query without an llm_db supervisor
 or worker. Strict integrity errors therefore surface as `LLMDB.LoadError` at
-first use; explicit `LLMDB.load/1` calls retain their `{:error, reason}` shape.
-The `LLMDB.Application` callback is a deprecated compatibility shim for one
-minor release and is no longer registered as the package's OTP callback.
+first use; explicit `LLMDB.load/1` calls retain their `{:error, reason}` shape
+and can preload the catalog during consumer application startup. The
+`LLMDB.Application` callback is a deprecated compatibility shim for one minor
+release and is no longer registered as the package's OTP callback.
 
 ## Supported Artifacts and Extensions
 

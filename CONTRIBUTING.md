@@ -26,8 +26,8 @@ LLM DB is a model metadata catalog with fast, capability-aware lookups. We value
 
 ```bash
 # Clone the repository
-git clone https://github.com/agentjido/llm_db.git
-cd llm_db
+git clone https://github.com/agentjido/llmdb.git
+cd llmdb
 
 # Install dependencies
 mix deps.get

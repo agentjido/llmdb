@@ -51,6 +51,18 @@ defmodule LLMDB.ApplicationTest do
     end
   end
 
+  test "explicit preload prepares the catalog before the first public query" do
+    enable_lazy_loading()
+
+    assert Catalog.snapshot() == nil
+    assert {:ok, _catalog} = LLMDB.load()
+    preload_epoch = Catalog.epoch()
+
+    assert preload_epoch > 0
+    assert {:ok, _model} = LLMDB.model("openai:gpt-4o")
+    assert Catalog.epoch() == preload_epoch
+  end
+
   test "first query lazily loads once and warm queries do no initialization work" do
     enable_lazy_loading()
 

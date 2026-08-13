@@ -31,7 +31,7 @@ if Mix.env() == :dev do
   config :git_ops,
     mix_project: LLMDB.MixProject,
     changelog_file: "CHANGELOG.md",
-    repository_url: "https://github.com/agentjido/llm_db",
+    repository_url: "https://github.com/agentjido/llmdb",
     manage_mix_version?: false,
     manage_readme_version: false,
     version_tag_prefix: ""

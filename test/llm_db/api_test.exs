@@ -22,16 +22,39 @@ defmodule LLMDB.APITest do
       %{
         id: "gpt-4o",
         provider: :openai,
+        extra: %{
+          llmfit: %{
+            architecture: "dense-transformer",
+            parameters_raw: 100_000_000_000,
+            memory: %{min_ram_gb: 60.0, min_vram_gb: 50.0}
+          }
+        },
         capabilities: %{chat: true, tools: %{enabled: true}, json: %{native: true}}
       },
       %{
         id: "gpt-4o-mini",
         provider: :openai,
+        extra: %{
+          llmfit: %{
+            parameters_raw: 10_000_000_000,
+            memory: %{min_ram_gb: 6.0, min_vram_gb: 5.0}
+          }
+        },
         capabilities: %{chat: true, tools: %{enabled: true}, json: %{native: true}}
       },
       %{
         id: "claude-3-5-sonnet-20241022",
         provider: :anthropic,
+        extra: %{
+          "llmfit" => %{
+            "parameters_raw" => 200_000_000_000,
+            "memory" => %{"min_ram_gb" => 120.0, "min_vram_gb" => 100.0},
+            "moe" => %{
+              "active_parameters" => 20_000_000_000,
+              "is_moe" => true
+            }
+          }
+        },
         capabilities: %{chat: true, tools: %{enabled: true}, json: %{native: false}}
       },
       %{
@@ -176,6 +199,93 @@ defmodule LLMDB.APITest do
       candidates = LLMDB.candidates(require: [rerank: true])
 
       assert candidates == [{:cohere, "rerank-v3.5"}]
+    end
+
+    test "sorts by total parameters and places missing values last" do
+      assert LLMDB.candidates(sort_by: :total_parameters) == [
+               {:openai, "gpt-4o-mini"},
+               {:openai, "gpt-4o"},
+               {:anthropic, "claude-3-5-sonnet-20241022"},
+               {:cohere, "rerank-v3.5"}
+             ]
+
+      assert LLMDB.candidates(sort_by: :total_parameters, sort_order: :desc) == [
+               {:anthropic, "claude-3-5-sonnet-20241022"},
+               {:openai, "gpt-4o"},
+               {:openai, "gpt-4o-mini"},
+               {:cohere, "rerank-v3.5"}
+             ]
+    end
+
+    test "sorts by active parameters with snapshot string keys" do
+      assert hd(LLMDB.candidates(sort_by: :active_parameters)) ==
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+    end
+
+    test "sorts by minimum RAM and VRAM" do
+      assert Enum.take(LLMDB.candidates(sort_by: :minimum_ram_gb), 3) == [
+               {:openai, "gpt-4o-mini"},
+               {:openai, "gpt-4o"},
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+
+      assert Enum.take(LLMDB.candidates(sort_by: :minimum_vram_gb), 3) == [
+               {:openai, "gpt-4o-mini"},
+               {:openai, "gpt-4o"},
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+    end
+
+    test "selects the first sorted model" do
+      assert {:ok, {:openai, "gpt-4o-mini"}} =
+               LLMDB.select(sort_by: :total_parameters)
+    end
+
+    test "rejects invalid sort options" do
+      assert_raise ArgumentError, ~r/sort_by must be/, fn ->
+        LLMDB.candidates(sort_by: :unknown_size)
+      end
+
+      assert_raise ArgumentError, ~r/sort_order must be/, fn ->
+        LLMDB.candidates(sort_order: :sideways)
+      end
+    end
+
+    test "filters by dense architecture" do
+      assert LLMDB.candidates(architecture: :dense) == [{:openai, "gpt-4o"}]
+    end
+
+    test "filters by MoE architecture with snapshot string keys" do
+      assert LLMDB.candidates(architecture: :moe) == [
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+    end
+
+    test "filters models with missing or unusable architecture metadata as unknown" do
+      assert LLMDB.candidates(architecture: :unknown) |> MapSet.new() ==
+               MapSet.new([
+                 {:openai, "gpt-4o-mini"},
+                 {:cohere, "rerank-v3.5"}
+               ])
+    end
+
+    test "combines architecture and capability filters" do
+      assert LLMDB.candidates(require: [chat: true], architecture: :moe) == [
+               {:anthropic, "claude-3-5-sonnet-20241022"}
+             ]
+
+      assert {:ok, {:anthropic, "claude-3-5-sonnet-20241022"}} =
+               LLMDB.select(
+                 require: [chat: true],
+                 architecture: :moe,
+                 sort_by: :total_parameters
+               )
+    end
+
+    test "rejects an invalid architecture filter" do
+      assert_raise ArgumentError, ~r/architecture must be/, fn ->
+        LLMDB.candidates(architecture: :sparse)
+      end
     end
   end
 

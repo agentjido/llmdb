@@ -153,20 +153,101 @@ defmodule LLMDB.Sources.OpenRouter do
   def transform(content) when is_map(content) do
     models = Map.get(content, "data", [])
 
-    canonical_models =
+    {canonical_models, resolved_alias_ids} =
       models
       |> Enum.map(&transform_model/1)
+      |> consolidate_alias_targets(models)
 
     %{
       "openrouter" => %{
         id: :openrouter,
         name: "OpenRouter",
+        exclude_models: resolved_alias_ids,
         models: canonical_models
       }
     }
   end
 
   # Private helpers
+
+  defp consolidate_alias_targets(canonical_models, source_models) do
+    model_ids = MapSet.new(canonical_models, & &1.id)
+
+    direct_targets =
+      Enum.reduce(source_models, %{}, fn source_model, direct_targets ->
+        alias_id = source_model["id"]
+        target_id = get_in(source_model, ["alias_target", "slug"])
+
+        if is_binary(alias_id) and is_binary(target_id) and alias_id != target_id and
+             MapSet.member?(model_ids, target_id) do
+          Map.put(direct_targets, alias_id, target_id)
+        else
+          direct_targets
+        end
+      end)
+
+    {aliases_by_target, resolved_alias_ids} =
+      Enum.reduce(source_models, {%{}, []}, fn source_model,
+                                               {aliases_by_target, resolved_alias_ids} ->
+        alias_id = source_model["id"]
+
+        case resolve_alias_target(alias_id, direct_targets) do
+          {:ok, target_id} ->
+            {
+              Map.update(aliases_by_target, target_id, [alias_id], &[alias_id | &1]),
+              [alias_id | resolved_alias_ids]
+            }
+
+          :error ->
+            {aliases_by_target, resolved_alias_ids}
+        end
+      end)
+
+    resolved_alias_id_set = MapSet.new(resolved_alias_ids)
+
+    models =
+      canonical_models
+      |> Enum.reject(&MapSet.member?(resolved_alias_id_set, &1.id))
+      |> Enum.map(fn model ->
+        case Map.get(aliases_by_target, model.id) do
+          nil ->
+            model
+
+          aliases ->
+            Map.update(model, :aliases, Enum.reverse(aliases), fn current_aliases ->
+              Enum.uniq(current_aliases ++ Enum.reverse(aliases))
+            end)
+        end
+      end)
+
+    {models, Enum.reverse(resolved_alias_ids)}
+  end
+
+  defp resolve_alias_target(alias_id, direct_targets) when is_binary(alias_id) do
+    case Map.fetch(direct_targets, alias_id) do
+      {:ok, target_id} ->
+        follow_alias_target(target_id, direct_targets, MapSet.new([alias_id]))
+
+      :error ->
+        :error
+    end
+  end
+
+  defp resolve_alias_target(_alias_id, _direct_targets), do: :error
+
+  defp follow_alias_target(target_id, direct_targets, visited) do
+    if MapSet.member?(visited, target_id) do
+      :error
+    else
+      case Map.fetch(direct_targets, target_id) do
+        {:ok, next_target_id} ->
+          follow_alias_target(next_target_id, direct_targets, MapSet.put(visited, target_id))
+
+        :error ->
+          {:ok, target_id}
+      end
+    end
+  end
 
   defp get_cache_dir do
     Application.get_env(:llm_db, :openrouter_cache_dir, @default_cache_dir)

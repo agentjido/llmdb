@@ -189,6 +189,20 @@ defmodule LLMDB.Engine.MergeTest do
       assert provider.config.max_tokens == 1000
     end
 
+    test "keeps model exclusions from all provider sources" do
+      base = [
+        %{id: :test_provider_alpha, exclude_models: ["base-model"]}
+      ]
+
+      override = [
+        %{id: :test_provider_alpha, exclude_models: ["override-model"]}
+      ]
+
+      [provider] = Merge.merge_providers(base, override)
+
+      assert provider.exclude_models == ["base-model", "override-model"]
+    end
+
     test "handles empty base list" do
       result = Merge.merge_providers([], [%{id: :test_provider_alpha}])
       assert length(result) == 1

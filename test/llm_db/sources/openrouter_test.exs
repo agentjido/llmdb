@@ -509,6 +509,119 @@ defmodule LLMDB.Sources.OpenRouterTest do
       assert Map.has_key?(result, "openrouter")
       assert result["openrouter"][:models] == []
     end
+
+    test "consolidates an exact alias target into the canonical model" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "anthropic/claude-fable-latest",
+            "name" => "Anthropic: Claude Fable Latest",
+            "alias_target" => %{"slug" => "anthropic/claude-fable-5"}
+          },
+          %{
+            "id" => "anthropic/claude-fable-5",
+            "name" => "Anthropic: Claude Fable 5"
+          }
+        ]
+      }
+
+      result = OpenRouter.transform(input)
+
+      assert result["openrouter"][:exclude_models] == [
+               "anthropic/claude-fable-latest"
+             ]
+
+      assert [
+               %{
+                 id: "anthropic/claude-fable-5",
+                 aliases: ["anthropic/claude-fable-latest"]
+               }
+             ] = result["openrouter"][:models]
+    end
+
+    test "keeps an alias model when its target is not in the response" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "anthropic/claude-fable-latest",
+            "name" => "Anthropic: Claude Fable Latest",
+            "alias_target" => %{"slug" => "anthropic/claude-fable-5"}
+          }
+        ]
+      }
+
+      result = OpenRouter.transform(input)
+
+      assert result["openrouter"][:exclude_models] == []
+
+      assert [
+               %{
+                 id: "anthropic/claude-fable-latest",
+                 extra: %{alias_target: %{"slug" => "anthropic/claude-fable-5"}}
+               }
+             ] = result["openrouter"][:models]
+    end
+
+    test "resolves an alias chain to the final canonical model" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "test/model-latest",
+            "name" => "Model Latest",
+            "alias_target" => %{"slug" => "test/model-current"}
+          },
+          %{
+            "id" => "test/model-current",
+            "name" => "Model Current",
+            "alias_target" => %{"slug" => "test/model-1"}
+          },
+          %{
+            "id" => "test/model-1",
+            "name" => "Model 1"
+          }
+        ]
+      }
+
+      result = OpenRouter.transform(input)
+
+      assert result["openrouter"][:exclude_models] == [
+               "test/model-latest",
+               "test/model-current"
+             ]
+
+      assert [
+               %{
+                 id: "test/model-1",
+                 aliases: ["test/model-latest", "test/model-current"]
+               }
+             ] = result["openrouter"][:models]
+    end
+
+    test "keeps every model in an alias cycle" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "test/model-a",
+            "name" => "Model A",
+            "alias_target" => %{"slug" => "test/model-b"}
+          },
+          %{
+            "id" => "test/model-b",
+            "name" => "Model B",
+            "alias_target" => %{"slug" => "test/model-a"}
+          }
+        ]
+      }
+
+      result = OpenRouter.transform(input)
+
+      assert result["openrouter"][:exclude_models] == []
+
+      assert [
+               %{id: "test/model-a", extra: %{alias_target: %{"slug" => "test/model-b"}}},
+               %{id: "test/model-b", extra: %{alias_target: %{"slug" => "test/model-a"}}}
+             ] = result["openrouter"][:models]
+    end
   end
 
   describe "integration" do

@@ -7,6 +7,49 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.8.2](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.2) (2026-08-12)
+
+
+
+
+### Features:
+
+* add xAI Grok 4.6 metadata (#299) by mikehostetler
+
+## [2026.8.1](https://github.com/agentjido/llm_db/compare/2026.8.1...2026.8.1) (2026-08-11)
+
+
+
+
+### Features:
+
+* sort models by size (#295) by mikehostetler
+
+* filter models by architecture (#294) by mikehostetler
+
+## [2026.8.0](https://github.com/agentjido/llm_db/compare/2026.8.0...2026.8.0) (2026-08-10)
+
+
+
+
+## [2026.7.5](https://github.com/agentjido/llm_db/compare/2026.7.5...2026.7.5) (2026-07-31)
+
+
+
+
+### Bug Fixes:
+
+* support catalog preload and cold string lookup (#290) by mikehostetler
+
+## [2026.7.4](https://github.com/agentjido/llm_db/compare/2026.7.4...2026.7.4) (2026-07-31)
+
+
+
+
+### Bug Fixes:
+
+* openrouter: consolidate alias targets (#288) by mikehostetler
+
 ## [2026.7.3](https://github.com/agentjido/llm_db/compare/2026.7.3...2026.7.3) (2026-07-25)
 
 

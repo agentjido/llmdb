@@ -5,6 +5,360 @@
         "reasoning": true
       },
       "context_length": 1000000,
+      "created": 1785743198,
+      "display_name": "Qwen: Qwen3.8-Max",
+      "id": "qwen/qwen3.8-max",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.17
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "input_cache_write": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-08-03"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1777003313,
+      "display_name": "DeepSeek: DeepSeek V4 Flash 0731 (Free)",
+      "id": "deepseek/deepseek-v4-flash-free",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "deepseek",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1777000285,
+      "display_name": "DeepSeek: DeepSeek V4 Flash 0731",
+      "id": "deepseek/deepseek-v4-flash",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "deepseek",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.28
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.0028
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.14
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1785238269,
+      "display_name": "Qwen: Qwen3.7-Flash",
+      "id": "qwen/qwen3.7-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 32,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.13
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 32,
+                "lte": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.4
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.8
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 0,
+                "lte": 32,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.003
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 0,
+                "lte": 32,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.006
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 32,
+                "lte": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.01
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 32,
+                "lte": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.02
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.02
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.04
+          }
+        ],
+        "input_cache_write": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 32,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.038
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 32,
+                "lte": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.125
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 32,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.03
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 32,
+                "lte": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 256,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-07-28"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
       "created": 1784912471,
       "display_name": "Anthropic: Claude Opus 5",
       "id": "anthropic/claude-opus-5",
@@ -288,7 +642,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6
+            "value": 1.2
           },
           {
             "conditions": {
@@ -299,7 +653,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 9
+            "value": 1.8
           }
         ],
         "input_cache_read": [
@@ -313,7 +667,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.1
+            "value": 0.02
           },
           {
             "conditions": {
@@ -324,7 +678,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.2
+            "value": 0.04
           }
         ],
         "input_cache_write": [
@@ -338,7 +692,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1.25
+            "value": 0.25
           },
           {
             "conditions": {
@@ -349,7 +703,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2.5
+            "value": 0.5
           }
         ],
         "prompt": [
@@ -363,7 +717,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1
+            "value": 0.2
           },
           {
             "conditions": {
@@ -374,7 +728,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2
+            "value": 0.4
           }
         ],
         "web_search": [
@@ -417,7 +771,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 15
+            "value": 12
           },
           {
             "conditions": {
@@ -428,7 +782,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 22.5
+            "value": 18
           }
         ],
         "input_cache_read": [
@@ -442,7 +796,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.25
+            "value": 0.2
           },
           {
             "conditions": {
@@ -453,35 +807,10 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.5
+            "value": 0.4
           }
         ],
         "input_cache_write": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lte": 272,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 3.125
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gt": 272,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 6.25
-          }
-        ],
-        "prompt": [
           {
             "conditions": {
               "prompt_tokens": {
@@ -504,6 +833,31 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 5
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
           }
         ],
         "web_search": [
@@ -743,6 +1097,58 @@
             "currency": "USD",
             "unit": "perCount",
             "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-07-09"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1048576,
+      "created": 1783671768,
+      "display_name": "Meta: Muse Spark 1.1",
+      "id": "meta/muse-spark-1.1",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "meta",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.25
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.125
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.0025
           }
         ]
       },
@@ -2752,47 +3158,6 @@
         "reasoning": true
       },
       "context_length": 1000000,
-      "created": 1777000285,
-      "display_name": "DeepSeek: DeepSeek V4 Flash",
-      "id": "deepseek/deepseek-v4-flash",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.28
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.0028
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.14
-          }
-        ]
-      },
-      "publish_time": "2026-04-24"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 1000000,
       "created": 1777000366,
       "display_name": "DeepSeek: DeepSeek V4 Pro",
       "id": "deepseek/deepseek-v4-pro",
@@ -3470,6 +3835,49 @@
             "currency": "USD",
             "unit": "perCount",
             "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-04-03"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 262144,
+      "created": 1785829866,
+      "display_name": "Google: Gemma 4 26B A4B IT",
+      "id": "google/gemma-4-26b-a4b-it",
+      "input_modalities": [
+        "image",
+        "video",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "google",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.6
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.015
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.15
           }
         ]
       },

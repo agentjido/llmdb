@@ -1,0 +1,23 @@
+id = "grok-4.6"
+name = "Grok 4.6"
+provider_model_id = "grok-4.6"
+release_date = "2026-08-12"
+last_updated = "2026-08-12"
+knowledge = "2026-02-01"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.json]
+schema = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[extra.constraints]
+reasoning_effort = "required"
+reasoning_effort_values = ["low", "medium", "high", "xhigh"]

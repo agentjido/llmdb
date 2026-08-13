@@ -10,16 +10,20 @@ defmodule LLMDB.Normalize do
   - Dates: DateTime/Date → ISO8601 string
   - Removing nil values from maps
 
-  Uses `String.to_existing_atom/1` at runtime to prevent atom leaking.
-  Uses `String.to_atom/1` ONLY in unsafe mode during build-time (mix tasks).
+  Resolves packaged providers through a generated registry and uses
+  `String.to_existing_atom/1` for trusted custom providers. Uses
+  `String.to_atom/1` only in unsafe mode during build-time Mix tasks.
   """
+
+  alias LLMDB.Generated.ProviderRegistry
 
   @doc """
   Normalizes a provider ID to an atom.
 
   Converts binary provider IDs to atoms, handling hyphens and dots by converting
-  them to underscores. Uses String.to_existing_atom/1 to prevent atom leaking
-  at runtime. During activation task, unsafe conversion is allowed.
+  them to underscores. At runtime, it accepts providers from the generated
+  package registry or atoms that trusted custom configuration already created.
+  During build-time tasks, unsafe conversion is allowed.
 
   ## Examples
 
@@ -33,7 +37,7 @@ defmodule LLMDB.Normalize do
       {:error, :bad_provider}
   """
   @spec normalize_provider_id(binary() | atom(), keyword()) ::
-          {:ok, atom()} | {:error, :bad_provider}
+          {:ok, atom()} | {:error, :bad_provider | :unknown_provider}
   def normalize_provider_id(provider_id, opts \\ [])
 
   def normalize_provider_id(provider_id, _opts) when is_atom(provider_id) do
@@ -57,16 +61,23 @@ defmodule LLMDB.Normalize do
       # Only used during activation task when generating provider atoms
       {:ok, String.to_atom(str)}
     else
-      # Runtime: only accept existing atoms to prevent atom leaking
-      try do
-        atom = String.to_existing_atom(str)
-        {:ok, atom}
-        # Note: Whitelist check removed - validation now happens in verify_provider_exists
-        # which checks the loaded catalog, supporting custom/test providers
-      rescue
-        # Atom doesn't exist at all - treat as unknown provider
-        ArgumentError -> {:error, :unknown_provider}
+      case ProviderRegistry.fetch(str) do
+        {:ok, atom} ->
+          {:ok, atom}
+
+        :error ->
+          existing_provider_atom(str)
       end
+    end
+  end
+
+  # Custom providers can be declared by trusted runtime configuration. Accept
+  # their atoms only after another trusted code path has created them.
+  defp existing_provider_atom(str) do
+    try do
+      {:ok, String.to_existing_atom(str)}
+    rescue
+      ArgumentError -> {:error, :unknown_provider}
     end
   end
 

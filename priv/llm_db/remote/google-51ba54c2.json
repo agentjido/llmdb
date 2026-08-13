@@ -653,6 +653,25 @@
       "version": "1.6-preview"
     },
     {
+      "description": "Gemini Robotics-ER 2 Preview",
+      "displayName": "Gemini Robotics-ER 2 Preview",
+      "inputTokenLimit": 131072,
+      "maxTemperature": 2,
+      "name": "models/gemini-robotics-er-2-preview",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "2-preview"
+    },
+    {
       "description": "Gemini 2.5 Computer Use Preview 10-2025",
       "displayName": "Gemini 2.5 Computer Use Preview 10-2025",
       "inputTokenLimit": 131072,
@@ -919,6 +938,21 @@
       "topK": 64,
       "topP": 0.95,
       "version": "3.1-flash-live-03-2026"
+    },
+    {
+      "description": "Gemini Robotics-ER 2 Streaming Preview",
+      "displayName": "Gemini Robotics-ER 2 Streaming Preview",
+      "inputTokenLimit": 131072,
+      "maxTemperature": 2,
+      "name": "models/gemini-robotics-er-2-streaming-preview",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "bidiGenerateContent"
+      ],
+      "temperature": 1,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "2-streaming-preview"
     },
     {
       "description": "Gemini 3.5 Live Translate Preview",

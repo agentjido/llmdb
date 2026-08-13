@@ -134,7 +134,10 @@ defmodule LLMDB.Merge do
       deep_merge(
         base_provider,
         override_provider,
-        resolver(preserve_empty_list_keys: [:exclude_models])
+        resolver(
+          union_list_keys: [:exclude_models],
+          preserve_empty_list_keys: [:exclude_models]
+        )
       )
     end)
     |> Map.values()
