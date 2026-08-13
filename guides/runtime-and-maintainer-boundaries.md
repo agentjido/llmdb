@@ -57,6 +57,11 @@ The corresponding task modules are `Mix.Tasks.LlmDb.Build`,
 Mix.Tasks.LlmDb.Install.Docs is an internal helper for the conditional install
 task.
 
+The experimental NPM spike uses `LLMDB.NPM.Exporter` through
+`Mix.Tasks.LlmDb.Npm.Export`. These repository-only tools generate provider
+shards for `@jido/llmdb`. They are not part of the supported runtime or Mix task
+compatibility surface.
+
 ## Compatibility facades and direct tooling internals
 
 No module or task is removed in this minor release.

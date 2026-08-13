@@ -1,0 +1,21 @@
+{
+  "name": "llmdb-monorepo",
+  "private": true,
+  "packageManager": "npm@11.12.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "npm:build": "npm run build --workspace @jido/llmdb",
+    "npm:check": "npm run check --workspace @jido/llmdb",
+    "npm:pack": "npm run pack:check --workspace @jido/llmdb",
+    "npm:sync": "npm run sync --workspace @jido/llmdb",
+    "npm:sync:check": "npm run sync:check --workspace @jido/llmdb",
+    "npm:test": "npm run test --workspace @jido/llmdb",
+    "npm:typecheck": "npm run typecheck --workspace @jido/llmdb"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "typescript": "^5.9.3"
+  }
+}

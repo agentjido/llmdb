@@ -1,0 +1,80 @@
+{
+  "name": "@jido/llmdb",
+  "version": "2026.8.2",
+  "description": "Offline-first, provider-sharded LLM model metadata catalog.",
+  "license": "Apache-2.0",
+  "author": "Mike Hostetler",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentjido/llmdb.git",
+    "directory": "packages/llmdb"
+  },
+  "homepage": "https://llmdb.xyz",
+  "bugs": {
+    "url": "https://github.com/agentjido/llmdb/issues"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "metadata",
+    "models",
+    "pricing"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./full": {
+      "types": "./dist/full.d.ts",
+      "import": "./dist/full.js",
+      "default": "./dist/full.js"
+    },
+    "./snapshot": {
+      "types": "./dist/snapshot.d.ts",
+      "import": "./dist/snapshot.js",
+      "default": "./dist/snapshot.js"
+    },
+    "./raw": {
+      "types": "./dist/snapshot.d.ts",
+      "import": "./dist/snapshot.js",
+      "default": "./dist/snapshot.js"
+    },
+    "./providers/*": {
+      "types": "./dist/providers/*.d.ts",
+      "import": "./dist/providers/*.js",
+      "default": "./dist/providers/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run generate && tsc -p tsconfig.build.json && node scripts/build-artifacts.mjs",
+    "check": "npm run sync:check && npm run typecheck && npm run test && npm run pack:check",
+    "clean": "node scripts/clean.mjs",
+    "generate": "node scripts/generate.mjs",
+    "pack:check": "npm run build && node scripts/check-package.mjs",
+    "prepack": "npm run build",
+    "sync": "node scripts/sync-version.mjs",
+    "sync:check": "node scripts/sync-version.mjs --check",
+    "test": "npm run build && npm run typecheck:package && node --test test/*.test.mjs",
+    "typecheck:package": "tsc -p tsconfig.package.json --noEmit",
+    "typecheck": "npm run generate && tsc -p tsconfig.json --noEmit"
+  }
+}

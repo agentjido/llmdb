@@ -13,11 +13,13 @@ Runs on every push and pull request to ensure code quality.
 - Pull requests to `main` branch
 
 **Jobs:**
+- NPM package spike job: build and check `@jido/llmdb` on the supported Node.js versions
 - Lint job: format check, compile with warnings as errors, Credo, Dialyzer, unused dependency check, Hex audit
 - Test job: compile and run the test suite across the supported Elixir/OTP matrix
 - Build check job: verify the packaged snapshot is up to date and check history drift
 
 **Matrix Testing:**
+- Node.js versions: 22.14, 24
 - Elixir versions: 1.18, 1.19
 - OTP versions: 27, 28
 
@@ -54,7 +56,7 @@ Manually publishes a new Hex.pm release from the committed snapshot on `main`.
 **Jobs:**
 1. Validate the committed snapshot with `mix llm_db.build --check --install`
 2. Run tests and quality checks
-3. Bump `mix.exs` to the current CalVer release
+3. Synchronize the Elixir and NPM package versions to the current CalVer release
 4. Generate the changelog and tag using `git_ops`
 5. Push release commits and tags
 6. Publish to Hex.pm
@@ -123,7 +125,7 @@ Cron examples:
 
 ### Manually Create a Release
 
-Releases package the latest published snapshot. To manually release:
+Releases package the committed snapshot. To manually release:
 
 1. Ensure the latest snapshot has been published: `mix llm_db.snapshot.publish`
 2. Rebuild the published history bundle if needed: `mix llm_db.history.rebuild --publish`

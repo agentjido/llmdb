@@ -25,3 +25,12 @@ llm_db-*.tar
 # Environment variables with API keys
 .env
 
+# NPM workspace artifacts. The NPM package is generated downstream from the
+# canonical Elixir snapshot and the repository license.
+/node_modules/
+/packages/llmdb/dist/
+/packages/llmdb/generated/
+/packages/llmdb/LICENSE
+/packages/llmdb/src/generated/
+/packages/llmdb/src/providers/
+/packages/llmdb/*.tgz
