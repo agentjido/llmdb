@@ -6,13 +6,13 @@
     "packages/*"
   ],
   "scripts": {
-    "npm:build": "npm run build --workspace @jido/llmdb",
-    "npm:check": "npm run check --workspace @jido/llmdb",
-    "npm:pack": "npm run pack:check --workspace @jido/llmdb",
-    "npm:sync": "npm run sync --workspace @jido/llmdb",
-    "npm:sync:check": "npm run sync:check --workspace @jido/llmdb",
-    "npm:test": "npm run test --workspace @jido/llmdb",
-    "npm:typecheck": "npm run typecheck --workspace @jido/llmdb"
+    "npm:build": "npm run build --workspace @agentjido/llmdb",
+    "npm:check": "npm run check --workspace @agentjido/llmdb",
+    "npm:pack": "npm run pack:check --workspace @agentjido/llmdb",
+    "npm:sync": "npm run sync --workspace @agentjido/llmdb",
+    "npm:sync:check": "npm run sync:check --workspace @agentjido/llmdb",
+    "npm:test": "npm run test --workspace @agentjido/llmdb",
+    "npm:typecheck": "npm run typecheck --workspace @agentjido/llmdb"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",

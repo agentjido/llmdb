@@ -59,7 +59,7 @@ task.
 
 The experimental NPM spike uses `LLMDB.NPM.Exporter` through
 `Mix.Tasks.LlmDb.Npm.Export`. These repository-only tools generate provider
-shards for `@jido/llmdb`. They are not part of the supported runtime or Mix task
+shards for `@agentjido/llmdb`. They are not part of the supported runtime or Mix task
 compatibility surface.
 
 ## Compatibility facades and direct tooling internals

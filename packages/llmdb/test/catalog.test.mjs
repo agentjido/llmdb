@@ -10,8 +10,8 @@ import {
   ModelNotFoundError,
   parseModelSpec,
   ProviderNotFoundError,
-} from "@jido/llmdb";
-import openai from "@jido/llmdb/providers/openai";
+} from "@agentjido/llmdb";
+import openai from "@agentjido/llmdb/providers/openai";
 
 test("loads one provider through the default lazy API", async () => {
   const model = await llmdb.get("openai:gpt-5.4");
@@ -104,7 +104,7 @@ test("does not read model or provider IDs from object prototypes", async () => {
 });
 
 test("gives model aliases precedence over deprecated canonical stubs", async () => {
-  const { default: xai } = await import("@jido/llmdb/providers/xai");
+  const { default: xai } = await import("@agentjido/llmdb/providers/xai");
 
   assert.equal(xai.get("grok-code-fast-1").id, "grok-build-0.1");
   assert.equal(
@@ -114,7 +114,7 @@ test("gives model aliases precedence over deprecated canonical stubs", async () 
 });
 
 test("provides an explicit synchronous full catalog", async () => {
-  const { catalog } = await import("@jido/llmdb/full");
+  const { catalog } = await import("@agentjido/llmdb/full");
 
   assert.equal(catalog.get("openai:gpt-5.4").id, "gpt-5.4");
   assert.equal(catalog.find("missing:model"), undefined);
@@ -122,7 +122,7 @@ test("provides an explicit synchronous full catalog", async () => {
 });
 
 test("reconstructs the canonical snapshot on explicit import", async () => {
-  const { snapshot } = await import("@jido/llmdb/snapshot");
+  const { snapshot } = await import("@agentjido/llmdb/snapshot");
 
   assert.equal(snapshot.snapshot_id, manifest.snapshot_id);
   assert.equal(
@@ -164,7 +164,7 @@ test("uses known providers to resolve specs with both separators", () => {
 });
 
 test("round-trips every canonical provider:model spec", async () => {
-  const { snapshot } = await import("@jido/llmdb/snapshot");
+  const { snapshot } = await import("@agentjido/llmdb/snapshot");
   let modelCount = 0;
 
   for (const [providerId, provider] of Object.entries(snapshot.providers)) {

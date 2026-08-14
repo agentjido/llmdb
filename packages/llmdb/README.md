@@ -1,4 +1,4 @@
-# @jido/llmdb
+# @agentjido/llmdb
 
 Offline-first, typed access to the LLM DB model metadata catalog.
 
@@ -12,7 +12,7 @@ validation, and snapshot integrity.
 ## Install
 
 ```bash
-npm install @jido/llmdb
+npm install @agentjido/llmdb
 ```
 
 The package is ESM-only and requires Node.js 22.14 or newer.
@@ -22,7 +22,7 @@ The package is ESM-only and requires Node.js 22.14 or newer.
 Use the default API for most applications:
 
 ```ts
-import { llmdb } from "@jido/llmdb";
+import { llmdb } from "@agentjido/llmdb";
 
 const model = await llmdb.get("openai:gpt-5.4");
 
@@ -58,7 +58,7 @@ Direct provider imports give bundlers an explicit boundary and provide model-ID
 autocomplete:
 
 ```ts
-import openai from "@jido/llmdb/providers/openai";
+import openai from "@agentjido/llmdb/providers/openai";
 
 const model = openai.get("gpt-5.4");
 ```
@@ -68,7 +68,7 @@ const model = openai.get("gpt-5.4");
 Import the complete synchronous catalog only when you need it:
 
 ```ts
-import { catalog } from "@jido/llmdb/full";
+import { catalog } from "@agentjido/llmdb/full";
 
 const model = catalog.get("openai:gpt-5.4");
 ```
@@ -76,10 +76,10 @@ const model = catalog.get("openai:gpt-5.4");
 The canonical wire snapshot is also available through an explicit entrypoint:
 
 ```ts
-import snapshot from "@jido/llmdb/snapshot";
+import snapshot from "@agentjido/llmdb/snapshot";
 ```
 
-`@jido/llmdb/raw` is an alias for the same snapshot entrypoint.
+`@agentjido/llmdb/raw` is an alias for the same snapshot entrypoint.
 
 ## Errors
 

@@ -73,11 +73,11 @@ function run(command, arguments_, cwd) {
 
 const runtimeConsumer = `
 import assert from "node:assert/strict";
-import { llmdb, manifest } from "@jido/llmdb";
-import { catalog } from "@jido/llmdb/full";
-import snapshot from "@jido/llmdb/snapshot";
-import rawSnapshot from "@jido/llmdb/raw";
-import openai from "@jido/llmdb/providers/openai";
+import { llmdb, manifest } from "@agentjido/llmdb";
+import { catalog } from "@agentjido/llmdb/full";
+import snapshot from "@agentjido/llmdb/snapshot";
+import rawSnapshot from "@agentjido/llmdb/raw";
+import openai from "@agentjido/llmdb/providers/openai";
 
 assert.equal((await llmdb.get("openai:gpt-5.4")).id, "gpt-5.4");
 assert.equal(openai.get("gpt-5.4").id, "gpt-5.4");
@@ -87,10 +87,10 @@ assert.equal(rawSnapshot.snapshot_id, snapshot.snapshot_id);
 `;
 
 const typeConsumer = `
-import { llmdb, type Model, type Snapshot } from "@jido/llmdb";
-import { catalog } from "@jido/llmdb/full";
-import snapshot from "@jido/llmdb/snapshot";
-import openai from "@jido/llmdb/providers/openai";
+import { llmdb, type Model, type Snapshot } from "@agentjido/llmdb";
+import { catalog } from "@agentjido/llmdb/full";
+import snapshot from "@agentjido/llmdb/snapshot";
+import openai from "@agentjido/llmdb/providers/openai";
 
 const lazyModel: Promise<Model> = llmdb.get("openai:gpt-5.4");
 const directModel: Model = openai.get("gpt-5.4");

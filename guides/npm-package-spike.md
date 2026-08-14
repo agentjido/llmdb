@@ -1,7 +1,7 @@
 # NPM Package Spike
 
 The repository contains a private NPM workspace and one publishable package:
-`@jido/llmdb`.
+`@agentjido/llmdb`.
 
 This is a spike. It tests an offline-first provider-sharded package, a typed
 developer API, package size, and one-way synchronization with the Elixir
@@ -32,11 +32,11 @@ platforms.
 
 | Entrypoint | Purpose |
 | --- | --- |
-| `@jido/llmdb` | Small lazy-loading API and manifest |
-| `@jido/llmdb/providers/openai` | One synchronous provider catalog |
-| `@jido/llmdb/full` | Complete synchronous query catalog |
-| `@jido/llmdb/snapshot` | Reconstructed canonical wire snapshot |
-| `@jido/llmdb/raw` | Alias for the snapshot entrypoint |
+| `@agentjido/llmdb` | Small lazy-loading API and manifest |
+| `@agentjido/llmdb/providers/openai` | One synchronous provider catalog |
+| `@agentjido/llmdb/full` | Complete synchronous query catalog |
+| `@agentjido/llmdb/snapshot` | Reconstructed canonical wire snapshot |
+| `@agentjido/llmdb/raw` | Alias for the snapshot entrypoint |
 
 The default API performs no network requests. It dynamically imports one
 provider module and caches its promise. Concurrent requests for one provider
@@ -72,7 +72,7 @@ npm run npm:sync
 
 If the spike is accepted:
 
-1. reserve the `@jido/llmdb` package;
+1. reserve the `@agentjido/llmdb` package;
 2. configure NPM Trusted Publishing for a dedicated GitHub workflow;
 3. publish Hex and NPM from the same release commit and CalVer;
 4. run the Elixir snapshot and shard checks before NPM packaging; and
