@@ -100,6 +100,16 @@ for `@agentjido/llmdb` with these values:
 - Workflow filename: `release.yml`
 - Allowed action: `npm publish`
 
+Configure it from an authenticated maintainer workstation with:
+
+```bash
+npx npm@11.19.0 trust github @agentjido/llmdb \
+  --repo agentjido/llmdb \
+  --file release.yml \
+  --allow-publish \
+  --yes
+```
+
 The NPM publish job uses a short-lived GitHub OIDC identity and creates package
 provenance automatically.
 
