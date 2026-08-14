@@ -1,15 +1,10 @@
-name: Release to Hex
+name: Release to Hex and NPM
 
 on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Dry run (no git push, no tag, no GitHub release, no Hex publish)"
-        required: false
-        type: boolean
-        default: false
-      hex_dry_run:
-        description: "Hex dry run only (run all git/release steps, but skip actual Hex publish)"
+        description: "Dry run (validate packages without a commit, tag, or publish)"
         required: false
         type: boolean
         default: false
@@ -19,13 +14,14 @@ on:
         type: boolean
         default: false
 
-permissions:
-  contents: write
-
 jobs:
-  release:
+  prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -64,6 +60,11 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Use the pinned NPM version
+        run: npm install --global npm@11.12.1
 
       - name: Restore dependencies cache
         uses: actions/cache@v6
@@ -80,6 +81,7 @@ jobs:
           set -euo pipefail
           mix deps.get
           MIX_ENV=dev mix deps.compile git_ops
+          npm ci
 
       - name: Validate committed snapshot
         run: |
@@ -97,13 +99,18 @@ jobs:
           set -euo pipefail
           mix quality
 
+      - name: Run NPM package checks
+        run: |
+          set -euo pipefail
+          npm run npm:check
+
       - name: Configure git
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version to CalVer
+      - name: Bump and synchronize package versions
         id: version
         run: |
           set -euo pipefail
@@ -111,9 +118,8 @@ jobs:
           npm run npm:sync
           VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "### Version: $VERSION" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Prepared version: $VERSION" >> "$GITHUB_STEP_SUMMARY"
 
-          # Commit version bump with conventional commit format
           if git diff --quiet -- mix.exs packages/llmdb/package.json package-lock.json; then
             echo "Version already up to date"
           else
@@ -121,13 +127,18 @@ jobs:
             git commit -m "chore: bump version to $VERSION"
           fi
 
+      - name: Validate release packages
+        run: |
+          set -euo pipefail
+          mix hex.build --output "$RUNNER_TEMP/llm_db-${{ steps.version.outputs.version }}.tar"
+          npm publish --workspace @agentjido/llmdb --access public --dry-run
+
       - name: Generate changelog and create tag
         if: ${{ inputs.dry_run != true }}
         env:
           MIX_ENV: dev
         run: |
           set -euo pipefail
-          # Use --override to set exact version (our CalVer), bypassing semver logic
           mix git_ops.release --yes --override "${{ steps.version.outputs.version }}"
 
       - name: Push changes and tags
@@ -137,29 +148,133 @@ jobs:
           git push origin main
           git push --tags
 
+  publish_hex:
+    if: ${{ inputs.dry_run != true }}
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.prepare.outputs.version }}
+          fetch-depth: 0
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: "1.18"
+          otp-version: "27"
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Verify release version
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          set -euo pipefail
+          MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
+          if [[ "$MIX_VERSION" != "$RELEASE_VERSION" ]]; then
+            echo "::error::Hex version $MIX_VERSION does not match tag $RELEASE_VERSION."
+            exit 1
+          fi
+          mix llm_db.build --check --install
+
       - name: Publish to Hex.pm
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
         run: |
           set -euo pipefail
-          if [ "${{ inputs.dry_run }}" = "true" ] || [ "${{ inputs.hex_dry_run }}" = "true" ]; then
-            echo "### Hex Dry Run - Would publish:" >> "$GITHUB_STEP_SUMMARY"
-            mix hex.publish --dry-run
-          else
-            mix hex.publish --yes
-            echo "### Published to Hex.pm" >> "$GITHUB_STEP_SUMMARY"
-          fi
-          echo "- Package: llm_db" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Version: ${{ steps.version.outputs.version }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Snapshot: priv/llm_db/snapshot.json" >> "$GITHUB_STEP_SUMMARY"
+          mix hex.publish --yes
+          echo "### Published llm_db ${{ needs.prepare.outputs.version }} to Hex.pm" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Create GitHub release
-        if: ${{ inputs.dry_run != true }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  publish_npm:
+    if: ${{ inputs.dry_run != true }}
+    needs:
+      - prepare
+      - publish_hex
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.prepare.outputs.version }}
+          fetch-depth: 0
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: "1.18"
+          otp-version: "27"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Use the pinned NPM version
+        run: npm install --global npm@11.12.1
+
+      - name: Install dependencies
         run: |
           set -euo pipefail
-          VERSION="${{ steps.version.outputs.version }}"
-          gh release create "$VERSION" \
-            --title "Release v$VERSION" \
-            --notes "See [CHANGELOG.md](CHANGELOG.md) for details."
+          mix deps.get
+          npm ci
+
+      - name: Verify release version
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          set -euo pipefail
+          MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
+          NPM_VERSION=$(node -p "require('./packages/llmdb/package.json').version")
+          if [[ "$MIX_VERSION" != "$RELEASE_VERSION" || "$NPM_VERSION" != "$RELEASE_VERSION" ]]; then
+            echo "::error::Tag, Hex, and NPM versions must match."
+            echo "Tag: $RELEASE_VERSION; Hex: $MIX_VERSION; NPM: $NPM_VERSION"
+            exit 1
+          fi
+
+      - name: Check NPM package
+        run: npm run npm:check
+
+      - name: Publish to NPM with trusted publishing
+        run: |
+          set -euo pipefail
+          npm publish --workspace @agentjido/llmdb --access public
+          echo "### Published @agentjido/llmdb ${{ needs.prepare.outputs.version }} to NPM" >> "$GITHUB_STEP_SUMMARY"
+
+  github_release:
+    if: ${{ inputs.dry_run != true }}
+    needs:
+      - prepare
+      - publish_hex
+      - publish_npm
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Create GitHub release
+        env:
+          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "$RELEASE_VERSION" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --title "Release v$RELEASE_VERSION" \
+            --notes "See [CHANGELOG.md](https://github.com/$GITHUB_REPOSITORY/blob/$RELEASE_VERSION/CHANGELOG.md) for details."

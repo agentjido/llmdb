@@ -46,9 +46,10 @@ store.
 - Updated immutable `snapshot-<snapshot_id>` release assets
 - Updated immutable `history-<snapshot_id>` release assets for the latest published snapshot
 
-### 3. Release to Hex (`release.yml`)
+### 3. Release to Hex and NPM (`release.yml`)
 
-Manually publishes a new Hex.pm release from the committed snapshot on `main`.
+Prepares one release from the committed snapshot on `main`, then publishes the
+same version to Hex.pm and NPM.
 
 **Triggers:**
 - Manual workflow dispatch
@@ -58,9 +59,11 @@ Manually publishes a new Hex.pm release from the committed snapshot on `main`.
 2. Run tests and quality checks
 3. Synchronize the Elixir and NPM package versions to the current CalVer release
 4. Generate the changelog and tag using `git_ops`
-5. Push release commits and tags
-6. Publish to Hex.pm
-7. Create a GitHub release
+5. Validate both release packages without publishing
+6. Push release commits and tags
+7. Publish to Hex.pm
+8. Publish `@agentjido/llmdb` to NPM with trusted publishing
+9. Create a GitHub release after both registry publishes succeed
 
 **Version Format:**
 - Date-based CalVer: `YYYY.M.N` (for example, `2026.5.1`)
@@ -69,7 +72,7 @@ Manually publishes a new Hex.pm release from the committed snapshot on `main`.
 
 ### 1. Required Secrets
 
-Configure these secrets in your GitHub repository settings:
+Configure this secret in your GitHub repository settings:
 
 #### `HEX_API_KEY`
 
@@ -88,11 +91,23 @@ Your Hex.pm API key for publishing packages.
 4. Value: Your Hex API key
 5. Click "Add secret"
 
+NPM publishing does not use an `NPM_TOKEN`. Configure NPM Trusted Publishing
+for `@agentjido/llmdb` with these values:
+
+- Provider: GitHub Actions
+- Organization: `agentjido`
+- Repository: `llmdb`
+- Workflow filename: `release.yml`
+- Allowed action: `npm publish`
+
+The NPM publish job uses a short-lived GitHub OIDC identity and creates package
+provenance automatically.
+
 ### 2. Permissions
 
-The workflows use `GITHUB_TOKEN` with these permissions:
-- `contents: write` - Create branches, tags, and commits
-- `pull-requests: write` - Create and manage pull requests
+The release workflow uses `GITHUB_TOKEN` with these permissions:
+- `contents: write` - Create release commits, tags, and the GitHub release
+- `id-token: write` - Request the short-lived NPM trusted-publishing identity
 
 These are configured in each workflow file and should work automatically.
 
@@ -132,7 +147,8 @@ Releases package the committed snapshot. To manually release:
 3. Prepare release: `mix llm_db.release prepare`
 4. Review version in `mix.exs`
 5. Commit and push to main
-6. Workflow will fetch the latest published snapshot and publish the package
+6. Run the "Release to Hex and NPM" workflow on `main`
+7. The workflow publishes the same immutable version to Hex.pm and NPM
 
 ## Workflow Scripts
 
