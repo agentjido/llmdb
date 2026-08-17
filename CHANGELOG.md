@@ -7,7 +7,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
-## [2026.8.3](https://github.com/agentjido/llmdb/compare/2026.8.3...2026.8.3) (2026-08-17)
+## [2026.8.3](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.3) (2026-08-17)
 
 
 
@@ -22,7 +22,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * add GLM-5.3 to Z.AI Coding Plan by mikehostetler
 
-## [2026.8.2](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.2) (2026-08-12)
+## [2026.8.2](https://github.com/agentjido/llmdb/compare/2026.8.1...2026.8.2) (2026-08-12)
 
 
 
@@ -31,7 +31,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * add xAI Grok 4.6 metadata (#299) by mikehostetler
 
-## [2026.8.1](https://github.com/agentjido/llm_db/compare/2026.8.1...2026.8.1) (2026-08-11)
+## [2026.8.1](https://github.com/agentjido/llmdb/compare/2026.8.0...2026.8.1) (2026-08-11)
 
 
 
@@ -42,12 +42,12 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * filter models by architecture (#294) by mikehostetler
 
-## [2026.8.0](https://github.com/agentjido/llm_db/compare/2026.8.0...2026.8.0) (2026-08-10)
+## [2026.8.0](https://github.com/agentjido/llmdb/compare/2026.7.5...2026.8.0) (2026-08-10)
 
 
 
 
-## [2026.7.5](https://github.com/agentjido/llm_db/compare/2026.7.5...2026.7.5) (2026-07-31)
+## [2026.7.5](https://github.com/agentjido/llmdb/compare/2026.7.4...2026.7.5) (2026-07-31)
 
 
 
@@ -56,7 +56,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * support catalog preload and cold string lookup (#290) by mikehostetler
 
-## [2026.7.4](https://github.com/agentjido/llm_db/compare/2026.7.4...2026.7.4) (2026-07-31)
+## [2026.7.4](https://github.com/agentjido/llmdb/compare/2026.7.3...2026.7.4) (2026-07-31)
 
 
 
@@ -65,7 +65,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * openrouter: consolidate alias targets (#288) by mikehostetler
 
-## [2026.7.3](https://github.com/agentjido/llm_db/compare/2026.7.3...2026.7.3) (2026-07-25)
+## [2026.7.3](https://github.com/agentjido/llmdb/compare/2026.7.2...2026.7.3) (2026-07-25)
 
 
 
@@ -74,7 +74,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * update Moonshot Kimi metadata by mikehostetler
 
-## [2026.7.2](https://github.com/agentjido/llm_db/compare/2026.7.2...2026.7.2) (2026-07-16)
+## [2026.7.2](https://github.com/agentjido/llmdb/compare/2026.7.1...2026.7.2) (2026-07-16)
 
 
 
@@ -97,7 +97,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * deps: update Mint for CVE-2026-59249 by mikehostetler
 
-## [2026.7.1](https://github.com/agentjido/llm_db/compare/2026.7.1...2026.7.1) (2026-07-14)
+## [2026.7.1](https://github.com/agentjido/llmdb/compare/2026.7.0...2026.7.1) (2026-07-14)
 
 
 
@@ -112,7 +112,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * add OpenAI GPT-5 snapshot deprecations by mikehostetler
 
-## [2026.7.0](https://github.com/agentjido/llm_db/compare/2026.7.0...2026.7.0) (2026-07-05)
+## [2026.7.0](https://github.com/agentjido/llmdb/compare/2026.6.4...2026.7.0) (2026-07-05)
 
 
 
@@ -129,7 +129,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * update OpenAI GPT-5 response protocols by mikehostetler
 
-## [2026.6.4](https://github.com/agentjido/llm_db/compare/2026.6.4...2026.6.4) (2026-06-25)
+## [2026.6.4](https://github.com/agentjido/llmdb/compare/2026.6.3...2026.6.4) (2026-06-25)
 
 
 
@@ -140,7 +140,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * start OTP-compatible application supervisor by Andrew Timberlake
 
-## [2026.6.3](https://github.com/agentjido/llm_db/compare/2026.6.3...2026.6.3) (2026-06-20)
+## [2026.6.3](https://github.com/agentjido/llmdb/compare/2026.6.2...2026.6.3) (2026-06-20)
 
 
 
@@ -155,12 +155,12 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * preserve models.dev provider api urls by mikehostetler
 
-## [2026.6.2](https://github.com/agentjido/llm_db/compare/2026.6.2...2026.6.2) (2026-06-14)
+## [2026.6.2](https://github.com/agentjido/llmdb/compare/2026.6.1...2026.6.2) (2026-06-14)
 
 
 
 
-## [2026.6.1](https://github.com/agentjido/llm_db/compare/2026.6.1...2026.6.1) (2026-06-11)
+## [2026.6.1](https://github.com/agentjido/llmdb/compare/2026.6.0...2026.6.1) (2026-06-11)
 
 
 
@@ -187,7 +187,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * update openai lifecycle metadata by github-actions[bot]
 
-## [2026.6.0](https://github.com/agentjido/llm_db/compare/2026.6.0...2026.6.0) (2026-06-09)
+## [2026.6.0](https://github.com/agentjido/llmdb/compare/2026.5.2...2026.6.0) (2026-06-09)
 
 
 
@@ -198,7 +198,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * add llm metadata verification skill by github-actions[bot]
 
-## [2026.5.2](https://github.com/agentjido/llm_db/compare/2026.5.2...2026.5.2) (2026-05-28)
+## [2026.5.2](https://github.com/agentjido/llmdb/compare/2026.5.1...2026.5.2) (2026-05-28)
 
 
 
@@ -207,7 +207,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * clean release hygiene by github-actions[bot]
 
-## [2026.5.1](https://github.com/agentjido/llm_db/compare/v2026.5.1...2026.5.1) (2026-05-20)
+## [2026.5.1](https://github.com/agentjido/llmdb/compare/2026.5.0...2026.5.1) (2026-05-20)
 
 
 
@@ -394,7 +394,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.5.0](https://github.com/agentjido/llm_db/compare/v2026.5.0...2026.5.0) (2026-05-08)
+## [2026.5.0](https://github.com/agentjido/llmdb/compare/2026.4.8...2026.5.0) (2026-05-08)
 
 
 
@@ -575,7 +575,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.8](https://github.com/agentjido/llm_db/compare/v2026.4.8...2026.4.8) (2026-04-29)
+## [2026.4.8](https://github.com/agentjido/llmdb/compare/2026.4.7...2026.4.8) (2026-04-29)
 
 
 
@@ -754,7 +754,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.7](https://github.com/agentjido/llm_db/compare/v2026.4.7...2026.4.7) (2026-04-27)
+## [2026.4.7](https://github.com/agentjido/llmdb/compare/2026.4.6...2026.4.7) (2026-04-27)
 
 
 
@@ -933,7 +933,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.6](https://github.com/agentjido/llm_db/compare/v2026.4.6...2026.4.6) (2026-04-23)
+## [2026.4.6](https://github.com/agentjido/llmdb/compare/2026.4.5...2026.4.6) (2026-04-23)
 
 
 
@@ -1110,7 +1110,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.5](https://github.com/agentjido/llm_db/compare/v2026.4.5...2026.4.5) (2026-04-21)
+## [2026.4.5](https://github.com/agentjido/llmdb/compare/2026.4.4...2026.4.5) (2026-04-21)
 
 
 
@@ -1287,7 +1287,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.4](https://github.com/agentjido/llm_db/compare/v2026.4.4...2026.4.4) (2026-04-19)
+## [2026.4.4](https://github.com/agentjido/llmdb/compare/2026.4.3...2026.4.4) (2026-04-19)
 
 
 
@@ -1462,7 +1462,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.3](https://github.com/agentjido/llm_db/compare/v2026.4.3...2026.4.3) (2026-04-16)
+## [2026.4.3](https://github.com/agentjido/llmdb/compare/2026.4.2...2026.4.3) (2026-04-16)
 
 
 
@@ -1637,7 +1637,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.2](https://github.com/agentjido/llm_db/compare/v2026.4.2...2026.4.2) (2026-04-14)
+## [2026.4.2](https://github.com/agentjido/llmdb/compare/2026.4.1...2026.4.2) (2026-04-14)
 
 
 
@@ -1812,7 +1812,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.1](https://github.com/agentjido/llm_db/compare/v2026.4.1...2026.4.1) (2026-04-08)
+## [2026.4.1](https://github.com/agentjido/llmdb/compare/2026.4.0...2026.4.1) (2026-04-08)
 
 
 
@@ -2053,7 +2053,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.4.0](https://github.com/agentjido/llm_db/compare/v2026.4.0...2026.4.0) (2026-04-01)
+## [2026.4.0](https://github.com/agentjido/llmdb/compare/2026.3.3...2026.4.0) (2026-04-01)
 
 
 
@@ -2292,7 +2292,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.3.3](https://github.com/agentjido/llm_db/compare/v2026.3.3...2026.3.3) (2026-03-23)
+## [2026.3.3](https://github.com/agentjido/llmdb/compare/2026.3.2...2026.3.3) (2026-03-23)
 
 
 
@@ -2525,7 +2525,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.3.2](https://github.com/agentjido/llm_db/compare/v2026.3.2...2026.3.2) (2026-03-14)
+## [2026.3.2](https://github.com/agentjido/llmdb/compare/2026.3.1...2026.3.2) (2026-03-14)
 
 
 
@@ -2756,7 +2756,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.3.1](https://github.com/agentjido/llm_db/compare/v2026.3.1...2026.3.1) (2026-03-10)
+## [2026.3.1](https://github.com/agentjido/llmdb/compare/2026.3.0...2026.3.1) (2026-03-10)
 
 
 
@@ -2961,7 +2961,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.3.0](https://github.com/agentjido/llm_db/compare/v2026.3.0...2026.3.0) (2026-03-03)
+## [2026.3.0](https://github.com/agentjido/llmdb/compare/2026.2.9...2026.3.0) (2026-03-03)
 
 
 
@@ -3144,7 +3144,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.9](https://github.com/agentjido/llm_db/compare/v2026.2.9...2026.2.9) (2026-02-27)
+## [2026.2.9](https://github.com/agentjido/llmdb/compare/2026.2.8...2026.2.9) (2026-02-27)
 
 
 
@@ -3319,7 +3319,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.8](https://github.com/agentjido/llm_db/compare/v2026.2.8...2026.2.8) (2026-02-20)
+## [2026.2.8](https://github.com/agentjido/llmdb/compare/2026.2.7...2026.2.8) (2026-02-20)
 
 
 
@@ -3472,7 +3472,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.7](https://github.com/agentjido/llm_db/compare/v2026.2.7...2026.2.7) (2026-02-17)
+## [2026.2.7](https://github.com/agentjido/llmdb/compare/2026.2.6...2026.2.7) (2026-02-17)
 
 
 
@@ -3623,7 +3623,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.6](https://github.com/agentjido/llm_db/compare/v2026.2.6...2026.2.6) (2026-02-16)
+## [2026.2.6](https://github.com/agentjido/llmdb/compare/2026.2.5...2026.2.6) (2026-02-16)
 
 
 
@@ -3772,7 +3772,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.5](https://github.com/agentjido/llm_db/compare/v2026.2.5...2026.2.5) (2026-02-11)
+## [2026.2.5](https://github.com/agentjido/llmdb/compare/2026.2.4...2026.2.5) (2026-02-11)
 
 
 
@@ -3915,7 +3915,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.4](https://github.com/agentjido/llm_db/compare/v2026.2.4...2026.2.4) (2026-02-09)
+## [2026.2.4](https://github.com/agentjido/llmdb/compare/2026.2.3...2026.2.4) (2026-02-09)
 
 
 
@@ -4056,7 +4056,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.3](https://github.com/agentjido/llm_db/compare/v2026.2.3...2026.2.3) (2026-02-05)
+## [2026.2.3](https://github.com/agentjido/llmdb/compare/2026.2.2...2026.2.3) (2026-02-05)
 
 
 
@@ -4187,7 +4187,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.2](https://github.com/agentjido/llm_db/compare/v2026.2.2...2026.2.2) (2026-02-02)
+## [2026.2.2](https://github.com/agentjido/llmdb/compare/2026.2.1...2026.2.2) (2026-02-02)
 
 
 
@@ -4316,7 +4316,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.1](https://github.com/agentjido/llm_db/compare/v2026.2.1...2026.2.1) (2026-02-01)
+## [2026.2.1](https://github.com/agentjido/llmdb/compare/2026.2.0...2026.2.1) (2026-02-01)
 
 
 
@@ -4443,7 +4443,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.2.0](https://github.com/agentjido/llm_db/compare/v2026.2.0...2026.2.0) (2026-02-01)
+## [2026.2.0](https://github.com/agentjido/llmdb/compare/2026.1.5...2026.2.0) (2026-02-01)
 
 
 
@@ -4568,7 +4568,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.5](https://github.com/agentjido/llm_db/compare/v2026.1.5...2026.1.5) (2026-01-30)
+## [2026.1.5](https://github.com/agentjido/llmdb/compare/2026.1.4...2026.1.5) (2026-01-30)
 
 
 
@@ -4685,7 +4685,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.4](https://github.com/agentjido/llm_db/compare/v2026.1.4...2026.1.4) (2026-01-28)
+## [2026.1.4](https://github.com/agentjido/llmdb/compare/2026.1.3...2026.1.4) (2026-01-28)
 
 
 
@@ -4796,7 +4796,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.3](https://github.com/agentjido/llm_db/compare/v2026.1.3...2026.1.3) (2026-01-28)
+## [2026.1.3](https://github.com/agentjido/llmdb/compare/2026.1.2...2026.1.3) (2026-01-28)
 
 
 
@@ -4893,7 +4893,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.2](https://github.com/agentjido/llm_db/compare/v2026.1.2...2026.1.2) (2026-01-26)
+## [2026.1.2](https://github.com/agentjido/llmdb/compare/2026.1.1...2026.1.2) (2026-01-26)
 
 
 
@@ -4962,7 +4962,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.1](https://github.com/agentjido/llm_db/compare/v2026.1.1...2026.1.1) (2026-01-19)
+## [2026.1.1](https://github.com/agentjido/llmdb/compare/2026.1.0...2026.1.1) (2026-01-19)
 
 
 
@@ -5029,7 +5029,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2026.1.0](https://github.com/agentjido/llm_db/compare/v2026.1.0...2026.1.0) (2026-01-05)
+## [2026.1.0](https://github.com/agentjido/llmdb/compare/2025.12.4...2026.1.0) (2026-01-05)
 
 
 
@@ -5084,7 +5084,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2025.12.4](https://github.com/agentjido/llm_db/compare/v2025.12.4...2025.12.4) (2025-12-26)
+## [2025.12.4](https://github.com/agentjido/llmdb/compare/2025.12.3...2025.12.4) (2025-12-26)
 
 
 
@@ -5131,7 +5131,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2025.12.3](https://github.com/agentjido/llm_db/compare/v2025.12.3...2025.12.3) (2025-12-22)
+## [2025.12.3](https://github.com/agentjido/llmdb/compare/2025.12.2...2025.12.3) (2025-12-22)
 
 
 
@@ -5176,7 +5176,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * Add gemini-2.5-flash-image and gemini-2.5-flash-lite (#60) by Victor
 
-## [2025.12.2](https://github.com/agentjido/llm_db/compare/v2025.12.2...2025.12.2) (2025-12-17)
+## [2025.12.2](https://github.com/agentjido/llmdb/compare/2025.12.1...2025.12.2) (2025-12-17)
 
 
 
@@ -5207,7 +5207,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * restrict llm_db.build and llm_db.pull tasks to llm_db project only (#49) by mikehostetler
 
-## [2025.12.1](https://github.com/agentjido/llm_db/compare/v2025.12.1...2025.12.1) (2025-12-17)
+## [2025.12.1](https://github.com/agentjido/llmdb/compare/2025.12.0...2025.12.1) (2025-12-17)
 
 
 
@@ -5236,7 +5236,7 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 * restrict llm_db.build and llm_db.pull tasks to llm_db project only (#49) by mikehostetler
 
-## [2025.12.0](https://github.com/agentjido/llm_db/compare/v2025.11.18...v2025.12.0) - 2025-12-17
+## [2025.12.0](https://github.com/agentjido/llmdb/compare/v2025.11.18...2025.12.0) - 2025-12-17
 
 ### Changed
 

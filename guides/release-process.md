@@ -100,20 +100,25 @@ Updates `@version` in `mix.exs`.
 $ mix git_ops.release
 Analyzing commits since last release...
 Updating CHANGELOG.md...
-Creating git tag v2025.11.6...
+Creating git tag 2025.11.6...
 ```
 
 1. Parses conventional commits since last tag
 2. Updates `CHANGELOG.md`
-3. Creates git tag `v2025.11.6`
+3. Creates git tag `2025.11.6`
 
-### Push Tag
+### Publish with CI
 
 ```bash
-$ git push && git push --tags
+$ gh workflow run release.yml --ref main \
+    -f dry_run=false \
+    -f skip_tests=false
 ```
 
-CI triggers on tag push: Hex.pm publish, GitHub release, HexDocs publish.
+The preparation run validates the source, creates the release commit and tag,
+and pushes both. It then dispatches a second run from the release commit. The
+second run publishes Hex.pm first, publishes NPM with trusted publishing, and
+creates the GitHub release.
 
 ## Snapshot Format
 
@@ -176,7 +181,7 @@ CI triggers on tag push: Hex.pm publish, GitHub release, HexDocs publish.
 - [ ] Review `CHANGELOG.md`
 - [ ] `git push && git push --tags`
 
-## Automated Release
+## Local Release Preparation
 
 ```bash
 $ mix llm_db.pull && \
@@ -208,6 +213,9 @@ end
 $ mix release
 $ git push && git push --tags
 ```
+
+Use the CI workflow for normal registry releases. The local commands are for
+maintainer diagnosis and emergency recovery.
 
 ## Snapshot Versions
 

@@ -13,9 +13,13 @@ on:
         required: false
         type: boolean
         default: false
+  repository_dispatch:
+    types:
+      - publish_release
 
 jobs:
   prepare:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -148,9 +152,84 @@ jobs:
           git push origin main
           git push --tags
 
+      - name: Dispatch publishing from the release commit
+        if: ${{ inputs.dry_run != true }}
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          RELEASE_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
+
+          jq -n \
+            --arg version "$RELEASE_VERSION" \
+            --arg release_sha "$RELEASE_SHA" \
+            '{event_type: "publish_release", client_payload: {version: $version, release_sha: $release_sha}}' \
+            > "$RUNNER_TEMP/release-dispatch.json"
+
+          gh api \
+            --method POST \
+            "repos/$GITHUB_REPOSITORY/dispatches" \
+            --input "$RUNNER_TEMP/release-dispatch.json"
+
+          echo "### Dispatched registry publishing for $RELEASE_VERSION at $RELEASE_SHA" >> "$GITHUB_STEP_SUMMARY"
+
+  publish_context:
+    if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'publish_release' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.release.outputs.version }}
+      release_sha: ${{ steps.release.outputs.release_sha }}
+
+    steps:
+      - name: Checkout release commit
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Verify release dispatch
+        id: release
+        env:
+          RELEASE_VERSION: ${{ github.event.client_payload.version }}
+          RELEASE_SHA: ${{ github.event.client_payload.release_sha }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]{4}\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid release version: $RELEASE_VERSION"
+            exit 1
+          fi
+
+          if [[ ! "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Invalid release commit: $RELEASE_SHA"
+            exit 1
+          fi
+
+          TAG_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
+          MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
+          NPM_VERSION=$(jq -r '.version' packages/llmdb/package.json)
+
+          if [[ "$GITHUB_SHA" != "$RELEASE_SHA" || "$TAG_SHA" != "$RELEASE_SHA" ]]; then
+            echo "::error::The publish run, release tag, and dispatched commit must match."
+            echo "Run: $GITHUB_SHA; tag: $TAG_SHA; dispatch: $RELEASE_SHA"
+            exit 1
+          fi
+
+          if [[ "$MIX_VERSION" != "$RELEASE_VERSION" || "$NPM_VERSION" != "$RELEASE_VERSION" ]]; then
+            echo "::error::The release tag, Hex version, and NPM version must match."
+            echo "Tag: $RELEASE_VERSION; Hex: $MIX_VERSION; NPM: $NPM_VERSION"
+            exit 1
+          fi
+
+          echo "version=$RELEASE_VERSION" >> "$GITHUB_OUTPUT"
+          echo "release_sha=$RELEASE_SHA" >> "$GITHUB_OUTPUT"
+          echo "### Verified release $RELEASE_VERSION at $RELEASE_SHA" >> "$GITHUB_STEP_SUMMARY"
+
   publish_hex:
-    if: ${{ inputs.dry_run != true }}
-    needs: prepare
+    needs: publish_context
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -160,7 +239,7 @@ jobs:
       - name: Checkout release tag
         uses: actions/checkout@v7
         with:
-          ref: ${{ needs.prepare.outputs.version }}
+          ref: ${{ needs.publish_context.outputs.version }}
           fetch-depth: 0
 
       - name: Set up Elixir
@@ -174,7 +253,7 @@ jobs:
 
       - name: Verify release version
         env:
-          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
           MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
@@ -190,12 +269,11 @@ jobs:
         run: |
           set -euo pipefail
           mix hex.publish --yes
-          echo "### Published llm_db ${{ needs.prepare.outputs.version }} to Hex.pm" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Published llm_db ${{ needs.publish_context.outputs.version }} to Hex.pm" >> "$GITHUB_STEP_SUMMARY"
 
   publish_npm:
-    if: ${{ inputs.dry_run != true }}
     needs:
-      - prepare
+      - publish_context
       - publish_hex
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -207,7 +285,7 @@ jobs:
       - name: Checkout release tag
         uses: actions/checkout@v7
         with:
-          ref: ${{ needs.prepare.outputs.version }}
+          ref: ${{ needs.publish_context.outputs.version }}
           fetch-depth: 0
 
       - name: Set up Elixir
@@ -234,7 +312,7 @@ jobs:
 
       - name: Verify release version
         env:
-          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
           MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
@@ -252,12 +330,11 @@ jobs:
         run: |
           set -euo pipefail
           npm publish --workspace @agentjido/llmdb --access public
-          echo "### Published @agentjido/llmdb ${{ needs.prepare.outputs.version }} to NPM" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Published @agentjido/llmdb ${{ needs.publish_context.outputs.version }} to NPM" >> "$GITHUB_STEP_SUMMARY"
 
   github_release:
-    if: ${{ inputs.dry_run != true }}
     needs:
-      - prepare
+      - publish_context
       - publish_hex
       - publish_npm
     runs-on: ubuntu-latest
@@ -270,7 +347,7 @@ jobs:
     steps:
       - name: Create GitHub release
         env:
-          RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
           gh release create "$RELEASE_VERSION" \

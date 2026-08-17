@@ -49,11 +49,13 @@ store.
 
 ### 3. Release to Hex and NPM (`release.yml`)
 
-Prepares one release from the committed snapshot on `main`, then publishes the
-same version to Hex.pm and NPM.
+Prepares one release from the committed snapshot on `main`. After it pushes the
+release commit and tag, it starts a second run at that release commit. The
+second run publishes the same version to Hex.pm and NPM.
 
 **Triggers:**
 - Manual workflow dispatch
+- Internal `publish_release` repository dispatch after release preparation
 
 **Jobs:**
 1. Validate the committed snapshot with `mix llm_db.build --check --install`
@@ -61,10 +63,12 @@ same version to Hex.pm and NPM.
 3. Synchronize the Elixir and NPM package versions to the current CalVer release
 4. Generate the changelog and tag using `git_ops`
 5. Validate both release packages without publishing
-6. Push release commits and tags
-7. Publish to Hex.pm
-8. Publish `@agentjido/llmdb` to NPM with trusted publishing
-9. Create a GitHub release after both registry publishes succeed
+6. Push the release commits and tag
+7. Dispatch a publish run from the new release commit
+8. Verify that the publish run, tag, commit, Hex version, and NPM version match
+9. Publish to Hex.pm
+10. Publish `@agentjido/llmdb` to NPM with trusted publishing
+11. Create a GitHub release after both registry publishes succeed
 
 **Version Format:**
 - Date-based CalVer: `YYYY.M.N` (for example, `2026.5.1`)
@@ -112,7 +116,8 @@ npx npm@11.19.0 trust github @agentjido/llmdb \
 ```
 
 The NPM publish job uses a short-lived GitHub OIDC identity and creates package
-provenance automatically.
+provenance automatically. Publishing runs separately from preparation so the
+provenance source revision is the release commit.
 
 ### 2. Permissions
 
@@ -155,11 +160,11 @@ Releases package the committed snapshot. To manually release:
 
 1. Ensure the latest snapshot has been published: `mix llm_db.snapshot.publish`
 2. Rebuild the published history bundle if needed: `mix llm_db.history.rebuild --publish`
-3. Prepare release: `mix llm_db.release prepare`
-4. Review version in `mix.exs`
-5. Commit and push to main
-6. Run the "Release to Hex and NPM" workflow on `main`
-7. The workflow publishes the same immutable version to Hex.pm and NPM
+3. Ensure `main` is clean and contains the exact source to release
+4. Run the "Release to Hex and NPM" workflow on `main`
+5. Keep tests enabled for a production release
+6. Monitor both the preparation run and the dispatched publishing run
+7. Confirm the same immutable version on Hex.pm, NPM, and GitHub Releases
 
 ## Workflow Scripts
 
