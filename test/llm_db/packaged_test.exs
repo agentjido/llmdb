@@ -136,8 +136,7 @@ defmodule LLMDB.PackagedTest do
         elevenlabs_model = snapshot["providers"]["elevenlabs"]["models"]["eleven_flash_v2_5"]
         claude_opus_4 = snapshot["providers"]["anthropic"]["models"]["claude-opus-4-20250514"]
 
-        claude_opus_4_1 =
-          snapshot["providers"]["anthropic"]["models"]["claude-opus-4-1-20250805"]
+        claude_opus_4_6 = snapshot["providers"]["anthropic"]["models"]["claude-opus-4-6"]
 
         assert responses_model["execution"]["text"]["family"] == "openai_responses_compatible"
         assert speech_model["execution"]["speech"]["family"] == "openai_speech"
@@ -145,7 +144,7 @@ defmodule LLMDB.PackagedTest do
         assert elevenlabs_model["execution"]["speech"]["family"] == "elevenlabs_speech"
         assert claude_opus_4["execution"]["text"]["family"] == "anthropic_messages"
         refute Map.has_key?(claude_opus_4["execution"], "object")
-        assert claude_opus_4_1["execution"]["object"]["family"] == "anthropic_messages"
+        assert claude_opus_4_6["execution"]["object"]["family"] == "anthropic_messages"
       end
     end
 
