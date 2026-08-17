@@ -7,6 +7,21 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.8.3](https://github.com/agentjido/llmdb/compare/2026.8.3...2026.8.3) (2026-08-17)
+
+
+
+
+### Features:
+
+* add provider-sharded npm package by mikehostetler
+
+### Bug Fixes:
+
+* make snapshot history incremental by mikehostetler
+
+* add GLM-5.3 to Z.AI Coding Plan by mikehostetler
+
 ## [2026.8.2](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.2) (2026-08-12)
 
 
