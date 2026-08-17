@@ -39,12 +39,13 @@ store.
 3. Validate the packaged snapshot with `mix llm_db.build --check --install`, `mix test`, and `mix quality`
 4. Commit refreshed metadata inputs back to `main` when they changed
 5. Publish the current canonical snapshot using `mix llm_db.snapshot.publish`
-6. Rebuild and publish `history.tar.gz` from the published snapshot chain using `mix llm_db.history.rebuild --publish`
+6. Incrementally update and publish `history.tar.gz` using `mix llm_db.history.rebuild --publish`
 7. Validate the published history bundle
 
 **Output:**
 - Updated immutable `snapshot-<snapshot_id>` release assets
-- Updated immutable `history-<snapshot_id>` release assets for the latest published snapshot
+- Updated mutable `catalog-index` assets
+- Updated mutable `history-latest` checkpoint assets when history changed
 
 ### 3. Release to Hex and NPM (`release.yml`)
 

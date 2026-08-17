@@ -19,7 +19,7 @@ defmodule Mix.Tasks.LlmDb.History.Sync do
 
   - `--output-dir` - Directory for generated history files (default: `priv/llm_db/history`)
   - `--repo` - GitHub repository slug (default: `agentjido/llmdb`)
-  - `--index-tag` - Deprecated compatibility option; ignored for immutable release lookup
+  - `--index-tag` - Shared snapshot-store compatibility option
   - `--cache-dir` - Local snapshot cache directory
   """
 

@@ -9,9 +9,8 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
   Builds and publishes a canonical snapshot to GitHub Releases.
 
   This creates or repairs the immutable snapshot release for the current
-  `snapshot_id`. Local `latest.json` and `snapshot-index.json` outputs are still
-  written for inspection, but the canonical remote index is derived from the
-  published snapshot releases themselves.
+  `snapshot_id`. It also publishes `latest.json` and `snapshot-index.json` to
+  the mutable compact catalog-index release.
   """
 
   @impl Mix.Task
@@ -43,7 +42,8 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
     existing_snapshots =
       case ReleaseStore.fetch_snapshot_index(store_overrides) do
         {:ok, snapshots} -> snapshots
-        _ -> []
+        {:error, :not_found} -> []
+        {:error, reason} -> Mix.raise("Snapshot index fetch failed: #{inspect(reason)}")
       end
 
     latest_entry = List.last(existing_snapshots)
@@ -73,7 +73,7 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
           artifact.snapshot_path,
           artifact.metadata_path,
           artifact.snapshot_id,
-          store_overrides
+          Keyword.put(store_overrides, :snapshot_index, existing_snapshots)
         )
 
       published_at = DateTime.utc_now() |> DateTime.to_iso8601()
@@ -109,8 +109,12 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
         "snapshots" => snapshots
       })
 
+      {:ok, index_tag} =
+        ReleaseStore.publish_snapshot_index([index_path, latest_path], store_overrides)
+
       Mix.shell().info("✓ Snapshot #{artifact.snapshot_id} published")
       Mix.shell().info("  snapshot release: #{snapshot_tag}")
+      Mix.shell().info("  catalog index:    #{index_tag}")
       Mix.shell().info("  latest index:     #{latest_path}")
       Mix.shell().info("  snapshot index:   #{index_path}")
     else

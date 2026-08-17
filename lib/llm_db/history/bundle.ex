@@ -54,15 +54,44 @@ defmodule LLMDB.History.Bundle do
   @spec install_archive(String.t(), String.t() | nil) :: :ok | {:error, term()}
   def install_archive(archive_path, destination \\ nil) when is_binary(archive_path) do
     output_dir = history_dir(destination)
-    File.mkdir_p!(output_dir)
+    install_dir = "#{output_dir}.install-#{System.unique_integer([:positive])}"
+    File.rm_rf!(install_dir)
+    File.mkdir_p!(install_dir)
 
     case :erl_tar.extract(String.to_charlist(archive_path), [
            :compressed,
-           {:cwd, String.to_charlist(output_dir)}
+           {:cwd, String.to_charlist(install_dir)}
          ]) do
-      :ok -> :ok
-      {:error, reason} -> {:error, reason}
+      :ok ->
+        File.mkdir_p!(output_dir)
+        clean_generated_output(output_dir)
+
+        install_dir
+        |> File.ls!()
+        |> Enum.each(fn name ->
+          File.cp_r!(Path.join(install_dir, name), Path.join(output_dir, name))
+        end)
+
+        File.rm_rf!(install_dir)
+        :ok
+
+      {:error, reason} ->
+        File.rm_rf!(install_dir)
+        {:error, reason}
     end
+  end
+
+  defp clean_generated_output(output_dir) do
+    [
+      "events",
+      "snapshots.ndjson",
+      "meta.json",
+      Snapshot.snapshot_index_filename(),
+      Snapshot.latest_filename(),
+      Snapshot.history_state_filename(),
+      ".incremental-transaction"
+    ]
+    |> Enum.each(fn name -> File.rm_rf!(Path.join(output_dir, name)) end)
   end
 
   defp build_metadata(history_dir, opts) do

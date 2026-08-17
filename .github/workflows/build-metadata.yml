@@ -116,4 +116,4 @@ jobs:
         run: |
           echo "### Snapshot Publish Complete" >> "$GITHUB_STEP_SUMMARY"
           echo "- Refreshed catalog validated before publishing" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Snapshot and history releases updated" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Snapshot, compact index, and latest history checkpoint updated" >> "$GITHUB_STEP_SUMMARY"

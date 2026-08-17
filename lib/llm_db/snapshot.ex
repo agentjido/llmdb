@@ -19,6 +19,7 @@ defmodule LLMDB.Snapshot do
   @snapshot_index_filename "snapshot-index.json"
   @history_meta_filename "history-meta.json"
   @history_archive_filename "history.tar.gz"
+  @history_state_filename "state.json"
 
   @hash_excluded_keys MapSet.new([
                         "snapshot_id",
@@ -118,6 +119,9 @@ defmodule LLMDB.Snapshot do
 
   @spec history_archive_filename() :: String.t()
   def history_archive_filename, do: @history_archive_filename
+
+  @spec history_state_filename() :: String.t()
+  def history_state_filename, do: @history_state_filename
 
   @doc """
   Builds a canonical snapshot document from an engine snapshot.

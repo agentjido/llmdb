@@ -12,8 +12,7 @@ defmodule Mix.Tasks.LlmDb.History.MigrateGit do
 
   By default this writes local artifacts only. With `--publish`, it also seeds
   GitHub Releases with all discovered immutable snapshots and uploads a rebuilt
-  `history.tar.gz` bundle to the immutable history release for the latest
-  migrated snapshot.
+  compact catalog index and the mutable latest history bundle.
   """
 
   @impl Mix.Task
@@ -80,11 +79,14 @@ defmodule Mix.Tasks.LlmDb.History.MigrateGit do
 
       observations = read_snapshot_index!(summary.snapshot_index_path)
 
-      publish_snapshots!(observations, summary.snapshots_dir, store_overrides)
+      indexed_observations =
+        publish_snapshots!(observations, summary.snapshots_dir, store_overrides)
+
+      publish_snapshot_index!(summary, indexed_observations, store_overrides)
 
       publish_history_bundle!(
         summary.output_dir,
-        observations,
+        indexed_observations,
         opts[:bundle_output_dir],
         store_overrides
       )
@@ -92,26 +94,70 @@ defmodule Mix.Tasks.LlmDb.History.MigrateGit do
   end
 
   defp publish_snapshots!(observations, snapshots_dir, store_overrides) do
-    observations
-    |> Enum.map(& &1["snapshot_id"])
-    |> Enum.uniq()
-    |> Enum.each(fn snapshot_id ->
-      snapshot_path = Path.join([snapshots_dir, snapshot_id, Snapshot.snapshot_filename()])
-      meta_path = Path.join([snapshots_dir, snapshot_id, Snapshot.snapshot_meta_filename()])
-
-      case ReleaseStore.ensure_snapshot_release(
-             snapshot_path,
-             meta_path,
-             snapshot_id,
-             store_overrides
-           ) do
-        {:ok, _tag} ->
-          :ok
-
-        {:error, reason} ->
-          Mix.raise("Failed publishing snapshot #{snapshot_id}: #{inspect(reason)}")
+    existing_entries =
+      case ReleaseStore.fetch_snapshot_index(store_overrides) do
+        {:ok, entries} -> entries
+        {:error, :not_found} -> []
+        {:error, reason} -> Mix.raise("Failed fetching snapshot index: #{inspect(reason)}")
       end
+
+    entries_by_id = Map.new(existing_entries, &{&1["snapshot_id"], &1})
+
+    published_by_id =
+      observations
+      |> Enum.uniq_by(& &1["snapshot_id"])
+      |> Enum.reduce(entries_by_id, fn observation, acc ->
+        snapshot_id = observation["snapshot_id"]
+        snapshot_path = Path.join([snapshots_dir, snapshot_id, Snapshot.snapshot_filename()])
+        meta_path = Path.join([snapshots_dir, snapshot_id, Snapshot.snapshot_meta_filename()])
+
+        case ReleaseStore.ensure_snapshot_release(
+               snapshot_path,
+               meta_path,
+               snapshot_id,
+               Keyword.put(store_overrides, :snapshot_index, Map.values(acc))
+             ) do
+          {:ok, tag} ->
+            existing = Map.get(acc, snapshot_id, %{})
+
+            asset_entry = %{
+              "tag" => tag,
+              "published_at" =>
+                existing["published_at"] ||
+                  DateTime.utc_now() |> DateTime.to_iso8601(),
+              "snapshot_url" =>
+                ReleaseStore.asset_url(tag, Snapshot.snapshot_filename(), store_overrides),
+              "snapshot_meta_url" =>
+                ReleaseStore.asset_url(tag, Snapshot.snapshot_meta_filename(), store_overrides)
+            }
+
+            Map.put(acc, snapshot_id, asset_entry)
+
+          {:error, reason} ->
+            Mix.raise("Failed publishing snapshot #{snapshot_id}: #{inspect(reason)}")
+        end
+      end)
+
+    Enum.map(observations, fn observation ->
+      Map.merge(observation, Map.fetch!(published_by_id, observation["snapshot_id"]))
     end)
+  end
+
+  defp publish_snapshot_index!(summary, observations, store_overrides) do
+    Snapshot.write!(summary.snapshot_index_path, %{
+      "schema_version" => Snapshot.schema_version(),
+      "snapshots" => observations
+    })
+
+    Snapshot.write!(summary.latest_path, List.last(observations))
+
+    case ReleaseStore.publish_snapshot_index(
+           [summary.snapshot_index_path, summary.latest_path],
+           store_overrides
+         ) do
+      {:ok, _tag} -> :ok
+      {:error, reason} -> Mix.raise("Failed publishing snapshot index: #{inspect(reason)}")
+    end
   end
 
   defp publish_history_bundle!(history_dir, observations, bundle_output_dir, store_overrides) do

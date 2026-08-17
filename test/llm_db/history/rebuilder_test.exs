@@ -82,6 +82,9 @@ defmodule LLMDB.History.RebuilderTest do
     assert summary.to_snapshot_id == snapshot_b["snapshot_id"]
     assert summary.snapshots_written == 2
     assert summary.events_written == 3
+    assert summary.mode == :full
+    assert summary.snapshots_processed == 2
+    assert File.exists?(Path.join(history_dir, Snapshot.history_state_filename()))
 
     Application.put_env(:llm_db, :history_dir, history_dir)
     clear_history_cache()
@@ -96,6 +99,166 @@ defmodule LLMDB.History.RebuilderTest do
            ]
   end
 
+  test "incremental rebuild loads only new snapshots and matches a full rebuild" do
+    history_dir = temp_dir("llm_db_history_incremental")
+    full_dir = temp_dir("llm_db_history_full")
+
+    snapshot_a = model_snapshot("gpt-test", "First")
+    snapshot_b = model_snapshot("gpt-test", "Second")
+    snapshot_c = model_snapshot("gpt-test", "Third")
+
+    observations = [
+      observation(snapshot_a, "2026-01-01T00:00:00Z"),
+      observation(snapshot_b, "2026-01-02T00:00:00Z"),
+      observation(snapshot_c, "2026-01-03T00:00:00Z")
+    ]
+
+    snapshots =
+      Map.new([snapshot_a, snapshot_b, snapshot_c], fn snapshot ->
+        {snapshot["snapshot_id"], snapshot}
+      end)
+
+    assert {:ok, initial_summary} =
+             Rebuilder.rebuild(
+               observations: Enum.take(observations, 2),
+               output_dir: history_dir,
+               source: "test",
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert initial_summary.mode == :full
+
+    test_pid = self()
+
+    assert {:ok, incremental_summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: history_dir,
+               source: "test",
+               snapshot_loader: fn snapshot_id ->
+                 send(test_pid, {:loaded, snapshot_id})
+                 Map.fetch(snapshots, snapshot_id)
+               end
+             )
+
+    assert incremental_summary.mode == :incremental
+    assert incremental_summary.snapshots_processed == 1
+    assert incremental_summary.events_added == 1
+    snapshot_c_id = snapshot_c["snapshot_id"]
+    assert_receive {:loaded, ^snapshot_c_id}
+    refute_receive {:loaded, _snapshot_id}
+
+    assert {:ok, full_summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: full_dir,
+               source: "test",
+               mode: :full,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert full_summary.events_written == incremental_summary.events_written
+
+    for path <- [
+          "snapshots.ndjson",
+          "events/2026.ndjson",
+          Snapshot.snapshot_index_filename(),
+          Snapshot.latest_filename(),
+          Snapshot.history_state_filename()
+        ] do
+      assert File.read!(Path.join(history_dir, path)) == File.read!(Path.join(full_dir, path))
+    end
+  end
+
+  test "missing checkpoint state uses the full migration path" do
+    history_dir = temp_dir("llm_db_history_missing_state")
+    snapshot = model_snapshot("gpt-test", "First")
+    observations = [observation(snapshot, "2026-01-01T00:00:00Z")]
+
+    assert {:ok, _summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: history_dir,
+               snapshot_loader: fn _snapshot_id -> {:ok, snapshot} end
+             )
+
+    File.rm!(Path.join(history_dir, Snapshot.history_state_filename()))
+    test_pid = self()
+
+    assert {:ok, summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: history_dir,
+               snapshot_loader: fn snapshot_id ->
+                 send(test_pid, {:loaded, snapshot_id})
+                 {:ok, snapshot}
+               end
+             )
+
+    assert summary.mode == :full
+    assert summary.snapshots_processed == 1
+    assert_receive {:loaded, _snapshot_id}
+  end
+
+  test "rolls back an interrupted incremental append before retry" do
+    history_dir = temp_dir("llm_db_history_interrupted")
+    full_dir = temp_dir("llm_db_history_interrupted_full")
+    snapshot_a = model_snapshot("gpt-test", "First")
+    snapshot_b = model_snapshot("gpt-test", "Second")
+    snapshots = Map.new([snapshot_a, snapshot_b], &{&1["snapshot_id"], &1})
+
+    observations = [
+      observation(snapshot_a, "2026-01-01T00:00:00Z"),
+      observation(snapshot_b, "2026-01-02T00:00:00Z")
+    ]
+
+    assert {:ok, _summary} =
+             Rebuilder.rebuild(
+               observations: Enum.take(observations, 1),
+               output_dir: history_dir,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert_raise RuntimeError, "simulated interruption", fn ->
+      Rebuilder.rebuild(
+        observations: observations,
+        output_dir: history_dir,
+        incremental_commit_hook: fn -> raise "simulated interruption" end,
+        snapshot_loader: &Map.fetch(snapshots, &1)
+      )
+    end
+
+    assert {:ok, retry_summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: history_dir,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert retry_summary.mode == :incremental
+    assert retry_summary.snapshots_processed == 1
+
+    assert {:ok, _summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: full_dir,
+               mode: :full,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    for path <- [
+          "snapshots.ndjson",
+          "events/2026.ndjson",
+          Snapshot.snapshot_index_filename(),
+          Snapshot.latest_filename(),
+          Snapshot.history_state_filename()
+        ] do
+      assert File.read!(Path.join(history_dir, path)) == File.read!(Path.join(full_dir, path))
+    end
+
+    refute File.exists?(Path.join(history_dir, ".incremental-transaction"))
+  end
+
   defp snapshot(providers) do
     document = %{
       "schema_version" => Snapshot.schema_version(),
@@ -105,6 +268,28 @@ defmodule LLMDB.History.RebuilderTest do
     }
 
     Map.put(document, "snapshot_id", Snapshot.snapshot_id(document))
+  end
+
+  defp model_snapshot(model_id, name) do
+    snapshot(%{
+      "openai" => %{
+        "id" => "openai",
+        "models" => %{
+          model_id => %{
+            "id" => model_id,
+            "provider" => "openai",
+            "name" => name
+          }
+        }
+      }
+    })
+  end
+
+  defp observation(snapshot, captured_at) do
+    %{
+      "snapshot_id" => snapshot["snapshot_id"],
+      "captured_at" => captured_at
+    }
   end
 
   defp write_snapshot(base_dir, snapshot) do

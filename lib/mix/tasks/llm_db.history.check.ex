@@ -22,7 +22,7 @@ defmodule Mix.Tasks.LlmDb.History.Check do
   - `--allow-outdated` - Treat an older local history bundle as success (default: `false`)
   - `--output-dir` - History directory (default: `priv/llm_db/history`)
   - `--repo` - GitHub repository slug (default: `agentjido/llmdb`)
-  - `--index-tag` - Deprecated compatibility option; ignored for immutable release lookup
+  - `--index-tag` - Shared snapshot-store compatibility option
   - `--cache-dir` - Local snapshot cache directory
   """
 
