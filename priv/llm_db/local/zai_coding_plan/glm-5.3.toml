@@ -1,0 +1,44 @@
+id = "glm-5.3"
+name = "GLM-5.3"
+provider_model_id = "glm-5.3"
+release_date = "2026-08-14"
+last_updated = "2026-08-14"
+
+[limits]
+context = 1000000
+output = 131072
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["low", "high", "max"]
+default = "max"
+
+[capabilities.reasoning.thinking]
+supported = true
+types = ["enabled"]
+default_type = "enabled"
+disable_supported = false
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+attachment = false
+description = "Flagship GLM model for complex software engineering and long-horizon agent tasks"
+family = "glm"
+reasoning_options = [{ type = "effort", values = ["low", "high", "max"] }]
+structured_output = true

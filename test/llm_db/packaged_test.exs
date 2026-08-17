@@ -149,6 +149,32 @@ defmodule LLMDB.PackagedTest do
       end
     end
 
+    test "snapshot includes GLM-5.3 for the Z.AI Coding Plan" do
+      snapshot = Packaged.snapshot()
+
+      if snapshot do
+        model = snapshot["providers"]["zai_coding_plan"]["models"]["glm-5.3"]
+
+        assert model["provider_model_id"] == "glm-5.3"
+        assert model["limits"] == %{"context" => 1_000_000, "output" => 131_072}
+        assert model["modalities"] == %{"input" => ["text"], "output" => ["text"]}
+        assert model["capabilities"]["reasoning"]["enabled"]
+
+        assert model["capabilities"]["reasoning"]["effort"] == %{
+                 "default" => "max",
+                 "supported" => true,
+                 "values" => ["low", "high", "max"]
+               }
+
+        assert model["capabilities"]["reasoning"]["thinking"] == %{
+                 "default_type" => "enabled",
+                 "disable_supported" => false,
+                 "supported" => true,
+                 "types" => ["enabled"]
+               }
+      end
+    end
+
     test "snapshot maps recent OpenAI GPT-5 text and tool models to Responses API" do
       snapshot = Packaged.snapshot()
 
