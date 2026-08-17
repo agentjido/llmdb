@@ -4,25 +4,32 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: "Dry run (validate packages without a commit, tag, or publish)"
+        description: "Validate a new release without a push or publish"
         required: false
         type: boolean
         default: false
       skip_tests:
-        description: "Skip tests before release"
+        description: "Skip tests during a dry run only"
         required: false
         type: boolean
         default: false
-  repository_dispatch:
-    types:
-      - publish_release
+      publish_tag:
+        description: "Existing tag to publish or recover (run this workflow at the same tag)"
+        required: false
+        type: string
+        default: ""
+
+concurrency:
+  group: release-${{ inputs.publish_tag != '' && 'publish' || 'prepare' }}
+  cancel-in-progress: false
 
 jobs:
   prepare:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    if: ${{ inputs.publish_tag == '' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     permissions:
+      actions: write
       contents: write
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -31,17 +38,32 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           fetch-tags: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Require the main branch
+      - name: Require current main and safe inputs
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+          SKIP_TESTS: ${{ inputs.skip_tests }}
         run: |
           set -euo pipefail
-          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
-            echo "::error::Run releases only from the main branch."
+
+          if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
+            echo "::error::Run release preparation only from the main branch."
+            exit 1
+          fi
+
+          git fetch origin main --no-tags
+          if [[ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]]; then
+            echo "::error::The checked-out commit is not the current main commit."
+            exit 1
+          fi
+
+          if [[ "$SKIP_TESTS" == "true" && "$DRY_RUN" != "true" ]]; then
+            echo "::error::Tests can be skipped only during a dry run."
             exit 1
           fi
 
@@ -50,18 +72,19 @@ jobs:
 
       - name: Fetch tags
         run: |
+          set -euo pipefail
           git fetch --tags --force
           echo "Available tags:"
           git tag -l | tail -10
 
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           elixir-version: "1.18"
           otp-version: "27"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
@@ -71,7 +94,7 @@ jobs:
         run: npm install --global npm@11.19.0
 
       - name: Restore dependencies cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             deps
@@ -88,25 +111,17 @@ jobs:
           npm ci
 
       - name: Validate committed snapshot
-        run: |
-          set -euo pipefail
-          mix llm_db.build --check --install
+        run: mix llm_db.build --check --install
 
       - name: Run tests
         if: ${{ inputs.skip_tests != true }}
-        run: |
-          set -euo pipefail
-          mix test
+        run: mix test
 
       - name: Run quality checks
-        run: |
-          set -euo pipefail
-          mix quality
+        run: mix quality
 
       - name: Run NPM package checks
-        run: |
-          set -euo pipefail
-          npm run npm:check
+        run: npm run npm:check
 
       - name: Configure git
         run: |
@@ -132,27 +147,61 @@ jobs:
           fi
 
       - name: Validate release packages
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          mix hex.build --output "$RUNNER_TEMP/llm_db-${{ steps.version.outputs.version }}.tar"
+          mix hex.build --output "$RUNNER_TEMP/llm_db-$RELEASE_VERSION.tar"
           npm publish --workspace @agentjido/llmdb --access public --dry-run
 
-      - name: Generate changelog and create tag
-        if: ${{ inputs.dry_run != true }}
+      - name: Generate changelog and create local tag
         env:
           MIX_ENV: dev
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          mix git_ops.release --yes --override "${{ steps.version.outputs.version }}"
+          mix git_ops.release --yes --override "$RELEASE_VERSION"
 
-      - name: Push changes and tags
+      - name: Validate tag, versions, and changelog
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          RELEASE_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
+          MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
+          NPM_VERSION=$(jq -r '.version' packages/llmdb/package.json)
+          COMPARE_FROM=$(
+            sed -n "s|^## \\[$RELEASE_VERSION\\](https://github.com/$GITHUB_REPOSITORY/compare/\\(.*\\)\\.\\.\\.$RELEASE_VERSION).*|\\1|p" CHANGELOG.md |
+              head -1
+          )
+
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]{4}\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Invalid release version: $RELEASE_VERSION"
+            exit 1
+          fi
+
+          if [[ "$MIX_VERSION" != "$RELEASE_VERSION" || "$NPM_VERSION" != "$RELEASE_VERSION" ]]; then
+            echo "::error::The tag, Hex version, and NPM version must match."
+            exit 1
+          fi
+
+          if [[ -z "$COMPARE_FROM" || "$COMPARE_FROM" == "$RELEASE_VERSION" ]]; then
+            echo "::error::The generated changelog comparison is invalid."
+            exit 1
+          fi
+
+          git diff --check
+          echo "### Validated tag $RELEASE_VERSION at $RELEASE_SHA" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Push release atomically
         if: ${{ inputs.dry_run != true }}
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
-          git push origin main
-          git push --tags
+          git push --atomic origin HEAD:refs/heads/main "refs/tags/$RELEASE_VERSION"
 
-      - name: Dispatch publishing from the release commit
+      - name: Start publishing from the release tag
         if: ${{ inputs.dry_run != true }}
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
@@ -160,22 +209,44 @@ jobs:
           set -euo pipefail
           RELEASE_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
 
-          jq -n \
-            --arg version "$RELEASE_VERSION" \
-            --arg release_sha "$RELEASE_SHA" \
-            '{event_type: "publish_release", client_payload: {version: $version, release_sha: $release_sha}}' \
-            > "$RUNNER_TEMP/release-dispatch.json"
+          gh workflow run release.yml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref "$RELEASE_VERSION" \
+            --field publish_tag="$RELEASE_VERSION"
 
-          gh api \
-            --method POST \
-            "repos/$GITHUB_REPOSITORY/dispatches" \
-            --input "$RUNNER_TEMP/release-dispatch.json"
+          PUBLISH_RUN_ID=""
+          for _attempt in $(seq 1 30); do
+            PUBLISH_RUN_ID=$(
+              gh run list \
+                --repo "$GITHUB_REPOSITORY" \
+                --workflow release.yml \
+                --event workflow_dispatch \
+                --commit "$RELEASE_SHA" \
+                --limit 20 \
+                --json databaseId,headSha,createdAt |
+                jq -r --arg sha "$RELEASE_SHA" \
+                  '[.[] | select(.headSha == $sha)] | sort_by(.createdAt) | last | .databaseId // empty'
+            )
 
-          echo "### Dispatched registry publishing for $RELEASE_VERSION at $RELEASE_SHA" >> "$GITHUB_STEP_SUMMARY"
+            if [[ -n "$PUBLISH_RUN_ID" ]]; then
+              break
+            fi
+
+            sleep 2
+          done
+
+          if [[ -z "$PUBLISH_RUN_ID" ]]; then
+            echo "::error::The publishing run did not start."
+            exit 1
+          fi
+
+          PUBLISH_URL="https://github.com/$GITHUB_REPOSITORY/actions/runs/$PUBLISH_RUN_ID"
+          echo "### Publishing run: [$PUBLISH_RUN_ID]($PUBLISH_URL)" >> "$GITHUB_STEP_SUMMARY"
+          gh run watch "$PUBLISH_RUN_ID" --repo "$GITHUB_REPOSITORY" --exit-status
 
   publish_context:
-    if: ${{ github.event_name == 'repository_dispatch' && github.event.action == 'publish_release' }}
-    runs-on: ubuntu-latest
+    if: ${{ inputs.publish_tag != '' }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
       contents: read
@@ -184,17 +255,17 @@ jobs:
       release_sha: ${{ steps.release.outputs.release_sha }}
 
     steps:
-      - name: Checkout release commit
-        uses: actions/checkout@v7
+      - name: Checkout release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
           fetch-tags: true
+          persist-credentials: false
 
-      - name: Verify release dispatch
+      - name: Verify release tag context
         id: release
         env:
-          RELEASE_VERSION: ${{ github.event.client_payload.version }}
-          RELEASE_SHA: ${{ github.event.client_payload.release_sha }}
+          RELEASE_VERSION: ${{ inputs.publish_tag }}
         run: |
           set -euo pipefail
 
@@ -203,18 +274,25 @@ jobs:
             exit 1
           fi
 
-          if [[ ! "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
-            echo "::error::Invalid release commit: $RELEASE_SHA"
+          if [[ "$GITHUB_REF" != "refs/tags/$RELEASE_VERSION" ]]; then
+            echo "::error::Run recovery at the same tag given in publish_tag."
+            echo "Run ref: $GITHUB_REF; requested tag: $RELEASE_VERSION"
             exit 1
           fi
 
-          TAG_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
+          git fetch origin main --no-tags
+          RELEASE_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
           MIX_VERSION=$(grep -oP '@version "\K[^"]+' mix.exs)
           NPM_VERSION=$(jq -r '.version' packages/llmdb/package.json)
 
-          if [[ "$GITHUB_SHA" != "$RELEASE_SHA" || "$TAG_SHA" != "$RELEASE_SHA" ]]; then
-            echo "::error::The publish run, release tag, and dispatched commit must match."
-            echo "Run: $GITHUB_SHA; tag: $TAG_SHA; dispatch: $RELEASE_SHA"
+          if [[ "$GITHUB_SHA" != "$RELEASE_SHA" ]]; then
+            echo "::error::The publish run and release tag must use the same commit."
+            echo "Run: $GITHUB_SHA; tag: $RELEASE_SHA"
+            exit 1
+          fi
+
+          if ! git merge-base --is-ancestor "$RELEASE_SHA" origin/main; then
+            echo "::error::The release tag is not reachable from main."
             exit 1
           fi
 
@@ -230,20 +308,21 @@ jobs:
 
   publish_hex:
     needs: publish_context
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read
 
     steps:
       - name: Checkout release tag
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.publish_context.outputs.version }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           elixir-version: "1.18"
           otp-version: "27"
@@ -263,19 +342,28 @@ jobs:
           fi
           mix llm_db.build --check --install
 
-      - name: Publish to Hex.pm
+      - name: Publish package and documentation to Hex.pm
         env:
           HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
-          mix hex.publish --yes
-          echo "### Published llm_db ${{ needs.publish_context.outputs.version }} to Hex.pm" >> "$GITHUB_STEP_SUMMARY"
+
+          if curl -fsSL https://hex.pm/api/packages/llm_db |
+            jq -e --arg version "$RELEASE_VERSION" '.releases | any(.version == $version)' >/dev/null; then
+            echo "Hex package $RELEASE_VERSION exists. Republishing its documentation."
+            mix hex.publish docs --yes
+          else
+            mix hex.publish --yes
+          fi
+
+          echo "### Hex.pm is ready for llm_db $RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
 
   publish_npm:
     needs:
       - publish_context
       - publish_hex
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -283,19 +371,20 @@ jobs:
 
     steps:
       - name: Checkout release tag
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.publish_context.outputs.version }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Elixir
-        uses: erlef/setup-beam@v1
+        uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           elixir-version: "1.18"
           otp-version: "27"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
@@ -327,17 +416,25 @@ jobs:
         run: npm run npm:check
 
       - name: Publish to NPM with trusted publishing
+        env:
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
-          npm publish --workspace @agentjido/llmdb --access public
-          echo "### Published @agentjido/llmdb ${{ needs.publish_context.outputs.version }} to NPM" >> "$GITHUB_STEP_SUMMARY"
+
+          if [[ "$(npm view "@agentjido/llmdb@$RELEASE_VERSION" version 2>/dev/null || true)" == "$RELEASE_VERSION" ]]; then
+            echo "NPM package $RELEASE_VERSION already exists."
+          else
+            npm publish --workspace @agentjido/llmdb --access public
+          fi
+
+          echo "### NPM is ready for @agentjido/llmdb $RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
 
   github_release:
     needs:
       - publish_context
       - publish_hex
       - publish_npm
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
       contents: write
@@ -350,8 +447,144 @@ jobs:
           RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
         run: |
           set -euo pipefail
-          gh release create "$RELEASE_VERSION" \
-            --repo "$GITHUB_REPOSITORY" \
-            --verify-tag \
-            --title "Release v$RELEASE_VERSION" \
-            --notes "See [CHANGELOG.md](https://github.com/$GITHUB_REPOSITORY/blob/$RELEASE_VERSION/CHANGELOG.md) for details."
+
+          if gh release view "$RELEASE_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "GitHub release $RELEASE_VERSION already exists."
+          else
+            gh release create "$RELEASE_VERSION" \
+              --repo "$GITHUB_REPOSITORY" \
+              --verify-tag \
+              --title "Release v$RELEASE_VERSION" \
+              --notes "See [CHANGELOG.md](https://github.com/$GITHUB_REPOSITORY/blob/$RELEASE_VERSION/CHANGELOG.md) for details."
+          fi
+
+          echo "### GitHub release $RELEASE_VERSION is ready" >> "$GITHUB_STEP_SUMMARY"
+
+  verify_release:
+    needs:
+      - publish_context
+      - github_release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.publish_context.outputs.version }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Use the pinned NPM version
+        run: npm install --global npm@11.19.0
+
+      - name: Wait for public registries
+        env:
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          set -euo pipefail
+
+          for _attempt in $(seq 1 36); do
+            HEX_VERSION=$(
+              curl -fsSL https://hex.pm/api/packages/llm_db 2>/dev/null |
+                jq -r '.latest_stable_version // empty' || true
+            )
+            NPM_VERSION=$(
+              npm view "@agentjido/llmdb@$RELEASE_VERSION" version 2>/dev/null || true
+            )
+
+            if [[ "$HEX_VERSION" == "$RELEASE_VERSION" && "$NPM_VERSION" == "$RELEASE_VERSION" ]]; then
+              exit 0
+            fi
+
+            sleep 5
+          done
+
+          echo "::error::The release did not become visible in both public registries."
+          exit 1
+
+      - name: Verify HexDocs
+        env:
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          set -euo pipefail
+          curl --fail --silent --show-error --location \
+            --retry 12 --retry-all-errors --retry-delay 5 \
+            --output /dev/null \
+            "https://hexdocs.pm/llm_db/$RELEASE_VERSION/LLMDB.html"
+
+      - name: Verify NPM signatures and provenance
+        env:
+          RELEASE_SHA: ${{ needs.publish_context.outputs.release_sha }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          set -euo pipefail
+          QA_DIRECTORY="$RUNNER_TEMP/llmdb-release-qa"
+          mkdir -p "$QA_DIRECTORY"
+          cd "$QA_DIRECTORY"
+          npm init --yes >/dev/null
+          npm install --ignore-scripts --no-audit --no-fund "@agentjido/llmdb@$RELEASE_VERSION"
+          npm audit signatures --include-attestations --json > npm-audit.json
+          node "$GITHUB_WORKSPACE/packages/llmdb/scripts/verify-npm-provenance.mjs" \
+            npm-audit.json "$RELEASE_VERSION" "$RELEASE_SHA"
+
+      - name: Summarize release QA
+        env:
+          RELEASE_SHA: ${{ needs.publish_context.outputs.release_sha }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          {
+            echo "### Release QA passed"
+            echo "- Version: $RELEASE_VERSION"
+            echo "- Commit: $RELEASE_SHA"
+            echo "- Hex.pm and HexDocs: verified"
+            echo "- NPM signature and provenance: verified"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  verify_npm_runtime:
+    needs:
+      - publish_context
+      - verify_release
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["22.14", "24"]
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: "https://registry.npmjs.org"
+          package-manager-cache: false
+
+      - name: Install and use the public package
+        env:
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          set -euo pipefail
+          QA_DIRECTORY="$RUNNER_TEMP/llmdb-node-${{ matrix.node }}"
+          mkdir -p "$QA_DIRECTORY"
+          cd "$QA_DIRECTORY"
+          npm init --yes >/dev/null
+          npm install --ignore-scripts --no-audit --no-fund "@agentjido/llmdb@$RELEASE_VERSION"
+          node --input-type=module --eval '
+            const { llmdb, manifest } = await import("@agentjido/llmdb");
+            const openai = await import("@agentjido/llmdb/providers/openai");
+            const snapshot = await import("@agentjido/llmdb/snapshot");
+            if ((await llmdb.get("openai:gpt-5.4")).id !== "gpt-5.4") throw new Error("Lazy lookup failed");
+            if (openai.default.get("gpt-5.4").id !== "gpt-5.4") throw new Error("Provider import failed");
+            if (snapshot.default.snapshot_id !== manifest.snapshot_id) throw new Error("Snapshot import failed");
+          '
