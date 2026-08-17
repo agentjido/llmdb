@@ -13,6 +13,9 @@
 # Temporary files, for example, from tests.
 /tmp/
 
+# The published history bundle carries this large generated checkpoint.
+/priv/llm_db/history/state.json
+
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
 

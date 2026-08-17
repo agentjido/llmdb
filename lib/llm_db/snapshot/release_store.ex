@@ -2,10 +2,10 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   @moduledoc """
   GitHub Releases-backed snapshot artifact store.
 
-  Runtime fetching resolves immutable snapshot and history releases via the
-  GitHub Releases API and downloads public assets via Req. Publishing is
-  handled with the `gh` CLI, intended for local maintainer workflows and
-  GitHub Actions.
+  Runtime fetching resolves immutable snapshots through a compact mutable
+  catalog index and resolves the mutable latest history checkpoint. A release
+  scan supports migration when the compact assets do not exist. Publishing is
+  handled with the `gh` CLI for local maintainer workflows and GitHub Actions.
 
   This shared transport is internal. Runtime consumers configure snapshot
   sources through `LLMDB.load/1`; maintainers use the supported
@@ -17,14 +17,15 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   @default_repo "agentjido/llmdb"
   @default_index_tag "catalog-index"
+  @default_history_tag "history-latest"
   @default_cache_dir Path.join(["tmp", "llm_db", "snapshot_cache"])
   @github_api_version "2022-11-28"
   @release_page_size 100
-  @max_release_pages 10
 
   @type config :: %{
           repo: String.t(),
           index_tag: String.t(),
+          history_tag: String.t(),
           cache_dir: String.t()
         }
 
@@ -46,6 +47,8 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     %{
       repo: Map.get(merged, :repo, Map.get(merged, "repo", @default_repo)),
       index_tag: Map.get(merged, :index_tag, Map.get(merged, "index_tag", @default_index_tag)),
+      history_tag:
+        Map.get(merged, :history_tag, Map.get(merged, "history_tag", @default_history_tag)),
       cache_dir:
         Map.get(merged, :cache_dir, Map.get(merged, "cache_dir", @default_cache_dir))
         |> expand_path()
@@ -109,10 +112,42 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   @spec fetch_snapshot_index(keyword() | map()) :: {:ok, [map()]} | {:error, term()}
   def fetch_snapshot_index(overrides \\ %{}) do
-    with {:ok, releases} <- list_releases(config(overrides).repo) do
+    case override_entries(overrides, :snapshot_index) do
+      {:ok, entries} ->
+        {:ok, entries}
+
+      :none ->
+        fetch_published_snapshot_index(overrides)
+
+      error ->
+        error
+    end
+  end
+
+  defp fetch_published_snapshot_index(overrides) do
+    cfg = config(overrides)
+    index_url = release_asset_url(cfg.repo, cfg.index_tag, Snapshot.snapshot_index_filename())
+
+    case fetch_json(index_url, overrides) do
+      {:ok, %{"snapshots" => snapshots}} when is_list(snapshots) ->
+        {:ok, snapshots}
+
+      {:ok, other} ->
+        {:error, {:invalid_snapshot_index, other}}
+
+      {:error, :not_found} ->
+        fetch_snapshot_index_from_releases(overrides)
+
+      error ->
+        error
+    end
+  end
+
+  defp fetch_snapshot_index_from_releases(overrides) do
+    with {:ok, releases} <- list_releases(config(overrides).repo, overrides) do
       releases
       |> Enum.filter(&snapshot_release?/1)
-      |> build_entries(&snapshot_entry_from_release/1)
+      |> build_entries(&snapshot_entry_from_release(&1, overrides))
       |> case do
         {:ok, entries} ->
           sorted =
@@ -131,11 +166,21 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   @spec fetch_history_meta(keyword() | map()) :: {:ok, map()} | {:error, term()}
   def fetch_history_meta(overrides \\ %{}) do
-    with {:ok, latest} <- fetch_latest(overrides),
-         snapshot_id when is_binary(snapshot_id) <- latest["snapshot_id"],
-         {:ok, entry} <- find_history_entry(snapshot_id, overrides),
+    cfg = config(overrides)
+    meta_url = release_asset_url(cfg.repo, cfg.history_tag, Snapshot.history_meta_filename())
+
+    case fetch_json(meta_url, overrides) do
+      {:ok, %{} = meta} -> {:ok, meta}
+      {:ok, other} -> {:error, {:invalid_history_metadata, other}}
+      {:error, :not_found} -> fetch_legacy_history_meta(overrides)
+      error -> error
+    end
+  end
+
+  defp fetch_legacy_history_meta(overrides) do
+    with {:ok, entry} <- latest_history_entry(overrides),
          meta_url when is_binary(meta_url) <- entry["history_meta_url"] do
-      fetch_json(meta_url)
+      fetch_json(meta_url, overrides)
     else
       nil -> {:error, :not_found}
       error -> error
@@ -147,9 +192,10 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   def fetch_snapshot(ref, overrides \\ %{})
 
   def fetch_snapshot(:latest, overrides) do
-    with {:ok, latest} <- fetch_latest(overrides),
+    with {:ok, snapshots} <- fetch_snapshot_index(overrides),
+         latest when is_map(latest) <- List.last(snapshots),
          snapshot_id when is_binary(snapshot_id) <- latest["snapshot_id"] do
-      fetch_snapshot(snapshot_id, overrides)
+      fetch_snapshot(snapshot_id, put_override(overrides, :snapshot_index, snapshots))
     else
       {:error, _reason} = error -> error
       _ -> {:error, :invalid_latest_snapshot}
@@ -167,8 +213,8 @@ defmodule LLMDB.Snapshot.ReleaseStore do
       {:error, :cache_miss} ->
         with {:ok, entry} <- find_snapshot_entry(snapshot_id, overrides),
              snapshot_url when is_binary(snapshot_url) <- entry["snapshot_url"],
-             {:ok, content} <- download(snapshot_url),
-             {:ok, snapshot} <- Snapshot.decode(content),
+             {:ok, content} <- download(snapshot_url, overrides),
+             {:ok, snapshot} <- decode_snapshot(content),
              ^snapshot_id <- snapshot["snapshot_id"] do
           File.write!(path, Snapshot.encode(snapshot))
           {:ok, %{snapshot: snapshot, snapshot_id: snapshot_id, path: path}}
@@ -190,20 +236,51 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   @spec download_history_archive(String.t(), keyword() | map()) :: :ok | {:error, term()}
   def download_history_archive(destination, overrides \\ %{}) when is_binary(destination) do
-    with {:ok, latest} <- fetch_latest(overrides),
-         snapshot_id when is_binary(snapshot_id) <- latest["snapshot_id"],
-         {:ok, entry} <- find_history_entry(snapshot_id, overrides),
-         history_url when is_binary(history_url) <- entry["history_url"],
-         {:ok, content} <- download(history_url) do
-      destination
-      |> Path.dirname()
-      |> File.mkdir_p!()
+    cfg = config(overrides)
 
-      File.write!(destination, content)
-      :ok
+    history_url =
+      release_asset_url(cfg.repo, cfg.history_tag, Snapshot.history_archive_filename())
+
+    case download(history_url, overrides) do
+      {:ok, content} ->
+        write_download(destination, content)
+
+      {:error, :not_found} ->
+        download_legacy_history_archive(destination, overrides)
+
+      error ->
+        error
+    end
+  end
+
+  defp download_legacy_history_archive(destination, overrides) do
+    with {:ok, entry} <- latest_history_entry(overrides),
+         history_url when is_binary(history_url) <- entry["history_url"],
+         {:ok, content} <- download(history_url, overrides) do
+      write_download(destination, content)
     else
       nil -> {:error, :not_found}
       error -> error
+    end
+  end
+
+  defp write_download(destination, content) do
+    destination
+    |> Path.dirname()
+    |> File.mkdir_p!()
+
+    File.write!(destination, content)
+    :ok
+  end
+
+  @spec publish_snapshot_index([String.t()], keyword() | map()) ::
+          {:ok, String.t()} | {:error, term()}
+  def publish_snapshot_index(asset_paths, overrides \\ %{}) when is_list(asset_paths) do
+    cfg = config(overrides)
+
+    with :ok <- ensure_gh_available(),
+         {:ok, asset_paths} <- validate_asset_paths(asset_paths) do
+      upsert_release(cfg.index_tag, cfg.repo, "Snapshot catalog index", asset_paths)
     end
   end
 
@@ -234,23 +311,11 @@ defmodule LLMDB.Snapshot.ReleaseStore do
           {:ok, String.t()} | {:error, term()}
   def publish_history_release(asset_paths, snapshot_id, overrides \\ %{})
       when is_list(asset_paths) and is_binary(snapshot_id) do
+    cfg = config(overrides)
+
     with :ok <- ensure_gh_available(),
          {:ok, asset_paths} <- validate_asset_paths(asset_paths) do
-      case find_history_entry(snapshot_id, overrides) do
-        {:ok, entry} ->
-          {:ok, entry["tag"]}
-
-        {:error, :not_found} ->
-          create_release(
-            history_tag(snapshot_id),
-            config(overrides).repo,
-            "History #{snapshot_id}",
-            asset_paths
-          )
-
-        {:error, reason} ->
-          {:error, reason}
-      end
+      upsert_release(cfg.history_tag, cfg.repo, "Latest model history", asset_paths)
     end
   end
 
@@ -298,10 +363,10 @@ defmodule LLMDB.Snapshot.ReleaseStore do
         {:ok, entries}
 
       :none ->
-        with {:ok, releases} <- list_releases(config(overrides).repo) do
+        with {:ok, releases} <- list_releases(config(overrides).repo, overrides) do
           releases
           |> Enum.filter(&history_release?/1)
-          |> build_entries(&history_entry_from_release/1)
+          |> build_entries(&history_entry_from_release(&1, overrides))
           |> case do
             {:ok, entries} ->
               sorted =
@@ -316,6 +381,16 @@ defmodule LLMDB.Snapshot.ReleaseStore do
               error
           end
         end
+    end
+  end
+
+  defp latest_history_entry(overrides) do
+    with {:ok, entries} <- history_entries(overrides),
+         %{} = entry <- List.last(entries) do
+      {:ok, entry}
+    else
+      nil -> {:error, :not_found}
+      error -> error
     end
   end
 
@@ -387,7 +462,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   defp history_release?(%{tag_name: "history-" <> _rest}), do: true
   defp history_release?(_release), do: false
 
-  defp snapshot_entry_from_release(release) do
+  defp snapshot_entry_from_release(release, overrides) do
     snapshot_url = release_asset_download_url(release, Snapshot.snapshot_filename())
     meta_url = release_asset_download_url(release, Snapshot.snapshot_meta_filename())
 
@@ -396,7 +471,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
         {:ok, nil}
 
       true ->
-        with {:ok, meta} <- fetch_json(meta_url),
+        with {:ok, meta} <- fetch_json(meta_url, overrides),
              snapshot_id when is_binary(snapshot_id) <- meta["snapshot_id"] do
           entry =
             meta
@@ -412,7 +487,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end
   end
 
-  defp history_entry_from_release(release) do
+  defp history_entry_from_release(release, overrides) do
     archive_url = release_asset_download_url(release, Snapshot.history_archive_filename())
     meta_url = release_asset_download_url(release, Snapshot.history_meta_filename())
 
@@ -421,7 +496,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
         {:ok, nil}
 
       true ->
-        with {:ok, meta} <- fetch_json(meta_url),
+        with {:ok, meta} <- fetch_json(meta_url, overrides),
              snapshot_id when is_binary(snapshot_id) <- meta["to_snapshot_id"] do
           entry =
             meta
@@ -456,19 +531,30 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   defp release_published_at(%{published_at: published_at}), do: published_at
   defp release_published_at(_release), do: nil
 
-  @spec fetch_json(String.t()) :: {:ok, term()} | {:error, term()}
-  defp fetch_json(url) do
-    with {:ok, content} <- download(url),
-         {:ok, decoded} <- Jason.decode(content) do
-      {:ok, decoded}
+  @spec fetch_json(String.t(), keyword() | map()) :: {:ok, term()} | {:error, term()}
+  defp fetch_json(url, overrides) do
+    case download(url, overrides) do
+      {:ok, content} when is_binary(content) -> Jason.decode(content)
+      {:ok, decoded} when is_map(decoded) or is_list(decoded) -> {:ok, decoded}
+      {:ok, other} -> {:error, {:invalid_json_body, other}}
+      error -> error
     end
   end
 
-  @spec download(String.t()) :: {:ok, binary()} | {:error, term()}
-  defp download(url) do
+  defp decode_snapshot(content) when is_binary(content), do: Snapshot.decode(content)
+  defp decode_snapshot(content) when is_map(content), do: Snapshot.prepare(content)
+  defp decode_snapshot(content), do: {:error, {:invalid_snapshot_body, content}}
+
+  @spec download(String.t(), keyword() | map()) :: {:ok, term()} | {:error, term()}
+  defp download(url, overrides) do
     :ok = ensure_http_started()
 
-    case Req.get(url) do
+    req_opts =
+      overrides
+      |> request_options()
+      |> Keyword.put_new(:redirect_log_level, false)
+
+    case Req.get(url, req_opts) do
       {:ok, %{status: status, body: body}} when status in 200..299 -> {:ok, body}
       {:ok, %{status: 404}} -> {:error, :not_found}
       {:ok, %{status: status, body: body}} -> {:error, {:http_status, status, body}}
@@ -502,21 +588,36 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end
   end
 
-  defp list_releases(repo) do
-    do_list_releases(repo, 1, [])
+  defp upsert_release(tag, repo, title, asset_paths) do
+    case run_gh(["release", "view", tag, "--repo", repo]) do
+      {:ok, _output} ->
+        args = ["release", "upload", tag] ++ asset_paths ++ ["--repo", repo, "--clobber"]
+
+        case run_gh(args) do
+          {:ok, _output} -> {:ok, tag}
+          {:error, reason} -> {:error, reason}
+        end
+
+      {:error, _reason} ->
+        create_release(tag, repo, title, asset_paths)
+    end
   end
 
-  defp do_list_releases(repo, page, acc) when page <= @max_release_pages do
+  defp list_releases(repo, overrides) do
+    do_list_releases(repo, overrides, 1, [])
+  end
+
+  defp do_list_releases(repo, overrides, page, acc) do
     url = "https://api.github.com/repos/#{repo}/releases"
 
-    case api_get_json(url, params: [per_page: @release_page_size, page: page]) do
+    case api_get_json(url, [params: [per_page: @release_page_size, page: page]], overrides) do
       {:ok, releases} when is_list(releases) ->
         next_acc = acc ++ releases
 
         if length(releases) < @release_page_size do
           {:ok, next_acc}
         else
-          do_list_releases(repo, page + 1, next_acc)
+          do_list_releases(repo, overrides, page + 1, next_acc)
         end
 
       {:ok, other} ->
@@ -527,12 +628,10 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end
   end
 
-  defp do_list_releases(_repo, _page, acc), do: {:ok, acc}
-
-  defp api_get_json(url, opts) do
+  defp api_get_json(url, opts, overrides) do
     :ok = ensure_http_started()
 
-    req_opts = api_request_options(opts)
+    req_opts = api_request_options(opts, overrides)
 
     case Req.get(url, req_opts) do
       {:ok, %{status: status, body: body}} when status in 200..299 -> {:ok, body}
@@ -542,7 +641,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end
   end
 
-  defp api_request_options(opts) do
+  defp api_request_options(opts, overrides) do
     headers =
       [
         {"accept", "application/vnd.github+json"},
@@ -551,10 +650,31 @@ defmodule LLMDB.Snapshot.ReleaseStore do
       ]
       |> maybe_add_auth_header()
 
-    opts
+    overrides
+    |> request_options()
+    |> Keyword.merge(opts)
     |> Keyword.put(:headers, headers)
     |> Keyword.put_new(:decode_body, true)
+    |> Keyword.put_new(:redirect_log_level, false)
   end
+
+  defp request_options(overrides) do
+    override_map = override_map(overrides)
+
+    case Map.get(override_map, :req_opts, Map.get(override_map, "req_opts", [])) do
+      opts when is_list(opts) -> opts
+      _other -> []
+    end
+  end
+
+  defp put_override(overrides, key, value) do
+    overrides
+    |> override_map()
+    |> Map.put(key, value)
+  end
+
+  defp override_map(overrides) when is_map(overrides), do: overrides
+  defp override_map(overrides) when is_list(overrides), do: Enum.into(overrides, %{})
 
   defp maybe_add_auth_header(headers) do
     case System.get_env("GH_TOKEN") || System.get_env("GITHUB_TOKEN") do

@@ -391,7 +391,8 @@ mix llm_db.history.migrate_git --publish
 This writes snapshot-based history artifacts under `priv/llm_db/history/` and
 materializes immutable historical snapshots under
 `_build/llm_db/snapshot_store/snapshots/`. With `--publish`, it also seeds the
-immutable snapshot releases and publishes the rebuilt history bundle.
+immutable snapshot releases, the compact catalog index, and the latest history
+checkpoint.
 
 After that one-time migration, publish each current snapshot and rebuild history
 from the published snapshot observation chain:
@@ -403,6 +404,24 @@ mix llm_db.history.sync
 mix llm_db.history.check
 mix llm_db.history.check --allow-outdated
 ```
+
+The normal rebuild installs the latest published checkpoint and processes only
+new snapshot observations. Use `mix llm_db.history.rebuild --full` for an audit
+or repair. A full rebuild also creates the checkpoint state that is required by
+later incremental runs.
+
+The release storage has these growth rules:
+
+- Immutable full snapshot releases grow linearly with changed catalog states.
+- The compact `catalog-index` asset grows linearly with snapshot observations.
+- `history-latest` is one mutable full checkpoint. New runs replace its assets.
+- Legacy immutable `history-*` releases remain readable for migration, but new
+  rebuilds do not create more of them.
+- Local history event files grow linearly with recorded model changes.
+
+This design keeps content-addressed snapshots for audit use. It prevents the
+previous faster-than-linear growth from one new full history release per
+snapshot.
 
 `mix llm_db.history.backfill` and `LLMDB.History.Backfill` remain functional for
 compatibility but are deprecated. They may be removed no earlier than

@@ -13,12 +13,16 @@ defmodule LLMDB.History.Rebuilder do
   alias LLMDB.{History.Diff, History.Lineage, Snapshot}
 
   @lineage_overrides_file "lineage_overrides.json"
+  @checkpoint_schema_version 1
   @type observation :: map()
 
   @type summary :: %{
+          mode: :full | :incremental,
           snapshots_written: non_neg_integer(),
           unique_snapshots_written: non_neg_integer(),
+          snapshots_processed: non_neg_integer(),
           events_written: non_neg_integer(),
+          events_added: non_neg_integer(),
           output_dir: String.t(),
           snapshot_index_path: String.t(),
           latest_path: String.t(),
@@ -38,55 +42,186 @@ defmodule LLMDB.History.Rebuilder do
     snapshot_index_path = snapshot_index_path(opts, output_dir)
     latest_path = latest_path(opts, output_dir)
     source = Keyword.get(opts, :source)
+    mode = Keyword.get(opts, :mode, :auto)
 
     with :ok <- validate_observations(observations),
-         :ok <- prepare_output_dir(output_dir),
          {:ok, lineage_overrides} <- load_lineage_overrides(output_dir),
-         {:ok, result} <- rebuild_records(observations, snapshot_loader, lineage_overrides),
+         {:ok, checkpoint} <-
+           load_checkpoint(
+             mode,
+             output_dir,
+             snapshot_index_path,
+             observations,
+             lineage_overrides
+           ) do
+      case checkpoint do
+        :full ->
+          rebuild_full(
+            observations,
+            snapshot_loader,
+            lineage_overrides,
+            output_dir,
+            snapshot_index_path,
+            latest_path,
+            source
+          )
+
+        checkpoint ->
+          rebuild_incremental(
+            observations,
+            snapshot_loader,
+            lineage_overrides,
+            output_dir,
+            snapshot_index_path,
+            latest_path,
+            source,
+            checkpoint
+          )
+      end
+    end
+  end
+
+  defp rebuild_full(
+         observations,
+         snapshot_loader,
+         lineage_overrides,
+         output_dir,
+         snapshot_index_path,
+         latest_path,
+         source
+       ) do
+    with :ok <- prepare_output_dir(output_dir),
+         {:ok, result} <-
+           rebuild_records(
+             observations,
+             snapshot_loader,
+             lineage_overrides,
+             initial_state(),
+             0
+           ),
          :ok <-
-           write_outputs(
+           write_full_outputs(
              output_dir,
              snapshot_index_path,
              latest_path,
              observations,
              result,
-             source
+             source,
+             lineage_overrides
            ) do
       {:ok,
-       %{
-         snapshots_written: length(observations),
-         unique_snapshots_written:
-           observations |> Enum.map(& &1["snapshot_id"]) |> MapSet.new() |> MapSet.size(),
-         events_written: result.events_written,
-         output_dir: output_dir,
-         snapshot_index_path: snapshot_index_path,
-         latest_path: latest_path,
-         from_snapshot_id: observations |> List.first() |> snapshot_id_from_observation(),
-         to_snapshot_id: observations |> List.last() |> snapshot_id_from_observation()
-       }}
+       summary(
+         :full,
+         observations,
+         length(observations),
+         result.events_written,
+         result.events_written,
+         output_dir,
+         snapshot_index_path,
+         latest_path
+       )}
     end
   end
 
-  defp rebuild_records(observations, snapshot_loader, lineage_overrides) do
-    initial = %{
+  defp rebuild_incremental(
+         observations,
+         snapshot_loader,
+         lineage_overrides,
+         output_dir,
+         snapshot_index_path,
+         latest_path,
+         source,
+         checkpoint
+       ) do
+    pending_observations = Enum.drop(observations, checkpoint.observation_count)
+
+    if pending_observations == [] do
+      {:ok,
+       summary(
+         :incremental,
+         observations,
+         0,
+         checkpoint.events_written,
+         0,
+         output_dir,
+         snapshot_index_path,
+         latest_path
+       )}
+    else
+      initial = %{
+        previous_models: checkpoint.previous_models,
+        previous_lineage_by_key: checkpoint.previous_lineage_by_key,
+        snapshot_records: [],
+        events_by_year: %{},
+        events_written: 0,
+        has_previous: true
+      }
+
+      with {:ok, result} <-
+             rebuild_records(
+               pending_observations,
+               snapshot_loader,
+               lineage_overrides,
+               initial,
+               checkpoint.observation_count
+             ),
+           :ok <-
+             append_outputs(
+               output_dir,
+               snapshot_index_path,
+               latest_path,
+               observations,
+               result,
+               source,
+               lineage_overrides,
+               checkpoint.events_written
+             ) do
+        total_events = checkpoint.events_written + result.events_written
+
+        {:ok,
+         summary(
+           :incremental,
+           observations,
+           length(pending_observations),
+           total_events,
+           result.events_written,
+           output_dir,
+           snapshot_index_path,
+           latest_path
+         )}
+      end
+    end
+  end
+
+  defp initial_state do
+    %{
       previous_models: %{},
       previous_lineage_by_key: %{},
       snapshot_records: [],
       events_by_year: %{},
-      events_written: 0
+      events_written: 0,
+      has_previous: false
     }
+  end
 
+  defp rebuild_records(
+         observations,
+         snapshot_loader,
+         lineage_overrides,
+         initial,
+         observation_offset
+       ) do
     result =
       observations
-      |> Enum.with_index(1)
+      |> Enum.with_index(observation_offset + 1)
       |> Enum.reduce_while(initial, fn {observation, observation_idx}, acc ->
         case snapshot_loader.(observation["snapshot_id"]) do
           {:ok, snapshot} ->
             current_models = flatten_snapshot_models(snapshot)
 
             {events, current_lineage_by_key} =
-              case acc.snapshot_records do
-                [] ->
+              case acc.has_previous do
+                false ->
                   current_lineage_by_key = Lineage.initialize(current_models, lineage_overrides)
 
                   events =
@@ -95,7 +230,7 @@ defmodule LLMDB.History.Rebuilder do
 
                   {events, current_lineage_by_key}
 
-                _ ->
+                true ->
                   current_lineage_by_key =
                     Lineage.resolve(
                       acc.previous_models,
@@ -159,7 +294,8 @@ defmodule LLMDB.History.Rebuilder do
                previous_lineage_by_key: current_lineage_by_key,
                snapshot_records: [snapshot_record | acc.snapshot_records],
                events_by_year: events_by_year,
-               events_written: acc.events_written + length(events)
+               events_written: acc.events_written + length(events),
+               has_previous: true
              }}
 
           {:error, reason} ->
@@ -179,18 +315,64 @@ defmodule LLMDB.History.Rebuilder do
              Map.new(state.events_by_year, fn {year, records} ->
                {year, Enum.reverse(records)}
              end),
-           events_written: state.events_written
+           events_written: state.events_written,
+           previous_models: state.previous_models,
+           previous_lineage_by_key: state.previous_lineage_by_key
          }}
     end
   end
 
-  defp write_outputs(output_dir, snapshot_index_path, latest_path, observations, result, source) do
+  defp write_full_outputs(
+         output_dir,
+         snapshot_index_path,
+         latest_path,
+         observations,
+         result,
+         source,
+         lineage_overrides
+       ) do
     write_ndjson(Path.join(output_dir, "snapshots.ndjson"), result.snapshot_records)
 
     Enum.each(result.events_by_year, fn {year, records} ->
       write_ndjson(Path.join([output_dir, "events", "#{year}.ndjson"]), records)
     end)
 
+    write_index_and_latest(snapshot_index_path, latest_path, observations)
+
+    write_meta(output_dir, snapshot_index_path, observations, result.events_written, source)
+    write_checkpoint(output_dir, observations, result, lineage_overrides)
+  end
+
+  defp append_outputs(
+         output_dir,
+         snapshot_index_path,
+         latest_path,
+         observations,
+         result,
+         source,
+         lineage_overrides,
+         previous_event_count
+       ) do
+    append_ndjson(Path.join(output_dir, "snapshots.ndjson"), result.snapshot_records)
+
+    Enum.each(result.events_by_year, fn {year, records} ->
+      append_ndjson(Path.join([output_dir, "events", "#{year}.ndjson"]), records)
+    end)
+
+    write_index_and_latest(snapshot_index_path, latest_path, observations)
+
+    write_meta(
+      output_dir,
+      snapshot_index_path,
+      observations,
+      previous_event_count + result.events_written,
+      source
+    )
+
+    write_checkpoint(output_dir, observations, result, lineage_overrides)
+  end
+
+  defp write_index_and_latest(snapshot_index_path, latest_path, observations) do
     Snapshot.write!(snapshot_index_path, %{
       "schema_version" => Snapshot.schema_version(),
       "snapshots" => observations
@@ -201,6 +383,10 @@ defmodule LLMDB.History.Rebuilder do
       latest -> Snapshot.write!(latest_path, latest)
     end
 
+    :ok
+  end
+
+  defp write_meta(output_dir, snapshot_index_path, observations, event_count, source) do
     Snapshot.write!(Path.join(output_dir, "meta.json"), %{
       "schema_version" => Snapshot.schema_version(),
       "generated_at" => DateTime.utc_now() |> DateTime.to_iso8601(),
@@ -208,11 +394,22 @@ defmodule LLMDB.History.Rebuilder do
       "snapshots_written" => length(observations),
       "unique_snapshots_written" =>
         observations |> Enum.map(& &1["snapshot_id"]) |> MapSet.new() |> MapSet.size(),
-      "events_written" => result.events_written,
-      "event_count" => result.events_written,
+      "events_written" => event_count,
+      "event_count" => event_count,
       "from_snapshot_id" => observations |> List.first() |> snapshot_id_from_observation(),
       "to_snapshot_id" => observations |> List.last() |> snapshot_id_from_observation(),
       "snapshot_index_path" => snapshot_index_path
+    })
+  end
+
+  defp write_checkpoint(output_dir, observations, result, lineage_overrides) do
+    Snapshot.write!(Path.join(output_dir, Snapshot.history_state_filename()), %{
+      "checkpoint_schema_version" => @checkpoint_schema_version,
+      "observation_count" => length(observations),
+      "to_snapshot_id" => observations |> List.last() |> snapshot_id_from_observation(),
+      "previous_models" => result.previous_models,
+      "previous_lineage_by_key" => result.previous_lineage_by_key,
+      "lineage_overrides_digest" => term_digest(lineage_overrides)
     })
   end
 
@@ -275,6 +472,94 @@ defmodule LLMDB.History.Rebuilder do
     end)
   end
 
+  defp load_checkpoint(:full, _output_dir, _index_path, _observations, _lineage_overrides),
+    do: {:ok, :full}
+
+  defp load_checkpoint(:auto, output_dir, index_path, observations, lineage_overrides) do
+    state_path = Path.join(output_dir, Snapshot.history_state_filename())
+    meta_path = Path.join(output_dir, "meta.json")
+    snapshots_path = Path.join(output_dir, "snapshots.ndjson")
+
+    checkpoint =
+      with {:ok, state} <- read_json(state_path),
+           @checkpoint_schema_version <- state["checkpoint_schema_version"],
+           observation_count when is_integer(observation_count) and observation_count > 0 <-
+             state["observation_count"],
+           true <- observation_count <= length(observations),
+           previous_models when is_map(previous_models) <- state["previous_models"],
+           previous_lineage_by_key when is_map(previous_lineage_by_key) <-
+             state["previous_lineage_by_key"],
+           true <- state["lineage_overrides_digest"] == term_digest(lineage_overrides),
+           {:ok, %{"snapshots" => existing_observations}} when is_list(existing_observations) <-
+             read_json(index_path),
+           existing_observations <- Enum.map(existing_observations, &stringify_observation/1),
+           true <- length(existing_observations) == observation_count,
+           true <- Enum.take(observations, observation_count) == existing_observations,
+           to_snapshot_id <-
+             existing_observations |> List.last() |> snapshot_id_from_observation(),
+           true <- state["to_snapshot_id"] == to_snapshot_id,
+           {:ok, meta} <- read_json(meta_path),
+           true <- meta["to_snapshot_id"] == to_snapshot_id,
+           events_written when is_integer(events_written) and events_written >= 0 <-
+             meta["event_count"] || meta["events_written"],
+           true <- File.exists?(snapshots_path),
+           true <- File.dir?(Path.join(output_dir, "events")) do
+        %{
+          observation_count: observation_count,
+          events_written: events_written,
+          previous_models: previous_models,
+          previous_lineage_by_key: previous_lineage_by_key
+        }
+      else
+        _reason -> :full
+      end
+
+    {:ok, checkpoint}
+  end
+
+  defp load_checkpoint(mode, _output_dir, _index_path, _observations, _lineage_overrides),
+    do: {:error, {:invalid_rebuild_mode, mode}}
+
+  defp read_json(path) do
+    with {:ok, content} <- File.read(path),
+         {:ok, decoded} <- Jason.decode(content) do
+      {:ok, decoded}
+    end
+  end
+
+  defp term_digest(term) do
+    term
+    |> Snapshot.encode()
+    |> then(&:crypto.hash(:sha256, &1))
+    |> Base.encode16(case: :lower)
+  end
+
+  defp summary(
+         mode,
+         observations,
+         snapshots_processed,
+         events_written,
+         events_added,
+         output_dir,
+         snapshot_index_path,
+         latest_path
+       ) do
+    %{
+      mode: mode,
+      snapshots_written: length(observations),
+      unique_snapshots_written:
+        observations |> Enum.map(& &1["snapshot_id"]) |> MapSet.new() |> MapSet.size(),
+      snapshots_processed: snapshots_processed,
+      events_written: events_written,
+      events_added: events_added,
+      output_dir: output_dir,
+      snapshot_index_path: snapshot_index_path,
+      latest_path: latest_path,
+      from_snapshot_id: observations |> List.first() |> snapshot_id_from_observation(),
+      to_snapshot_id: observations |> List.last() |> snapshot_id_from_observation()
+    }
+  end
+
   defp provider_from_model_key(model_key) do
     model_key
     |> String.split(":", parts: 2)
@@ -332,6 +617,7 @@ defmodule LLMDB.History.Rebuilder do
     File.rm_rf!(Path.join(output_dir, "meta.json"))
     File.rm_rf!(Path.join(output_dir, Snapshot.snapshot_index_filename()))
     File.rm_rf!(Path.join(output_dir, Snapshot.latest_filename()))
+    File.rm_rf!(Path.join(output_dir, Snapshot.history_state_filename()))
     File.mkdir_p!(Path.join(output_dir, "events"))
     :ok
   end
@@ -347,6 +633,17 @@ defmodule LLMDB.History.Rebuilder do
       |> Enum.join("\n")
 
     File.write!(path, lines <> if(lines == "", do: "", else: "\n"))
+  end
+
+  defp append_ndjson(_path, []), do: :ok
+
+  defp append_ndjson(path, records) do
+    path
+    |> Path.dirname()
+    |> File.mkdir_p!()
+
+    lines = records |> Enum.map(&Jason.encode!/1) |> Enum.join("\n")
+    File.write!(path, lines <> "\n", [:append])
   end
 
   defp compact_nils(map) do
