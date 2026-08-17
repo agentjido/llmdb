@@ -114,6 +114,8 @@ jobs:
 
       - name: Report success
         run: |
-          echo "### Snapshot Publish Complete" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Refreshed catalog validated before publishing" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Snapshot, compact index, and latest history checkpoint updated" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "### Snapshot Publish Complete"
+            echo "- Refreshed catalog validated before publishing"
+            echo "- Snapshot, compact index, and latest history checkpoint updated"
+          } >> "$GITHUB_STEP_SUMMARY"
