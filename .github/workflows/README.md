@@ -13,6 +13,7 @@ Runs on every push and pull request to ensure code quality.
 - Pull requests to `main` branch
 
 **Jobs:**
+- Workflow security job: validate workflow syntax and scan for high-severity findings
 - NPM package spike job: build and check `@agentjido/llmdb` on the supported Node.js versions
 - Lint job: format check, compile with warnings as errors, Credo, Dialyzer, unused dependency check, Hex audit
 - Test job: compile and run the test suite across the supported Elixir/OTP matrix
@@ -49,13 +50,15 @@ store.
 
 ### 3. Release to Hex and NPM (`release.yml`)
 
-Prepares one release from the committed snapshot on `main`. After it pushes the
-release commit and tag, it starts a second run at that release commit. The
-second run publishes the same version to Hex.pm and NPM.
+Prepares one release from the committed snapshot on `main`. It pushes the
+release commit and tag atomically. It then starts a second run at the exact
+release tag and waits for that run to finish. The second run publishes the same
+version to Hex.pm and NPM.
 
 **Triggers:**
 - Manual workflow dispatch
-- Internal `publish_release` repository dispatch after release preparation
+- Internal workflow dispatch at the release tag after release preparation
+- Manual recovery dispatch at an existing release tag
 
 **Jobs:**
 1. Validate the committed snapshot with `mix llm_db.build --check --install`
@@ -63,12 +66,18 @@ second run publishes the same version to Hex.pm and NPM.
 3. Synchronize the Elixir and NPM package versions to the current CalVer release
 4. Generate the changelog and tag using `git_ops`
 5. Validate both release packages without publishing
-6. Push the release commits and tag
-7. Dispatch a publish run from the new release commit
+6. Push the release commits and tag in one atomic operation
+7. Dispatch a publish run from the new release tag and wait for its result
 8. Verify that the publish run, tag, commit, Hex version, and NPM version match
 9. Publish to Hex.pm
 10. Publish `@agentjido/llmdb` to NPM with trusted publishing
 11. Create a GitHub release after both registry publishes succeed
+12. Verify Hex.pm, HexDocs, the NPM signature, and NPM provenance
+13. Install and use the public NPM package with Node.js 22.14 and 24
+
+The workflow serializes release preparation and publishing. Tests can be
+skipped only during a dry run. A recovery run does not publish an NPM or GitHub
+release that already exists. It republishes HexDocs when the Hex package exists.
 
 **Version Format:**
 - Date-based CalVer: `YYYY.M.N` (for example, `2026.5.1`)
@@ -86,8 +95,19 @@ Your Hex.pm API key for publishing packages.
 **How to get it:**
 1. Login to [hex.pm](https://hex.pm)
 2. Go to Settings → API keys
-3. Create a new key with publish permissions
+3. Create a CI key with only the `api:write` permission
 4. Copy the key
+
+You can create this least-privilege key from a maintainer workstation:
+
+```bash
+mix hex.user key generate \
+  --key-name llmdb-github-release \
+  --permission api:write
+```
+
+Rotate this key on a regular schedule. Revoke the old key after the new key
+works.
 
 **Add to GitHub:**
 1. Go to repository Settings → Secrets and variables → Actions
@@ -123,6 +143,7 @@ provenance source revision is the release commit.
 
 The release workflow uses `GITHUB_TOKEN` with these permissions:
 - `contents: write` - Create release commits, tags, and the GitHub release
+- `actions: write` - Start the publishing run at the release tag
 - `id-token: write` - Request the short-lived NPM trusted-publishing identity
 
 These are configured in each workflow file and should work automatically.
@@ -163,8 +184,21 @@ Releases package the committed snapshot. To manually release:
 3. Ensure `main` is clean and contains the exact source to release
 4. Run the "Release to Hex and NPM" workflow on `main`
 5. Keep tests enabled for a production release
-6. Monitor both the preparation run and the dispatched publishing run
-7. Confirm the same immutable version on Hex.pm, NPM, and GitHub Releases
+6. Monitor the preparation run. It waits for the publishing run and reports its result.
+7. Review the automatic registry, provenance, HexDocs, and Node.js QA results.
+
+### Recover an Existing Release Tag
+
+Use this command when a release tag exists but one publish or QA step failed:
+
+```bash
+VERSION=2026.8.4
+gh workflow run release.yml --ref "$VERSION" --field publish_tag="$VERSION"
+```
+
+The workflow requires the tag commit to be reachable from `main`. The tag,
+Elixir version, and NPM version must match. The workflow skips immutable NPM
+and GitHub objects that already exist. It can then finish the remaining work.
 
 ## Workflow Scripts
 
@@ -232,7 +266,7 @@ Generates GitHub release notes with:
 2. **Test Before Release**: CI runs automatically, but check test results
 3. **Monitor Releases**: Check Hex.pm after publish to verify release
 4. **Keep Secrets Secure**: Rotate `HEX_API_KEY` periodically
-5. **Update Dependencies**: Keep actions versions current (e.g., `@v4` → `@v5`)
+5. **Update Dependencies**: Update pinned action commit hashes and their version comments together
 
 ## Development
 

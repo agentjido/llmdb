@@ -71,6 +71,7 @@
     "generate": "node scripts/generate.mjs",
     "pack:check": "npm run build && node scripts/check-package.mjs",
     "prepack": "npm run build",
+    "size:report": "npm run generate && node scripts/size-report.mjs",
     "sync": "node scripts/sync-version.mjs",
     "sync:check": "node scripts/sync-version.mjs --check",
     "test": "npm run build && npm run typecheck:package && node --test test/*.test.mjs",

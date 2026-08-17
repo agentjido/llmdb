@@ -15,6 +15,27 @@ permissions:
   pull-requests: read
 
 jobs:
+  workflow-security:
+    name: Workflow Security
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Validate workflow syntax
+        run: go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.12 .github/workflows/*.yml
+
+      - name: Scan workflow security
+        run: |
+          pipx run --spec zizmor==1.29.0 zizmor \
+            --offline \
+            --min-severity high \
+            --format github \
+            .github
+
   npm:
     name: NPM Package Spike / Node ${{ matrix.node }}
     runs-on: ubuntu-24.04
@@ -26,14 +47,16 @@ jobs:
         node: ["22.14", "24"]
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: ${{ matrix.node }}
           cache: npm
 
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           otp-version: "27"
           elixir-version: "1.18"
@@ -56,7 +79,9 @@ jobs:
       MIX_ENV: dev
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
       - name: Check for CHANGELOG.md modifications
         if: github.event_name == 'pull_request'
@@ -71,13 +96,13 @@ jobs:
           fi
           echo "No CHANGELOG.md modifications detected."
 
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           otp-version: "28"
           elixir-version: "1.19"
 
       - name: Restore Hex/Mix cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             ~/.hex
@@ -94,7 +119,7 @@ jobs:
 
       - name: Restore dependencies cache
         id: deps-cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             deps
@@ -122,7 +147,7 @@ jobs:
         run: mkdir -p priv/plts
 
       - name: Restore Dialyzer PLT cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: priv/plts
           key: ${{ runner.os }}-plt-otp28-elixir1.19-${{ hashFiles('mix.lock', 'mix.exs') }}
@@ -159,13 +184,14 @@ jobs:
       MIX_ENV: test
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       # Cache only immutable package downloads; avoid cached archives/binaries.
       - name: Restore Hex package cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             ~/.hex/packages
@@ -173,14 +199,14 @@ jobs:
           key: ${{ runner.os }}-hex-v2-otp${{ matrix.otp }}-elixir${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}
 
       - name: Restore dependencies cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             deps
             _build
           key: ${{ runner.os }}-mix-${{ env.MIX_ENV }}-otp${{ matrix.otp }}-elixir${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}
 
-      - uses: erlef/setup-beam@v1
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           otp-version: ${{ matrix.otp }}
           elixir-version: ${{ matrix.elixir }}
@@ -216,10 +242,11 @@ jobs:
     name: Build Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
-      - uses: erlef/setup-beam@v1
+          persist-credentials: false
+      - uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
         with:
           otp-version: "27"
           elixir-version: "1.18"

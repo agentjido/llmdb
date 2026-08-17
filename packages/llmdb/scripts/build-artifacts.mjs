@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 
+import { compactKeys, compactStrings, compactValue } from "./compact.mjs";
 import {
   distributionDirectory,
   distributionProvidersDirectory,
@@ -8,6 +9,25 @@ import {
 
 const manifest = JSON.parse(await readFile(generatedManifestPath, "utf8"));
 const providerIds = Object.keys(manifest.providers).sort();
+const providers = new Map(
+  await Promise.all(
+    providerIds.map(async (providerId) => [
+      providerId,
+      JSON.parse(
+        await readFile(
+          new URL(`../generated/providers/${providerId}.json`, import.meta.url),
+          "utf8",
+        ),
+      ),
+    ]),
+  ),
+);
+const sharedKeys = compactKeys(providers.values());
+const keyIndexes = new Map(sharedKeys.map((key, index) => [key, index]));
+const sharedStrings = compactStrings(providers.values());
+const stringIndexes = new Map(
+  sharedStrings.map((value, index) => [value, index]),
+);
 
 await mkdir(distributionProvidersDirectory, { recursive: true });
 
@@ -17,14 +37,15 @@ const providerVariables = providerIds.map(
 
 await Promise.all(
   providerIds.flatMap((providerId) => {
-    const sourcePath = new URL(
-      `../generated/providers/${providerId}.json`,
-      import.meta.url,
-    );
+    const provider = providers.get(providerId);
+
+    if (provider === undefined) {
+      throw new Error(`Generated provider ${providerId} is missing.`);
+    }
 
     return [
-      buildProviderJavaScript(providerId, sourcePath),
-      buildProviderDeclaration(providerId, sourcePath),
+      buildProviderJavaScript(providerId, provider),
+      buildProviderDeclaration(providerId, provider),
     ];
   }),
 );
@@ -59,11 +80,16 @@ console.log(
     `${distributionDirectory}.`,
 );
 
-async function buildProviderJavaScript(providerId, sourcePath) {
-  const source = (await readFile(sourcePath, "utf8")).trim();
-  const output = `import { createProviderCatalog } from "../provider.js";
+async function buildProviderJavaScript(providerId, provider) {
+  const source = JSON.stringify(
+    compactValue(provider, keyIndexes, stringIndexes),
+  );
+  const output = `import { expandCompactValue } from "../compact.js";
+import { compactKeys } from "../generated/compact-keys.js";
+import { compactStrings } from "../generated/compact-strings.js";
+import { createProviderCatalog } from "../provider.js";
 
-export const data = ${source};
+export const data = expandCompactValue(compactKeys, compactStrings, ${source});
 const provider = /* @__PURE__ */ createProviderCatalog(data);
 export default provider;
 `;
@@ -74,8 +100,7 @@ export default provider;
   );
 }
 
-async function buildProviderDeclaration(providerId, sourcePath) {
-  const provider = JSON.parse(await readFile(sourcePath, "utf8"));
+async function buildProviderDeclaration(providerId, provider) {
   const modelNames = new Set(Object.keys(provider.models));
 
   for (const model of Object.values(provider.models)) {
