@@ -88,7 +88,8 @@ defmodule LLMDB.History.Bundle do
       "meta.json",
       Snapshot.snapshot_index_filename(),
       Snapshot.latest_filename(),
-      Snapshot.history_state_filename()
+      Snapshot.history_state_filename(),
+      ".incremental-transaction"
     ]
     |> Enum.each(fn name -> File.rm_rf!(Path.join(output_dir, name)) end)
   end

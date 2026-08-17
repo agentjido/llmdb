@@ -200,6 +200,65 @@ defmodule LLMDB.History.RebuilderTest do
     assert_receive {:loaded, _snapshot_id}
   end
 
+  test "rolls back an interrupted incremental append before retry" do
+    history_dir = temp_dir("llm_db_history_interrupted")
+    full_dir = temp_dir("llm_db_history_interrupted_full")
+    snapshot_a = model_snapshot("gpt-test", "First")
+    snapshot_b = model_snapshot("gpt-test", "Second")
+    snapshots = Map.new([snapshot_a, snapshot_b], &{&1["snapshot_id"], &1})
+
+    observations = [
+      observation(snapshot_a, "2026-01-01T00:00:00Z"),
+      observation(snapshot_b, "2026-01-02T00:00:00Z")
+    ]
+
+    assert {:ok, _summary} =
+             Rebuilder.rebuild(
+               observations: Enum.take(observations, 1),
+               output_dir: history_dir,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert_raise RuntimeError, "simulated interruption", fn ->
+      Rebuilder.rebuild(
+        observations: observations,
+        output_dir: history_dir,
+        incremental_commit_hook: fn -> raise "simulated interruption" end,
+        snapshot_loader: &Map.fetch(snapshots, &1)
+      )
+    end
+
+    assert {:ok, retry_summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: history_dir,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    assert retry_summary.mode == :incremental
+    assert retry_summary.snapshots_processed == 1
+
+    assert {:ok, _summary} =
+             Rebuilder.rebuild(
+               observations: observations,
+               output_dir: full_dir,
+               mode: :full,
+               snapshot_loader: &Map.fetch(snapshots, &1)
+             )
+
+    for path <- [
+          "snapshots.ndjson",
+          "events/2026.ndjson",
+          Snapshot.snapshot_index_filename(),
+          Snapshot.latest_filename(),
+          Snapshot.history_state_filename()
+        ] do
+      assert File.read!(Path.join(history_dir, path)) == File.read!(Path.join(full_dir, path))
+    end
+
+    refute File.exists?(Path.join(history_dir, ".incremental-transaction"))
+  end
+
   defp snapshot(providers) do
     document = %{
       "schema_version" => Snapshot.schema_version(),

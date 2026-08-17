@@ -16,6 +16,7 @@ defmodule LLMDB.History.BundleTest do
     write_json(source_dir, Snapshot.latest_filename(), %{"snapshot_id" => "new"})
 
     write_file(destination_dir, "events/2025.ndjson", ~s({"event_id":"stale"}\n))
+    write_file(destination_dir, ".incremental-transaction/manifest.json", "stale")
     write_json(destination_dir, Snapshot.history_state_filename(), %{"to_snapshot_id" => "old"})
     write_json(destination_dir, "lineage_overrides.json", %{"lineage" => %{}})
 
@@ -25,6 +26,7 @@ defmodule LLMDB.History.BundleTest do
     assert :ok = Bundle.install_archive(bundle.archive_path, destination_dir)
 
     refute File.exists?(Path.join(destination_dir, "events/2025.ndjson"))
+    refute File.exists?(Path.join(destination_dir, ".incremental-transaction"))
     assert File.exists?(Path.join(destination_dir, "events/2026.ndjson"))
 
     assert read_json(destination_dir, Snapshot.history_state_filename())["to_snapshot_id"] ==

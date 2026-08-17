@@ -13,6 +13,8 @@ defmodule LLMDB.History.Rebuilder do
   alias LLMDB.{History.Diff, History.Lineage, Snapshot}
 
   @lineage_overrides_file "lineage_overrides.json"
+  @transaction_dir ".incremental-transaction"
+  @transaction_manifest "manifest.json"
   @checkpoint_schema_version 1
   @type observation :: map()
 
@@ -43,14 +45,17 @@ defmodule LLMDB.History.Rebuilder do
     latest_path = latest_path(opts, output_dir)
     source = Keyword.get(opts, :source)
     mode = Keyword.get(opts, :mode, :auto)
+    incremental_commit_hook = Keyword.get(opts, :incremental_commit_hook, fn -> :ok end)
 
-    with :ok <- validate_observations(observations),
+    with :ok <- recover_interrupted_update(output_dir),
+         :ok <- validate_observations(observations),
          {:ok, lineage_overrides} <- load_lineage_overrides(output_dir),
          {:ok, checkpoint} <-
            load_checkpoint(
              mode,
              output_dir,
              snapshot_index_path,
+             latest_path,
              observations,
              lineage_overrides
            ) do
@@ -75,7 +80,8 @@ defmodule LLMDB.History.Rebuilder do
             snapshot_index_path,
             latest_path,
             source,
-            checkpoint
+            checkpoint,
+            incremental_commit_hook
           )
       end
     end
@@ -131,7 +137,8 @@ defmodule LLMDB.History.Rebuilder do
          snapshot_index_path,
          latest_path,
          source,
-         checkpoint
+         checkpoint,
+         incremental_commit_hook
        ) do
     pending_observations = Enum.drop(observations, checkpoint.observation_count)
 
@@ -174,7 +181,8 @@ defmodule LLMDB.History.Rebuilder do
                result,
                source,
                lineage_overrides,
-               checkpoint.events_written
+               checkpoint.events_written,
+               incremental_commit_hook
              ) do
         total_events = checkpoint.events_written + result.events_written
 
@@ -351,8 +359,18 @@ defmodule LLMDB.History.Rebuilder do
          result,
          source,
          lineage_overrides,
-         previous_event_count
+         previous_event_count,
+         incremental_commit_hook
        ) do
+    transaction =
+      begin_incremental_transaction(
+        output_dir,
+        snapshot_index_path,
+        latest_path,
+        observations,
+        result
+      )
+
     append_ndjson(Path.join(output_dir, "snapshots.ndjson"), result.snapshot_records)
 
     Enum.each(result.events_by_year, fn {year, records} ->
@@ -369,7 +387,9 @@ defmodule LLMDB.History.Rebuilder do
       source
     )
 
+    incremental_commit_hook.()
     write_checkpoint(output_dir, observations, result, lineage_overrides)
+    finish_incremental_transaction(transaction)
   end
 
   defp write_index_and_latest(snapshot_index_path, latest_path, observations) do
@@ -472,10 +492,24 @@ defmodule LLMDB.History.Rebuilder do
     end)
   end
 
-  defp load_checkpoint(:full, _output_dir, _index_path, _observations, _lineage_overrides),
-    do: {:ok, :full}
+  defp load_checkpoint(
+         :full,
+         _output_dir,
+         _index_path,
+         _latest_path,
+         _observations,
+         _lineage_overrides
+       ),
+       do: {:ok, :full}
 
-  defp load_checkpoint(:auto, output_dir, index_path, observations, lineage_overrides) do
+  defp load_checkpoint(
+         :auto,
+         output_dir,
+         index_path,
+         latest_path,
+         observations,
+         lineage_overrides
+       ) do
     state_path = Path.join(output_dir, Snapshot.history_state_filename())
     meta_path = Path.join(output_dir, "meta.json")
     snapshots_path = Path.join(output_dir, "snapshots.ndjson")
@@ -490,6 +524,8 @@ defmodule LLMDB.History.Rebuilder do
            previous_lineage_by_key when is_map(previous_lineage_by_key) <-
              state["previous_lineage_by_key"],
            true <- state["lineage_overrides_digest"] == term_digest(lineage_overrides),
+           true <- managed_path?(index_path, output_dir),
+           true <- managed_path?(latest_path, output_dir),
            {:ok, %{"snapshots" => existing_observations}} when is_list(existing_observations) <-
              read_json(index_path),
            existing_observations <- Enum.map(existing_observations, &stringify_observation/1),
@@ -517,8 +553,170 @@ defmodule LLMDB.History.Rebuilder do
     {:ok, checkpoint}
   end
 
-  defp load_checkpoint(mode, _output_dir, _index_path, _observations, _lineage_overrides),
-    do: {:error, {:invalid_rebuild_mode, mode}}
+  defp load_checkpoint(
+         mode,
+         _output_dir,
+         _index_path,
+         _latest_path,
+         _observations,
+         _lineage_overrides
+       ),
+       do: {:error, {:invalid_rebuild_mode, mode}}
+
+  defp begin_incremental_transaction(
+         output_dir,
+         snapshot_index_path,
+         latest_path,
+         observations,
+         result
+       ) do
+    transaction_dir = Path.join(output_dir, @transaction_dir)
+    backup_dir = Path.join(transaction_dir, "control")
+
+    data_paths =
+      [Path.join(output_dir, "snapshots.ndjson")] ++
+        Enum.map(Map.keys(result.events_by_year), fn year ->
+          Path.join([output_dir, "events", "#{year}.ndjson"])
+        end)
+
+    control_paths = [
+      snapshot_index_path,
+      latest_path,
+      Path.join(output_dir, "meta.json"),
+      Path.join(output_dir, Snapshot.history_state_filename())
+    ]
+
+    File.rm_rf!(transaction_dir)
+    File.mkdir_p!(backup_dir)
+
+    Enum.each(control_paths, fn path ->
+      if File.exists?(path) do
+        backup_path = transaction_backup_path(backup_dir, output_dir, path)
+        File.mkdir_p!(Path.dirname(backup_path))
+        File.cp!(path, backup_path)
+      end
+    end)
+
+    manifest = %{
+      "target_observation_count" => length(observations),
+      "target_snapshot_id" => observations |> List.last() |> snapshot_id_from_observation(),
+      "data_files" =>
+        Map.new(data_paths, fn path ->
+          {Path.relative_to(path, output_dir), file_size(path)}
+        end),
+      "control_files" => Enum.map(control_paths, &Path.relative_to(&1, output_dir))
+    }
+
+    Snapshot.write!(Path.join(transaction_dir, @transaction_manifest), manifest)
+    %{dir: transaction_dir}
+  end
+
+  defp finish_incremental_transaction(%{dir: transaction_dir}) do
+    File.rm_rf!(transaction_dir)
+    :ok
+  end
+
+  defp recover_interrupted_update(output_dir) do
+    transaction_dir = Path.join(output_dir, @transaction_dir)
+    manifest_path = Path.join(transaction_dir, @transaction_manifest)
+
+    cond do
+      not File.dir?(transaction_dir) ->
+        :ok
+
+      not File.exists?(manifest_path) ->
+        File.rm_rf!(transaction_dir)
+        :ok
+
+      true ->
+        with {:ok, manifest} <- read_json(manifest_path) do
+          if transaction_committed?(output_dir, manifest) do
+            File.rm_rf!(transaction_dir)
+          else
+            rollback_transaction(output_dir, transaction_dir, manifest)
+          end
+
+          :ok
+        else
+          _error ->
+            File.rm_rf!(transaction_dir)
+            :ok
+        end
+    end
+  end
+
+  defp transaction_committed?(output_dir, manifest) do
+    state_path = Path.join(output_dir, Snapshot.history_state_filename())
+
+    case read_json(state_path) do
+      {:ok, state} ->
+        state["observation_count"] == manifest["target_observation_count"] and
+          state["to_snapshot_id"] == manifest["target_snapshot_id"]
+
+      _error ->
+        false
+    end
+  end
+
+  defp rollback_transaction(output_dir, transaction_dir, manifest) do
+    Enum.each(manifest["data_files"] || %{}, fn {relative_path, original_size} ->
+      path = managed_transaction_path!(output_dir, relative_path)
+      restore_file_size(path, original_size)
+    end)
+
+    backup_dir = Path.join(transaction_dir, "control")
+
+    Enum.each(manifest["control_files"] || [], fn relative_path ->
+      path = managed_transaction_path!(output_dir, relative_path)
+      backup_path = managed_transaction_path!(backup_dir, relative_path)
+
+      if File.exists?(backup_path) do
+        File.mkdir_p!(Path.dirname(path))
+        File.cp!(backup_path, path)
+      else
+        File.rm_rf!(path)
+      end
+    end)
+
+    File.rm_rf!(transaction_dir)
+  end
+
+  defp restore_file_size(path, nil), do: File.rm_rf!(path)
+
+  defp restore_file_size(path, size) when is_integer(size) and size >= 0 do
+    File.open!(path, [:read, :write], fn file ->
+      {:ok, ^size} = :file.position(file, size)
+      :ok = :file.truncate(file)
+    end)
+  end
+
+  defp file_size(path) do
+    case File.stat(path) do
+      {:ok, stat} -> stat.size
+      {:error, :enoent} -> nil
+    end
+  end
+
+  defp transaction_backup_path(backup_dir, output_dir, path) do
+    relative_path = Path.relative_to(path, output_dir)
+    managed_transaction_path!(backup_dir, relative_path)
+  end
+
+  defp managed_transaction_path!(root, relative_path) do
+    path = Path.expand(relative_path, root)
+
+    if managed_path?(path, root) do
+      path
+    else
+      raise "invalid history transaction path: #{relative_path}"
+    end
+  end
+
+  defp managed_path?(path, root) do
+    expanded_path = Path.expand(path)
+    expanded_root = Path.expand(root)
+    expanded_path == expanded_root or String.starts_with?(expanded_path, expanded_root <> "/")
+  end
 
   defp read_json(path) do
     with {:ok, content} <- File.read(path),
@@ -618,6 +816,7 @@ defmodule LLMDB.History.Rebuilder do
     File.rm_rf!(Path.join(output_dir, Snapshot.snapshot_index_filename()))
     File.rm_rf!(Path.join(output_dir, Snapshot.latest_filename()))
     File.rm_rf!(Path.join(output_dir, Snapshot.history_state_filename()))
+    File.rm_rf!(Path.join(output_dir, @transaction_dir))
     File.mkdir_p!(Path.join(output_dir, "events"))
     :ok
   end

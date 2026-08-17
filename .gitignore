@@ -15,6 +15,7 @@
 
 # The published history bundle carries this large generated checkpoint.
 /priv/llm_db/history/state.json
+/priv/llm_db/history/.incremental-transaction/
 
 # If the VM crashes, it generates a dump, let's ignore it too.
 erl_crash.dump
