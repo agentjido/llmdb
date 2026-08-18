@@ -4,6 +4,50 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 393100,
+      "created": 1786962877,
+      "display_name": "Dots Studio: Dots3-Note Preview (Free)",
+      "id": "dots-studio/dots3-note-prev",
+      "input_modalities": [
+        "text",
+        "image",
+        "video",
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "dots-studio",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-08-17"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1048576,
       "created": 1786671530,
       "display_name": "Google: Gemini 3.7 Flash",
