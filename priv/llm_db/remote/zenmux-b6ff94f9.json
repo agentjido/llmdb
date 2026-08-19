@@ -100,6 +100,54 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1000000,
+      "created": 1786609177,
+      "display_name": "Z.AI: GLM 5.3",
+      "id": "z-ai/glm-5.3",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "z-ai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.4
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.26
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.4
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-08-13"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 500000,
       "created": 1786550329,
       "display_name": "xAI: Grok 4.6",
@@ -116,23 +164,77 @@
       "pricings": {
         "completion": [
           {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 200,
+                "unit": "kTokens"
+              }
+            },
             "currency": "USD",
             "unit": "perMTokens",
             "value": 6
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 200,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 12
           }
         ],
         "input_cache_read": [
           {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 200,
+                "unit": "kTokens"
+              }
+            },
             "currency": "USD",
             "unit": "perMTokens",
             "value": 0.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 200,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1
           }
         ],
         "prompt": [
           {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lte": 200,
+                "unit": "kTokens"
+              }
+            },
             "currency": "USD",
             "unit": "perMTokens",
             "value": 2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 200,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
           }
         ],
         "web_search": [
@@ -140,6 +242,54 @@
             "currency": "USD",
             "unit": "perCount",
             "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-08-13"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1787042172,
+      "display_name": "Z.AI: GLM 5.3 (Free)",
+      "id": "z-ai/glm-5.3-free",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "z-ai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0
           }
         ]
       },
