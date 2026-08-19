@@ -1,6 +1,7 @@
 # LLM DB - A LLM Model Metadata Database
 
 [![Hex.pm](https://img.shields.io/hexpm/v/llm_db.svg)](https://hex.pm/packages/llm_db)
+[![npm](https://img.shields.io/npm/v/@agentjido/llmdb.svg)](https://www.npmjs.com/package/@agentjido/llmdb)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/llm_db/)
 [![CI](https://github.com/agentjido/llmdb/actions/workflows/ci.yml/badge.svg)](https://github.com/agentjido/llmdb/actions/workflows/ci.yml)
 [![License](https://img.shields.io/hexpm/l/llm_db.svg)](https://github.com/agentjido/llmdb/blob/main/LICENSE)
@@ -75,6 +76,20 @@ def deps do
   ]
 end
 ```
+
+### Node.js and TypeScript
+
+LLM DB is also available on npm as
+[`@agentjido/llmdb`](https://www.npmjs.com/package/@agentjido/llmdb).
+It provides offline-first, typed access to the same model metadata catalog.
+
+```bash
+npm install @agentjido/llmdb
+```
+
+The package requires Node.js 22.14 or newer. See the
+[Node.js and TypeScript guide](packages/llmdb/README.md) for API examples and
+available entry points.
 
 ## model_spec (the main interface)
 
