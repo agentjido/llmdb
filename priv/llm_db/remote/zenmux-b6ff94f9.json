@@ -4,6 +4,88 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 256000,
+      "created": 1787113284,
+      "display_name": "Mind Lab: Macaron V1 Tall",
+      "id": "mindai/macaron-v1-tall",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "mindai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.6
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.08
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.45
+          }
+        ]
+      },
+      "publish_time": "2026-08-19"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1787106368,
+      "display_name": "Mind Lab: Macaron V1 Venti",
+      "id": "mindai/macaron-v1-venti",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "mindai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.5
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.3
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.5
+          }
+        ]
+      },
+      "publish_time": "2026-08-18"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 393100,
       "created": 1786962877,
       "display_name": "Dots Studio: Dots3-Note Preview (Free)",
@@ -627,47 +709,6 @@
         ]
       },
       "publish_time": "2026-08-01"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 1000000,
-      "created": 1777003313,
-      "display_name": "DeepSeek: DeepSeek V4 Flash 0731 (Free)",
-      "id": "deepseek/deepseek-v4-flash-free",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-07-31"
     },
     {
       "capabilities": {
