@@ -5,6 +5,48 @@
         "reasoning": true
       },
       "context_length": 256000,
+      "created": 1787207684,
+      "display_name": "Nex AGI: Nex-N2-Pro",
+      "id": "nex-agi/nex-n2-pro",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "nex-agi",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          }
+        ]
+      },
+      "publish_time": "2026-08-20"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 256000,
       "created": 1787113284,
       "display_name": "Mind Lab: Macaron V1 Tall",
       "id": "mindai/macaron-v1-tall",
