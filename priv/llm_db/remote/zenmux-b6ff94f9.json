@@ -4,6 +4,271 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1000000,
+      "created": 1787305220,
+      "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
+      "id": "deepseek/deepseek-v4-flash-vision-exp-free",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "deepseek",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-08-21"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1787290766,
+      "display_name": "Qwen: Qwen3.8-27B",
+      "id": "qwen/qwen3.8-27b",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 3
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.05
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          }
+        ],
+        "input_cache_write": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.625
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-08-21"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1787304413,
+      "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp",
+      "id": "deepseek/deepseek-v4-flash-vision-exp",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "deepseek",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.66
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.66
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.66
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.32
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.32
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.007
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.007
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.007
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.014
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.014
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.22
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.22
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.22
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.44
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.44
+          }
+        ]
+      },
+      "publish_time": "2026-08-21"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 256000,
       "created": 1787207684,
       "display_name": "Nex AGI: Nex-N2-Pro",
