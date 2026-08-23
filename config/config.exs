@@ -34,7 +34,7 @@ if Mix.env() == :dev do
     repository_url: "https://github.com/agentjido/llmdb",
     manage_mix_version?: false,
     manage_readme_version: false,
-    version_source: :tags,
+    version_source: {:file, "CHANGELOG.md", ~r/^## \[(\d{4}\.\d+\.\d+)\]/m},
     version_tag_prefix: ""
 
   config :git_hooks,

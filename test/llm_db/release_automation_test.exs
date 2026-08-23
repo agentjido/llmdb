@@ -64,10 +64,12 @@ defmodule LLMDB.ReleaseAutomationTest do
     assert ci =~ "zizmor==1.29.0"
   end
 
-  test "git_ops reads the previous version from release tags" do
+  test "git_ops reads the previous version from the changelog" do
     config = File.read!(@config_path)
 
-    assert config =~ "version_source: :tags"
+    assert config =~ ~s(version_source: {:file, "CHANGELOG.md")
+    assert config =~ ~S|~r/^## \[(\d{4}\.\d+\.\d+)\]/m|
+    refute config =~ "version_source: :tags"
   end
 
   test "changelog links compare different tags in the current repository" do
