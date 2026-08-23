@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.8.4](https://github.com/agentjido/llmdb/compare/2026.8.3...2026.8.4) (2026-08-23)
+
+
+
+
+### Bug Fixes:
+
+* read release version from changelog by github-actions[bot]
+
+* harden releases and reduce npm package size by mikehostetler
+
+* correct release provenance and changelog links by github-actions[bot]
+
 ## [2026.8.3](https://github.com/agentjido/llmdb/compare/2026.8.2...2026.8.3) (2026-08-17)
 
 
