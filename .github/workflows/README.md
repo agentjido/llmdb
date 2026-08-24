@@ -45,8 +45,8 @@ store.
 
 **Output:**
 - Updated immutable `snapshot-<snapshot_id>` release assets
-- Updated mutable `catalog-index` assets
-- Updated mutable `history-latest` checkpoint assets when history changed
+- A new immutable `catalog-index-<generation>` release when the index changed
+- A new immutable `history-latest-<generation>` checkpoint release when history changed
 
 ### 3. Release to Hex and NPM (`release.yml`)
 

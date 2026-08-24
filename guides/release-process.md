@@ -78,8 +78,11 @@ $ mix llm_db.snapshot.publish
 $ mix llm_db.history.rebuild --publish
 ```
 
-This publishes immutable snapshot releases plus the mutable `catalog-index`
-assets: `latest.json`, `snapshot-index.json`, `history.tar.gz`, and `history-meta.json`.
+This publishes immutable snapshot releases and complete immutable generations.
+`catalog-index-<generation>` contains versioned forms of `latest.json` and
+`snapshot-index.json`. `history-latest-<generation>` contains versioned forms
+of `history.tar.gz` and `history-meta.json`. The publisher keeps the two latest
+complete releases for each type.
 
 ## Versioning and Tagging
 

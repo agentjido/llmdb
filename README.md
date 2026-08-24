@@ -429,12 +429,27 @@ it appends data. The next run rolls back an interrupted append before it starts.
 The release storage has these growth rules:
 
 - Immutable full snapshot releases grow linearly with changed catalog states.
-- `catalog-index` keeps the two latest complete, versioned index asset pairs.
-- `history-latest` keeps the two latest complete, versioned checkpoint pairs.
-- A publisher uploads a complete new pair before it removes an old pair.
+- Each `catalog-index-<generation>` release contains one complete, versioned
+  index asset pair.
+- Each `history-latest-<generation>` release contains one complete, versioned
+  checkpoint pair.
+- GitHub CLI uploads a generation as a draft and publishes it only after both
+  assets are present. Published generation assets are not changed.
+- The publisher keeps the two latest complete catalog and checkpoint generation
+  releases. It removes older releases only after a replacement is public.
+- Readers use the newest complete generation. They ignore drafts and incomplete
+  releases.
+- Existing fixed `catalog-index` and `history-latest` releases remain readable
+  as migration fallbacks.
 - Legacy immutable `history-*` releases remain readable for migration, but new
   rebuilds do not create more of them.
 - Local history event files grow linearly with recorded model changes.
+
+No one-time data rewrite is required. The first publish with this release
+creates the first generation releases. Current readers can use the old fixed
+releases until those generations exist. Older readers cannot discover later
+generation tags and stay on the last fixed generation, so consumers that fetch
+live catalog updates must upgrade.
 
 This design keeps content-addressed snapshots for audit use. It prevents the
 previous faster-than-linear growth from one new full history release per

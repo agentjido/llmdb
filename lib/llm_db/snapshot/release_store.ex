@@ -3,10 +3,11 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   GitHub Releases-backed snapshot artifact store.
 
   Runtime fetching resolves immutable snapshots through the latest complete
-  catalog asset generation. It resolves history through the latest complete
-  checkpoint generation. A release scan supports migration when these assets
-  do not exist. Publishing uses versioned asset pairs and keeps two complete
-  generations. It uses the `gh` CLI for maintainer workflows and GitHub Actions.
+  catalog generation release. It resolves history through the latest complete
+  checkpoint generation release. Fixed-tag assets and a release scan support
+  migration when these releases do not exist. Publishing creates one immutable
+  release for each complete asset pair. It uses the `gh` CLI for maintainer
+  workflows and GitHub Actions.
 
   This shared transport is internal. Runtime consumers configure snapshot
   sources through `LLMDB.load/1`; maintainers use the supported
@@ -22,6 +23,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   @default_cache_dir Path.join(["tmp", "llm_db", "snapshot_cache"])
   @github_api_version "2022-11-28"
   @release_page_size 100
+  @generation_publish_attempts 2
   @retained_generations 2
 
   @catalog_asset_specs %{
@@ -155,8 +157,31 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   end
 
   defp latest_release_assets(repo, tag, asset_specs, overrides) do
-    with {:ok, release} <- release_by_tag(repo, tag, overrides) do
-      complete_release_assets(release, asset_specs)
+    case latest_generation_release_assets(repo, tag, asset_specs, overrides) do
+      {:ok, _assets} = result ->
+        result
+
+      {:error, :not_found} ->
+        with {:ok, release} <- release_by_tag(repo, tag, overrides) do
+          complete_release_assets(release, asset_specs)
+        end
+
+      error ->
+        error
+    end
+  end
+
+  defp latest_generation_release_assets(repo, base_tag, asset_specs, overrides) do
+    with {:ok, releases} <- recent_releases(repo, overrides) do
+      releases
+      |> Enum.filter(&generation_release?(&1, base_tag))
+      |> Enum.sort_by(&release_identity/1, :desc)
+      |> Enum.find_value({:error, :not_found}, fn release ->
+        case complete_release_assets(release, asset_specs) do
+          {:ok, _assets} = result -> result
+          {:error, :not_found} -> nil
+        end
+      end)
     end
   end
 
@@ -610,25 +635,6 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end)
   end
 
-  defp complete_generations(asset_names, asset_specs) do
-    asset_specs
-    |> Map.values()
-    |> Enum.map(fn {prefix, suffix} ->
-      asset_names
-      |> Enum.map(&versioned_generation(&1, prefix, suffix))
-      |> Enum.reject(&is_nil/1)
-      |> MapSet.new()
-    end)
-    |> intersect_sets()
-    |> MapSet.to_list()
-  end
-
-  defp asset_generation(name, asset_specs) do
-    Enum.find_value(asset_specs, fn {_key, {prefix, suffix}} ->
-      versioned_generation(name, prefix, suffix)
-    end)
-  end
-
   defp versioned_generation(name, prefix, suffix) when is_binary(name) do
     if String.starts_with?(name, prefix) and String.ends_with?(name, suffix) do
       generation_size = byte_size(name) - byte_size(prefix) - byte_size(suffix)
@@ -646,6 +652,7 @@ defmodule LLMDB.Snapshot.ReleaseStore do
 
   defp release_tag_name(%{"tag_name" => tag}), do: tag
   defp release_tag_name(%{tag_name: tag}), do: tag
+  defp release_tag_name(_release), do: nil
 
   defp release_published_at(%{"published_at" => published_at}), do: published_at
   defp release_published_at(%{published_at: published_at}), do: published_at
@@ -712,6 +719,8 @@ defmodule LLMDB.Snapshot.ReleaseStore do
   end
 
   defp create_release(tag, repo, title, asset_paths) do
+    # `gh release create` uses a draft while it uploads the supplied assets. It
+    # publishes the release only after all uploads succeed.
     args =
       ["release", "create", tag]
       |> Kernel.++(asset_paths)
@@ -723,7 +732,27 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     end
   end
 
-  defp publish_versioned_release(tag, repo, title, generation, asset_specs, sources) do
+  defp publish_versioned_release(base_tag, repo, title, generation, asset_specs, sources) do
+    do_publish_versioned_release(
+      base_tag,
+      repo,
+      title,
+      generation,
+      asset_specs,
+      sources,
+      @generation_publish_attempts
+    )
+  end
+
+  defp do_publish_versioned_release(
+         base_tag,
+         repo,
+         title,
+         generation,
+         asset_specs,
+         sources,
+         attempts_left
+       ) do
     staging_dir =
       Path.join(
         System.tmp_dir!(),
@@ -740,78 +769,77 @@ defmodule LLMDB.Snapshot.ReleaseStore do
       end)
 
     try do
-      with :ok <- ensure_mutable_release(tag, repo, title),
-           :ok <- upload_release_assets(tag, repo, Map.values(staged_paths)),
-           :ok <- prune_release_assets(tag, repo, asset_specs, generation) do
-        {:ok, tag}
+      tag = "#{base_tag}-#{generation}"
+
+      case create_release(tag, repo, title, Map.values(staged_paths)) do
+        {:ok, ^tag} ->
+          with :ok <- prune_generation_releases(base_tag, repo, tag) do
+            {:ok, tag}
+          end
+
+        {:error, reason} when attempts_left > 1 ->
+          if immutable_release_error?(reason) do
+            replacement_generation = "#{generation}-#{generation_id()}"
+
+            do_publish_versioned_release(
+              base_tag,
+              repo,
+              title,
+              replacement_generation,
+              asset_specs,
+              sources,
+              attempts_left - 1
+            )
+          else
+            {:error, reason}
+          end
+
+        {:error, reason} ->
+          {:error, reason}
       end
     after
       File.rm_rf!(staging_dir)
     end
   end
 
-  defp ensure_mutable_release(tag, repo, title) do
-    case run_gh(["release", "view", tag, "--repo", repo]) do
-      {:ok, _output} ->
-        :ok
-
-      {:error, _reason} ->
-        case create_release(tag, repo, title, []) do
-          {:ok, ^tag} -> :ok
-          {:error, reason} -> {:error, reason}
-        end
-    end
+  defp immutable_release_error?(reason) when is_binary(reason) do
+    String.contains?(reason, "HTTP 422") and
+      String.contains?(String.downcase(reason), "immutable release")
   end
 
-  defp upload_release_assets(tag, repo, asset_paths) do
-    args = ["release", "upload", tag] ++ asset_paths ++ ["--repo", repo]
+  defp prune_generation_releases(base_tag, repo, published_tag) do
+    args = [
+      "release",
+      "list",
+      "--repo",
+      repo,
+      "--limit",
+      Integer.to_string(@release_page_size),
+      "--json",
+      "tagName,isDraft,publishedAt"
+    ]
 
-    case run_gh(args) do
-      {:ok, _output} -> :ok
-      {:error, reason} -> {:error, reason}
-    end
-  end
-
-  defp prune_release_assets(tag, repo, asset_specs, published_generation) do
-    with {:ok, asset_names} <- release_asset_names(tag, repo) do
-      retained_generations =
-        asset_names
-        |> complete_generations(asset_specs)
-        |> Enum.sort(:desc)
-        |> Enum.take(@retained_generations)
-        |> MapSet.new()
-
-      asset_names
-      |> Enum.filter(fn name ->
-        case asset_generation(name, asset_specs) do
-          nil ->
-            false
-
-          generation ->
-            generation < published_generation and
-              not MapSet.member?(retained_generations, generation)
-        end
+    with {:ok, output} <- run_gh(args),
+         {:ok, releases} when is_list(releases) <- Jason.decode(output) do
+      releases
+      |> Enum.reject(& &1["isDraft"])
+      |> Enum.filter(fn release ->
+        tag = release["tagName"]
+        is_binary(tag) and tag != published_tag and String.starts_with?(tag, "#{base_tag}-")
       end)
-      |> Enum.reduce_while(:ok, fn name, :ok ->
-        case run_gh(["release", "delete-asset", tag, name, "--repo", repo, "--yes"]) do
+      |> Enum.sort_by(&{&1["publishedAt"] || "", &1["tagName"]}, :desc)
+      |> Enum.drop(@retained_generations - 1)
+      |> Enum.reduce_while(:ok, fn release, :ok ->
+        tag = release["tagName"]
+
+        case run_gh(["release", "delete", tag, "--repo", repo, "--yes", "--cleanup-tag"]) do
           {:ok, _output} -> {:cont, :ok}
           {:error, reason} -> {:halt, {:error, reason}}
         end
       end)
-    end
-  end
-
-  defp release_asset_names(tag, repo) do
-    case run_gh(["release", "view", tag, "--repo", repo, "--json", "assets"]) do
-      {:ok, output} ->
-        with {:ok, %{"assets" => assets}} when is_list(assets) <- Jason.decode(output) do
-          {:ok, Enum.map(assets, & &1["name"])}
-        else
-          _error -> {:error, :invalid_release_assets}
-        end
-
-      {:error, reason} ->
-        {:error, reason}
+    else
+      {:ok, _other} -> {:error, :invalid_release_list}
+      {:error, reason} -> {:error, reason}
     end
   end
 
@@ -819,10 +847,35 @@ defmodule LLMDB.Snapshot.ReleaseStore do
     do_list_releases(repo, overrides, 1, [])
   end
 
+  defp recent_releases(repo, overrides) do
+    url = "https://api.github.com/repos/#{repo}/releases"
+
+    case api_get_json(url, [params: [per_page: @release_page_size, page: 1]], overrides) do
+      {:ok, releases} when is_list(releases) -> {:ok, releases}
+      {:ok, other} -> {:error, {:invalid_release_list, other}}
+      error -> error
+    end
+  end
+
   defp release_by_tag(repo, tag, overrides) do
     encoded_tag = URI.encode_www_form(tag)
     url = "https://api.github.com/repos/#{repo}/releases/tags/#{encoded_tag}"
     api_get_json(url, [], overrides)
+  end
+
+  defp generation_release?(release, base_tag) do
+    tag = release_tag_name(release)
+    draft? = Map.get(release, "draft", Map.get(release, :draft, false))
+
+    draft? != true and is_binary(tag) and String.starts_with?(tag, "#{base_tag}-")
+  end
+
+  defp release_identity(release) do
+    {
+      release_published_at(release) || "",
+      Map.get(release, "created_at", Map.get(release, :created_at, "")),
+      release_tag_name(release) || ""
+    }
   end
 
   defp do_list_releases(repo, overrides, page, acc) do

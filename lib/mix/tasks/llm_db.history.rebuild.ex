@@ -9,7 +9,7 @@ defmodule Mix.Tasks.LlmDb.History.Rebuild do
   @moduledoc """
   Rebuilds local history artifacts from the published snapshot observation chain,
   then bundles the result and optionally publishes `history.tar.gz` plus
-  `history-meta.json` to the mutable `history-latest` release.
+  `history-meta.json` to one immutable `history-latest-<generation>` release.
 
   By default, the task installs the latest published checkpoint and processes
   only new snapshots. Use `--full` for an audit or repair rebuild.
