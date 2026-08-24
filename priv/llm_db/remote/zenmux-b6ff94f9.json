@@ -3461,9 +3461,7 @@
       "publish_time": "2026-05-19"
     },
     {
-      "capabilities": {
-        "reasoning": true
-      },
+      "capabilities": {},
       "context_length": 262144,
       "created": 1778304211,
       "display_name": "inclusionAI: Ring-2.6-1T",
@@ -3476,29 +3474,6 @@
         "text"
       ],
       "owned_by": "inclusionai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 2.5
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.06
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.3
-          }
-        ]
-      },
       "publish_time": "2026-05-09"
     },
     {

@@ -64980,7 +64980,7 @@
         "last_updated": "2026-02-23",
         "limit": {
           "context": 262144,
-          "output": 65536
+          "output": 262144
         },
         "modalities": {
           "input": [
@@ -65142,8 +65142,8 @@
       "thinkingmachines/inkling": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.16,
-          "input": 0.95,
+          "cache_read": 0.17,
+          "input": 1,
           "output": 4.05
         },
         "description": "Multimodal reasoning model for visual analysis, planning, and tool use",
@@ -68847,7 +68847,7 @@
         "last_updated": "2024-11-08",
         "limit": {
           "context": 1024000,
-          "output": 1024000
+          "output": 32768
         },
         "modalities": {
           "input": [
@@ -69134,8 +69134,9 @@
       "qwen/qwen3.5-397b-a17b": {
         "attachment": true,
         "cost": {
-          "input": 0.39,
-          "output": 2.34
+          "cache_read": 0.3,
+          "input": 0.5,
+          "output": 3.6
         },
         "description": "Large open Qwen multimodal MoE for visual agents and long technical tasks",
         "family": "qwen",
@@ -69143,7 +69144,7 @@
         "last_updated": "2026-02-15",
         "limit": {
           "context": 262144,
-          "output": 65536
+          "output": 262144
         },
         "modalities": {
           "input": [
@@ -72612,9 +72613,9 @@
       "deepseek/deepseek-v4-flash": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.009772,
-          "input": 0.04886,
-          "output": 0.09772
+          "cache_read": 0.011732,
+          "input": 0.05866,
+          "output": 0.11732
         },
         "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
         "family": "deepseek-flash",
@@ -73117,9 +73118,9 @@
       "deepseek/deepseek-v4-flash-0731": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.016,
-          "input": 0.08,
-          "output": 0.18
+          "cache_read": 0.028,
+          "input": 0.14,
+          "output": 0.28
         },
         "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
         "family": "deepseek-flash",
@@ -73128,7 +73129,7 @@
         "last_updated": "2026-07-31",
         "limit": {
           "context": 1310720,
-          "output": 384000
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -77422,9 +77423,9 @@
       "deepseek/deepseek-v4-pro": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.033075,
-          "input": 0.396894,
-          "output": 0.793788
+          "cache_read": 0.043268,
+          "input": 0.519216,
+          "output": 1.038432
         },
         "description": "Open MoE flagship with million-token context for coding and long agent runs",
         "family": "deepseek-thinking",
@@ -78577,9 +78578,8 @@
       "qwen/qwen3.6-27b": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.12,
-          "input": 0.6,
-          "output": 3.6
+          "input": 0.32,
+          "output": 3.2
         },
         "description": "Qwen vision-language model for visual reasoning, documents, and agent tasks",
         "family": "qwen",
@@ -78587,7 +78587,7 @@
         "last_updated": "2026-04-22",
         "limit": {
           "context": 262144,
-          "output": 262144
+          "output": 81920
         },
         "modalities": {
           "input": [
@@ -144292,7 +144292,7 @@
         "last_updated": "2026-02-23",
         "limit": {
           "context": 262144,
-          "output": 65536
+          "output": 262144
         },
         "modalities": {
           "input": [
@@ -148083,8 +148083,8 @@
         "id": "thedrummer/unslopnemo-12b",
         "last_updated": "2024-11-08",
         "limit": {
-          "context": 1024000,
-          "output": 1024000
+          "context": 32768,
+          "output": 32768
         },
         "modalities": {
           "input": [
@@ -148172,9 +148172,9 @@
       "tencent/hy3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.033,
-          "input": 0.132,
-          "output": 0.528
+          "cache_read": 0.035,
+          "input": 0.14,
+          "output": 0.58
         },
         "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
         "family": "Hy",
@@ -148385,7 +148385,7 @@
         "last_updated": "2026-02-15",
         "limit": {
           "context": 262144,
-          "output": 65536
+          "output": 262144
         },
         "modalities": {
           "input": [
@@ -152355,7 +152355,7 @@
         "last_updated": "2026-07-31",
         "limit": {
           "context": 1048576,
-          "output": 384000
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -157903,7 +157903,7 @@
         "last_updated": "2026-04-22",
         "limit": {
           "context": 262144,
-          "output": 262144
+          "output": 81920
         },
         "modalities": {
           "input": [
@@ -181851,8 +181851,8 @@
         "attachment": false,
         "cost": {
           "cache_read": 0.007,
-          "input": 0.22,
-          "output": 0.66
+          "input": 0.035,
+          "output": 0.07
         },
         "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
         "family": "deepseek-flash",
@@ -188935,9 +188935,9 @@
       "Qwen/Qwen3.8-27B-TEE": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.039999999999999994,
-          "input": 0.4,
-          "output": 3
+          "cache_read": 0.03499999999999999,
+          "input": 0.35,
+          "output": 2.75
         },
         "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
         "family": "qwen",
