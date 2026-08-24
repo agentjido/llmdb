@@ -3635,6 +3635,8 @@
       "qwen-plus": {
         "attachment": false,
         "cost": {
+          "cache_read": 0.012,
+          "cache_write": 0.144,
           "input": 0.115,
           "output": 0.287,
           "reasoning": 1.147
@@ -65685,7 +65687,7 @@
         "last_updated": "2023-07-22",
         "limit": {
           "context": 6144,
-          "output": 6144
+          "output": 4096
         },
         "modalities": {
           "input": [
@@ -70026,37 +70028,6 @@
         "temperature": true,
         "tool_call": false
       },
-      "inclusionai/ling-2.6-1t": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.015,
-          "input": 0.075,
-          "output": 0.625
-        },
-        "description": "Tool-capable chat model for instruction following and agentic application workflows",
-        "family": "ling",
-        "id": "inclusionai/ling-2.6-1t",
-        "last_updated": "2026-04-23",
-        "limit": {
-          "context": 262144,
-          "output": 32768
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Ling-2.6-1T",
-        "open_weights": false,
-        "reasoning": false,
-        "release_date": "2026-04-23",
-        "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
       "google/gemma-3n-e4b-it": {
         "attachment": false,
         "cost": {
@@ -70420,46 +70391,6 @@
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-03-16",
-        "structured_output": false,
-        "temperature": true,
-        "tool_call": true
-      },
-      "inclusionai/ring-2.6-1t": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.015,
-          "input": 0.075,
-          "output": 0.625
-        },
-        "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
-        "family": "ring",
-        "id": "inclusionai/ring-2.6-1t",
-        "last_updated": "2026-05-08",
-        "limit": {
-          "context": 262144,
-          "output": 65536
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Ring-2.6-1T",
-        "open_weights": false,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "high",
-              "xhigh"
-            ]
-          }
-        ],
-        "release_date": "2026-05-08",
         "structured_output": false,
         "temperature": true,
         "tool_call": true
@@ -71822,37 +71753,6 @@
         "temperature": true,
         "tool_call": true
       },
-      "inclusionai/ling-2.6-flash": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.002,
-          "input": 0.01,
-          "output": 0.03
-        },
-        "description": "Efficient model for low-latency assistance, extraction, and routine automation",
-        "family": "ling",
-        "id": "inclusionai/ling-2.6-flash",
-        "last_updated": "2026-04-21",
-        "limit": {
-          "context": 262144,
-          "output": 32768
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Ling-2.6-flash",
-        "open_weights": false,
-        "reasoning": false,
-        "release_date": "2026-04-21",
-        "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
       "openai/gpt-4.1-mini": {
         "attachment": true,
         "cost": {
@@ -72613,9 +72513,9 @@
       "deepseek/deepseek-v4-flash": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.011732,
-          "input": 0.05866,
-          "output": 0.11732
+          "cache_read": 0.01148,
+          "input": 0.0574,
+          "output": 0.1148
         },
         "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
         "family": "deepseek-flash",
@@ -77423,9 +77323,9 @@
       "deepseek/deepseek-v4-pro": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.043268,
-          "input": 0.519216,
-          "output": 1.038432
+          "cache_read": 0.043848,
+          "input": 0.526176,
+          "output": 1.052352
         },
         "description": "Open MoE flagship with million-token context for coding and long agent runs",
         "family": "deepseek-thinking",
@@ -91477,8 +91377,8 @@
       "qwen/deepseek-v4-flash-0731": {
         "attachment": false,
         "cost": {
-          "input": 0.176,
-          "output": 0.528
+          "input": 0.352,
+          "output": 1.056
         },
         "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
         "family": "deepseek-flash",
@@ -96994,8 +96894,8 @@
       "qwen/deepseek-v4-pro-0813": {
         "attachment": false,
         "cost": {
-          "input": 0.627,
-          "output": 1.881
+          "input": 1.1616,
+          "output": 3.4848
         },
         "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
         "family": "deepseek-thinking",
@@ -105711,7 +105611,7 @@
         "tool_call": true
       },
       "Qwen/Qwen3.8-27B": {
-        "attachment": false,
+        "attachment": true,
         "cost": {
           "cache_read": 0.01,
           "input": 0.1,
@@ -105727,7 +105627,8 @@
         },
         "modalities": {
           "input": [
-            "text"
+            "text",
+            "image"
           ],
           "output": [
             "text"
@@ -109575,7 +109476,7 @@
       "moonshotai/Kimi-K2.7-Code": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.17,
+          "cache_read": 0.19,
           "cache_write": 0,
           "input": 0.67,
           "output": 3.4
@@ -128841,6 +128742,44 @@
         "temperature": false,
         "tool_call": true
       },
+      "longcat-2.0": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.006,
+          "input": 0.3,
+          "output": 1.2
+        },
+        "description": "Meituan LongCat-2.0, a reasoning model with tool calling and a 1M-token context window",
+        "family": "longcat",
+        "id": "longcat-2.0",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-06-30",
+        "limit": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "LongCat-2.0",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          }
+        ],
+        "release_date": "2026-06-30",
+        "temperature": true,
+        "tool_call": true
+      },
       "mimo-v2-omni": {
         "attachment": true,
         "cost": {
@@ -144985,7 +144924,7 @@
         "last_updated": "2023-07-22",
         "limit": {
           "context": 6144,
-          "output": 6144
+          "output": 4096
         },
         "modalities": {
           "input": [
@@ -149247,37 +149186,6 @@
         "temperature": true,
         "tool_call": false
       },
-      "inclusionai/ling-2.6-1t": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.06,
-          "input": 0.3,
-          "output": 2.5
-        },
-        "description": "Tool-capable chat model for instruction following and agentic application workflows",
-        "family": "ling",
-        "id": "inclusionai/ling-2.6-1t",
-        "last_updated": "2026-04-23",
-        "limit": {
-          "context": 262144,
-          "output": 32768
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "inclusionAI: Ling-2.6-1T (retires Aug 24)",
-        "open_weights": false,
-        "reasoning": false,
-        "release_date": "2026-04-23",
-        "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
       "google/gemma-3n-e4b-it": {
         "attachment": false,
         "cost": {
@@ -149653,46 +149561,6 @@
           }
         ],
         "release_date": "2026-03-16",
-        "structured_output": false,
-        "temperature": true,
-        "tool_call": true
-      },
-      "inclusionai/ring-2.6-1t": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.06,
-          "input": 0.3,
-          "output": 2.5
-        },
-        "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
-        "family": "ring",
-        "id": "inclusionai/ring-2.6-1t",
-        "last_updated": "2026-05-08",
-        "limit": {
-          "context": 262144,
-          "output": 65536
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "inclusionAI: Ring-2.6-1T (retires Aug 24)",
-        "open_weights": false,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "high",
-              "xhigh"
-            ]
-          }
-        ],
-        "release_date": "2026-05-08",
         "structured_output": false,
         "temperature": true,
         "tool_call": true
@@ -151116,37 +150984,6 @@
         "reasoning": false,
         "release_date": "2024-12-05",
         "structured_output": false,
-        "temperature": true,
-        "tool_call": true
-      },
-      "inclusionai/ling-2.6-flash": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.02,
-          "input": 0.1,
-          "output": 0.3
-        },
-        "description": "Efficient model for low-latency assistance, extraction, and routine automation",
-        "family": "ling",
-        "id": "inclusionai/ling-2.6-flash",
-        "last_updated": "2026-04-21",
-        "limit": {
-          "context": 262144,
-          "output": 32768
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "inclusionAI: Ling-2.6-flash (retires Aug 24)",
-        "open_weights": false,
-        "reasoning": false,
-        "release_date": "2026-04-21",
-        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -155826,10 +155663,10 @@
       "qwen/qwen3.8-27b": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.1,
-          "cache_write": 0.625,
-          "input": 0.5,
-          "output": 3
+          "cache_read": 0.085,
+          "cache_write": 0.53125,
+          "input": 0.425,
+          "output": 2.55
         },
         "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
         "family": "qwen",
@@ -186268,6 +186105,16 @@
             "type": "toggle"
           },
           {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
             "max": 393216,
             "min": 1,
             "type": "budget_tokens"
@@ -186461,6 +186308,16 @@
         "reasoning_options": [
           {
             "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
           },
           {
             "max": 393216,
@@ -186731,6 +186588,16 @@
         "reasoning_options": [
           {
             "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
           }
         ],
         "release_date": "2026-04-21",
@@ -188099,6 +187966,21 @@
         "reasoning_options": [
           {
             "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
+            "max": 393216,
+            "min": 1,
+            "type": "budget_tokens"
           }
         ],
         "release_date": "2026-07-31",
@@ -188262,6 +188144,16 @@
         "reasoning_options": [
           {
             "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
           },
           {
             "max": 38912,
@@ -250907,6 +250799,149 @@
       }
     },
     "name": "Xiaomi Token Plan (Singapore)",
+    "npm": "@ai-sdk/openai-compatible"
+  },
+  "agentrouter": {
+    "api": "https://agentrouter.org/v1",
+    "doc": "https://agentrouter.org/docs/opencode.html",
+    "env": [
+      "AGENTROUTER_API_KEY"
+    ],
+    "id": "agentrouter",
+    "models": {
+      "claude-opus-4-8": {
+        "attachment": true,
+        "description": "Top Claude Opus tier for the hardest reasoning, coding, and long-horizon agents",
+        "family": "claude-opus",
+        "id": "claude-opus-4-8",
+        "knowledge": "2026-01",
+        "last_updated": "2026-05-28",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 4.8",
+        "open_weights": false,
+        "provider": {
+          "api": "https://agentrouter.org/v1",
+          "npm": "@ai-sdk/anthropic"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-05-28",
+        "temperature": false,
+        "tool_call": true
+      },
+      "claude-opus-5": {
+        "attachment": true,
+        "description": "Strongest Claude Opus model for coding, agents, and professional work",
+        "family": "claude-opus",
+        "id": "claude-opus-5",
+        "knowledge": "2026-05",
+        "last_updated": "2026-07-24",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5",
+        "open_weights": false,
+        "provider": {
+          "api": "https://agentrouter.org/v1",
+          "npm": "@ai-sdk/anthropic"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-07-24",
+        "temperature": false,
+        "tool_call": true
+      },
+      "gpt-5.6-sol": {
+        "attachment": true,
+        "description": "Frontier GPT-5.6 model for complex professional work, coding, and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-5.6-sol",
+        "knowledge": "2026-02-16",
+        "last_updated": "2026-07-09",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-5.6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-07-09",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      }
+    },
+    "name": "AgentRouter",
     "npm": "@ai-sdk/openai-compatible"
   },
   "tencent-token-plan": {

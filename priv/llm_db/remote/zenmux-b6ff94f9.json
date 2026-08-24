@@ -5,6 +5,68 @@
         "reasoning": true
       },
       "context_length": 1000000,
+      "created": 1787557116,
+      "display_name": "Qwen: Qwen3.8-2.4T-A95B",
+      "id": "qwen/qwen3.8-2.4t-a95b",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.17
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "input_cache_write": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-08-24"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
       "created": 1787305220,
       "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
       "id": "deepseek/deepseek-v4-flash-vision-exp-free",
@@ -1178,7 +1240,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gt": 0,
+                "gte": 0,
                 "lte": 32,
                 "unit": "kTokens"
               }
@@ -1190,7 +1252,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gt": 0,
+                "gte": 0,
                 "lte": 32,
                 "unit": "kTokens"
               }
@@ -4105,9 +4167,7 @@
       "publish_time": "2026-04-25"
     },
     {
-      "capabilities": {
-        "reasoning": false
-      },
+      "capabilities": {},
       "context_length": 262144,
       "created": 1774580060,
       "display_name": "inclusionAI: Ling-2.6-1T",
@@ -4120,29 +4180,6 @@
         "text"
       ],
       "owned_by": "inclusionai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 2.5
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.06
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.3
-          }
-        ]
-      },
       "publish_time": "2026-04-23"
     },
     {
@@ -5049,6 +5086,23 @@
           }
         ]
       },
+      "publish_time": "2026-04-02"
+    },
+    {
+      "capabilities": {},
+      "context_length": 262144,
+      "created": 1787542223,
+      "display_name": "Google: Gemma 4 31B IT",
+      "id": "google/gemma-4-31b-it",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "google",
       "publish_time": "2026-04-02"
     },
     {
