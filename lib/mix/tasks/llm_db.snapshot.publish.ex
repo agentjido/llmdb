@@ -10,7 +10,7 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
 
   This creates or repairs the immutable snapshot release for the current
   `snapshot_id`. It also publishes `latest.json` and `snapshot-index.json` to
-  the mutable compact catalog-index release.
+  one immutable `catalog-index-<generation>` release.
   """
 
   @impl Mix.Task

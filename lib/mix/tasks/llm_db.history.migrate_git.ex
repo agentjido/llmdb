@@ -12,7 +12,7 @@ defmodule Mix.Tasks.LlmDb.History.MigrateGit do
 
   By default this writes local artifacts only. With `--publish`, it also seeds
   GitHub Releases with all discovered immutable snapshots and uploads a rebuilt
-  compact catalog index and the mutable latest history bundle.
+  compact catalog index and latest history bundle as immutable generations.
   """
 
   @impl Mix.Task

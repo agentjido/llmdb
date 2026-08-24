@@ -3,7 +3,7 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
 
   alias LLMDB.Snapshot.ReleaseStore
 
-  test "creates snapshot and history releases atomically with unique tags" do
+  test "creates snapshot, catalog, and history releases atomically with unique tags" do
     tmp_dir = tmp_dir("release_store_create")
     bin_dir = Path.join(tmp_dir, "bin")
     assets_dir = Path.join(tmp_dir, "assets")
@@ -13,6 +13,8 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
 
     {snapshot_path, snapshot_meta_path, history_archive_path, history_meta_path} =
       write_assets!(assets_dir)
+
+    {snapshot_index_path, latest_path} = write_catalog_assets!(assets_dir)
 
     File.mkdir_p!(bin_dir)
     File.write!(script_path, gh_script(log_path))
@@ -34,6 +36,11 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
 
     assert snapshot_tag =~ ~r/^snapshot-abc-\d+-\d+$/
 
+    assert {:ok, catalog_tag} =
+             ReleaseStore.publish_snapshot_index([snapshot_index_path, latest_path])
+
+    assert catalog_tag =~ ~r/^catalog-index-\d+-\d+$/
+
     assert {:ok, history_tag} =
              ReleaseStore.publish_history_release(
                [history_archive_path, history_meta_path],
@@ -41,19 +48,22 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
                history_entries: []
              )
 
-    assert history_tag == "history-latest"
+    assert history_tag =~ ~r/^history-latest-\d+-\d+-abc$/
 
     log = File.read!(log_path)
     assert log =~ "release create #{snapshot_tag} #{snapshot_path} #{snapshot_meta_path}"
-    assert log =~ "release view history-latest"
-    assert log =~ "release create history-latest --repo agentjido/llmdb"
-    assert log =~ "release upload history-latest"
+    assert log =~ "release create #{catalog_tag}"
+    assert log =~ "snapshot-index-"
+    assert log =~ "latest-"
+    assert log =~ "release create #{history_tag}"
     assert log =~ "history-meta-"
     assert log =~ ".tar.gz"
+    refute log =~ "release upload"
+    refute log =~ "delete-asset"
     refute log =~ "--clobber"
   end
 
-  test "reuses already indexed snapshot and history releases" do
+  test "reuses an indexed snapshot and publishes a new history generation" do
     tmp_dir = tmp_dir("release_store_reuse")
     bin_dir = Path.join(tmp_dir, "bin")
     assets_dir = Path.join(tmp_dir, "assets")
@@ -96,18 +106,21 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
                snapshot_index: [existing_snapshot_entry]
              )
 
-    assert {:ok, "history-latest"} =
+    assert {:ok, history_tag} =
              ReleaseStore.publish_history_release(
                [history_archive_path, history_meta_path],
                "abc",
                history_entries: [existing_history_entry]
              )
 
+    assert history_tag =~ ~r/^history-latest-\d+-\d+-abc$/
+
     log = File.read!(log_path)
-    assert log =~ "release view history-latest"
-    assert log =~ "release upload history-latest"
+    assert log =~ "release create #{history_tag}"
+    assert log =~ "history-meta-"
+    assert log =~ ".tar.gz"
     refute log =~ "--clobber"
-    refute log =~ "release create"
+    refute log =~ "release upload"
   end
 
   test "creates a fresh unique snapshot release when only broken historical tags exist" do
@@ -162,6 +175,9 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
       send(test_pid, {:request, conn.request_path})
 
       case conn.request_path do
+        "/repos/agentjido/llmdb/releases" ->
+          Req.Test.json(conn, [])
+
         "/repos/agentjido/llmdb/releases/tags/catalog-index" ->
           Req.Test.json(conn, versioned_release("catalog-index", "0001"))
 
@@ -179,6 +195,7 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     assert length(loaded) == 1_001
     assert List.last(loaded)["snapshot_id"] == "snapshot-1001"
 
+    assert_receive {:request, "/repos/agentjido/llmdb/releases"}
     assert_receive {:request, "/repos/agentjido/llmdb/releases/tags/catalog-index"}
     assert_receive {:request, "/catalog/snapshot-index-0001.json"}
 
@@ -194,8 +211,8 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
       send(test_pid, {:request, conn.request_path})
 
       case conn.request_path do
-        "/repos/agentjido/llmdb/releases/tags/catalog-index" ->
-          Req.Test.json(conn, versioned_release("catalog-index", "0001"))
+        "/repos/agentjido/llmdb/releases" ->
+          Req.Test.json(conn, [versioned_release("catalog-index-0001", "0001")])
 
         "/catalog/snapshot-index-0001.json" ->
           conn
@@ -225,35 +242,42 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     assert {:ok, %{snapshot_id: ^snapshot_id}} =
              ReleaseStore.fetch_snapshot(:latest, cache_dir: cache_dir, req_opts: [plug: plug])
 
-    assert_receive {:request, "/repos/agentjido/llmdb/releases/tags/catalog-index"}
+    assert_receive {:request, "/repos/agentjido/llmdb/releases"}
     assert_receive {:request, "/catalog/snapshot-index-0001.json"}
 
     assert_receive {:request, "/snapshot.json"}
     refute_receive {:request, _path}
   end
 
-  test "ignores a newer incomplete catalog asset generation" do
+  test "selects the latest complete catalog generation release" do
     test_pid = self()
 
     plug = fn conn ->
       send(test_pid, {:request, conn.request_path})
 
       case conn.request_path do
-        "/repos/agentjido/llmdb/releases/tags/catalog-index" ->
-          release =
-            versioned_release("catalog-index", "0001")
-            |> update_in(["assets"], fn assets ->
-              [
-                %{
-                  "name" => "snapshot-index-0002.json",
-                  "browser_download_url" =>
-                    "https://example.test/catalog/snapshot-index-0002.json"
-                }
-                | assets
-              ]
-            end)
+        "/repos/agentjido/llmdb/releases" ->
+          draft_release =
+            versioned_release("catalog-index-0003", "0003")
+            |> Map.put("published_at", "2026-08-24T03:00:00Z")
+            |> Map.put("draft", true)
 
-          Req.Test.json(conn, release)
+          incomplete_release = %{
+            "tag_name" => "catalog-index-0002",
+            "published_at" => "2026-08-24T02:00:00Z",
+            "assets" => [
+              %{
+                "name" => "snapshot-index-0002.json",
+                "browser_download_url" => "https://example.test/catalog/snapshot-index-0002.json"
+              }
+            ]
+          }
+
+          complete_release =
+            versioned_release("catalog-index-0001", "0001")
+            |> Map.put("published_at", "2026-08-24T01:00:00Z")
+
+          Req.Test.json(conn, [draft_release, incomplete_release, complete_release])
 
         "/catalog/snapshot-index-0001.json" ->
           Req.Test.json(conn, %{"schema_version" => 1, "snapshots" => []})
@@ -261,11 +285,63 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     end
 
     assert {:ok, []} = ReleaseStore.fetch_snapshot_index(req_opts: [plug: plug])
+    assert_receive {:request, "/repos/agentjido/llmdb/releases"}
     assert_receive {:request, "/catalog/snapshot-index-0001.json"}
     refute_receive {:request, "/catalog/snapshot-index-0002.json"}
+    refute_receive {:request, "/catalog/snapshot-index-0003.json"}
   end
 
-  test "keeps existing release assets when a replacement upload fails" do
+  test "fetches history from the latest immutable checkpoint generation" do
+    test_pid = self()
+
+    plug = fn conn ->
+      send(test_pid, {:request, conn.request_path})
+
+      case conn.request_path do
+        "/repos/agentjido/llmdb/releases" ->
+          Req.Test.json(conn, [history_versioned_release("history-latest-0001", "0001")])
+
+        "/history/history-meta-0001.json" ->
+          Req.Test.json(conn, %{"to_snapshot_id" => "abc"})
+      end
+    end
+
+    assert {:ok, %{"to_snapshot_id" => "abc"}} =
+             ReleaseStore.fetch_history_meta(req_opts: [plug: plug])
+
+    assert_receive {:request, "/repos/agentjido/llmdb/releases"}
+    assert_receive {:request, "/history/history-meta-0001.json"}
+    refute_receive {:request, _path}
+  end
+
+  test "keeps the fixed history checkpoint release readable during migration" do
+    test_pid = self()
+
+    plug = fn conn ->
+      send(test_pid, {:request, conn.request_path})
+
+      case conn.request_path do
+        "/repos/agentjido/llmdb/releases" ->
+          Req.Test.json(conn, [])
+
+        "/repos/agentjido/llmdb/releases/tags/history-latest" ->
+          Req.Test.json(conn, history_versioned_release("history-latest", "0001"))
+
+        "/history/history-meta-0001.json" ->
+          Req.Test.json(conn, %{"to_snapshot_id" => "legacy"})
+      end
+    end
+
+    assert {:ok, %{"to_snapshot_id" => "legacy"}} =
+             ReleaseStore.fetch_history_meta(req_opts: [plug: plug])
+
+    assert_receive {:request, "/repos/agentjido/llmdb/releases"}
+    assert_receive {:request, "/repos/agentjido/llmdb/releases/tags/history-latest"}
+    assert_receive {:request, "/history/history-meta-0001.json"}
+    refute_receive {:request, _path}
+  end
+
+  test "returns the GitHub error without changing an earlier generation" do
     tmp_dir = tmp_dir("release_store_upload_failure")
     bin_dir = Path.join(tmp_dir, "bin")
     assets_dir = Path.join(tmp_dir, "assets")
@@ -277,26 +353,62 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
       write_assets!(assets_dir)
 
     File.mkdir_p!(bin_dir)
-    File.write!(script_path, gh_script(log_path, "history-latest", fail_upload: true))
+    File.write!(script_path, gh_script(log_path, nil, fail_create: true))
     File.chmod!(script_path, 0o755)
     File.write!(log_path, "")
     System.put_env("PATH", "#{bin_dir}:#{original_path}")
 
     on_exit(fn -> System.put_env("PATH", original_path) end)
 
-    assert {:error, "upload failed"} =
+    assert {:error, "create failed"} =
              ReleaseStore.publish_history_release(
                [history_archive_path, history_meta_path],
                "abc"
              )
 
     log = File.read!(log_path)
-    assert log =~ "release upload history-latest"
+    assert log =~ "release create history-latest-"
     refute log =~ "--clobber"
+    refute log =~ "release upload"
     refute log =~ "delete-asset"
   end
 
-  test "retains the two latest complete release asset generations" do
+  test "retries with a replacement generation after GitHub returns immutable release 422" do
+    tmp_dir = tmp_dir("release_store_retention")
+    bin_dir = Path.join(tmp_dir, "bin")
+    assets_dir = Path.join(tmp_dir, "assets")
+    log_path = Path.join(tmp_dir, "gh.log")
+    script_path = Path.join(bin_dir, "gh")
+    original_path = System.get_env("PATH")
+
+    {snapshot_index_path, latest_path} = write_catalog_assets!(assets_dir)
+
+    File.mkdir_p!(bin_dir)
+    File.write!(script_path, gh_script(log_path, nil, immutable_create_once: true))
+    File.chmod!(script_path, 0o755)
+    File.write!(log_path, "")
+    System.put_env("PATH", "#{bin_dir}:#{original_path}")
+
+    on_exit(fn -> System.put_env("PATH", original_path) end)
+
+    assert {:ok, replacement_tag} =
+             ReleaseStore.publish_snapshot_index([snapshot_index_path, latest_path])
+
+    create_commands =
+      log_path
+      |> File.read!()
+      |> String.split("\n", trim: true)
+      |> Enum.filter(&String.starts_with?(&1, "release create catalog-index-"))
+
+    assert length(create_commands) == 2
+    [failed_command, replacement_command] = create_commands
+    refute failed_command == replacement_command
+    assert replacement_command =~ "release create #{replacement_tag}"
+    refute replacement_command =~ "release upload catalog-index"
+    refute replacement_command =~ "delete-asset"
+  end
+
+  test "retains two complete immutable generation releases" do
     tmp_dir = tmp_dir("release_store_retention")
     bin_dir = Path.join(tmp_dir, "bin")
     assets_dir = Path.join(tmp_dir, "assets")
@@ -307,36 +419,27 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     {_snapshot_path, _snapshot_meta_path, history_archive_path, history_meta_path} =
       write_assets!(assets_dir)
 
-    old_assets =
-      for generation <- ["0001", "0002", "0003"],
-          name <- ["history-#{generation}.tar.gz", "history-meta-#{generation}.json"] do
-        name
-      end
+    release_tags = ["history-latest-0002", "history-latest-0001"]
 
     File.mkdir_p!(bin_dir)
-
-    File.write!(
-      script_path,
-      gh_script(log_path, "history-latest", release_assets: old_assets)
-    )
-
+    File.write!(script_path, gh_script(log_path, nil, release_tags: release_tags))
     File.chmod!(script_path, 0o755)
     File.write!(log_path, "")
     System.put_env("PATH", "#{bin_dir}:#{original_path}")
 
     on_exit(fn -> System.put_env("PATH", original_path) end)
 
-    assert {:ok, "history-latest"} =
+    assert {:ok, history_tag} =
              ReleaseStore.publish_history_release(
                [history_archive_path, history_meta_path],
                "abc"
              )
 
     log = File.read!(log_path)
-    assert log =~ "delete-asset history-latest history-0001.tar.gz"
-    assert log =~ "delete-asset history-latest history-meta-0001.json"
-    refute log =~ "delete-asset history-latest history-0002"
-    refute log =~ "delete-asset history-latest history-0003"
+    assert log =~ "release create #{history_tag}"
+    assert log =~ "release delete history-latest-0001"
+    refute log =~ "release delete history-latest-0002"
+    refute log =~ "delete-asset"
   end
 
   defp write_assets!(assets_dir) do
@@ -355,43 +458,63 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
     {snapshot_path, snapshot_meta_path, history_archive_path, history_meta_path}
   end
 
-  defp gh_script(log_path, existing_tag \\ nil, opts \\ []) do
-    fail_upload? = Keyword.get(opts, :fail_upload, false)
+  defp write_catalog_assets!(assets_dir) do
+    File.mkdir_p!(assets_dir)
 
-    release_assets =
+    snapshot_index_path = Path.join(assets_dir, "snapshot-index.json")
+    latest_path = Path.join(assets_dir, "latest.json")
+
+    File.write!(snapshot_index_path, ~s({"schema_version":1,"snapshots":[]}))
+    File.write!(latest_path, ~s({"snapshot_id":"abc"}))
+
+    {snapshot_index_path, latest_path}
+  end
+
+  defp gh_script(log_path, existing_tag \\ nil, opts \\ []) do
+    fail_create? = Keyword.get(opts, :fail_create, false)
+    immutable_create_once? = Keyword.get(opts, :immutable_create_once, false)
+    immutable_marker = "#{log_path}.immutable-release"
+
+    release_list =
       opts
-      |> Keyword.get(:release_assets, [])
-      |> Enum.map(&%{"name" => &1})
-      |> then(&Jason.encode!(%{"assets" => &1}))
+      |> Keyword.get(:release_tags, [])
+      |> Enum.map(&%{"tagName" => &1, "isDraft" => false})
+      |> Jason.encode!()
 
     """
     #!/bin/sh
     set -eu
     printf '%s\\n' "$*" >> "#{log_path}"
 
-    if [ "$1" = "release" ] && [ "$2" = "view" ] && [ "${7:-}" = "assets" ]; then
-      printf '%s\\n' '#{release_assets}'
-      exit 0
-    fi
-
     if [ "$1" = "release" ] && [ "$2" = "view" ] && [ "$3" = "#{existing_tag}" ]; then
       exit 0
     fi
 
+    if [ "$1" = "release" ] && [ "$2" = "list" ]; then
+      printf '%s\\n' '#{release_list}'
+      exit 0
+    fi
+
     if [ "$1" = "release" ] && [ "$2" = "create" ]; then
+      if [ "#{immutable_create_once?}" = "true" ] && [ ! -e "#{immutable_marker}" ]; then
+        : > "#{immutable_marker}"
+        echo "HTTP 422: Cannot upload assets to an immutable release." >&2
+        exit 1
+      fi
+      if [ "#{fail_create?}" = "true" ]; then
+        echo "create failed" >&2
+        exit 1
+      fi
       echo "https://github.com/agentjido/llmdb/releases/tag/$3"
       exit 0
     fi
 
     if [ "$1" = "release" ] && [ "$2" = "upload" ]; then
-      if [ "#{fail_upload?}" = "true" ]; then
-        echo "upload failed" >&2
-        exit 1
-      fi
-      exit 0
+      echo "HTTP 422: Cannot upload assets to an immutable release." >&2
+      exit 1
     fi
 
-    if [ "$1" = "release" ] && [ "$2" = "delete-asset" ]; then
+    if [ "$1" = "release" ] && [ "$2" = "delete" ]; then
       exit 0
     fi
 
@@ -412,6 +535,22 @@ defmodule LLMDB.Snapshot.ReleaseStoreTest do
         %{
           "name" => "latest-#{generation}.json",
           "browser_download_url" => "https://example.test/catalog/latest-#{generation}.json"
+        }
+      ]
+    }
+  end
+
+  defp history_versioned_release(tag, generation) do
+    %{
+      "tag_name" => tag,
+      "assets" => [
+        %{
+          "name" => "history-#{generation}.tar.gz",
+          "browser_download_url" => "https://example.test/history/history-#{generation}.tar.gz"
+        },
+        %{
+          "name" => "history-meta-#{generation}.json",
+          "browser_download_url" => "https://example.test/history/history-meta-#{generation}.json"
         }
       ]
     }
