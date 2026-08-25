@@ -1,6 +1,7 @@
 id = "image-01"
 name = "MiniMax image-01"
 provider = "minimax_cn_coding_plan"
+release_date = "2025-02-15"
 last_updated = "2026-08-25"
 deprecated = false
 
@@ -13,10 +14,10 @@ id = "image.generated"
 kind = "image"
 unit = "image"
 per = 1
-rate = 0.0035
+rate = 0.0
 
 [modalities]
-input = ["text"]
+input = ["text", "image"]
 output = ["image"]
 
 [capabilities]

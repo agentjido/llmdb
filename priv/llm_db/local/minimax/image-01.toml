@@ -1,6 +1,7 @@
 id = "image-01"
 name = "MiniMax image-01"
 provider = "minimax"
+release_date = "2025-02-15"
 last_updated = "2026-08-25"
 deprecated = false
 
@@ -16,7 +17,7 @@ per = 1
 rate = 0.0035
 
 [modalities]
-input = ["text"]
+input = ["text", "image"]
 output = ["image"]
 
 [capabilities]
