@@ -1,0 +1,47 @@
+id = "image-01"
+name = "MiniMax image-01"
+provider = "minimax_cn"
+last_updated = "2026-08-25"
+deprecated = false
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "image.generated"
+kind = "image"
+unit = "image"
+per = 1
+rate = 0.0035
+
+[modalities]
+input = ["text"]
+output = ["image"]
+
+[capabilities]
+chat = false
+embeddings = false
+
+[capabilities.json]
+native = false
+schema = false
+strict = false
+
+[capabilities.reasoning]
+enabled = false
+
+[capabilities.streaming]
+tool_calls = false
+
+[capabilities.tools]
+enabled = false
+parallel = false
+streaming = false
+strict = false
+
+[extra]
+attachment = true
+family = "minimax-image"
+open_weights = false
+temperature = false
