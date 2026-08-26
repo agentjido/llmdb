@@ -641,54 +641,6 @@
         "reasoning": true
       },
       "context_length": 1000000,
-      "created": 1787042172,
-      "display_name": "Z.AI: GLM 5.3 (Free)",
-      "id": "z-ai/glm-5.3-free",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "z-ai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "web_search": [
-          {
-            "currency": "USD",
-            "unit": "perCount",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-08-13"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 1000000,
       "created": 1787557116,
       "display_name": "Qwen: Qwen3.8-2.4T-A95B",
       "id": "qwen/qwen3.8-2.4t-a95b",
