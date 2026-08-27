@@ -457,6 +457,23 @@
       "version": "001"
     },
     {
+      "description": "Gemini 3.5 Transcribe",
+      "displayName": "Gemini 3.5 Transcribe",
+      "inputTokenLimit": 98304,
+      "maxTemperature": 2,
+      "name": "models/gemini-3.5-transcribe",
+      "outputTokenLimit": 32768,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.5-transcribe-08-2026"
+    },
+    {
       "description": "Gemini 3.6 Flash",
       "displayName": "Gemini 3.6 Flash",
       "inputTokenLimit": 1048576,
@@ -750,6 +767,21 @@
         "predictLongRunning"
       ],
       "version": "3.1"
+    },
+    {
+      "description": "Gemini 3.5 Transcribe Live",
+      "displayName": "Gemini 3.5 Transcribe Live",
+      "inputTokenLimit": 131072,
+      "maxTemperature": 2,
+      "name": "models/gemini-3.5-transcribe-live",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "bidiGenerateContent"
+      ],
+      "temperature": 1,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.5-transcribe-live-08-2026"
     },
     {
       "description": "Latest release of Gemini 2.5 Flash Native Audio",

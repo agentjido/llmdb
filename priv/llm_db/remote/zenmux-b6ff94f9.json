@@ -5,6 +5,118 @@
         "reasoning": true
       },
       "context_length": 1000000,
+      "created": 1787795860,
+      "display_name": "Qwen: Qwen3.8-Flash",
+      "id": "qwen/qwen3.8-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.47
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.016
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.016
+          }
+        ],
+        "input_cache_write": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.16
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-08-27"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1787754576,
+      "display_name": "Z.AI: GLM 5.3 Flash",
+      "id": "z-ai/glm-5.3-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "z-ai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.015
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.075
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-08-26"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
       "created": 1787305220,
       "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
       "id": "deepseek/deepseek-v4-flash-vision-exp-free",
@@ -458,28 +570,28 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 3.75
+            "value": 7.5
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.075
+            "value": 0.15
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.75
+            "value": 1.5
           }
         ],
         "web_search": [
           {
             "currency": "USD",
             "unit": "perCount",
-            "value": 0.007
+            "value": 0.014
           }
         ]
       },
@@ -1890,7 +2002,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 30
+            "value": 20
           },
           {
             "conditions": {
@@ -1901,7 +2013,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 45
+            "value": 30
           }
         ],
         "input_cache_read": [
@@ -1915,7 +2027,7 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.5
+            "value": 0.4
           },
           {
             "conditions": {
@@ -1926,35 +2038,10 @@
             },
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1
+            "value": 0.8
           }
         ],
         "input_cache_write": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 6.25
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 272,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 12.5
-          }
-        ],
-        "prompt": [
           {
             "conditions": {
               "prompt_tokens": {
@@ -1977,6 +2064,31 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 10
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 8
           }
         ],
         "web_search": [
@@ -3345,41 +3457,6 @@
         ]
       },
       "publish_time": "2026-05-22"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 256000,
-      "created": 1779357254,
-      "display_name": "Sapiens AI: Agnes-2.0-Flash",
-      "id": "sapiens-ai/agnes-2.0-flash",
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "sapiens-ai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-05-21"
     },
     {
       "capabilities": {
