@@ -64,6 +64,26 @@
     },
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 66000,
+      "created": 1787820642,
+      "display_name": "Meta: Muse Image 1.0",
+      "id": "meta/muse-image-1.0",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "meta",
+      "pricings": {},
+      "publish_time": "2026-08-27"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1000000,
@@ -111,108 +131,6 @@
         ]
       },
       "publish_time": "2026-08-26"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 1000000,
-      "created": 1787305220,
-      "display_name": "DeepSeek: DeepSeek V4 Flash Vision Exp (Free)",
-      "id": "deepseek/deepseek-v4-flash-vision-exp-free",
-      "input_modalities": [
-        "image",
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-08-21"
     },
     {
       "capabilities": {
@@ -312,6 +230,11 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
+            "value": 0.66
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
             "value": 1.32
           },
           {
@@ -339,6 +262,11 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
+            "value": 0.007
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
             "value": 0.014
           },
           {
@@ -348,6 +276,11 @@
           }
         ],
         "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.22
+          },
           {
             "currency": "USD",
             "unit": "perMTokens",
@@ -846,6 +779,11 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
+            "value": 1.98
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
             "value": 3.96
           },
           {
@@ -873,6 +811,11 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
+            "value": 0.022
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
             "value": 0.044
           },
           {
@@ -882,6 +825,11 @@
           }
         ],
         "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.66
+          },
           {
             "currency": "USD",
             "unit": "perMTokens",
@@ -1164,30 +1112,40 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.66
+            "value": 0.22
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.66
+            "value": 0.22
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.66
+            "value": 0.22
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1.32
+            "value": 0.22
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1.32
+            "value": 0.44
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.44
           }
         ],
         "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.007
+          },
           {
             "currency": "USD",
             "unit": "perMTokens",
@@ -1218,27 +1176,32 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.22
+            "value": 0.66
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.22
+            "value": 0.66
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.22
+            "value": 0.66
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.44
+            "value": 0.66
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.44
+            "value": 1.32
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.32
           }
         ]
       },

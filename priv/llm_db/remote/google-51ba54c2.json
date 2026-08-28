@@ -457,6 +457,23 @@
       "version": "001"
     },
     {
+      "description": "Gemini Omni 1.1 Flash ",
+      "displayName": "Gemini Omni 1.1 Flash",
+      "inputTokenLimit": 131072,
+      "maxTemperature": 2,
+      "name": "models/gemini-omni-1.1-flash",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "001"
+    },
+    {
       "description": "Gemini 3.5 Transcribe",
       "displayName": "Gemini 3.5 Transcribe",
       "inputTokenLimit": 98304,
