@@ -4488,7 +4488,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -4598,7 +4598,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:48:08.763524Z",
+      "modifiedTime": "2026-08-21T23:48:39.3911716Z",
       "name": "text-embedding-ada-002",
       "orginAssetId": null,
       "parentModelId": null,
@@ -4624,7 +4624,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 84,
+    "updateSequence": 86,
     "usage": {
       "popularity": 1.0,
       "totalCount": 4
@@ -9085,7 +9085,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -9213,7 +9213,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:46:55.0893409Z",
+      "modifiedTime": "2026-08-21T23:47:25.6648354Z",
       "name": "text-embedding-3-large",
       "orginAssetId": null,
       "parentModelId": null,
@@ -9236,7 +9236,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 96,
     "usage": {
       "popularity": 1.0,
       "totalCount": 1
@@ -9441,7 +9441,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -9572,7 +9572,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:47:31.5432793Z",
+      "modifiedTime": "2026-08-21T23:48:02.1766157Z",
       "name": "text-embedding-3-small",
       "orginAssetId": null,
       "parentModelId": null,
@@ -9595,7 +9595,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 96,
     "usage": {
       "popularity": 1.0,
       "totalCount": 7
@@ -13187,7 +13187,8 @@
           "AOAI",
           "UnifiedEndpointMaaS",
           "MaaP",
-          "Serverless API"
+          "Serverless API",
+          "Instant"
         ],
         "toolResponseEnd": null,
         "maapSurchargeType": null,
@@ -13227,7 +13228,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "GlobalBatch",
@@ -13354,7 +13355,7 @@
         "author": "OpenAI",
         "azureOffers": "PTU,batch-paygo",
         "benchmark": "quality",
-        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API",
+        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API,Instant",
         "displayName": "OpenAI GPT-4o mini",
         "evaluation": "﻿\n# Quality and performance evaluations\nSource: OpenAI\n\nGPT-4o mini surpasses GPT-3.5 Turbo and other small models on academic benchmarks across both textual intelligence and multimodal reasoning, and supports the same range of languages as GPT-4o. It also demonstrates strong performance in function calling, which can enable developers to build applications that fetch data or take actions with external systems, and improved long-context performance compared to GPT-3.5 Turbo.\n\nGPT-4o mini has been evaluated across several key benchmarks.\n\n**Reasoning tasks**: GPT-4o mini is better than other small models at reasoning tasks involving both text and vision, scoring 82.0% on MMLU, a textual intelligence and reasoning benchmark, as compared to 77.9% for Gemini Flash and 73.8% for Claude Haiku.\n\n**Math and coding proficiency**: GPT-4o mini excels in mathematical reasoning and coding tasks, outperforming previous small models on the market. On MGSM, measuring math reasoning, GPT-4o mini scored 87.0%, compared to 75.5% for Gemini Flash and 71.7% for Claude Haiku. GPT-4o mini scored 87.2% on HumanEval, which measures coding performance, compared to 71.5% for Gemini Flash and 75.9% for Claude Haiku.  \n\n**Multimodal reasoning**: GPT-4o mini also shows strong performance on MMMU, a multimodal reasoning eval, scoring 59.4% compared to 56.1% for Gemini Flash and 50.2% for Claude Haiku.\n\n| Task                             | GPT-4o mini Score | Gemini Flash Score | Claude Haiku Score |\n|----------------------------------|-------------------|--------------------|--------------------|\n| MMLU (Reasoning Text and Vision) | 82.0%             | 77.9%              | 73.8%              |\n| MGSM (Math Reasoning)            | 87.0%             | 75.5%              | 71.7%              |\n| HumanEval (Coding Performance)   | 87.2%             | 71.5%              | 75.9%              |\n| MMMU (Multimodal Reasoning)      | 59.4%             | 56.1%              | 50.2%              |\n\n# Benchmarking methodology\nSource: OpenAI\n\nThe provider has not supplied this information.\n\n# Public data summary\nSource: OpenAI\n\nThe provider has not supplied this information.",
         "freePlayground": "true",
@@ -13412,7 +13413,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:01:18.9121367Z",
+      "modifiedTime": "2026-08-21T23:01:49.5030722Z",
       "name": "gpt-4o-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -13437,7 +13438,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 151,
+    "updateSequence": 153,
     "usage": {
       "popularity": 67.81,
       "totalCount": 65
@@ -19616,7 +19617,8 @@
           "AOAI",
           "UnifiedEndpointMaaS",
           "MaaP",
-          "Serverless API"
+          "Serverless API",
+          "Instant"
         ],
         "toolResponseEnd": null,
         "maapSurchargeType": null,
@@ -19655,7 +19657,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "ProvisionedManaged",
@@ -19786,7 +19788,7 @@
         "author": "OpenAI",
         "azureOffers": "PTU,batch-paygo",
         "benchmark": "quality",
-        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API",
+        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API,Instant",
         "disable-batch": "true",
         "disable-maap": "true",
         "displayName": "OpenAI GPT-4o",
@@ -19847,7 +19849,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:04:47.0223028Z",
+      "modifiedTime": "2026-08-21T23:05:47.669563Z",
       "name": "gpt-4o",
       "orginAssetId": null,
       "parentModelId": null,
@@ -19872,7 +19874,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 141,
+    "updateSequence": 143,
     "usage": {
       "popularity": 67.84,
       "totalCount": 1
@@ -20093,7 +20095,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -20273,7 +20275,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:39:57.6000884Z",
+      "modifiedTime": "2026-08-21T23:41:58.4257684Z",
       "name": "o1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -20297,7 +20299,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 133,
+    "updateSequence": 135,
     "usage": {
       "popularity": 67.9,
       "totalCount": 4
@@ -24030,7 +24032,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "ProvisionedManaged",
@@ -24208,7 +24210,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:42:42.231193Z",
+      "modifiedTime": "2026-08-21T23:43:42.872031Z",
       "name": "o3-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -24233,7 +24235,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 132,
+    "updateSequence": 134,
     "usage": {
       "popularity": 69.01,
       "totalCount": 0
@@ -27113,7 +27115,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -27268,7 +27270,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-12T14:25:56.3922536Z",
+      "modifiedTime": "2026-08-17T14:24:27.8679345Z",
       "name": "computer-use-preview",
       "orginAssetId": null,
       "parentModelId": null,
@@ -27292,7 +27294,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 77,
+    "updateSequence": 79,
     "usage": {
       "popularity": 68.14,
       "totalCount": 0
@@ -27523,7 +27525,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:50:00.8611936Z",
+      "modifiedTime": "2026-08-21T23:50:31.4132508Z",
       "name": "whisper",
       "orginAssetId": null,
       "parentModelId": null,
@@ -27546,7 +27548,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 72,
+    "updateSequence": 74,
     "usage": {
       "popularity": 1.0,
       "totalCount": 8
@@ -48017,7 +48019,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -48205,7 +48207,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T22:55:08.3518916Z",
+      "modifiedTime": "2026-08-27T17:20:39.2331013Z",
       "name": "gpt-4.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -48230,7 +48232,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 146,
+    "updateSequence": 148,
     "usage": {
       "popularity": 69.58,
       "totalCount": 4
@@ -48885,7 +48887,7 @@
         "alias": null,
         "deploymentOptionDetails": null,
         "featureFlags": null,
-        "lifecycle": "Deprecated",
+        "lifecycle": "Legacy",
         "evaluationMinSkuSpec": null,
         "preview": null,
         "isDirectFromAzure": true,
@@ -48899,7 +48901,8 @@
           "AOAI",
           "UnifiedEndpointMaaS",
           "MaaP",
-          "Serverless API"
+          "Serverless API",
+          "Instant"
         ],
         "toolResponseEnd": null,
         "maapSurchargeType": null,
@@ -48937,7 +48940,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -49067,7 +49070,7 @@
         "author": "OpenAI",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
-        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API",
+        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API,Instant",
         "displayName": "OpenAI GPT-4.1-nano",
         "evaluation": "﻿\n# Quality and performance evaluations\nSource: OpenAI\n\nThe provider has not supplied this information.\n\n# Benchmarking methodology\nSource: OpenAI\n\nThe provider has not supplied this information.\n\n# Public data summary\nSource: OpenAI\n\nThe provider has not supplied this information.",
         "freePlayground": "true",
@@ -49077,7 +49080,7 @@
         "languages": "en,it,af,es,de,fr,id,ru,pl,uk,el,lv,zh,ar,tr,ja,sw,cy,ko,is,bn,ur,ne,th,pa,mr,te",
         "license": "custom",
         "licenseDescription": "Use of this Azure Direct Model is subject to applicable [Microsoft Product Terms](https://www.microsoft.com/licensing/terms/welcome/welcomepage) including the Universal License Terms for Microsoft Generative AI Services and the service-specific terms for Azure AI Foundry Models. If this Azure Direct Model is designated as Preview, its use is also subject to the [Supplemental Terms for Azure Previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).",
-        "lifecycle": "Deprecated",
+        "lifecycle": "Legacy",
         "maxOutputTokens": "32768",
         "modelCapabilities": "agents,streaming,tool-calling,agentsV2,fine-tuning",
         "notes": "# Responsible AI considerations\n\n## Safety techniques\n\nPrompts and completions are passed through a default configuration of Azure AI Content Safety classification models to detect and prevent the output of harmful content. Learn more about [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview). Additional classification models and configuration options are available when you deploy an Azure OpenAI model in production; [learn more](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter?tabs=warning%2Cuser-prompt%2Cpython-new).\n\n## Safety evaluations\n\nThe provider has not supplied this information.\n\n## Known limitations\n\nThe provider has not supplied this information.\n\n# Acceptable use\n\n## Acceptable use policy\n\nThe provider has not supplied this information.",
@@ -49125,7 +49128,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T22:53:22.638893Z",
+      "modifiedTime": "2026-08-21T22:53:57.9696788Z",
       "name": "gpt-4.1-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -49150,7 +49153,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 140,
+    "updateSequence": 142,
     "usage": {
       "popularity": 69.1,
       "totalCount": 0
@@ -49508,7 +49511,8 @@
           "AOAI",
           "UnifiedEndpointMaaS",
           "MaaP",
-          "Serverless API"
+          "Serverless API",
+          "Instant"
         ],
         "toolResponseEnd": null,
         "maapSurchargeType": null,
@@ -49546,7 +49550,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -49676,7 +49680,7 @@
         "author": "OpenAI",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
-        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API",
+        "deploymentOptions": "AOAI,UnifiedEndpointMaaS,MaaP,Serverless API,Instant",
         "displayName": "OpenAI GPT-4.1-mini",
         "evaluation": "﻿\n# Quality and performance evaluations\nSource: OpenAI\n\nThe provider has not supplied this information.\n\n# Benchmarking methodology\nSource: OpenAI\n\nThe provider has not supplied this information.\n\n# Public data summary\nSource: OpenAI\n\nThe provider has not supplied this information.",
         "freePlayground": "true",
@@ -49734,7 +49738,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T22:52:45.6681693Z",
+      "modifiedTime": "2026-08-21T22:53:16.2288738Z",
       "name": "gpt-4.1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -49759,7 +49763,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 132,
+    "updateSequence": 134,
     "usage": {
       "popularity": 69.55,
       "totalCount": 0
@@ -50348,7 +50352,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:03:39.536903Z",
+      "modifiedTime": "2026-08-21T23:04:40.4754697Z",
       "name": "gpt-4o-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -50372,7 +50376,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 76,
+    "updateSequence": 78,
     "usage": {
       "popularity": 68.23,
       "totalCount": 0
@@ -50632,7 +50636,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "ProvisionedManaged",
@@ -50790,7 +50794,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:44:26.1674847Z",
+      "modifiedTime": "2026-08-21T23:44:56.7777987Z",
       "name": "o3",
       "orginAssetId": null,
       "parentModelId": null,
@@ -50814,7 +50818,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 144,
+    "updateSequence": 146,
     "usage": {
       "popularity": 69.37,
       "totalCount": 2
@@ -51184,7 +51188,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -51344,7 +51348,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:45:03.6611628Z",
+      "modifiedTime": "2026-08-21T23:45:34.2992388Z",
       "name": "o4-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -51369,7 +51373,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 142,
+    "updateSequence": 144,
     "usage": {
       "popularity": 69.13,
       "totalCount": 0
@@ -51913,7 +51917,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:49:23.8781415Z",
+      "modifiedTime": "2026-08-21T23:49:54.408102Z",
       "name": "tts",
       "orginAssetId": null,
       "parentModelId": null,
@@ -51936,7 +51940,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 72,
+    "updateSequence": 74,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -52210,7 +52214,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:48:47.5485293Z",
+      "modifiedTime": "2026-08-21T23:49:17.981136Z",
       "name": "tts-hd",
       "orginAssetId": null,
       "parentModelId": null,
@@ -52233,7 +52237,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 72,
+    "updateSequence": 74,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -59944,7 +59948,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -60107,7 +60111,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:43:49.5636087Z",
+      "modifiedTime": "2026-08-21T23:44:20.202751Z",
       "name": "o3-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -60131,7 +60135,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 96,
     "usage": {
       "popularity": 68.56,
       "totalCount": 0
@@ -60249,7 +60253,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -60385,7 +60389,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T22:45:46.183426Z",
+      "modifiedTime": "2026-08-21T22:46:46.8410903Z",
       "name": "codex-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -60409,7 +60413,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 95,
+    "updateSequence": 97,
     "usage": {
       "popularity": 68.71,
       "totalCount": 0
@@ -61418,7 +61422,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -61581,7 +61585,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:42:05.338326Z",
+      "modifiedTime": "2026-08-21T23:42:35.8766626Z",
       "name": "o3-deep-research",
       "orginAssetId": null,
       "parentModelId": null,
@@ -61605,7 +61609,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 116,
+    "updateSequence": 118,
     "usage": {
       "popularity": 68.74,
       "totalCount": 0
@@ -62960,7 +62964,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -63125,7 +63129,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:24:18.1610712Z",
+      "modifiedTime": "2026-08-21T23:25:18.8375016Z",
       "name": "gpt-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -63149,7 +63153,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 149,
+    "updateSequence": 151,
     "usage": {
       "popularity": 69.7,
       "totalCount": 0
@@ -63364,7 +63368,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "GlobalStandard",
           "ProvisionedManaged",
@@ -63513,7 +63517,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:07:36.9393298Z",
+      "modifiedTime": "2026-08-21T23:08:07.6158001Z",
       "name": "gpt-5-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -63536,7 +63540,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 131,
+    "updateSequence": 133,
     "usage": {
       "popularity": 69.28,
       "totalCount": 0
@@ -63718,7 +63722,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -63863,7 +63867,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:08:13.7234963Z",
+      "modifiedTime": "2026-08-21T23:08:44.5199611Z",
       "name": "gpt-5-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -63886,7 +63890,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 122,
+    "updateSequence": 124,
     "usage": {
       "popularity": 69.31,
       "totalCount": 0
@@ -65421,7 +65425,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -65571,7 +65575,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:26:37.8906674Z",
+      "modifiedTime": "2026-08-21T23:27:08.767734Z",
       "name": "gpt-audio",
       "orginAssetId": null,
       "parentModelId": null,
@@ -65594,7 +65598,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 76,
+    "updateSequence": 78,
     "usage": {
       "popularity": 68.83,
       "totalCount": 1
@@ -65723,7 +65727,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -65875,7 +65879,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:37:00.6269202Z",
+      "modifiedTime": "2026-08-21T23:37:31.271907Z",
       "name": "gpt-realtime",
       "orginAssetId": null,
       "parentModelId": null,
@@ -65898,7 +65902,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 80,
+    "updateSequence": 82,
     "usage": {
       "popularity": 68.86,
       "totalCount": 0
@@ -66689,7 +66693,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -66832,7 +66836,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:06:30.604233Z",
+      "modifiedTime": "2026-08-21T23:07:31.2535397Z",
       "name": "gpt-5-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -66855,7 +66859,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 156,
+    "updateSequence": 158,
     "usage": {
       "popularity": 69.43,
       "totalCount": 0
@@ -68299,7 +68303,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -68422,7 +68426,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:28:59.6592057Z",
+      "modifiedTime": "2026-08-21T23:29:30.1668537Z",
       "name": "gpt-image-1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -68446,7 +68450,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 76,
+    "updateSequence": 78,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -68558,7 +68562,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -68708,7 +68712,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:26:01.4737104Z",
+      "modifiedTime": "2026-08-21T23:26:31.9891612Z",
       "name": "gpt-audio-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -68731,7 +68735,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 70,
+    "updateSequence": 72,
     "usage": {
       "popularity": 68.98,
       "totalCount": 0
@@ -69171,7 +69175,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -69309,7 +69313,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:08:51.0000739Z",
+      "modifiedTime": "2026-08-21T23:09:21.8769619Z",
       "name": "gpt-5-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -69333,7 +69337,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 104,
+    "updateSequence": 106,
     "usage": {
       "popularity": 69.9,
       "totalCount": 0
@@ -69452,7 +69456,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -69581,7 +69585,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:45:39.9775644Z",
+      "modifiedTime": "2026-08-21T23:46:10.5831634Z",
       "name": "sora-2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -69604,7 +69608,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 87,
+    "updateSequence": 89,
     "usage": {
       "popularity": 70.25,
       "totalCount": 0
@@ -70226,7 +70230,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:02:32.2838749Z",
+      "modifiedTime": "2026-08-21T23:03:33.0880377Z",
       "name": "gpt-4o-transcribe-diarize",
       "orginAssetId": null,
       "parentModelId": null,
@@ -70249,7 +70253,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 70,
+    "updateSequence": 72,
     "usage": {
       "popularity": 69.49,
       "totalCount": 0
@@ -87144,7 +87148,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "Standard",
           "GlobalStandard",
@@ -87304,7 +87308,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:13:03.2618585Z",
+      "modifiedTime": "2026-08-21T23:13:33.8386069Z",
       "name": "gpt-5.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -87327,7 +87331,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 106,
+    "updateSequence": 108,
     "usage": {
       "popularity": 70.7,
       "totalCount": 0
@@ -87810,7 +87814,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "ProvisionedManaged",
@@ -87955,7 +87959,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:12:26.143989Z",
+      "modifiedTime": "2026-08-21T23:12:56.8017566Z",
       "name": "gpt-5.1-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -87978,7 +87982,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 113,
+    "updateSequence": 115,
     "usage": {
       "popularity": 70.65,
       "totalCount": 0
@@ -88148,7 +88152,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -88284,7 +88288,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:11:49.7211628Z",
+      "modifiedTime": "2026-08-21T23:12:20.288899Z",
       "name": "gpt-5.1-codex-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -88307,7 +88311,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 78,
+    "updateSequence": 80,
     "usage": {
       "popularity": 70.15,
       "totalCount": 0
@@ -89951,7 +89955,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -90089,7 +90093,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:10:42.9135215Z",
+      "modifiedTime": "2026-08-21T23:11:43.5170219Z",
       "name": "gpt-5.1-codex-max",
       "orginAssetId": null,
       "parentModelId": null,
@@ -90112,7 +90116,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 86,
+    "updateSequence": 88,
     "usage": {
       "popularity": 70.83,
       "totalCount": 0
@@ -91658,7 +91662,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -91813,7 +91817,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:15:31.2365641Z",
+      "modifiedTime": "2026-08-21T23:16:01.8595561Z",
       "name": "gpt-5.2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -91836,7 +91840,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 112,
+    "updateSequence": 114,
     "usage": {
       "popularity": 70.95,
       "totalCount": 0
@@ -92275,7 +92279,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -92455,7 +92459,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T22:58:58.1473507Z",
+      "modifiedTime": "2026-08-21T22:59:29.0468129Z",
       "name": "gpt-4o-mini-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -92479,7 +92483,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 58,
+    "updateSequence": 60,
     "usage": {
       "popularity": 68.2,
       "totalCount": 0
@@ -92590,7 +92594,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -92769,7 +92773,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:00:12.4761057Z",
+      "modifiedTime": "2026-08-21T23:01:13.10895Z",
       "name": "gpt-4o-mini-tts",
       "orginAssetId": null,
       "parentModelId": null,
@@ -92792,7 +92796,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 60,
+    "updateSequence": 62,
     "usage": {
       "popularity": 68.26,
       "totalCount": 0
@@ -92910,7 +92914,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 0,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -93058,7 +93062,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:35:09.6626086Z",
+      "modifiedTime": "2026-08-21T23:35:40.2139172Z",
       "name": "gpt-realtime-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -93081,7 +93085,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 64,
+    "updateSequence": 66,
     "usage": {
       "popularity": 69.34,
       "totalCount": 0
@@ -93210,7 +93214,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -93334,7 +93338,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:29:35.873328Z",
+      "modifiedTime": "2026-08-21T23:30:08.1048292Z",
       "name": "gpt-image-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -93357,7 +93361,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 68,
+    "updateSequence": 70,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -93525,7 +93529,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -93669,7 +93673,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:14:53.6627076Z",
+      "modifiedTime": "2026-08-21T23:15:24.397021Z",
       "name": "gpt-5.2-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -93692,7 +93696,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 111,
+    "updateSequence": 113,
     "usage": {
       "popularity": 71.04,
       "totalCount": 0
@@ -97262,7 +97266,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -97413,7 +97417,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:25:24.8812978Z",
+      "modifiedTime": "2026-08-21T23:25:55.4417796Z",
       "name": "gpt-audio-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -97436,7 +97440,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 62,
+    "updateSequence": 64,
     "usage": {
       "popularity": 71.25,
       "totalCount": 0
@@ -97563,7 +97567,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -97715,7 +97719,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:32:05.0420286Z",
+      "modifiedTime": "2026-08-21T23:32:35.8151822Z",
       "name": "gpt-realtime-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -97738,7 +97742,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 68,
+    "updateSequence": 70,
     "usage": {
       "popularity": 71.22,
       "totalCount": 0
@@ -97931,7 +97935,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -98087,7 +98091,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:16:46.0878809Z",
+      "modifiedTime": "2026-08-21T23:17:16.657763Z",
       "name": "gpt-5.3-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -98110,7 +98114,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 110,
+    "updateSequence": 112,
     "usage": {
       "popularity": 71.52,
       "totalCount": 0
@@ -98478,7 +98482,7 @@
   },
   {
     "annotations": {
-      "archived": false,
+      "archived": true,
       "datasets": [],
       "description": "Biomedical image analysis is fundamental for biomedical discovery in cell biology, pathology, radiology, and many other biomedical domains. MedImageParse is a biomedical foundation model for imaging parsing that can jointly conduct segmentation, detection, and recognition across 9 imaging modalities. Through joint learning, we can improve accuracy for individual tasks and enable novel applications such as segmenting all relevant objects in an image through a text prompt, rather than requiring users to laboriously specify the bounding box for each object. \n\nMedImageParse is broadly applicable, performing image segmentation across 9 imaging modalities. \n\nMedImageParse is also able to identify invalid user inputs describing objects that do not exist in the image. MedImageParse can perform object detection, which aims to locate a specific object of interest, including on objects with irregular shapes. \n\nOn object recognition, which aims to identify all objects in a given image along with their semantic types, MedImageParse can simultaneously segment and label all biomedical objects in an image. \n\nIn summary, MedImageParse shows potential to be a building block for an all-in-one tool for biomedical image analysis by jointly solving segmentation, detection, and recognition. \n\nIt is broadly applicable to all major biomedical image modalities, which may pave a future path for efficient and accurate image-based biomedical discovery when built upon and integrated into an application.\n\nThis repository contains the MedImageParse model, which is packaged in MLflow format and deployed using Azure ML service. The estimated time to package and begin to build upon the model is approximately 1 hour.\n\nThis model is intended and provided as-is for research and model development exploration. MedImageParse is not designed or intended to be deployed in clinical settings as-is nor is it intended for use in the diagnosis or treatment of any health or medical condition, and the model’s performance for such purposes has not been established. You bear sole responsibility and liability for any use of MedImageParse, including verification of outputs and incorporation into any product or service intended for a medical purpose or to inform clinical decision-making, compliance with applicable healthcare laws and regulations, and obtaining any necessary clearances or approvals.\n\nFor documentation and example Jupyter Notebooks, visit: https://aka.ms/MedImageParseDocs.\n\nFor example code, usage demonstrations, and fine-tuning capabilities, visit the [Healthcare AI Examples repository](https://aka.ms/HealthcareAIExamples).\n\n### Model Architecture\nMedImageParse is built upon a transformer-based architecture, optimized for processing large biomedical corpora. Leveraging multi-head attention mechanisms, it excels at identifying and understanding biomedical terminology, as well as extracting contextually relevant information from dense scientific texts. The model is pre-trained on vast biomedical datasets, allowing it to generalize across various biomedical domains with high accuracy.\n\n### License and where to send questions or comments about the model\nThe license for MedImageParse is the MIT license. Please cite our paper if you use the model for your research https://microsoft.github.io/BiomedParse/assets/BiomedParse_arxiv.pdf and https://openaccess.thecvf.com/content/CVPR2025/papers/Zhao_Boltzmann_Attention_Sampling_for_Image_Analysis_with_Small_Objects_CVPR_2025_paper.pdf .\nFor questions or comments, please contact: hlsfrontierteam@microsoft.com\n\n### Training information\n\nMedImageParse was trained on a large dataset comprising over six million triples of image, segmentation mask, and textual description.\n\nMedImageParse used 40 NVIDIA A100-SXM4-80GB GPUs for a duration of 48 hours. \n\n### Evaluation Results\nPlease see the paper for detailed information about methods and results. https://microsoft.github.io/BiomedParse/assets/BiomedParse_arxiv.pdf as well as https://openaccess.thecvf.com/content/CVPR2025/papers/Zhao_Boltzmann_Attention_Sampling_for_Image_Analysis_with_Small_Objects_CVPR_2025_paper.pdf.\n\nBar plot comparing the Dice score between our method and competing methods on 102,855 test instances (image-mask-label\ntriples) across 9 modalities. MedSAM and SAM require bounding box as input. \n\n<img src=\"https://automlcesdkdataresources.blob.core.windows.net/model-cards/model_card_images/MedImageParse/medimageparseresults.png\" alt=\"MedImageParse comparison results on segmentation\">\n\n### Fairness evaluation\nWe conducted fairness evaluation for different sex and age groups. Two-sided independent t-test \nshows non-significant differences between female and male and between different age groups, with p-value > 5% for all imaging modalities and segmentation targets evaluated.\n\n### Ethical Considerations and Limitations \n\nMicrosoft believes Responsible AI is a shared responsibility and we have identified six principles and practices to help organizations address risks, innovate, and create value: fairness, reliability and safety, privacy and security, inclusiveness, transparency, and accountability. When downloaded or used in accordance with our terms of service, developers should work with their supporting model team to ensure this model meets requirements for the relevant use case and addresses unforeseen product misuse.   \n\nWhile testing the model with images and/or text, ensure that the data is PHI free and that there are no patient information or information that can be tracked to a patient identity.\n\nThe model is not designed for the following use cases:\n* **Use by clinicians to inform clinical decision-making, as a diagnostic tool or as a medical device** - Although MedImageParse is highly accurate in parsing biomedical data, it is not desgined or intended to be deployed in clinical settings as-is not is it for use in the diagnosis, cure, mitigation, treatment, or prevention of disease or other conditions (including to support clinical decision-making), or as a substitute of professional medical advice, diagnosis, treatment, or clinical judgment of a healthcare professional.  \n\n* **Scenarios without consent for data** - Any scenario that uses health data for a purpose for which consent was not obtained.   \n\n* **Use outside of health scenarios** - Any scenario that uses non-medical related image and/or serving purposes outside of the healthcare domain.   \n\nPlease see Microsoft's Responsible AI Principles and approach available at [https://www.microsoft.com/en-us/ai/principles-and-approach/](https://www.microsoft.com/en-us/ai/principles-and-approach/)\n\n\n\n### Sample inputs and outputs (for real time inference)\n\nInput:\n```bash\ndata = {\n  \"input_data\": {\n    \"columns\": [\n      \"image\",\n      \"text\"\n    ],\n    \"index\":[0, 1],\n    \"data\": [\n      [base64.encodebytes(read_image('./examples/Part_3_226_pathology_breast.png')).decode(\"utf-8\"), \"neoplastic cells in breast pathology & inflammatory cells.\"],\n      [base64.encodebytes(read_image('./examples/TCGA_HT_7856_19950831_8_MRI-FLAIR_brain.png')).decode(\"utf-8\"), \"brain tumor\"]\n    ],\n  },\n  \"params\": {}\n}\n```\n\n\n\n## Data and Resource Specification for Deployment\n* **Supported Data Input Format** \n1. The model expect 2D 8-bit RGB or grayscale images by default, with pixel values ranging from 0 to 255 and resolution 1024*1024. \n2. We provided preprocessing notebooks 4, 5, 6 to illustrate how to convert raw formats including DICOM, NIFTI, PNG, and JPG to desired format, with preprocessing steps such as CT windowing.\n3. The model outputs pixel probabilities in the same shape as the input image. We convert the floating point probabilities to 8-bit grayscale outputs. The probability threshold for segmentation mask is 0.5, which corresponds to 127.5 in 8-bit grayscale output.\n4. The model takes in text prompts for segmentation and doesn't have a fixed number of targets to handle. However, to ensure quality performance, we recommend the following tasks based on evaluation results.\n  - CT: abdomen: adrenal gland, aorta, bladder, duodenum, esophagus, gallbladder, kidney, kidney cyst, \n            kidney tumor, left adrenal gland, left kidney, liver, pancreas, postcava, \n            right adrenal gland, right kidney, spleen, stomach, tumor\n        colon: tumor\n        liver: liver, tumor\n        lung: COVID-19 infection, nodule\n        pelvis: uterus \n  - MRI-FLAIR: brain: edema, lower-grade glioma, tumor, tumor core, whole tumor\n  - MRI-T1-Gd: brain: enhancing tumor, tumor core\n  - MRI-T2: prostate: prostate peripheral zone, prostate transitional zone, \n  - MRI: abdomen: aorta, esophagus, gallbladder, kidney, left kidney, liver, pancreas, postcava, \n                right kidney, spleen, stomach \n        brain: anterior hippocampus, posterior hippocampus\n        heart: left heart atrium, left heart ventricle, myocardium, right heart ventricle\n        prostate: prostate \n  - OCT: retinal: edema\n  - X-Ray: chest: COVID-19 infection, left lung, lung, lung opacity, right lung, viral pneumonia \n  - dermoscopy: skin: lesion, melanoma\n  - endoscope: colon: neoplastic polyp, non-neoplastic polyp, polyp \n  - fundus: retinal: optic cup, optic disc, \n  - pathology: bladder: neoplastic cells\n            breast: epithelial cells, neoplastic cells\n            cervix: neoplastic cells\n            colon: glandular structure, neoplastic cells\n            esophagus: neoplastic cells\n            kidney: neoplastic cells\n            liver: epithelial cells, neoplastic cells\n            ovarian: epithelial cells, 'neoplastic cells\n            prostate: neoplastic cells\n            skin: neoplastic cells\n            stomach: neoplastic cells\n            testis: epithelial cells\n            thyroid: epithelial cells, neoplastic cells \n            uterus: neoplastic cells\nultrasound: breast: benign tumor, malignant tumor, tumor\n            heart: left heart atrium, left heart ventricle\n            transperineal: fetal head, public symphysis\n\n\n## Version History\n\n| Version | Date | Description |\n|---------|------|-------------|\n| 17 | 2026-03-02 | - Initial version tracking <br>- Remove V100 support|",
       "invisibleUntil": "0001-01-01T00:00:00+00:00",
@@ -98494,6 +98498,7 @@
       "stage": "Development",
       "systemCatalogData": {
         "evaluation": null,
+        "azureOpenAIModelName": null,
         "directoryPath": null,
         "promptTemplate": null,
         "fineTuningMethods": null,
@@ -98523,6 +98528,7 @@
         "inferenceMinSkuSpec": "24|1|220|64",
         "datasets": null,
         "alias": null,
+        "deploymentOptionDetails": null,
         "featureFlags": null,
         "lifecycle": null,
         "evaluationMinSkuSpec": null,
@@ -98540,6 +98546,7 @@
         "architecture": null,
         "modalitiesSupported": null,
         "maasInference": null,
+        "reasoningStart": null,
         "openmmlabModelId": null,
         "enableBatch": null,
         "maasFineTuning": null,
@@ -98563,21 +98570,25 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
+        "minQuotaTier": null,
         "deploymentSkuNames": null,
         "toolsSupported": null,
         "keywords": null,
         "mlflowFlavor": null,
         "inferenceEnvironmentAssetId": null,
         "freePlayground": null,
+        "reasoningEnd": null,
         "maxOutputTokens": null,
         "softwareRequirements": null,
         "author": null,
+        "minFLVersion": null,
         "trainingCompute": null,
         "parameterSchema": null,
         "toolRegisterStart": null,
         "languages": [
           "en"
         ],
+        "azureOpenAIVersion": null,
         "deploymentTypes": [
           "maap-inference",
           "batch-enabled"
@@ -98661,7 +98672,7 @@
     "isAFragment": false,
     "kind": "Versioned",
     "properties": {
-      "allowedDeploymentTemplates": null,
+      "allowedDeploymentTemplates": [],
       "alphanumericVersion": "17",
       "artifactProfile": null,
       "creationContext": {
@@ -98686,7 +98697,7 @@
       "modelFormat": "MLFLOW",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-03-04T02:15:07.037778Z",
+      "modifiedTime": "2026-05-27T23:54:20.4823424Z",
       "name": "MedImageParse",
       "orginAssetId": null,
       "parentModelId": null,
@@ -98709,9 +98720,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "6c0a0e9c-d473-5f18-93c2-0d4fbc893456",
+    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 6,
+    "updateSequence": 8,
     "usage": {
       "popularity": 1.0,
       "totalCount": 2
@@ -98720,7 +98731,7 @@
   },
   {
     "annotations": {
-      "archived": false,
+      "archived": true,
       "datasets": [],
       "description": "<!-- DO NOT CHANGE MARKDOWN HEADERS. IF CHANGED, MODEL CARD MAY BE REJECTED BY A REVIEWER -->\n\n<!-- `description.md` is required. -->\n\nBiomedical image analysis is fundamental for biomedical discovery in cell biology, pathology, radiology, and many other biomedical domains. 3D medical images such as CT and MRI play unique roles in clinical practices. MedImageParse 3D is a foundation model for imaging parsing that can jointly conduct segmentation, detection, and recognition for 3D medical images including CT and MRI. Through joint learning, we can improve accuracy for individual tasks and enable novel applications such as segmenting relevant objects in an image through a text prompt, rather than requiring users to laboriously specify the bounding box for each object.\n\nMedImageParse 3D was trained on a large dataset comprising triples of image, segmentation mask, and textual description. It takes in 3D medical image volume with a text prompt about the target object type (e.g. pancreas in CT), and outputs the corresponding segmentation mask in 3D volume the same shape as the input image. MedImageParse 3D is also able to identify invalid user inputs describing objects that do not exist in the image. MedImageParse 3D can perform object detection, which aims to locate a specific object of interest, including objects with irregular shapes or of small size.\n\nTraditional segmentation models do segmentation alone, requiring a fully supervised mask during training and typically need either manual bounding boxes or automatic proposals at inference if multiple objects are present. Such model doesn’t inherently know which object to segment unless trained specifically for that class, and it can’t take a text query to switch targets. MedImageParse 3D can segment via text prompts describing the object without needing a user-drawn bounding box. This semantic prompt-based approach lets it parse the image and find relevant objects anywhere in the image.\n\nIn summary, MedImageParse 3D shows potential to be a building block for an all-in-one tool for biomedical image analysis by jointly solving segmentation, detection, and recognition. It is broadly applicable to different 3D image modalities through text prompting, which may pave a future path for efficient and accurate image-based biomedical discovery when built upon and integrated into an application.\n\nFor example code and usage demonstrations, visit the [Healthcare AI Examples repository](https://aka.ms/HealthcareAIExamples).\n\n### Model Architecture\n\nMedImageParse 3D is built upon BiomedParse with the BoltzFormer architecture, optimized for locating small objects in 3D images. Leveraging Boltzmann attention sampling mechanisms, it excels at identifying subtle patterns corresponding to biomedical terminologies, as well as extracting contextually relevant information from dense scientific texts. The model is pre-trained on vast 3D medical image datasets, allowing it to generalize across various biomedical domains with high accuracy.\n\n\n### Sample inputs and outputs (for real time inference)\n\n**Input**\n\n```python\nimport base64\ndata = {\n    \"input_data\": {\n        \"columns\": [ \"image\", \"text\" ],\n        \"index\": [ 0 ],\n        \"data\": [\n            [\n                base64_image,\n                \"CT imaging of the spleen within the abdomen & Presence of the right kidney detected in abdominal CT images & Abdominal CT showing the left kidney & CT scan of the gallbladder in the abdominal region & CT scan of the esophagus in the abdominal region & Visualization of the liver in abdominal CT imaging & CT imaging of the stomach in the abdomen & Abdominal CT showing aortic structures & Inferior vena cava in abdominal CT & CT scan of the pancreas in the abdominal region & CT imaging of the right adrenal gland in the abdomen & CT imaging of the left adrenal gland in the abdomen & Visualization of the duodenum in abdominal CT imaging & Bladder observed in abdominal CT scans & CT scan of the prostate/uterus in the abdominal region\"\n\n            ]\n        ]\n    }\n}\n```\n\n- `\"columns\"` describes the types of inputs your model expects (in this case, `\"image\"` and `\"text\"`).\n- `\"data\"` is where you actually provide the values: the first element is the Base64-encoded NIfTI, and the second is a text parameter (e.g., `\"CT imaging of the spleen within the abdomen & Presence of the right kidney detected in abdominal CT images ...\" where '&' seperates multiple prompts `).\n\n**Output**\n\n```json\n[\n  {\n    \"nifti_file\": \"{\\\"data\\\":\\\"<BASE64_ENCODED_BYTES>\\\"}\"\n  }\n]\n```\n\nThe field `\"<Base64EncodedNifti>\"` contains raw binary NIfTI data, encoded in Base64.\n\nThe provided function `decode_base64_to_nifti` handles the decoding logic:\n\n```python\nimport json\nimport base64\nimport tempfile\nimport nibabel as nib\n\ndef decode_base64_to_nifti(base64_string: str) -> nib.Nifti1Image:\n    \"\"\"\n    Decode a Base64 string back to a NIfTI image.\n  \n    The function expects `base64_string` to be a JSON string\n    of the form: '{\"data\": \"<Base64EncodedBytes>\"}'.\n    \"\"\"\n    # Convert the 'nifti_file' string to a Python dict, then extract the 'data' field\n    base64_string = json.loads(base64_string)[\"data\"]\n  \n    # Decode Base64 string to raw bytes\n    byte_data = base64.b64decode(base64_string)\n  \n    # Write these bytes to a temporary file and load as a NIfTI image\n    with tempfile.NamedTemporaryFile(suffix='.nii.gz', delete=False) as temp_file:\n        temp_file.write(byte_data)\n        nifti_image = nib.load(temp_file.name)\n  \n    # Return the voxel data as a Numpy array\n    return nifti_image.get_fdata()\n```\n\nThe output can be parsed using:\n\n```python\nimport json\n\n# Suppose `response` is the raw byte response from urllib\nresponse_data = json.loads(response)\n\n# Extract the JSON-stringified NIfTI\nnifti_file_str = response_data[0][\"nifti_file\"]\n\n# Decode to get the NIfTI volume as a Numpy array\nsegmentation_array = decode_base64_to_nifti(nifti_file_str)\nprint(segmentation_array.shape)  \n```\n\nOptionally, to visualize the output:\n\n```python\n# --- Quick visualization of one axial slice ---\nimport matplotlib.pyplot as plt\nimport numpy as np\n\nslice_id = 40  # choose an in-bounds slice index along the third axis (H, W, Z)\nslice_ = segmentation_array[:, :, slice_id]\n\n# Exclude background (0) when listing labels\nlabels = np.unique(slice_)\nlabels = labels[labels != 0]\n\nplt.figure(figsize=(6, 6))\nplt.imshow(slice_, cmap=\"gray\")\nplt.title(f\"Masks @ slice {slice_id} | labels: {labels.tolist()}\")\nplt.axis(\"off\")\nplt.show()\n\n```\n\n## Version History\n\n| Version | Date | Description |\n|---------|------|-------------|\n| 6 | 2026-03-02 | - Initial version tracking |",
       "invisibleUntil": "0001-01-01T00:00:00+00:00",
@@ -98736,11 +98747,13 @@
       "stage": "Development",
       "systemCatalogData": {
         "evaluation": "<!-- DO NOT CHANGE MARKDOWN HEADERS. IF CHANGED, MODEL CARD MAY BE REJECTED BY A REVIEWER -->\n\n<!-- `evaluation.md` is highly recommended, but not required. It captures information about the performance of the model. We highly recommend including this section as this information is often used to decide what model to use. -->\n\nWe benchmarked MedImageParse 3D against task-specific nnU-Net models on AMOS22 CT and MRI datasets. Note that we trained a single model to solve all different tasks solely via text prompting, e.g. \"gallbladder in abdomen MRI\", while nnU-Net was trained as multiple expert models for each individual object in each modality. Therefore, we made this comparison of one single model v.s. 27 task-specific models.\n\n\n**CT**\n\n| Dice score (%)   | aorta | bladder | duodenum | esophagus | gallbladder | left adrenal gland | left kidney | liver | pancreas | IVC   | right adrenal gland | right kidney | spleen | stomach | Average |\n| ---------------- | ----- | ------- | -------- | --------- | ----------- | ------------------ | ----------- | ----- | -------- | ----- | ------------------- | ------------ | ------ | ------- | ------- |\n| MedImageParse 3D | 95.27 | 90.17   | 83.27    | 87.11     | 85.96       | 79.48              | 96.39       | 97.71 | 88.42    | 92.02 | 79.39               | 96.88        | 96.91  | 91.49   | 90.00   |\n| nnU-Net          | 95.20 | 87.52   | 80.72    | 87.31     | 83.06       | 78.06              | 95.39       | 96.09 | 86.57    | 90.38 | 78.24               | 93.19        | 96.91  | 89.79   | 88.35   |\n| SegVol           | 92.07 | 88.03   | 72.49    | 64.47     | 79.05       | 76.31              | 94.58       | 96.24 | 80.97    | 83.65 | 71.07               | 92.92        | 94.03  | 88.82   | 83.75   |\n\n**MRI**\n\n| Dice score (%)   | aorta | duodenum | esophagus | gallbladder | left adrenal gland | left kidney | liver | pancreas | IVC   | right adrenal gland | right kidney | spleen | stomach | Average |\n| ---------------- | ----- | ",
+        "azureOpenAIModelName": null,
         "directoryPath": null,
         "promptTemplate": null,
         "fineTuningMethods": null,
         "toolCallStart": null,
         "isCustomerInfoRequired": null,
+        "deploymentSkuLocations": null,
         "modelArchitecture": null,
         "sharedComputeCapacityEnabled": true,
         "supportsToolCalling": null,
@@ -98748,6 +98761,7 @@
         "trainingDataSummary": null,
         "enableMaap": null,
         "textContextWindow": null,
+        "deploymentSku": null,
         "supportedRegionsLink": null,
         "rateLimitLink": null,
         "pricingLink": null,
@@ -98763,6 +98777,7 @@
         "inferenceMinSkuSpec": "24|1|220|64",
         "datasets": null,
         "alias": null,
+        "deploymentOptionDetails": null,
         "featureFlags": null,
         "lifecycle": null,
         "evaluationMinSkuSpec": null,
@@ -98774,15 +98789,18 @@
         "benchmark": null,
         "maapSurcharge": null,
         "inferenceDeprecationDate": null,
+        "deploymentOptions": null,
         "toolResponseEnd": null,
         "maapSurchargeType": null,
         "architecture": null,
         "modalitiesSupported": null,
         "maasInference": null,
+        "reasoningStart": null,
         "openmmlabModelId": null,
         "enableBatch": null,
         "maasFineTuning": null,
         "trainingApproach": null,
+        "huggingFaceModelId": null,
         "summary": null,
         "reportingMechanisms": null,
         "componentVersion": null,
@@ -98801,6 +98819,8 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
+        "minQuotaTier": null,
+        "deploymentSkuNames": null,
         "toolsSupported": null,
         "keywords": [
           "Multimodal"
@@ -98808,15 +98828,18 @@
         "mlflowFlavor": null,
         "inferenceEnvironmentAssetId": null,
         "freePlayground": null,
+        "reasoningEnd": null,
         "maxOutputTokens": null,
         "softwareRequirements": null,
         "author": null,
+        "minFLVersion": null,
         "trainingCompute": null,
         "parameterSchema": null,
         "toolRegisterStart": null,
         "languages": [
           "en"
         ],
+        "azureOpenAIVersion": null,
         "deploymentTypes": [
           "maap-inference",
           "batch-enabled"
@@ -98827,9 +98850,11 @@
         "modelCapabilities": null,
         "maasFinetuningTest": null,
         "trainingTime": null,
+        "hostedOn": null,
         "publisher": "Microsoft",
         "license": "mit",
         "fineTuneComputeAllowed": null,
+        "hiddenLayerScanned": true,
         "modelPath": null,
         "inferenceComputeAllowed": [
           "Standard_NC24ads_A100_v4",
@@ -98844,9 +98869,12 @@
         ],
         "licenseDescription": null,
         "fineTuneOnlyModel": null,
+        "longContextRetirementDate": null,
         "contactInformation": null,
         "finetuneRecommendedSkus": null,
         "trainingDates": null,
+        "maxInputTokens": null,
+        "domain": null,
         "toolRegisterEnd": null,
         "finetuneDeprecationDate": null,
         "outputModalities": [
@@ -98908,7 +98936,9 @@
     "isAFragment": false,
     "kind": "Versioned",
     "properties": {
+      "allowedDeploymentTemplates": [],
       "alphanumericVersion": "6",
+      "artifactProfile": null,
       "creationContext": {
         "createdBy": {
           "userName": "azureml",
@@ -98926,16 +98956,18 @@
         "publisher": null
       },
       "isAnonymous": false,
+      "loraConfig": null,
       "mimeType": "application/octet-stream",
       "modelFormat": "MLFLOW",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-03-04T02:59:59.9750206Z",
+      "modifiedTime": "2026-03-04T03:06:04.9276953Z",
       "name": "MedImageParse3D",
       "orginAssetId": null,
       "parentModelId": null,
       "provisioningState": "Succeeded",
       "runId": null,
+      "sourceData": null,
       "unpack": false,
       "updatedTime": "0001-01-01T00:00:00+00:00",
       "url": null,
@@ -98946,14 +98978,15 @@
         "languages": "en"
       },
       "variantInfo": null,
-      "version": 6
+      "version": 6,
+      "weightType": null
     },
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "c4665d80-d2f1-5ff2-bc18-3431529e155c",
+    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 4,
+    "updateSequence": 6,
     "usage": {
       "popularity": 1.0,
       "totalCount": 55
@@ -100055,7 +100088,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -100211,7 +100244,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:19:44.8001688Z",
+      "modifiedTime": "2026-08-21T23:20:15.3456647Z",
       "name": "gpt-5.4",
       "orginAssetId": null,
       "parentModelId": null,
@@ -100234,7 +100267,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 96,
+    "updateSequence": 98,
     "usage": {
       "popularity": 71.8,
       "totalCount": 0
@@ -100402,7 +100435,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -100553,7 +100586,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:19:07.9712448Z",
+      "modifiedTime": "2026-08-21T23:19:38.626345Z",
       "name": "gpt-5.4-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -100576,7 +100609,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 96,
     "usage": {
       "popularity": 71.9,
       "totalCount": 0
@@ -102020,7 +102053,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -102178,7 +102211,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:17:22.4411702Z",
+      "modifiedTime": "2026-08-21T23:18:23.2882382Z",
       "name": "gpt-5.4-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -102202,7 +102235,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 89,
+    "updateSequence": 91,
     "usage": {
       "popularity": 71.91,
       "totalCount": 0
@@ -102384,7 +102417,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -102536,7 +102569,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:18:29.2788216Z",
+      "modifiedTime": "2026-08-21T23:18:59.8697661Z",
       "name": "gpt-5.4-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -102559,7 +102592,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 84,
+    "updateSequence": 86,
     "usage": {
       "popularity": 71.92,
       "totalCount": 0
@@ -123283,7 +123316,6 @@
           "UAENORTH",
           "POLANDCENTRAL",
           "EASTUS2",
-          "NORTHEUROPE",
           "SWEDENCENTRAL"
         ],
         "modelArchitecture": null,
@@ -123300,7 +123332,6 @@
               "UAENORTH",
               "POLANDCENTRAL",
               "EASTUS2",
-              "NORTHEUROPE",
               "SWEDENCENTRAL"
             ],
             "name": "GlobalStandard"
@@ -123369,7 +123400,7 @@
         ],
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -123492,7 +123523,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:30:51.2592946Z",
+      "modifiedTime": "2026-08-21T23:31:21.8021738Z",
       "name": "gpt-image-2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -123515,7 +123546,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 68,
+    "updateSequence": 70,
     "usage": {
       "popularity": 72.01,
       "totalCount": 0
@@ -125935,7 +125966,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -126089,7 +126120,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:20:21.2259846Z",
+      "modifiedTime": "2026-08-21T23:21:21.8524669Z",
       "name": "gpt-5.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -126112,7 +126143,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 82,
+    "updateSequence": 84,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -156350,7 +156381,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard"
@@ -156503,7 +156534,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:33:18.7945267Z",
+      "modifiedTime": "2026-08-21T23:33:49.3914604Z",
       "name": "gpt-realtime-2.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -156526,7 +156557,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 32,
+    "updateSequence": 34,
     "usage": {
       "popularity": 72.29,
       "totalCount": 0
@@ -156646,7 +156677,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -156798,7 +156829,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:32:41.786254Z",
+      "modifiedTime": "2026-08-21T23:33:12.3506155Z",
       "name": "gpt-realtime-2.1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -156821,7 +156852,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 32,
+    "updateSequence": 34,
     "usage": {
       "popularity": 72.28,
       "totalCount": 0
@@ -156946,9 +156977,22 @@
           },
           {
             "locations": [
-              "UKSOUTH"
+              "UKSOUTH",
+              "EASTUS2"
             ],
             "name": "ProvisionedManaged"
+          },
+          {
+            "locations": [
+              "CENTRALUS",
+              "EASTUS",
+              "EASTUS2",
+              "NORTHCENTRALUS",
+              "SOUTHCENTRALUS",
+              "WESTUS",
+              "WESTUS3"
+            ],
+            "name": "DataZoneProvisionedManaged"
           }
         ],
         "supportedRegionsLink": null,
@@ -157015,11 +157059,12 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
-          "ProvisionedManaged"
+          "ProvisionedManaged",
+          "DataZoneProvisionedManaged"
         ],
         "toolsSupported": [
           "code_interpreter",
@@ -157168,7 +157213,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:21:28.1319622Z",
+      "modifiedTime": "2026-08-21T23:22:28.7226329Z",
       "name": "gpt-5.6-luna",
       "orginAssetId": null,
       "parentModelId": null,
@@ -157191,7 +157236,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 36,
+    "updateSequence": 38,
     "usage": {
       "popularity": 72.31,
       "totalCount": 0
@@ -157323,15 +157368,29 @@
           },
           {
             "locations": [
+              "UKSOUTH",
+              "WESTUS"
+            ],
+            "name": "ProvisionedManaged"
+          },
+          {
+            "locations": [
+              "CENTRALUS",
+              "EASTUS",
+              "EASTUS2",
               "FRANCECENTRAL",
               "GERMANYWESTCENTRAL",
               "ITALYNORTH",
+              "NORTHCENTRALUS",
               "NORWAYEAST",
               "POLANDCENTRAL",
+              "SOUTHCENTRALUS",
               "SPAINCENTRAL",
               "SWEDENCENTRAL",
               "SWITZERLANDNORTH",
-              "WESTEUROPE"
+              "WESTEUROPE",
+              "WESTUS",
+              "WESTUS3"
             ],
             "name": "DataZoneProvisionedManaged"
           }
@@ -157400,10 +157459,11 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
+          "ProvisionedManaged",
           "DataZoneProvisionedManaged"
         ],
         "toolsSupported": [
@@ -157553,7 +157613,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:22:34.2823269Z",
+      "modifiedTime": "2026-08-21T23:23:05.0330111Z",
       "name": "gpt-5.6-sol",
       "orginAssetId": null,
       "parentModelId": null,
@@ -157576,7 +157636,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 36,
+    "updateSequence": 38,
     "usage": {
       "popularity": 72.32,
       "totalCount": 0
@@ -157701,15 +157761,28 @@
           },
           {
             "locations": [
+              "WESTUS"
+            ],
+            "name": "ProvisionedManaged"
+          },
+          {
+            "locations": [
+              "CENTRALUS",
+              "EASTUS",
+              "EASTUS2",
               "FRANCECENTRAL",
               "GERMANYWESTCENTRAL",
               "ITALYNORTH",
+              "NORTHCENTRALUS",
               "NORWAYEAST",
               "POLANDCENTRAL",
+              "SOUTHCENTRALUS",
               "SPAINCENTRAL",
               "SWEDENCENTRAL",
               "SWITZERLANDNORTH",
-              "WESTEUROPE"
+              "WESTEUROPE",
+              "WESTUS",
+              "WESTUS3"
             ],
             "name": "DataZoneProvisionedManaged"
           }
@@ -157778,10 +157851,11 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
+          "ProvisionedManaged",
           "DataZoneProvisionedManaged"
         ],
         "toolsSupported": [
@@ -157931,7 +158005,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:23:11.3656505Z",
+      "modifiedTime": "2026-08-21T23:24:12.0379964Z",
       "name": "gpt-5.6-terra",
       "orginAssetId": null,
       "parentModelId": null,
@@ -157954,7 +158028,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 38,
+    "updateSequence": 40,
     "usage": {
       "popularity": 72.3,
       "totalCount": 0
@@ -159189,7 +159263,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -159337,7 +159411,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:31:27.7393349Z",
+      "modifiedTime": "2026-08-21T23:31:58.2979228Z",
       "name": "gpt-live-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -159360,7 +159434,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 20,
+    "updateSequence": 22,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -159480,7 +159554,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -159628,7 +159702,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:37:37.2309683Z",
+      "modifiedTime": "2026-08-21T23:38:07.8043662Z",
       "name": "gpt-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -159651,7 +159725,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 22,
+    "updateSequence": 24,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -164794,7 +164868,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard"
         ],
@@ -164939,7 +165013,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T23:28:21.9839018Z",
+      "modifiedTime": "2026-08-21T23:28:52.5663634Z",
       "name": "gpt-chat-latest",
       "orginAssetId": null,
       "parentModelId": null,
@@ -164962,7 +165036,7 @@
     "resourceType": "Registry",
     "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
     "type": "models",
-    "updateSequence": 14,
+    "updateSequence": 16,
     "usage": {
       "popularity": 72.26,
       "totalCount": 0
@@ -165707,6 +165781,260 @@
       "totalCount": 0
     },
     "version": "1"
+  },
+  {
+    "annotations": {
+      "archived": false,
+      "datasets": [],
+      "description": "# Direct from Azure models\n Direct from Azure models are a select portfolio curated for their market-differentiated capabilities:\n\n- Secure and managed by Microsoft: Purchase and manage models directly through Azure with a single license, consistent support, and no third-party dependencies, backed by Azure's enterprise-grade infrastructure.\n- Streamlined operations: Benefit from unified billing, governance, and seamless PTU portability across models hosted on Azure - all as part of one Microsoft Foundry platform.\n- Future-ready flexibility: Access the latest models as they become available, and easily test, deploy, or switch between them within Microsoft Foundry; reducing integration effort.\n- Cost control and optimization: Scale on demand with pay-as-you-go flexibility or reserve PTUs for predictable performance and savings.\n\nLearn more about [Direct from Azure models](https://aka.ms/DirectfromAzure).\n\n# Key capabilities\n\n## About this model\n\nKimi K3 is an open-weight, native multimodal agentic model and our most capable model to date. It is a 2.8T-parameter model built on Kimi Delta Attention (KDA) and Attention Residuals (AttnRes), with native vision capabilities and a 1-million-token context window. It is the world's first open 3T-class model, designed for frontier intelligence across long-horizon coding, knowledge work, and reasoning.\n\n## Key model capabilities\n\n- **New Architecture**: Kimi K3 is built on Kimi Delta Attention (KDA) and Attention Residuals (AttnRes), and scales up MoE sparsity with a Stable LatentMoE framework that activates 16 out of 896 experts — yielding an approximate 2.5× improvement in overall scaling efficiency over Kimi K2.\n- **Long-Horizon Coding**: Operating with minimal human oversight, Kimi K3 sustains long engineering sessions, navigates massive repositories, and orchestrates terminal tools — from GPU kernel optimization and compiler development to vision-in-the-loop game dev, CAD, and even chip design.\n- **Agentic Knowledge Work**: Kimi K3 advances end-to-end knowledge work, producing deep research with interactive visualizations, widgets and dashboards, and motion design and video editing, powered by its native multimodal architecture\n- **Native Multimodality & Long Context**: Kimi K3 understands text, images, and video within the same model, and supports a 1-million-token context window.\n- **Open Frontier Weights**: Moonshot AI has released the full Kimi K3 model weights under the Kimi K3 License, making frontier intelligence openly available for research, deployment, and further innovation.\n\n# Use cases\nSee Responsible AI for additional considerations for responsible use.\n\n## Key use cases\n\nThe provider has not supplied this information.\n\n## Out of scope use cases\n\nThe provider has not supplied this information.\n\n# Pricing\nPricing is based on a number of factors, including deployment type and tokens used. [See pricing details here.](https://aka.ms/MoonshotAIPricing)\n\n# Technical specs\n\n| | |\n|:---:|:---:|\n| **Architecture** | Mixture-of-Experts (MoE) |\n| **Total Parameters** | 2.8T |\n| **Activated Parameters** | 104B |\n| **Number of Layers**  | 93 |\n| **Number of Dense Layers** | 1 |\n| **Attention-Layer Composition**| 69 KDA + 24 Gated MLA |\n| **Attention Hidden Dimension** | 7168 |\n| **Number of Attention Heads**| 96|\n| **Latent MoE Dimension**| 3584 |\n| **MoE Hidden Dimension** (per Expert) | 3072 |\n| **Number of Experts** | 896 |\n| **Selected Experts per Token** | 16 |\n| **Number of Shared Experts** | 2 |\n| **Vocabulary Size** | 160K |\n| **Context Length** | 1048576 |\n| **Attention Mechanism** | KDA & Gated MLA |\n| **Activation Function** | SiTU-GLU |\n| **Vision Encoder** | MoonViT-V2 |\n| **Parameters of Vision Encoder** | 401M |\n| **Quantization**| MXFP4 weights / MXFP8 activations (quantization-aware training) |\n| **Modality**| Text, Image |\n\n\n## Training cut-off date\n\nThe provider has not supplied this information.\n\n## Training time\n\nThe provider has not supplied this information.\n\n## Input formats\n\nText, Image\n\n## Output formats\n\nText\n\n## Supported languages\n\nEnglish\n\n## Sample JSON response\n\nThe provider has not supplied this information.\n\n## Model architecture\n\nThe provider has not supplied this information.\n\n## Long context\n\nThe provider has not supplied this information.\n\n## Optimizing model performance\n\nThe provider has not supplied this information.\n\n## Additional assets\n\nPlease see MoonshotAI's Kimi-K3 model card [here](https://huggingface.co/moonshotai/Kimi-K3).\n\n# Training disclosure\n\n## Training, testing and validation\n\nThe provider has not supplied this information.\n\n# Distribution\n\n## Distribution channels\n\nThe provider has not supplied this information.\n\n# More information\n\nThe provider has not supplied this information.",
+      "invisibleUntil": "2026-08-28T17:00:00+00:00",
+      "labels": [
+        "invisibleLatest",
+        "default",
+        "latest"
+      ],
+      "name": "Kimi-K3",
+      "resourceRequirements": null,
+      "sampleInputData": null,
+      "sampleOutputData": null,
+      "stage": "Development",
+      "systemCatalogData": {
+        "evaluation": "##  Evaluation Results\n\n<div align=\"center\">\n<table>\n<thead>\n<tr>\n<th align=\"center\" style=\"text-align: center\">Benchmark</th>\n<th align=\"center\" style=\"text-align: center\"><sup>Kimi K3<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>Claude Fable 5<br><sup>(max, w/ fallback)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GPT-5.6 Sol<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>Claude Opus 4.8<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GPT-5.5<br><sup>(xhigh)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GLM-5.2<br><sup>(max)</sup></sup></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\" colspan=7 style=\"text-align: center\"><strong>Reasoning &amp; Knowledge</strong></td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">GPQA Diamond</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">92.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.2</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">CritPt</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">23.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">28.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">32.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">20.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">27.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">20.9</td>\n</tr>\n<tr>\n<td ",
+        "azureOpenAIModelName": null,
+        "directoryPath": null,
+        "promptTemplate": null,
+        "fineTuningMethods": null,
+        "toolCallStart": null,
+        "isCustomerInfoRequired": null,
+        "deploymentSkuLocations": null,
+        "modelArchitecture": null,
+        "sharedComputeCapacityEnabled": null,
+        "supportsToolCalling": null,
+        "inferenceRetirementDate": null,
+        "trainingDataSummary": null,
+        "enableMaap": false,
+        "textContextWindow": 1048576,
+        "deploymentSku": null,
+        "supportedRegionsLink": null,
+        "rateLimitLink": null,
+        "pricingLink": "https://aka.ms/Kimi-k3-Pricing",
+        "foundryLocal": null,
+        "toolCallEnd": null,
+        "industry": null,
+        "playgroundRateLimitTier": null,
+        "inferenceLegacyDate": null,
+        "featured": true,
+        "hasDeltaWeights": null,
+        "finetuneMinSkuSpec": null,
+        "modelFlavor": null,
+        "inferenceMinSkuSpec": null,
+        "datasets": null,
+        "alias": null,
+        "deploymentOptionDetails": null,
+        "featureFlags": null,
+        "lifecycle": "Preview",
+        "evaluationMinSkuSpec": null,
+        "preview": true,
+        "isDirectFromAzure": true,
+        "displayName": "Kimi-K3",
+        "trainingDataDate": null,
+        "toolResponseStart": null,
+        "benchmark": null,
+        "maapSurcharge": null,
+        "inferenceDeprecationDate": null,
+        "deploymentOptions": [
+          "UnifiedEndpointMaaS"
+        ],
+        "toolResponseEnd": null,
+        "maapSurchargeType": null,
+        "architecture": null,
+        "modalitiesSupported": null,
+        "maasInference": true,
+        "reasoningStart": null,
+        "openmmlabModelId": null,
+        "enableBatch": false,
+        "maasFineTuning": null,
+        "trainingApproach": null,
+        "huggingFaceModelId": null,
+        "summary": "Kimi K3 is an open-weight, native multimodal agentic model and Moonshot Ai's most capable model to date.",
+        "reportingMechanisms": null,
+        "componentVersion": null,
+        "featuresSupported": null,
+        "skuToNumReplicasMap": null,
+        "fineTuningTasks": null,
+        "inferenceTasks": [
+          "chat-completion"
+        ],
+        "maasFinetuningOffer": null,
+        "evaluationComputeAllowed": null,
+        "evaluationRecommendedSkus": null,
+        "finetuneRetirementDate": null,
+        "azureOffers": [
+          "standard-paygo"
+        ],
+        "maasFinetuningAvailableRegions": null,
+        "terms": null,
+        "minQuotaTier": null,
+        "deploymentSkuNames": null,
+        "toolsSupported": null,
+        "keywords": [
+          "Reasoning",
+          "Multilingual",
+          "Coding",
+          "Agents"
+        ],
+        "mlflowFlavor": null,
+        "inferenceEnvironmentAssetId": null,
+        "freePlayground": null,
+        "reasoningEnd": null,
+        "maxOutputTokens": 262144,
+        "softwareRequirements": null,
+        "author": null,
+        "minFLVersion": null,
+        "trainingCompute": null,
+        "parameterSchema": null,
+        "toolRegisterStart": null,
+        "languages": [
+          "en"
+        ],
+        "azureOpenAIVersion": null,
+        "deploymentTypes": [
+          "maas-inference"
+        ],
+        "languagesSupportedLink": null,
+        "endpointsSupported": null,
+        "baseModelWeightsVer": null,
+        "modelCapabilities": [
+          "reasoning",
+          "streaming",
+          "agentsV2"
+        ],
+        "maasFinetuningTest": null,
+        "trainingTime": null,
+        "hostedOn": [
+          "Azure"
+        ],
+        "publisher": "Moonshot AI",
+        "license": "other",
+        "fineTuneComputeAllowed": null,
+        "hiddenLayerScanned": null,
+        "modelPath": null,
+        "inferenceComputeAllowed": null,
+        "licenseDescription": "Use of the Moonshot AI Kimi-K3 model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Modified MIT License, available at <https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE>.",
+        "fineTuneOnlyModel": null,
+        "longContextRetirementDate": null,
+        "contactInformation": null,
+        "finetuneRecommendedSkus": null,
+        "trainingDates": null,
+        "maxInputTokens": null,
+        "domain": null,
+        "toolRegisterEnd": null,
+        "finetuneDeprecationDate": null,
+        "outputModalities": [
+          "text"
+        ],
+        "trademarkInformation": null,
+        "parameterCount": null,
+        "trainingCorpusSize": null,
+        "aotManifest": null,
+        "inferenceSupportedEnvs": null,
+        "inferenceRecommendedSkus": null,
+        "maasFinetuningDeployRegions": null,
+        "notes": "# Responsible AI considerations\n\n## Safety techniques\nKimi-K3 poses an elevated risk of producing content that would be blocked by the Foundry Models [Protected Material Detection filter](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/content-filter-protected-material?view=foundry-classic&tabs=text). When deployed via Microsoft Foundry, prompts and completions are passed through a default configuration of classification models to detect and prevent the output of harmful content. We recommend customers use the Protected Material Detection filter in conjunction with this model. As with any model, customers should conduct thorough evaluations on production systems before launching, as well as appropriate post-launch monitoring. All customers must comply with the Microsoft Enterprise AI Services Code of Conduct. Configuration options for content filtering vary when you deploy a model for production in Azure AI; [learn more](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview) .\n\n## Safety evaluations\nThe provider has not supplied this information.\n\n## Known limitations\nThe provider has not supplied this information.\n\n# Acceptable use\n\n## Acceptable use policy\nThe provider has not supplied this information.",
+        "inputModalities": [
+          "text",
+          "image"
+        ]
+      },
+      "tags": {
+        "Featured": "",
+        "Preview": "",
+        "author": "Moonshot AI",
+        "deploymentOptions": "UnifiedEndpointMaaS",
+        "disable-batch": "true",
+        "disable-maap": "true",
+        "displayName": "Kimi-K3",
+        "evaluation": "##  Evaluation Results\n\n<div align=\"center\">\n<table>\n<thead>\n<tr>\n<th align=\"center\" style=\"text-align: center\">Benchmark</th>\n<th align=\"center\" style=\"text-align: center\"><sup>Kimi K3<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>Claude Fable 5<br><sup>(max, w/ fallback)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GPT-5.6 Sol<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>Claude Opus 4.8<br><sup>(max)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GPT-5.5<br><sup>(xhigh)</sup></sup></th>\n<th align=\"center\" style=\"text-align: center\"><sup>GLM-5.2<br><sup>(max)</sup></sup></th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td align=\"center\" colspan=7 style=\"text-align: center\"><strong>Reasoning &amp; Knowledge</strong></td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">GPQA Diamond</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">92.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.2</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">CritPt</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">23.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">28.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">32.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">20.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">27.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">20.9</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">AA-LCR</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">74.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">70.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">73.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">67.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">74.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.3</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">HLE-Full</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">43.5 / 56.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">53.3 / 63.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">44.5 / 58.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">49.8 / 57.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">41.4 / 52.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" colspan=7 style=\"text-align: center\"><strong>Coding</strong></td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">DeepSWE</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">67.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">70.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">73.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">59.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">67.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">46.2</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">ProgramBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">77.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">77.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">70.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">63.7</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Terminal-Bench 2.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">82.7</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">FrontierSWE</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">86.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">66.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">64.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">67.3</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">SWE-Marathon</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">42.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">35.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">39.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">40.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">14.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">13.0</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">PostTrainBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">36.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">41.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">34.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">34.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">28.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">34.3</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MLS-Bench-Lite</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">48.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">49.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">46.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">42.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">35.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">40.4</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">SciCode</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">58.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">60.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">56.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">53.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">56.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">50.5</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Kimi Code Bench 2.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">72.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">64.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">69.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">64.2</td>\n</tr>\n<tr>\n<td align=\"center\" colspan=7 style=\"text-align: center\"><strong>Agentic</strong></td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">BrowseComp</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">90.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">DeepSearchQA (F1)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">95.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">ResearchRubrics</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">73.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">73.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">64.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.1</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">GDPval-AA v2 (Elo)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1686</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1747</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1736</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1593</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1491</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1510</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Toolathlon-Verified</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">77.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">74.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">73.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">59.9</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MCPMark-Verified</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">87.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">92.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">76.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">92.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MCP-Atlas</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">82.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">82.6</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">AutomationBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">30.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">29.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">29.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">27.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">22.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">12.9</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">JobBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">54.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">57.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">45.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">48.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">38.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">43.4</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">AA-Briefcase (Elo)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1548</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1583</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1495</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1354</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1158</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">1260</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Agents' Last Exam</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">28.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">25.7<sup>†</sup></td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">29.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">27.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">26.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">20.4</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">APEX-Agents</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">41.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">43.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">39.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">39.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">38.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">35.6</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">OfficeQA Pro</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">63.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">69.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">63.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">63.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">60.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">41.4</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">SpreadsheetBench 2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">34.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">34.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">32.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">31.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">29.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">28.1</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">OSWorld-Verified</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">85.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">79.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">OSWorld 2.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">58.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">66.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">62.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">55.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">49.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">SaaS-Bench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">60.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">61.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">56.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">43.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">τ³-Banking</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">33.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">26.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">33.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">27.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">31.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">26.8</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Harvey Lab-AA</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">93.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">87.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">86.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.0</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">CorpFin v2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">71.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">64.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">66.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">68.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">66.1</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Finance Agent v2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">54.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">56.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">53.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">53.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">51.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">49.7</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Legal Research Bench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">44.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">49.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">48.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">43.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">40.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">31.3</td>\n</tr>\n<tr>\n<td align=\"center\" colspan=7 style=\"text-align: center\"><strong>Vision</strong></td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">WorldVQA ForceAnswer</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">51.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">56.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">41.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">39.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">38.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">OmniDocBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">91.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">89.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">85.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">87.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">89.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">PerceptionBench</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">58.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">57.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">59.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">47.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">55.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">Video-MME (w. sub)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">90.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">89.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">86.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">89.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MMVU</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">82.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">79.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">BabyVision w/ python</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">85.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">90.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MMMU-Pro</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.6 / 83.4</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.2 / 86.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">83.0 / 84.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">78.9 / 82.7</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">81.2 / 83.2</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">CharXiv (RQ)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.8 / 91.3</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">88.9 / 93.5</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.6 / 89.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">80.5 / 89.9</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">84.1 / 89.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">MathVision</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.3 / 97.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">94.8 / 98.6</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">95.8 / 97.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">86.7 / 97.1</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">92.2 / 96.8</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n<tr>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">ZeroBench (pass@5)</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">23.0 / 41.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">23.0 / 46.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">17.0 / 35.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">17.0 / 34.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">22.0 / 41.0</td>\n<td align=\"center\" style=\"vertical-align: middle; text-align: center\">—</td>\n</tr>\n</tbody>\n</table>\n</div>",
+        "inputModalities": "text,image",
+        "isDirectFromAzure": "true",
+        "keywords": "Reasoning,Multilingual,Coding,Agents",
+        "languages": "en",
+        "license": "other",
+        "licenseDescription": "Use of the Moonshot AI Kimi-K3 model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Modified MIT License, available at <https://huggingface.co/moonshotai/Kimi-K3/blob/main/LICENSE>.",
+        "lifecycle": "Preview",
+        "maas-inference": "true",
+        "maxOutputTokens": "262144",
+        "modelCapabilities": "reasoning,streaming,agentsV2",
+        "notes": "# Responsible AI considerations\n\n## Safety techniques\nKimi-K3 poses an elevated risk of producing content that would be blocked by the Foundry Models [Protected Material Detection filter](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/concepts/content-filter-protected-material?view=foundry-classic&tabs=text). When deployed via Microsoft Foundry, prompts and completions are passed through a default configuration of classification models to detect and prevent the output of harmful content. We recommend customers use the Protected Material Detection filter in conjunction with this model. As with any model, customers should conduct thorough evaluations on production systems before launching, as well as appropriate post-launch monitoring. All customers must comply with the Microsoft Enterprise AI Services Code of Conduct. Configuration options for content filtering vary when you deploy a model for production in Azure AI; [learn more](https://learn.microsoft.com/azure/ai-studio/how-to/model-catalog-overview) .\n\n## Safety evaluations\nThe provider has not supplied this information.\n\n## Known limitations\nThe provider has not supplied this information.\n\n# Acceptable use\n\n## Acceptable use policy\nThe provider has not supplied this information.",
+        "outputModalities": "text",
+        "pricingLink": "https://aka.ms/Kimi-k3-Pricing",
+        "summary": "Kimi K3 is an open-weight, native multimodal agentic model and Moonshot Ai's most capable model to date.",
+        "task": "chat-completion",
+        "textContextWindow": "1048576"
+      }
+    },
+    "assetId": "azureml://registries/azureml-moonshotai/models/Kimi-K3/versions/2026-07-27",
+    "entityContainerId": "da29ccd3-985b-4414-8c16-767605140ffa",
+    "entityId": "azureml://registries/da29ccd3-985b-4414-8c16-767605140ffa/type/models/objectId/Kimi-K3/version/2026-07-27",
+    "entityObjectId": "Kimi-K3",
+    "entityResourceName": "azureml-moonshotai",
+    "fragmentId": null,
+    "highlights": {},
+    "internal": {},
+    "isAFragment": false,
+    "kind": "Versioned",
+    "properties": {
+      "allowedDeploymentTemplates": [],
+      "alphanumericVersion": "2026-07-27",
+      "artifactProfile": null,
+      "creationContext": {
+        "createdBy": {
+          "userName": "azureml-moonshotai",
+          "userObjectId": "00000000-0000-0000-0000-000000000000",
+          "userPrincipalName": null,
+          "userTenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "createdTime": "2026-08-21T21:36:44.45534+00:00",
+        "creationSource": null
+      },
+      "derivedModelIds": null,
+      "experimentName": null,
+      "id": "Kimi-K3:2026-07-27",
+      "intellectualProperty": {
+        "publisher": "Moonshotai"
+      },
+      "isAnonymous": false,
+      "loraConfig": null,
+      "mimeType": "application/json",
+      "modelFormat": "CUSTOM",
+      "modelFramework": "Custom",
+      "modelFrameworkVersion": null,
+      "modifiedTime": "2026-08-21T21:36:42.195686Z",
+      "name": "Kimi-K3",
+      "orginAssetId": null,
+      "parentModelId": null,
+      "provisioningState": "Succeeded",
+      "runId": null,
+      "sourceData": null,
+      "unpack": false,
+      "updatedTime": "0001-01-01T00:00:00+00:00",
+      "url": null,
+      "userProperties": {},
+      "variantInfo": null,
+      "version": 0,
+      "weightType": null
+    },
+    "relationships": [],
+    "relevancyScore": 1.0,
+    "resourceType": "Registry",
+    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "type": "models",
+    "updateSequence": 2,
+    "usage": {
+      "popularity": 1.0,
+      "totalCount": 0
+    },
+    "version": "2026-07-27"
   },
   {
     "annotations": {
