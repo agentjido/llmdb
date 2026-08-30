@@ -1,6 +1,41 @@
 {
   "data": [
     {
+      "created": 1671217299,
+      "id": "text-embedding-ada-002",
+      "object": "model",
+      "owned_by": "openai-internal",
+      "shutdown_date": null
+    },
+    {
+      "created": 1677532384,
+      "id": "whisper-1",
+      "object": "model",
+      "owned_by": "openai-internal",
+      "shutdown_date": null
+    },
+    {
+      "created": 1677610602,
+      "id": "gpt-3.5-turbo",
+      "object": "model",
+      "owned_by": "openai",
+      "shutdown_date": "2026-10-23"
+    },
+    {
+      "created": 1681940951,
+      "id": "tts-1",
+      "object": "model",
+      "owned_by": "openai-internal",
+      "shutdown_date": null
+    },
+    {
+      "created": 1683758102,
+      "id": "gpt-3.5-turbo-16k",
+      "object": "model",
+      "owned_by": "openai-internal",
+      "shutdown_date": null
+    },
+    {
       "created": 1686588896,
       "id": "gpt-4-0613",
       "object": "model",
@@ -13,48 +48,6 @@
       "object": "model",
       "owned_by": "openai",
       "shutdown_date": "2026-10-23"
-    },
-    {
-      "created": 1677610602,
-      "id": "gpt-3.5-turbo",
-      "object": "model",
-      "owned_by": "openai",
-      "shutdown_date": "2026-10-23"
-    },
-    {
-      "created": 1785168034,
-      "id": "gpt-live-transcribe",
-      "object": "model",
-      "owned_by": "system",
-      "shutdown_date": null
-    },
-    {
-      "created": 1782228658,
-      "id": "gpt-5.6-luna",
-      "object": "model",
-      "owned_by": "system",
-      "shutdown_date": null
-    },
-    {
-      "created": 1782254687,
-      "id": "gpt-realtime-2.1",
-      "object": "model",
-      "owned_by": "system",
-      "shutdown_date": null
-    },
-    {
-      "created": 1782254706,
-      "id": "gpt-realtime-2.1-mini",
-      "object": "model",
-      "owned_by": "system",
-      "shutdown_date": null
-    },
-    {
-      "created": 1785168027,
-      "id": "gpt-transcribe",
-      "object": "model",
-      "owned_by": "system",
-      "shutdown_date": null
     },
     {
       "created": 1692634301,
@@ -897,31 +890,38 @@
       "shutdown_date": null
     },
     {
-      "created": 1683758102,
-      "id": "gpt-3.5-turbo-16k",
+      "created": 1782228658,
+      "id": "gpt-5.6-luna",
       "object": "model",
-      "owned_by": "openai-internal",
+      "owned_by": "system",
       "shutdown_date": null
     },
     {
-      "created": 1681940951,
-      "id": "tts-1",
+      "created": 1782254687,
+      "id": "gpt-realtime-2.1",
       "object": "model",
-      "owned_by": "openai-internal",
+      "owned_by": "system",
       "shutdown_date": null
     },
     {
-      "created": 1677532384,
-      "id": "whisper-1",
+      "created": 1782254706,
+      "id": "gpt-realtime-2.1-mini",
       "object": "model",
-      "owned_by": "openai-internal",
+      "owned_by": "system",
       "shutdown_date": null
     },
     {
-      "created": 1671217299,
-      "id": "text-embedding-ada-002",
+      "created": 1785168027,
+      "id": "gpt-transcribe",
       "object": "model",
-      "owned_by": "openai-internal",
+      "owned_by": "system",
+      "shutdown_date": null
+    },
+    {
+      "created": 1785168034,
+      "id": "gpt-live-transcribe",
+      "object": "model",
+      "owned_by": "system",
       "shutdown_date": null
     }
   ],
