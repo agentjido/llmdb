@@ -7,6 +7,23 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.0](https://github.com/agentjido/llmdb/compare/2026.8.4...2026.9.0) (2026-09-01)
+
+
+
+
+### Features:
+
+* anthropic: add Claude Fable 5.1 (#319) by mikehostetler
+
+* providers: add MiniMax image-01 model to catalog by Gilbert
+
+### Bug Fixes:
+
+* openai: add GPT-5 Search API pricing by mikehostetler
+
+* publish immutable catalog generations (#312) by mikehostetler
+
 ## [2026.8.4](https://github.com/agentjido/llmdb/compare/2026.8.3...2026.8.4) (2026-08-23)
 
 
