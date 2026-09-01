@@ -1,0 +1,135 @@
+id = "claude-fable-5-1"
+provider_model_id = "claude-fable-5-1"
+name = "Claude Fable 5.1"
+family = "claude-fable-5"
+release_date = "2026-09-01"
+knowledge = "2026-06"
+doc_url = "https://platform.claude.com/docs/en/models/fable-5-1/overview"
+aliases = []
+
+[limits]
+context = 1000000
+input = 1000000
+output = 128000
+
+[cost]
+input = 10.0
+output = 50.0
+cache_read = 0.25
+cache_write = 12.5
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 12.5
+applies_when = { cache_operation = "write", cache_ttl = "5m" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.1h"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 20.0
+applies_when = { cache_operation = "write", cache_ttl = "1h" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.batch"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 5.0
+applies_when = { api = "batch" }
+mode = "batch"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.batch"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 25.0
+applies_when = { api = "batch" }
+mode = "batch"
+source = "provider_docs"
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["low", "medium", "high", "xhigh", "max"]
+default = "high"
+
+[capabilities.reasoning.thinking]
+supported = true
+types = ["adaptive"]
+default_type = "adaptive"
+disable_supported = false
+raw_output_supported = false
+summary_supported = true
+encrypted_supported = true
+
+[capabilities.tools]
+enabled = true
+streaming = true
+strict = true
+parallel = true
+forced_choice = false
+
+[capabilities.json]
+schema = true
+strict = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[capabilities.batch]
+supported = true
+
+[capabilities.citations]
+supported = true
+
+[capabilities.code_execution]
+supported = true
+
+[capabilities.context_management]
+supported = true
+features = ["clear_thinking", "clear_tool_uses", "compact"]
+
+[lifecycle]
+status = "active"
+
+[extra]
+availability = "general"
+training_data_cutoff = "2026-06"
+retirement_not_before = "2027-09-01"
+comparative_latency = "slower"
+thinking_display_default = "omitted"
+description = "For demanding reasoning and long-horizon agentic work"
+source_urls = [
+  "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+  "https://platform.claude.com/docs/en/models/fable-5-1/whats-new-fable-5-1",
+  "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+  "https://platform.claude.com/docs/en/build-with-claude/effort",
+  "https://platform.claude.com/docs/en/build-with-claude/thinking"
+]
+
+[extra.platform_model_ids]
+claude_api = "claude-fable-5-1"
+amazon_bedrock = "anthropic.claude-fable-5-1"
+google_cloud = "claude-fable-5-1"
+microsoft_foundry = "claude-fable-5-1"
+claude_platform_on_aws = "claude-fable-5-1"
