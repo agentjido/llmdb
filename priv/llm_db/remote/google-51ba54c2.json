@@ -579,25 +579,6 @@
       "version": "3.1-flash-tts-preview"
     },
     {
-      "description": "Gemini Robotics-ER 1.6 Preview",
-      "displayName": "Gemini Robotics-ER 1.6 Preview",
-      "inputTokenLimit": 131072,
-      "maxTemperature": 2,
-      "name": "models/gemini-robotics-er-1.6-preview",
-      "outputTokenLimit": 65536,
-      "supportedGenerationMethods": [
-        "generateContent",
-        "countTokens",
-        "createCachedContent",
-        "batchGenerateContent"
-      ],
-      "temperature": 1,
-      "thinking": true,
-      "topK": 64,
-      "topP": 0.95,
-      "version": "1.6-preview"
-    },
-    {
       "description": "Gemini Robotics-ER 2 Preview",
       "displayName": "Gemini Robotics-ER 2 Preview",
       "inputTokenLimit": 131072,

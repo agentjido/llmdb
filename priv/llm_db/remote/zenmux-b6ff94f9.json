@@ -1504,21 +1504,21 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.063
+            "value": 0.18
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.0042
+            "value": 0.012
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.021
+            "value": 0.06
           }
         ]
       },
@@ -2218,88 +2218,6 @@
         ]
       },
       "publish_time": "2026-07-09"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 256000,
-      "created": 1783491139,
-      "display_name": "KwaiKAT: KAT-Coder-Air-V2.5",
-      "id": "kuaishou/kat-coder-air-v2.5",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "kuaishou",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.6
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.03
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.15
-          }
-        ]
-      },
-      "publish_time": "2026-07-08"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 256000,
-      "created": 1783490305,
-      "display_name": "KwaiKAT: KAT-Coder-Pro-V2.5",
-      "id": "kuaishou/kat-coder-pro-v2.5",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "kuaishou",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 2.96
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.15
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.74
-          }
-        ]
-      },
-      "publish_time": "2026-07-08"
     },
     {
       "capabilities": {
@@ -4280,137 +4198,6 @@
       "capabilities": {
         "reasoning": true
       },
-      "context_length": 262144,
-      "created": 1776937997,
-      "display_name": "Tencent: Hy3 preview",
-      "id": "tencent/hy3-preview",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "tencent",
-      "pricings": {
-        "completion": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 16,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.572
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 16,
-                "lt": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.916
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.144
-          }
-        ],
-        "input_cache_read": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 16,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.058
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 16,
-                "lt": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.086
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.114
-          }
-        ],
-        "prompt": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 16,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.172
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 16,
-                "lt": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.229
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.286
-          }
-        ]
-      },
-      "publish_time": "2026-04-23"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
       "context_length": 1048576,
       "created": 1776918280,
       "display_name": "Xiaomi: MiMo-V2.5",
@@ -5096,47 +4883,6 @@
       ],
       "owned_by": "google",
       "publish_time": "2026-04-02"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 256000,
-      "created": 1774869874,
-      "display_name": "KwaiKAT: KAT-Coder-Pro-V2",
-      "id": "kuaishou/kat-coder-pro-v2",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "kuaishou",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.2
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.06
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.3
-          }
-        ]
-      },
-      "publish_time": "2026-03-30"
     },
     {
       "capabilities": {
@@ -7299,9 +7045,7 @@
       "publish_time": "2026-02-02"
     },
     {
-      "capabilities": {
-        "reasoning": true
-      },
+      "capabilities": {},
       "context_length": 262144,
       "created": 1769493282,
       "display_name": "MoonshotAI: Kimi K2.5",
@@ -7316,36 +7060,6 @@
         "text"
       ],
       "owned_by": "moonshotai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 3.02
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.1
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.58
-          }
-        ],
-        "web_search": [
-          {
-            "currency": "USD",
-            "unit": "perCount",
-            "value": 0.0044
-          }
-        ]
-      },
       "publish_time": "2026-01-27"
     },
     {
