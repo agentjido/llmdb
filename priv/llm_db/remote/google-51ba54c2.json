@@ -72,6 +72,25 @@
       "version": "gemini-2.5-pro-preview-tts-2025-05-19"
     },
     {
+      "description": "Latest release of Gemini Flash",
+      "displayName": "Gemini Flash Latest",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/gemini-flash-latest-high-res-exp",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "Gemini Flash Latest"
+    },
+    {
       "description": "Gemma 4 26B A4B IT",
       "displayName": "Gemma 4 26B A4B IT",
       "inputTokenLimit": 262144,
@@ -527,6 +546,25 @@
       "topK": 64,
       "topP": 0.95,
       "version": "3.7-flash-08-2026"
+    },
+    {
+      "description": "Gemini 3.8 Flash",
+      "displayName": "Gemini 3.8 Flash",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/gemini-3.8-flash",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "createCachedContent",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.0"
     },
     {
       "description": "Lyria 3 30s model Preview",

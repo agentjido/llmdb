@@ -1,0 +1,101 @@
+id = "gemini-3.8-flash"
+name = "Gemini 3.8 Flash"
+family = "gemini-flash"
+release_date = "2026-09-02"
+last_updated = "2026-09-02"
+knowledge = "2026-03"
+doc_url = "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+aliases = []
+
+[limits]
+context = 1048576
+input = 1048576
+output = 65536
+
+[cost]
+input = 0.75
+output = 3.75
+cache_read = 0.075
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input.batch"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.375
+applies_when = { api = "batch" }
+mode = "batch"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.batch"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 1.875
+applies_when = { api = "batch" }
+mode = "batch"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.batch"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.0375
+applies_when = { api = "batch", cache_operation = "read" }
+mode = "batch"
+source = "provider_docs"
+
+[modalities]
+input = ["text", "image", "video", "audio", "pdf"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["low", "medium", "high"]
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.json]
+native = true
+schema = true
+strict = false
+
+[capabilities.caching]
+type = "explicit"
+
+[capabilities.batch]
+supported = true
+
+[capabilities.code_execution]
+supported = true
+
+[lifecycle]
+status = "active"
+
+[extra]
+availability = "general"
+description = "Flash model for long-horizon software engineering, autonomous agents, and complex enterprise workflows"
+reasoning_options = [{ type = "effort", values = ["low", "medium", "high"] }]
+structured_output = true
+computer_use = "preview"
+file_search = true
+google_maps_grounding = true
+google_search_grounding = true
+url_context = true
+introductory_pricing_ends = "2026-12-31"
+source_urls = [
+  "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+  "https://ai.google.dev/gemini-api/docs/pricing",
+  "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+  "https://deepmind.google/models/model-cards/gemini-3-8-flash/"
+]
