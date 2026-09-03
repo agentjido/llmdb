@@ -4,6 +4,162 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1048576,
+      "created": 1788402390,
+      "display_name": "Meta: Muse Spark 1.3",
+      "id": "meta/muse-spark-1.3",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "meta",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.25
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.15
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.0025
+          }
+        ]
+      },
+      "publish_time": "2026-09-03"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1048576,
+      "created": 1788404630,
+      "display_name": "Meta: Muse Spark 1.3 Contributor",
+      "id": "meta/muse-spark-1.3-contributor",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "meta",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.002
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.0025
+          }
+        ]
+      },
+      "publish_time": "2026-09-03"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1048576,
+      "created": 1788346035,
+      "display_name": "Google: Gemini 3.8 Flash",
+      "id": "google/gemini-3.8-flash",
+      "input_modalities": [
+        "file",
+        "image",
+        "audio",
+        "video",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "google",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 3.75
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.075
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.75
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.007
+          }
+        ]
+      },
+      "publish_time": "2026-09-02"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1000000,
       "created": 1788316634,
       "display_name": "Qwen: Qwen3.8-Max-0902",
