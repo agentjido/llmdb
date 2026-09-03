@@ -95,6 +95,37 @@ defmodule LLMDB.GoogleMetadataTest do
     assert embedding.capabilities.embeddings.max_dimensions == 3072
   end
 
+  test "local Google overrides capture Gemini 3.8 Flash metadata" do
+    {_provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-3.8-flash")
+
+    assert model.name == "Gemini 3.8 Flash"
+    assert model.doc_url == "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash"
+    assert model.release_date == "2026-09-02"
+    assert model.knowledge == "2026-03"
+    assert model.limits.context == 1_048_576
+    assert model.limits.input == 1_048_576
+    assert model.limits.output == 65_536
+    assert model.cost.input == 0.75
+    assert model.cost.output == 3.75
+    assert model.cost.cache_read == 0.075
+    assert pricing_rate(model, "token.input.batch") == 0.375
+    assert pricing_rate(model, "token.output.batch") == 1.875
+    assert pricing_rate(model, "token.cache_read.batch") == 0.0375
+    assert model.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert model.modalities.output == [:text]
+    assert model.capabilities.reasoning.enabled
+    assert model.capabilities.reasoning.effort.supported
+    assert model.capabilities.reasoning.effort.values == ["low", "medium", "high"]
+    assert model.capabilities.tools.enabled
+    assert model.capabilities.json.schema
+    assert model.capabilities.caching.type == "explicit"
+    assert model.capabilities.batch.supported
+    assert model.capabilities.code_execution.supported
+    assert model.lifecycle.status == "active"
+    assert model.extra.availability == "general"
+  end
+
   defp google_provider_and_models do
     {:ok, data} = Local.load(%{dir: @local_dir})
     google = Map.fetch!(data, "google")
