@@ -7,6 +7,17 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.1](https://github.com/agentjido/llmdb/compare/2026.9.0...2026.9.1) (2026-09-03)
+
+
+
+
+### Features:
+
+* google: add Gemini 3.8 Flash (#320) by mikehostetler
+
+* openai: add GPT-6 Astra limited-access metadata (#322) by mikehostetler
+
 ## [2026.9.0](https://github.com/agentjido/llmdb/compare/2026.8.4...2026.9.0) (2026-09-01)
 
 
