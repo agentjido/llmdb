@@ -31,6 +31,7 @@ unit = "token"
 per = 1000000
 rate = 10.0
 applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -41,6 +42,7 @@ unit = "token"
 per = 1000000
 rate = 20.0
 applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -51,6 +53,7 @@ unit = "token"
 per = 1000000
 rate = 50.0
 applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -61,6 +64,7 @@ unit = "token"
 per = 1000000
 rate = 75.0
 applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -71,6 +75,7 @@ unit = "token"
 per = 1000000
 rate = 1.0
 applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -81,6 +86,7 @@ unit = "token"
 per = 1000000
 rate = 2.0
 applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -91,6 +97,7 @@ unit = "token"
 per = 1000000
 rate = 12.5
 applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
 
@@ -101,52 +108,9 @@ unit = "token"
 per = 1000000
 rate = 25.0
 applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
 charge_scope = "full_request"
 source = "provider_docs"
-
-[[pricing.components]]
-id = "modifier.batch"
-kind = "other"
-multiplier = 0.5
-applies_to = ["token.*"]
-applies_when = { api = "batch" }
-mode = "batch"
-charge_scope = "full_request"
-source = "provider_docs"
-notes = "Apply to the selected Standard context tier."
-
-[[pricing.components]]
-id = "modifier.flex"
-kind = "other"
-multiplier = 0.5
-applies_to = ["token.*"]
-applies_when = { service_tier = "flex" }
-mode = "flex"
-charge_scope = "full_request"
-source = "provider_docs"
-notes = "Apply to the selected Standard context tier."
-
-[[pricing.components]]
-id = "modifier.fast"
-kind = "other"
-multiplier = 2.0
-applies_to = ["token.*"]
-applies_when = { service_tier = "fast" }
-mode = "fast"
-charge_scope = "full_request"
-source = "provider_docs"
-notes = "Fast mode is unavailable with EU data residency. Apply to the selected context tier."
-
-[[pricing.components]]
-id = "modifier.priority"
-kind = "other"
-multiplier = 2.0
-applies_to = ["token.*"]
-applies_when = { service_tier = "priority" }
-mode = "fast"
-charge_scope = "full_request"
-source = "provider_docs"
-notes = "Fast mode is unavailable with EU data residency. Apply to the selected context tier."
 
 [modalities]
 input = ["text", "image"]
@@ -199,3 +163,9 @@ source_urls = [
 
 [extra.wire]
 protocol = "openai_responses"
+
+# Keep mode multipliers separate from billable rate components.
+[extra.pricing]
+mode_multipliers = { batch = 0.5, flex = 0.5, fast = 2.0, priority = 2.0 }
+mode_multiplier_scope = "Apply to the selected Standard token rates, for both short and long context."
+fast_mode_unavailable_data_residency = ["eu"]

@@ -60,36 +60,22 @@ defmodule LLMDB.OpenAIMetadataTest do
         assert component.id == "token." <> meter <> suffix
         assert component.rate == Map.fetch!(expected_rates, meter)
         assert component.per == 1_000_000
+        assert component.mode == "standard"
         assert component.charge_scope == "full_request"
         assert component.source == "provider_docs"
       end
     end
   end
 
-  test "Astra mode modifiers apply to both short and long context token rates" do
+  test "Astra extra metadata preserves mode multipliers without rate-less components" do
     model = astra_model()
 
-    for input_tokens <- [272_000, 272_001],
-        {api, service_tier, id, multiplier} <- [
-          {"batch", "default", "modifier.batch", 0.5},
-          {"responses", "flex", "modifier.flex", 0.5},
-          {"responses", "fast", "modifier.fast", 2.0},
-          {"responses", "priority", "modifier.priority", 2.0}
-        ] do
-      selection =
-        Pricing.components_for(model,
-          input_tokens: input_tokens,
-          api: api,
-          service_tier: service_tier
-        )
+    assert model.extra.pricing.mode_multipliers ==
+             %{batch: 0.5, flex: 0.5, fast: 2.0, priority: 2.0}
 
-      assert selection.unresolved == []
-      assert length(selection.components) == 5
-      [modifier] = Enum.filter(selection.components, &(&1.kind == "other"))
-      assert modifier.id == id
-      assert modifier.multiplier == multiplier
-      assert modifier.applies_to == ["token.*"]
-    end
+    assert model.extra.pricing.mode_multiplier_scope =~ "both short and long context"
+    assert model.extra.pricing.fast_mode_unavailable_data_residency == ["eu"]
+    assert Enum.all?(model.pricing.components, &is_number(&1.rate))
   end
 
   test "packaged Astra metadata preserves limited access and the Responses contract" do
@@ -99,7 +85,8 @@ defmodule LLMDB.OpenAIMetadataTest do
     assert model["extra"]["availability"] == "limited"
     assert model["limits"] == %{"context" => 1_050_000, "input" => 922_000, "output" => 128_000}
     assert model["aliases"] == []
-    assert length(model["pricing"]["components"]) == 12
+    assert length(model["pricing"]["components"]) == 8
+    assert model["extra"]["pricing"]["mode_multipliers"]["fast"] == 2.0
 
     for operation <- ["text", "object"] do
       assert model["execution"][operation]["family"] == "openai_responses_compatible"
