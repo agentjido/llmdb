@@ -72,25 +72,6 @@
       "version": "gemini-2.5-pro-preview-tts-2025-05-19"
     },
     {
-      "description": "Latest release of Gemini Flash",
-      "displayName": "Gemini Flash Latest",
-      "inputTokenLimit": 1048576,
-      "maxTemperature": 2,
-      "name": "models/gemini-flash-latest-high-res-exp",
-      "outputTokenLimit": 65536,
-      "supportedGenerationMethods": [
-        "generateContent",
-        "countTokens",
-        "createCachedContent",
-        "batchGenerateContent"
-      ],
-      "temperature": 1,
-      "thinking": true,
-      "topK": 64,
-      "topP": 0.95,
-      "version": "Gemini Flash Latest"
-    },
-    {
       "description": "Gemma 4 26B A4B IT",
       "displayName": "Gemma 4 26B A4B IT",
       "inputTokenLimit": 262144,
@@ -597,6 +578,22 @@
       "topK": 64,
       "topP": 0.95,
       "version": "lyria-3-pro-preview"
+    },
+    {
+      "description": "Music Generation model",
+      "displayName": "Lyria 3.5",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/lyria-3.5",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens"
+      ],
+      "temperature": 1,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.5"
     },
     {
       "description": "Gemini 3.1 Flash TTS Preview",

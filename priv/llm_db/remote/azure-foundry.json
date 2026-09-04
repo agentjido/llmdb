@@ -72194,7 +72194,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -72216,7 +72217,7 @@
         "featureFlags": null,
         "lifecycle": "Generally Available",
         "evaluationMinSkuSpec": null,
-        "preview": true,
+        "preview": null,
         "isDirectFromAzure": null,
         "displayName": "Claude Sonnet 4.5",
         "trainingDataDate": "July 2025",
@@ -72315,7 +72316,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -72352,7 +72355,6 @@
         ]
       },
       "tags": {
-        "Preview": "",
         "author": "Anthropic",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
@@ -72415,7 +72417,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:58:52.3953265Z",
+      "modifiedTime": "2026-09-03T21:49:55.089242Z",
       "name": "claude-sonnet-4-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -72433,9 +72435,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 88,
+    "updateSequence": 92,
     "usage": {
       "popularity": 70.75,
       "totalCount": 0
@@ -88605,7 +88607,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -88627,7 +88630,7 @@
         "featureFlags": null,
         "lifecycle": "Generally Available",
         "evaluationMinSkuSpec": null,
-        "preview": true,
+        "preview": null,
         "isDirectFromAzure": null,
         "displayName": "Claude Opus 4.5",
         "trainingDataDate": "August 2025",
@@ -88726,7 +88729,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -88763,7 +88768,6 @@
         ]
       },
       "tags": {
-        "Preview": "",
         "author": "Anthropic",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
@@ -88825,7 +88829,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:58:50.0977779Z",
+      "modifiedTime": "2026-09-03T21:48:46.3250037Z",
       "name": "claude-opus-4-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -88843,9 +88847,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 93,
+    "updateSequence": 97,
     "usage": {
       "popularity": 70.8,
       "totalCount": 0
@@ -96598,7 +96602,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -96620,7 +96625,7 @@
         "featureFlags": null,
         "lifecycle": "Generally Available",
         "evaluationMinSkuSpec": null,
-        "preview": true,
+        "preview": null,
         "isDirectFromAzure": null,
         "displayName": "Claude Sonnet 4.6",
         "trainingDataDate": "August 2025",
@@ -96719,7 +96724,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -96758,7 +96765,6 @@
         ]
       },
       "tags": {
-        "Preview": "",
         "author": "Anthropic",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
@@ -96820,7 +96826,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:57:53.9808743Z",
+      "modifiedTime": "2026-09-03T21:48:08.0983144Z",
       "name": "claude-sonnet-4-6",
       "orginAssetId": null,
       "parentModelId": null,
@@ -96838,9 +96844,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 69,
+    "updateSequence": 73,
     "usage": {
       "popularity": 71.55,
       "totalCount": 0
@@ -104121,7 +104127,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -104243,7 +104250,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -104344,7 +104353,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T20:13:38.961164Z",
+      "modifiedTime": "2026-09-03T21:51:03.2623549Z",
       "name": "claude-mythos-preview",
       "orginAssetId": null,
       "parentModelId": null,
@@ -104362,9 +104371,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 71,
+    "updateSequence": 75,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -122598,7 +122607,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -122620,7 +122630,7 @@
         "featureFlags": null,
         "lifecycle": "Generally Available",
         "evaluationMinSkuSpec": null,
-        "preview": true,
+        "preview": null,
         "isDirectFromAzure": null,
         "displayName": "Claude Opus 4.7",
         "trainingDataDate": "January 2026",
@@ -122719,7 +122729,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -122758,7 +122770,6 @@
         ]
       },
       "tags": {
-        "Preview": "",
         "author": "Anthropic",
         "azureOffers": "standard-paygo",
         "benchmark": "quality",
@@ -122820,7 +122831,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:57:22.7996054Z",
+      "modifiedTime": "2026-09-03T21:46:58.8881775Z",
       "name": "claude-opus-4-7",
       "orginAssetId": null,
       "parentModelId": null,
@@ -122838,9 +122849,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 65,
+    "updateSequence": 69,
     "usage": {
       "popularity": 71.99,
       "totalCount": 0
@@ -142151,7 +142162,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -142273,7 +142285,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -142374,7 +142388,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:55:41.4773856Z",
+      "modifiedTime": "2026-09-03T21:44:42.0498779Z",
       "name": "claude-mythos-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -142392,9 +142406,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 42,
+    "updateSequence": 46,
     "usage": {
       "popularity": 72.2,
       "totalCount": 4
@@ -142442,7 +142456,8 @@
               "EASTUS2",
               "SWEDENCENTRAL"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -142563,7 +142578,9 @@
         ],
         "maasFinetuningTest": null,
         "trainingTime": null,
-        "hostedOn": null,
+        "hostedOn": [
+          "Anthropic infrastructure"
+        ],
         "publisher": "Anthropic",
         "license": null,
         "fineTuneComputeAllowed": null,
@@ -142664,7 +142681,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-06T19:55:44.3385383Z",
+      "modifiedTime": "2026-09-03T21:45:50.644627Z",
       "name": "claude-fable-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -142682,9 +142699,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
     "type": "models",
-    "updateSequence": 38,
+    "updateSequence": 42,
     "usage": {
       "popularity": 72.18,
       "totalCount": 1

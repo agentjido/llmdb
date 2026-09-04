@@ -1142,6 +1142,26 @@
     },
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 66000,
+      "created": 1788244803,
+      "display_name": "Grok Imagine Image 2.0",
+      "id": "x-ai/grok-imagine-image-2.0",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "x-ai",
+      "pricings": {},
+      "publish_time": "2026-08-12"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 524288,
