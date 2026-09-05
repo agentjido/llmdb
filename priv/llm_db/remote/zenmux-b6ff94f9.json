@@ -4,6 +4,135 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1050000,
+      "created": 1788565695,
+      "display_name": "OpenAI: GPT-6 Astra",
+      "id": "openai/gpt-6-astra",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 50
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 75
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          }
+        ],
+        "input_cache_write": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 12.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 25
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 0,
+                "lt": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": 272,
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 20
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-09-04"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1048576,
       "created": 1788402390,
       "display_name": "Meta: Muse Spark 1.3",
