@@ -399,7 +399,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-08-26",
@@ -5271,7 +5271,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -8904,7 +8904,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -18342,7 +18342,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -18706,6 +18706,7 @@
           }
         ],
         "release_date": "2026-01-27",
+        "status": "deprecated",
         "structured_output": true,
         "temperature": true,
         "tool_call": true
@@ -22147,7 +22148,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -24299,7 +24300,7 @@
           ]
         },
         "name": "GLM-5.3-Flash (EU)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -37035,6 +37036,39 @@
         "temperature": true,
         "tool_call": true
       },
+      "deepseek/deepseek-v4-flash-vision-exp-uncensored": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.22,
+          "input": 0.44,
+          "output": 1.6
+        },
+        "description": "An uncensored variant of the experimental vision-enabled DeepSeek V4 Flash model for chat, image understanding, reasoning, coding, and tool use, with a 524K context window.",
+        "family": "deepseek",
+        "id": "deepseek/deepseek-v4-flash-vision-exp-uncensored",
+        "last_updated": "2026-09-07",
+        "limit": {
+          "context": 524288,
+          "input": 524288,
+          "output": 32768
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "DeepSeek V4 Flash Vision Exp Uncensored",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [],
+        "release_date": "2026-09-07",
+        "structured_output": false,
+        "tool_call": true
+      },
       "qwen/qwen3-coder-plus": {
         "attachment": false,
         "cost": {
@@ -43899,9 +43933,9 @@
       "z-ai/glm-5.3-flash-uncensored": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.175,
-          "input": 0.35,
-          "output": 1.4
+          "cache_read": 0.014,
+          "input": 0.07,
+          "output": 0.21
         },
         "description": "GLM 5.3 Flash Uncensored is an uncensored fine-tune of the efficient 320B mixture-of-experts reasoning model, built for unrestricted chat, creative writing, coding, agentic work, tool use, and long-context tasks.",
         "family": "glm",
@@ -50398,47 +50432,6 @@
         "structured_output": true,
         "tool_call": true
       },
-      "TEE/qwen3-8b": {
-        "attachment": false,
-        "cost": {
-          "cache_read": 0.11,
-          "input": 0.11,
-          "output": 0.45
-        },
-        "description": "Qwen3 8B is an open-weight dense language model from Alibaba's Qwen team for efficient dialogue, reasoning, mathematics, coding, and tool use. Running inside a TEE (Trusted Execution Environment), with provider attestation support.",
-        "id": "TEE/qwen3-8b",
-        "last_updated": "2026-09-04",
-        "limit": {
-          "context": 40960,
-          "input": 40960,
-          "output": 8192
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Qwen3 8B TEE",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high"
-            ]
-          }
-        ],
-        "release_date": "2026-09-04",
-        "structured_output": true,
-        "tool_call": true
-      },
       "gemma-4-26b-a4b-it-opusdistill": {
         "attachment": true,
         "cost": {
@@ -52815,9 +52808,9 @@
       "TEE/glm-5.2:thinking": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.5,
+          "cache_read": 0.7,
           "input": 1.4,
-          "output": 4.6
+          "output": 4.4
         },
         "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
         "family": "glm",
@@ -53810,7 +53803,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -55065,6 +55058,39 @@
         "temperature": true,
         "tool_call": true
       },
+      "poolside/laguna-xs-2.1": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.0315,
+          "input": 0.063,
+          "output": 0.126
+        },
+        "description": "Agentic coding model from Poolside in the XS size class for local deployment",
+        "family": "laguna",
+        "id": "poolside/laguna-xs-2.1",
+        "last_updated": "2026-07-02",
+        "limit": {
+          "context": 262144,
+          "input": 262144,
+          "output": 32768
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Laguna XS 2.1",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [],
+        "release_date": "2026-07-02",
+        "structured_output": false,
+        "temperature": true,
+        "tool_call": true
+      },
       "phi-4-mini-instruct": {
         "attachment": false,
         "cost": {
@@ -55215,7 +55241,7 @@
           ]
         },
         "name": "GLM 5.3 Flash TEE",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -55235,9 +55261,9 @@
       "TEE/glm-5.2": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.5,
+          "cache_read": 0.7,
           "input": 1.4,
-          "output": 4.6
+          "output": 4.4
         },
         "description": "Open flagship GLM for long-horizon coding agents and million-token context work",
         "family": "glm",
@@ -59451,7 +59477,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -63125,6 +63151,100 @@
     ],
     "id": "vivgrid",
     "models": {
+      "claude-fable-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 1.25,
+          "cache_write": 12.5,
+          "input": 10,
+          "output": 50
+        },
+        "description": "Claude model for creative writing, analysis, and controlled agent workflows",
+        "family": "claude-fable",
+        "id": "claude-fable-5",
+        "knowledge": "2026-01-31",
+        "last_updated": "2026-06-09",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Fable 5",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-06-09",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "claude-fable-5-1": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.5,
+          "cache_write": 12.5,
+          "input": 10,
+          "output": 50
+        },
+        "description": "Claude model for demanding reasoning and long-horizon agentic work",
+        "family": "claude-fable",
+        "id": "claude-fable-5-1",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-01",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Fable 5.1",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-01",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "deepseek-v3.2": {
         "attachment": false,
         "cost": {
@@ -63263,6 +63383,53 @@
           }
         ],
         "release_date": "2026-04-24",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
+      "deepseek-v4-pro-0813": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.05,
+          "input": 1.35,
+          "output": 3,
+          "reasoning": 3
+        },
+        "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
+        "family": "deepseek-thinking",
+        "id": "deepseek-v4-pro-0813",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-08-22",
+        "limit": {
+          "context": 1000000,
+          "output": 384000
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "DeepSeek V4 Pro 0813",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-08-12",
         "structured_output": true,
         "temperature": true,
         "tool_call": true
@@ -63433,6 +63600,51 @@
         "temperature": true,
         "tool_call": true
       },
+      "gemini-3.8-flash": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.15,
+          "input": 0.75,
+          "output": 3.75
+        },
+        "description": "Google's most intelligent Flash model, engineered for long-horizon software engineering, autonomous agents, and complex enterprise workflows",
+        "family": "gemini-flash",
+        "id": "gemini-3.8-flash",
+        "last_updated": "2026-09-02",
+        "limit": {
+          "context": 1048576,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Gemini 3.8 Flash",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-09-02",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
       "glm-5.2": {
         "attachment": false,
         "cost": {
@@ -63550,7 +63762,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -68118,9 +68330,9 @@
       "~z-ai/glm-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.234,
-          "input": 1.17,
-          "output": 3.96
+          "cache_read": 0.208,
+          "input": 1.12,
+          "output": 3.52
         },
         "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
         "family": "glm",
@@ -68128,7 +68340,7 @@
         "last_updated": "2026-08-19",
         "limit": {
           "context": 1310720,
-          "output": 235929
+          "output": 943718
         },
         "modalities": {
           "input": [
@@ -68294,37 +68506,6 @@
         "reasoning_options": [],
         "release_date": "2025-01-20",
         "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
-      "minimax/minimax-m2.7:free": {
-        "attachment": false,
-        "cost": {
-          "input": 0,
-          "output": 0
-        },
-        "description": "MiniMax model for chat, coding, office work, and agentic tasks",
-        "family": "minimax",
-        "id": "minimax/minimax-m2.7:free",
-        "last_updated": "2026-03-18",
-        "limit": {
-          "context": 196608,
-          "output": 176947
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "MiniMax M2.7 (free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2026-03-18",
-        "structured_output": false,
         "temperature": true,
         "tool_call": true
       },
@@ -69605,9 +69786,9 @@
       "~moonshotai/kimi-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.256,
-          "input": 2.55,
-          "output": 12.75
+          "cache_read": 0.29,
+          "input": 2.5,
+          "output": 14
         },
         "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
         "family": "kimi",
@@ -71707,8 +71888,8 @@
       "qwen/qwen3-14b": {
         "attachment": false,
         "cost": {
-          "input": 0.12,
-          "output": 0.24
+          "input": 0.2275,
+          "output": 0.91
         },
         "description": "Qwen instruction model for multilingual chat, reasoning, and tool use",
         "family": "qwen",
@@ -71717,7 +71898,7 @@
         "last_updated": "2025-04-28",
         "limit": {
           "context": 131072,
-          "output": 16384
+          "output": 8192
         },
         "modalities": {
           "input": [
@@ -72026,43 +72207,6 @@
         "reasoning": false,
         "release_date": "2024-11-20",
         "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
-      "minimax/minimax-m3:free": {
-        "attachment": true,
-        "cost": {
-          "input": 0,
-          "output": 0
-        },
-        "description": "MiniMax multimodal coding model for long-context reasoning and agent tasks",
-        "family": "minimax",
-        "id": "minimax/minimax-m3:free",
-        "last_updated": "2026-06-01",
-        "limit": {
-          "context": 1048576,
-          "output": 943718
-        },
-        "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "MiniMax M3 (free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "toggle"
-          }
-        ],
-        "release_date": "2026-06-01",
-        "structured_output": false,
         "temperature": true,
         "tool_call": true
       },
@@ -73201,7 +73345,6 @@
       "moonshotai/kimi-k2-thinking": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.15,
           "input": 0.6,
           "output": 2.5
         },
@@ -73215,7 +73358,7 @@
         "last_updated": "2025-11-06",
         "limit": {
           "context": 262144,
-          "output": 100352
+          "output": 235929
         },
         "modalities": {
           "input": [
@@ -73745,9 +73888,9 @@
       "deepseek/deepseek-chat-v3.1": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.55,
-          "input": 0.55,
-          "output": 1.65
+          "cache_read": 0.13,
+          "input": 0.25,
+          "output": 0.95
         },
         "description": "DeepSeek chat model for instruction following, coding, and analysis",
         "family": "deepseek",
@@ -73756,7 +73899,7 @@
         "last_updated": "2025-08-21",
         "limit": {
           "context": 163840,
-          "output": 144900
+          "output": 32768
         },
         "modalities": {
           "input": [
@@ -73782,9 +73925,9 @@
       "z-ai/glm-4.6": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.08,
-          "input": 0.43,
-          "output": 1.75
+          "cache_read": 0.11,
+          "input": 0.55,
+          "output": 2.2
         },
         "description": "Late GLM-4 workhorse for coding agents, reasoning, and structured tasks",
         "family": "glm",
@@ -73793,7 +73936,7 @@
         "last_updated": "2025-09-30",
         "limit": {
           "context": 204800,
-          "output": 16384
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -74833,7 +74976,7 @@
           }
         ],
         "release_date": "2025-04-28",
-        "structured_output": false,
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -75337,8 +75480,9 @@
       "deepseek/deepseek-chat-v3-0324": {
         "attachment": false,
         "cost": {
-          "input": 0.25,
-          "output": 1
+          "cache_read": 0.11,
+          "input": 0.29,
+          "output": 1.14
         },
         "description": "DeepSeek chat model for instruction following, coding, and analysis",
         "family": "deepseek",
@@ -77206,9 +77350,9 @@
       "~z-ai/glm-flash-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.015,
-          "input": 0.075,
-          "output": 0.25
+          "cache_read": 0.01425,
+          "input": 0.07125,
+          "output": 0.2375
         },
         "description": "GLM vision model for visual reasoning, documents, and multimodal agents",
         "family": "glm-flash",
@@ -77216,7 +77360,7 @@
         "last_updated": "2026-08-27",
         "limit": {
           "context": 1310720,
-          "output": 943718
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -77347,8 +77491,7 @@
       "z-ai/glm-4.7-flash": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.01,
-          "input": 0.06,
+          "input": 0.0605,
           "output": 0.4
         },
         "description": "Budget GLM lane for fast coding help, routing, and everyday automation",
@@ -77361,7 +77504,7 @@
         "last_updated": "2026-01-19",
         "limit": {
           "context": 202752,
-          "output": 16384
+          "output": 117964
         },
         "modalities": {
           "input": [
@@ -77902,7 +78045,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -78871,9 +79014,9 @@
       "deepseek/deepseek-v4-pro-0813": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.037356,
-          "input": 1.12068,
-          "output": 3.36204
+          "cache_read": 0.03498,
+          "input": 1.0494,
+          "output": 3.1482
         },
         "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
         "family": "deepseek-thinking",
@@ -79633,9 +79776,9 @@
       "deepseek/deepseek-v4-pro": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.086275,
-          "input": 1.0353,
-          "output": 2.0706
+          "cache_read": 0.079605,
+          "input": 0.95526,
+          "output": 1.91052
         },
         "description": "Open MoE flagship with million-token context for coding and long agent runs",
         "family": "deepseek-thinking",
@@ -80092,9 +80235,9 @@
       "moonshotai/kimi-k2.7-code": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.18,
-          "input": 0.66,
-          "output": 3.4
+          "cache_read": 0.15,
+          "input": 0.71,
+          "output": 3.5
         },
         "description": "Coding-focused Kimi model, stronger on long-horizon repo work with less overthinking",
         "family": "kimi-k2",
@@ -80396,7 +80539,7 @@
       "minimax/minimax-m1": {
         "attachment": false,
         "cost": {
-          "input": 0.55,
+          "input": 0.4,
           "output": 2.2
         },
         "description": "MiniMax model for chat, coding, office work, and agentic tasks",
@@ -86252,7 +86395,7 @@
           ]
         },
         "name": "GLM-5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -87804,7 +87947,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -93215,8 +93358,9 @@
       "mistral/magistral-medium-latest": {
         "attachment": true,
         "cost": {
-          "input": 2,
-          "output": 5
+          "cache_read": 0.15,
+          "input": 1.5,
+          "output": 7.5
         },
         "description": "Mistral reasoning model for transparent analysis, math, and complex decisions",
         "family": "magistral-medium",
@@ -98849,6 +98993,48 @@
         "temperature": true,
         "tool_call": true
       },
+      "flexai/DeepSeek-V4-Flash-0731": {
+        "attachment": false,
+        "cost": {
+          "input": 0.03,
+          "output": 0.1
+        },
+        "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
+        "family": "deepseek-flash",
+        "id": "flexai/DeepSeek-V4-Flash-0731",
+        "knowledge": "2025-05",
+        "last_updated": "2026-07-31",
+        "limit": {
+          "context": 786432,
+          "output": 384000
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "DeepSeek V4 Flash 0731 (FlexAI)",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-07-31",
+        "structured_output": false,
+        "temperature": true,
+        "tool_call": false
+      },
       "google/gemini-2.5-flash-image": {
         "attachment": true,
         "cost": {
@@ -99787,48 +99973,6 @@
         "temperature": true,
         "tool_call": true
       },
-      "flexai/deepseek-v4-flash-0731": {
-        "attachment": false,
-        "cost": {
-          "input": 0.03,
-          "output": 0.1
-        },
-        "description": "Official DeepSeek V4 Flash release with enhanced agentic capabilities and integrated DSpark speculative decoding",
-        "family": "deepseek-flash",
-        "id": "flexai/deepseek-v4-flash-0731",
-        "knowledge": "2025-05",
-        "last_updated": "2026-07-31",
-        "limit": {
-          "context": 786432,
-          "output": 384000
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "DeepSeek V4 Flash 0731 (FlexAI)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "high",
-              "max"
-            ]
-          }
-        ],
-        "release_date": "2026-07-31",
-        "structured_output": false,
-        "temperature": true,
-        "tool_call": false
-      },
       "google/gemini-3.1-flash-lite-image": {
         "attachment": true,
         "cost": {
@@ -100159,7 +100303,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -102621,7 +102765,7 @@
           ]
         },
         "name": "GLM5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -109630,7 +109774,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -115713,7 +115857,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -122058,6 +122202,90 @@
         "status": "beta",
         "tool_call": false
       },
+      "glm-5.3": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.1733,
+          "input": 1.791,
+          "output": 8.9436
+        },
+        "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+        "family": "glm",
+        "id": "glm-5.3",
+        "last_updated": "2026-08-14",
+        "limit": {
+          "context": 256000,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GLM-5.3",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-08-14",
+        "status": "beta",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
+      "glm-latest": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.1733,
+          "input": 1.791,
+          "output": 8.9436
+        },
+        "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+        "family": "glm",
+        "id": "glm-latest",
+        "last_updated": "2026-08-14",
+        "limit": {
+          "context": 256000,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GLM (latest)",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-08-14",
+        "status": "beta",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
       "gpt-oss-120b": {
         "attachment": false,
         "cost": {
@@ -126282,7 +126510,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -134242,7 +134470,7 @@
           ]
         },
         "name": "GLM-5.3-Flash (2x usage)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -135907,7 +136135,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-08-26",
@@ -139938,7 +140166,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -141335,10 +141563,10 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "last_updated": "2026-09-04",
+        "last_updated": "2026-09-07",
         "limit": {
-          "context": 1000000,
-          "output": 131072
+          "context": 1048573,
+          "output": 262144
         },
         "modalities": {
           "input": [
@@ -141379,9 +141607,9 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "last_updated": "2026-09-04",
+        "last_updated": "2026-09-07",
         "limit": {
-          "context": 1000000,
+          "context": 1048573,
           "output": 131072
         },
         "modalities": {
@@ -141396,7 +141624,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -141946,6 +142174,50 @@
           }
         ],
         "release_date": "2026-06-26",
+        "temperature": true,
+        "tool_call": true
+      },
+      "accounts/fireworks/routers/glm-5p3-fast": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.39,
+          "input": 2.1,
+          "output": 6.6
+        },
+        "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
+        "family": "glm",
+        "id": "accounts/fireworks/routers/glm-5p3-fast",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-09-07",
+        "limit": {
+          "context": 1048572,
+          "output": 262144
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GLM 5.3 Fast",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-08-28",
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -143752,7 +144024,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -148089,7 +148361,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -150392,6 +150664,54 @@
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-01-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "duo-chat-gpt-6-astra": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0,
+          "cache_write": 0,
+          "input": 0,
+          "output": 0
+        },
+        "description": "GPT-6 Astra is OpenAI's most capable model for complex reasoning, coding, computer use, research, and document creation.",
+        "family": "gpt-astra",
+        "id": "duo-chat-gpt-6-astra",
+        "knowledge": "2026-04-30",
+        "last_updated": "2026-09-04",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Agentic Chat (GPT-6 Astra)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-04",
         "structured_output": true,
         "temperature": false,
         "tool_call": true
@@ -154110,17 +154430,17 @@
       "~z-ai/glm-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.234,
-          "input": 1.17,
-          "output": 3.96
+          "cache_read": 0.208,
+          "input": 1.12,
+          "output": 3.52
         },
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "family": "glm",
         "id": "~z-ai/glm-latest",
         "last_updated": "2026-08-19",
         "limit": {
-          "context": 262144,
-          "output": 235929
+          "context": 1048576,
+          "output": 943718
         },
         "modalities": {
           "input": [
@@ -154288,44 +154608,6 @@
         ],
         "release_date": "2025-01-20",
         "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
-      "minimax/minimax-m2.7:free": {
-        "attachment": false,
-        "cost": {
-          "input": 0,
-          "output": 0
-        },
-        "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
-        "family": "minimax",
-        "id": "minimax/minimax-m2.7:free",
-        "last_updated": "2026-03-18",
-        "limit": {
-          "context": 196608,
-          "output": 176947
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "MiniMax: MiniMax M2.7 (free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "high"
-            ]
-          }
-        ],
-        "release_date": "2026-03-18",
-        "structured_output": false,
         "temperature": true,
         "tool_call": true
       },
@@ -155548,9 +155830,9 @@
       "~moonshotai/kimi-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.256,
-          "input": 2.55,
-          "output": 12.75
+          "cache_read": 0.29,
+          "input": 2.5,
+          "output": 14
         },
         "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
         "family": "kimi",
@@ -157197,9 +157479,9 @@
       "tencent/hy3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.035,
-          "input": 0.14,
-          "output": 0.58
+          "cache_read": 0.033,
+          "input": 0.132,
+          "output": 0.528
         },
         "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
         "family": "Hy",
@@ -157626,8 +157908,8 @@
         "id": "qwen/qwen3-14b",
         "last_updated": "2025-04-28",
         "limit": {
-          "context": 40960,
-          "output": 16384
+          "context": 131072,
+          "output": 8192
         },
         "modalities": {
           "input": [
@@ -157978,47 +158260,6 @@
         "reasoning": false,
         "release_date": "2024-11-20",
         "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
-      "minimax/minimax-m3:free": {
-        "attachment": true,
-        "cost": {
-          "input": 0,
-          "output": 0
-        },
-        "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
-        "family": "minimax",
-        "id": "minimax/minimax-m3:free",
-        "last_updated": "2026-06-01",
-        "limit": {
-          "context": 1048576,
-          "output": 943718
-        },
-        "modalities": {
-          "input": [
-            "text",
-            "image",
-            "video"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "MiniMax: MiniMax M3 (free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "none",
-              "high"
-            ]
-          }
-        ],
-        "release_date": "2026-06-01",
-        "structured_output": false,
         "temperature": true,
         "tool_call": true
       },
@@ -159190,7 +159431,7 @@
         "last_updated": "2025-11-06",
         "limit": {
           "context": 262144,
-          "output": 100352
+          "output": 235929
         },
         "modalities": {
           "input": [
@@ -159765,8 +160006,8 @@
         "id": "deepseek/deepseek-chat-v3.1",
         "last_updated": "2025-08-21",
         "limit": {
-          "context": 161000,
-          "output": 144900
+          "context": 163840,
+          "output": 32768
         },
         "modalities": {
           "input": [
@@ -159796,9 +160037,9 @@
       "z-ai/glm-4.6": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.08,
-          "input": 0.43,
-          "output": 1.75
+          "cache_read": 0.11,
+          "input": 0.55,
+          "output": 2.2
         },
         "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
         "family": "glm",
@@ -159806,8 +160047,8 @@
         "knowledge": "2025-04",
         "last_updated": "2025-09-30",
         "limit": {
-          "context": 198000,
-          "output": 16384
+          "context": 204800,
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -160811,7 +161052,7 @@
           }
         ],
         "release_date": "2025-04-28",
-        "structured_output": false,
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -161365,8 +161606,9 @@
       "deepseek/deepseek-chat-v3-0324": {
         "attachment": false,
         "cost": {
-          "input": 0.25,
-          "output": 1
+          "cache_read": 0.11,
+          "input": 0.29,
+          "output": 1.14
         },
         "description": "DeepSeek chat model for instruction following, coding, and analysis",
         "family": "deepseek",
@@ -161687,10 +161929,10 @@
       "openai/gpt-5.6-sol-discounted": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.25,
-          "cache_write": 3.125,
-          "input": 2.5,
-          "output": 15,
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10,
           "reasoning": 0
         },
         "description": "GPT-5.6 Sol served by OpenAI through Vercel AI Gateway at 50% lower cost than other available inference providers. This promotion runs through September 18, 2026.",
@@ -163287,9 +163529,9 @@
       "~z-ai/glm-flash-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.015,
-          "input": 0.075,
-          "output": 0.25
+          "cache_read": 0.01425,
+          "input": 0.07125,
+          "output": 0.2375
         },
         "description": "This model always redirects to the latest model in the GLM Flash family.",
         "family": "glm-flash",
@@ -163297,7 +163539,7 @@
         "last_updated": "2026-08-27",
         "limit": {
           "context": 1048576,
-          "output": 943718
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -163419,8 +163661,7 @@
       "z-ai/glm-4.7-flash": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.01,
-          "input": 0.06,
+          "input": 0.0605,
           "output": 0.4
         },
         "description": "Efficient GLM model for fast reasoning, coding, and agent workflows",
@@ -163429,8 +163670,8 @@
         "knowledge": "2025-04",
         "last_updated": "2026-01-19",
         "limit": {
-          "context": 202752,
-          "output": 16384
+          "context": 131072,
+          "output": 117964
         },
         "modalities": {
           "input": [
@@ -163978,7 +164219,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -167153,8 +167394,7 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2025-01",
-        "last_updated": "2026-04-15",
+        "last_updated": "2026-08-26",
         "limit": {
           "context": 1000000,
           "output": 131072
@@ -167175,12 +167415,13 @@
           {
             "type": "effort",
             "values": [
+              "low",
               "high",
               "max"
             ]
           }
         ],
-        "release_date": "2026-04-15",
+        "release_date": "2026-08-26",
         "structured_output": true,
         "temperature": true,
         "tool_call": true
@@ -171696,7 +171937,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -172283,7 +172524,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -172561,9 +172802,9 @@
       "gemma-4-26b-a4b-it": {
         "attachment": false,
         "cost": {
-          "cache_write": 0.053,
-          "input": 0.106,
-          "output": 0.368
+          "cache_write": 0.055,
+          "input": 0.11,
+          "output": 0.408
         },
         "description": "Open Gemma instruction model for efficient chat and self-hosted deployments",
         "family": "gemma",
@@ -172762,7 +173003,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -172813,9 +173054,9 @@
       "glm-5.1": {
         "attachment": false,
         "cost": {
-          "cache_write": 0.631,
-          "input": 1.262,
-          "output": 4.132
+          "cache_write": 0.666,
+          "input": 1.332,
+          "output": 4.312
         },
         "description": "Strong GLM coding model for agentic engineering, terminals, and repository generation",
         "family": "glm",
@@ -172845,9 +173086,9 @@
       "minimax-m2.7": {
         "attachment": false,
         "cost": {
-          "cache_write": 0.242,
-          "input": 0.484,
-          "output": 1.852
+          "cache_write": 0.235,
+          "input": 0.47,
+          "output": 1.76
         },
         "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
         "family": "minimax",
@@ -173351,9 +173592,9 @@
       "kimi-k2.5": {
         "attachment": false,
         "cost": {
-          "cache_write": 0.2572,
-          "input": 0.5144,
-          "output": 2.755
+          "cache_write": 0.2792,
+          "input": 0.5584,
+          "output": 2.935
         },
         "description": "Earlier Kimi frontier model for long-context agents, coding, and multimodal work",
         "family": "kimi-k2",
@@ -173923,7 +174164,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -174211,38 +174452,6 @@
         "reasoning": false,
         "release_date": "2025-04-14",
         "structured_output": false,
-        "temperature": true,
-        "tool_call": true
-      },
-      "qwen3-next-80b-a3b-thinking": {
-        "attachment": false,
-        "cost": {
-          "input": 0.149,
-          "output": 1.195
-        },
-        "description": "Reasoning model for deliberate analysis, multi-step problem solving, and tool use",
-        "family": "qwen",
-        "id": "qwen3-next-80b-a3b-thinking",
-        "knowledge": "2025-04",
-        "last_updated": "2025-09",
-        "limit": {
-          "context": 128000,
-          "output": 128000
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Qwen3-Next 80B-A3B (Thinking)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2025-09",
-        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -175009,7 +175218,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -175217,36 +175426,6 @@
         "structured_output": true,
         "temperature": false,
         "tool_call": false
-      },
-      "nvidia-nemotron-3-nano-omni": {
-        "attachment": false,
-        "cost": {
-          "input": 0.059,
-          "output": 0.237
-        },
-        "description": "Nemotron-3-Nano-Omni is an open, efficient omni-modal reasoning model that unifies text, image, audio, and video for agentic AI workflows.",
-        "id": "nvidia-nemotron-3-nano-omni",
-        "last_updated": "2026-04-29",
-        "limit": {
-          "context": 300000,
-          "output": 65536
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "nvidia-nemotron-3-nano-omni",
-        "open_weights": false,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2026-04-29",
-        "structured_output": true,
-        "temperature": false,
-        "tool_call": true
       },
       "qwen3-235b-a22b-instruct-2507": {
         "attachment": false,
@@ -176495,36 +176674,6 @@
         "temperature": false,
         "tool_call": true
       },
-      "cosmos3-super-reasoner": {
-        "attachment": false,
-        "cost": {
-          "input": 0.099,
-          "output": 0.296
-        },
-        "description": "Cosmos3 Super Reasoner is a high-capacity reasoning model designed for complex multi-agent tasks and advanced physical AI understanding.",
-        "id": "cosmos3-super-reasoner",
-        "last_updated": "2026-06-02",
-        "limit": {
-          "context": 256000,
-          "output": 256000
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "cosmos3-super-reasoner",
-        "open_weights": false,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2026-06-02",
-        "structured_output": true,
-        "temperature": false,
-        "tool_call": true
-      },
       "nova-2-lite": {
         "attachment": true,
         "cost": {
@@ -177521,9 +177670,9 @@
       "glm-5.3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.26,
-          "input": 1.4,
-          "output": 4.399
+          "cache_read": 0.279,
+          "input": 1.114,
+          "output": 3.899
         },
         "description": "Flagship GLM model for long-horizon coding, agents, and complex project delivery",
         "family": "glm",
@@ -177810,36 +177959,6 @@
         "release_date": "2026-02-12",
         "structured_output": true,
         "temperature": true,
-        "tool_call": true
-      },
-      "llama-3.1-nemotron-ultra-253b-v1": {
-        "attachment": false,
-        "cost": {
-          "input": 0.598,
-          "output": 1.794
-        },
-        "description": "A reasoning-optimized LLM based on Llama 3.1, Nemotron Ultra 253B delivers strong performance in tasks like RAG and tool use, with high efficiency and reduced latency.",
-        "id": "llama-3.1-nemotron-ultra-253b-v1",
-        "last_updated": "2025-04-07",
-        "limit": {
-          "context": 128000,
-          "output": 128000
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "llama-3.1-nemotron-ultra-253b-v1",
-        "open_weights": false,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2025-04-07",
-        "structured_output": true,
-        "temperature": false,
         "tool_call": true
       },
       "qwen3-30b-a3b-instruct-2507": {
@@ -194316,7 +194435,7 @@
           ]
         },
         "name": "GLM-5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -195827,7 +195946,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -197183,7 +197302,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -199984,7 +200103,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -209024,7 +209143,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -211790,7 +211909,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -216853,7 +216972,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -219720,7 +219839,7 @@
           ]
         },
         "name": "GLM-5.3 Flash (Runware)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -221310,7 +221429,7 @@
         "tool_call": true
       },
       "consensusprotocol/glm-5.3-flash": {
-        "attachment": false,
+        "attachment": true,
         "cost": {
           "cache_read": 0.02,
           "input": 0.1,
@@ -221326,14 +221445,17 @@
         },
         "modalities": {
           "input": [
-            "text"
+            "text",
+            "image",
+            "video",
+            "pdf"
           ],
           "output": [
             "text"
           ]
         },
         "name": "GLM-5.3 Flash (Consensus Protocol)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -226431,7 +226553,7 @@
         "tool_call": true
       },
       "consensusprotocol/Qwen3.8-27B": {
-        "attachment": false,
+        "attachment": true,
         "cost": {
           "cache_read": 0.08,
           "input": 0.41,
@@ -226446,7 +226568,8 @@
         },
         "modalities": {
           "input": [
-            "text"
+            "text",
+            "image"
           ],
           "output": [
             "text"
@@ -227799,7 +227922,7 @@
           ]
         },
         "name": "GLM-5.3 Flash (SCX.ai)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -228180,7 +228303,7 @@
           ]
         },
         "name": "GLM-5.3 Flash (NovitaAI)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -231233,7 +231356,7 @@
           ]
         },
         "name": "GLM-5.3 Flash (Z AI)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -234601,7 +234724,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -251855,7 +251978,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -255134,7 +255257,7 @@
           ]
         },
         "name": "GLM-5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -264259,7 +264382,7 @@
           ]
         },
         "name": "GLM 5.3-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "provider": {
           "npm": "@ai-sdk/openai-compatible"
         },
@@ -285299,42 +285422,6 @@
         "temperature": true,
         "tool_call": true
       },
-      "minimax/minimax-m3-free": {
-        "attachment": true,
-        "cost": {
-          "cache_read": 0,
-          "input": 0,
-          "output": 0
-        },
-        "description": "MiniMax multimodal model for long-context coding, perception, and agent planning",
-        "family": "minimax",
-        "id": "minimax/minimax-m3-free",
-        "last_updated": "2026-06-01",
-        "limit": {
-          "context": 1048576,
-          "output": 1048576
-        },
-        "modalities": {
-          "input": [
-            "text",
-            "image"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "MiniMax M3 (Free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "toggle"
-          }
-        ],
-        "release_date": "2026-06-01",
-        "temperature": true,
-        "tool_call": true
-      },
       "google/gemini-3.5-transcribe": {
         "attachment": false,
         "cost": {
@@ -291186,7 +291273,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -292654,36 +292741,6 @@
         ],
         "release_date": "2026-08-12",
         "structured_output": true,
-        "temperature": true,
-        "tool_call": true
-      },
-      "minimax/minimax-m2.7-free": {
-        "attachment": false,
-        "cost": {
-          "input": 0,
-          "output": 0
-        },
-        "description": "Open MiniMax flagship for coding agents, office automation, and complex environments",
-        "family": "minimax",
-        "id": "minimax/minimax-m2.7-free",
-        "last_updated": "2026-03-18",
-        "limit": {
-          "context": 196608,
-          "output": 196608
-        },
-        "modalities": {
-          "input": [
-            "text"
-          ],
-          "output": [
-            "text"
-          ]
-        },
-        "name": "Minimax M2.7 (Free)",
-        "open_weights": true,
-        "reasoning": true,
-        "reasoning_options": [],
-        "release_date": "2026-03-18",
         "temperature": true,
         "tool_call": true
       },
@@ -295661,7 +295718,6 @@
           {
             "type": "effort",
             "values": [
-              "none",
               "low",
               "medium",
               "high",
@@ -298611,7 +298667,6 @@
           {
             "type": "effort",
             "values": [
-              "none",
               "low",
               "medium",
               "high",
@@ -299717,7 +299772,7 @@
           ]
         },
         "name": "GLM 5.3 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
