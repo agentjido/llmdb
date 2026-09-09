@@ -2,6 +2,76 @@
   "data": [
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 10000,
+      "created": 1788919735,
+      "display_name": "OpenAI: GPT-Image-2.5-Sunburst",
+      "id": "openai/gpt-image-2.5-sunburst",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 5
+          }
+        ]
+      },
+      "publish_time": "2026-09-09"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 10000,
+      "created": 1788919688,
+      "display_name": "OpenAI: GPT-Image-2.5-Flare",
+      "id": "openai/gpt-image-2.5-flare",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 5
+          }
+        ]
+      },
+      "publish_time": "2026-09-09"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1050000,
@@ -287,6 +357,39 @@
     },
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 12800,
+      "created": 1788315093,
+      "display_name": "MiniMax: MiniMax H3 Max",
+      "id": "minimax/minimax-h3-max",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "minimax",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.05
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.08
+          }
+        ]
+      },
+      "publish_time": "2026-09-02"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1000000,
@@ -357,7 +460,8 @@
       "id": "anthropic/claude-fable-5.1",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "object": "model",
       "output_modalities": [
@@ -541,6 +645,122 @@
         ]
       },
       "publish_time": "2026-08-26"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1787557706,
+      "display_name": "Alibaba: Wan3.0-Video",
+      "id": "alibaba/wan3.0-video",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "alibaba",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.035
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.07
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.035
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.07
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          }
+        ]
+      },
+      "publish_time": "2026-08-24"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1787560612,
+      "display_name": "Alibaba: Wan3.0-Video-Prime",
+      "id": "alibaba/wan3.0-video-prime",
+      "input_modalities": [
+        "text",
+        "image",
+        "file",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "alibaba",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.068
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.28
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.068
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.28
+          }
+        ]
+      },
+      "publish_time": "2026-08-24"
     },
     {
       "capabilities": {
@@ -1273,6 +1493,179 @@
       "capabilities": {
         "reasoning": false
       },
+      "context_length": 0,
+      "created": 1786361333,
+      "display_name": "PixVerse: C1",
+      "id": "pixverse/c1",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "pixverse",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.08
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.1
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.13
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.24
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.06
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.08
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.1
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.19
+          }
+        ]
+      },
+      "publish_time": "2026-08-12"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 0,
+      "created": 1786436837,
+      "display_name": "PixVerse: V6",
+      "id": "pixverse/v6",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "pixverse",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.07
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.09
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.12
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.18
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.23
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.24
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.46
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.05
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.07
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.09
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.1
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.18
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.18
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.36
+          }
+        ]
+      },
+      "publish_time": "2026-08-12"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
       "context_length": 66000,
       "created": 1788244803,
       "display_name": "Grok Imagine Image 2.0",
@@ -1323,6 +1716,93 @@
         ]
       },
       "publish_time": "2026-08-10"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 12800,
+      "created": 1786096108,
+      "display_name": "ByteDance: Doubao-Seedance-2.5",
+      "id": "bytedance/doubao-seedance-2.5",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "bytedance",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.4
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.4
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10.7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10.7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 11.7
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.4
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.4
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10.7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10.7
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 11.7
+          }
+        ]
+      },
+      "publish_time": "2026-08-07"
     },
     {
       "capabilities": {
@@ -1416,6 +1896,131 @@
         ]
       },
       "publish_time": "2026-08-06"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 15000,
+      "created": 1786436995,
+      "display_name": "OpenAI: GPT Transcribe",
+      "id": "openai/gpt-transcribe",
+      "input_modalities": [
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "transcription"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "audio_input": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 7.5e-5
+          }
+        ]
+      },
+      "publish_time": "2026-08-06"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 0,
+      "created": 1785915505,
+      "display_name": "Qwen-Audio-3.0-TTS-Plus",
+      "id": "qwen/qwen-audio-3.0-tts-plus",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "speech"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 20
+          }
+        ]
+      },
+      "publish_time": "2026-08-05"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 15000,
+      "created": 1785831196,
+      "display_name": "xAI: Grok Voice STT 1.0",
+      "id": "x-ai/grok-voice-stt-1.0",
+      "input_modalities": [
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "transcription"
+      ],
+      "owned_by": "x-ai",
+      "pricings": {
+        "audio_input": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 2.778e-5
+          }
+        ]
+      },
+      "publish_time": "2026-08-04"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 12800,
+      "created": 1786674692,
+      "display_name": "Black Forest Labs: FLUX.3 Video",
+      "id": "bfl/flux-3-video",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "bfl",
+      "pricings": {
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.17
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.29
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.41
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.53
+          }
+        ]
+      },
+      "publish_time": "2026-08-04"
     },
     {
       "capabilities": {
@@ -1632,6 +2237,254 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 0.44
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 15000,
+      "created": 1785489338,
+      "display_name": "xAI: Grok Voice TTS 1.0",
+      "id": "x-ai/grok-voice-tts-1.0",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "speech"
+      ],
+      "owned_by": "x-ai",
+      "pricings": {
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 15
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 12800,
+      "created": 1785480282,
+      "display_name": "MiniMax: MiniMax H3",
+      "id": "minimax/minimax-h3",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "minimax",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.074
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.1185
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1788337250,
+      "display_name": "KlingAI: Kling-3.0-Omni",
+      "id": "klingai/kling-3.0-omni",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "klingai",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.112
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.126
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.168
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.084
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.112
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.126
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.168
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1788259485,
+      "display_name": "KlingAI: Kling-3.0",
+      "id": "klingai/kling-3.0",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "klingai",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.126
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.168
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.084
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.112
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.42
+          }
+        ]
+      },
+      "publish_time": "2026-07-31"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1788259643,
+      "display_name": "KlingAI: Kling-3.0-Turbo",
+      "id": "klingai/kling-3.0-turbo",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "klingai",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.112
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.112
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.14
           }
         ]
       },
@@ -2504,7 +3357,8 @@
       "id": "x-ai/grok-4.5",
       "input_modalities": [
         "text",
-        "image"
+        "image",
+        "file"
       ],
       "object": "model",
       "output_modalities": [
@@ -2651,6 +3505,33 @@
     },
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 1024,
+      "created": 1783426188,
+      "display_name": "Xiaomi: MiMo-V2.5-ASR",
+      "id": "xiaomi/mimo-v2.5-asr",
+      "input_modalities": [
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "transcription"
+      ],
+      "owned_by": "xiaomi",
+      "pricings": {
+        "audio_input": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.0002
+          }
+        ]
+      },
+      "publish_time": "2026-07-07"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 262144,
@@ -2794,6 +3675,33 @@
         ]
       },
       "publish_time": "2026-06-30"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 1024,
+      "created": 1782724491,
+      "display_name": "ByteDance: Doubao-Seed-ASR-2.0",
+      "id": "bytedance/doubao-seed-asr-2.0",
+      "input_modalities": [
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "transcription"
+      ],
+      "owned_by": "bytedance",
+      "pricings": {
+        "audio_input": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 3.27e-5
+          }
+        ]
+      },
+      "publish_time": "2026-06-29"
     },
     {
       "capabilities": {
@@ -4507,6 +5415,40 @@
       "publish_time": "2026-04-25"
     },
     {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 8192,
+      "created": 1781104177,
+      "display_name": "Gemini 3.1 Flash TTS Preview",
+      "id": "google/gemini-3.1-flash-tts-preview",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "speech"
+      ],
+      "owned_by": "google",
+      "pricings": {
+        "audio": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 20
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1
+          }
+        ]
+      },
+      "publish_time": "2026-04-24"
+    },
+    {
       "capabilities": {},
       "context_length": 262144,
       "created": 1774580060,
@@ -4991,6 +5933,113 @@
             "currency": "USD",
             "unit": "perCount",
             "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-04-03"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 12800,
+      "created": 1775530721,
+      "display_name": "ByteDance: Doubao-Seedance-2.0",
+      "id": "bytedance/doubao-seedance-2.0",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "bytedance",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.353
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 3.8236
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.1177
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.1177
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.5589
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.7649
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.7649
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 7.5002
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.353
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 3.8236
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.1177
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.1177
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.5589
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.7649
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.7649
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 7.5002
           }
         ]
       },
@@ -7960,6 +9009,76 @@
         ]
       },
       "publish_time": "2026-01-15"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 1000000,
+      "created": 1781663333,
+      "display_name": "Qwen: Qwen3 VL Rerank",
+      "id": "qwen/qwen3-vl-rerank",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "rerank"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          }
+        ]
+      },
+      "publish_time": "2026-01-08"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 8192,
+      "created": 1781693105,
+      "display_name": "Qwen: Qwen3 Rerank",
+      "id": "qwen/qwen3-rerank",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "rerank"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          }
+        ]
+      },
+      "publish_time": "2026-01-08"
     },
     {
       "capabilities": {

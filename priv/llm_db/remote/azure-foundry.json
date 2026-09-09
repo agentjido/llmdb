@@ -93965,7 +93965,8 @@
               "WESTUS",
               "WESTUS3"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -93994,7 +93995,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": null,
+        "inferenceDeprecationDate": "2027-01-26T00:00:00Z",
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "Serverless API"
@@ -94089,6 +94090,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -94101,6 +94103,7 @@
       },
       "tags": {
         "Featured": "",
+        "InferenceDeprecationDate": "01/26/2027 00:00:00 +00:00",
         "Preview": "",
         "author": "Moonshot AI",
         "deploymentOptions": "UnifiedEndpointMaaS,Serverless API",
@@ -94162,7 +94165,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T21:34:09.264094Z",
+      "modifiedTime": "2026-08-21T21:34:40.5590792Z",
       "name": "Kimi-K2.5",
       "orginAssetId": "azureml://locations/eastus/workspaces/ad672e27-41f6-4226-a038-e2be8fac9846/models/Kimi-K2-5/versions/1",
       "parentModelId": null,
@@ -94193,9 +94196,9 @@
     ],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 67,
+    "updateSequence": 69,
     "usage": {
       "popularity": 71.46,
       "totalCount": 0
@@ -104279,6 +104282,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": "GatedResearch",
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -104353,7 +104357,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-09-03T21:51:03.2623549Z",
+      "modifiedTime": "2026-09-08T23:37:20.9599514Z",
       "name": "claude-mythos-preview",
       "orginAssetId": null,
       "parentModelId": null,
@@ -104371,9 +104375,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 75,
+    "updateSequence": 79,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -124817,7 +124821,8 @@
               "WESTUS",
               "WESTUS3"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -124846,7 +124851,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": null,
+        "inferenceDeprecationDate": "2027-04-16T00:00:00Z",
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "Serverless API"
@@ -124942,6 +124947,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -124954,6 +124960,7 @@
       },
       "tags": {
         "Featured": "",
+        "InferenceDeprecationDate": "04/16/2027 00:00:00 +00:00",
         "Preview": "",
         "author": "Moonshot AI",
         "deploymentOptions": "UnifiedEndpointMaaS,Serverless API",
@@ -125015,7 +125022,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-21T21:34:47.1259952Z",
+      "modifiedTime": "2026-08-21T21:35:48.409143Z",
       "name": "Kimi-K2.6",
       "orginAssetId": null,
       "parentModelId": null,
@@ -125035,9 +125042,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 65,
+    "updateSequence": 67,
     "usage": {
       "popularity": 72.03,
       "totalCount": 0
@@ -141573,6 +141580,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": "GatedResearch",
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -141647,7 +141655,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-09-03T21:44:42.0498779Z",
+      "modifiedTime": "2026-09-08T23:35:38.4896924Z",
       "name": "claude-mythos-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -141665,9 +141673,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "f685e614-d9a4-5e20-a951-4fafd38bac98",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 46,
+    "updateSequence": 50,
     "usage": {
       "popularity": 72.2,
       "totalCount": 4
@@ -162568,7 +162576,8 @@
         "directoryPath": null,
         "promptTemplate": null,
         "fineTuningMethods": [
-          "Supervised"
+          "Supervised",
+          "Reinforcement"
         ],
         "toolCallStart": null,
         "isCustomerInfoRequired": null,
@@ -162693,6 +162702,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -162763,7 +162773,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-08-14T17:12:40.0507704Z",
+      "modifiedTime": "2026-09-08T18:11:51.1867379Z",
       "name": "qwen3.6-35b-a3b",
       "orginAssetId": null,
       "parentModelId": null,
@@ -162783,9 +162793,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 2,
+    "updateSequence": 6,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -167312,6 +167322,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": "GatedResearch",
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -167386,7 +167397,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-09-01T21:28:33.9087018Z",
+      "modifiedTime": "2026-09-08T23:36:44.8476086Z",
       "name": "claude-mythos-5-1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -167404,9 +167415,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 12,
+    "updateSequence": 16,
     "usage": {
       "popularity": 72.41,
       "totalCount": 0
@@ -167750,7 +167761,8 @@
               "WESTUS",
               "WESTUS3"
             ],
-            "name": "GlobalStandard"
+            "name": "GlobalStandard",
+            "prices": null
           }
         ],
         "supportedRegionsLink": null,
@@ -167779,7 +167791,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": null,
+        "inferenceDeprecationDate": "2026-10-03T00:00:00Z",
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "Serverless API"
@@ -167877,6 +167889,7 @@
         "trademarkInformation": null,
         "parameterCount": null,
         "trainingCorpusSize": null,
+        "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
         "inferenceRecommendedSkus": null,
@@ -167889,6 +167902,7 @@
       },
       "tags": {
         "Featured": "",
+        "InferenceDeprecationDate": "10/03/2026 00:00:00 +00:00",
         "Preview": "",
         "author": "Moonshot AI",
         "deploymentOptions": "UnifiedEndpointMaaS,Serverless API",
@@ -167950,7 +167964,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-09-02T00:11:16.4019035Z",
+      "modifiedTime": "2026-09-02T00:23:53.532911Z",
       "name": "Kimi-K2.7-Code",
       "orginAssetId": null,
       "parentModelId": null,
@@ -167968,9 +167982,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "33abe2f8-17ff-564e-b2c9-5997128845a1",
+    "schemaId": "7b625415-fe75-5e8e-9a76-661718b86751",
     "type": "models",
-    "updateSequence": 2,
+    "updateSequence": 4,
     "usage": {
       "popularity": 72.25,
       "totalCount": 0
