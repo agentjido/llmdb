@@ -12,7 +12,7 @@
       "id": "whisper-1",
       "object": "model",
       "owned_by": "openai-internal",
-      "shutdown_date": null
+      "shutdown_date": "2027-02-26"
     },
     {
       "created": 1677610602,
@@ -257,14 +257,14 @@
       "id": "gpt-4o-transcribe",
       "object": "model",
       "owned_by": "system",
-      "shutdown_date": null
+      "shutdown_date": "2027-02-26"
     },
     {
       "created": 1742068596,
       "id": "gpt-4o-mini-transcribe",
       "object": "model",
       "owned_by": "system",
-      "shutdown_date": null
+      "shutdown_date": "2027-02-26"
     },
     {
       "created": 1742251504,
@@ -397,7 +397,7 @@
       "id": "gpt-4o-transcribe-diarize",
       "object": "model",
       "owned_by": "system",
-      "shutdown_date": null
+      "shutdown_date": "2027-02-26"
     },
     {
       "created": 1750865219,
@@ -955,6 +955,13 @@
     {
       "created": 1788851010,
       "id": "gpt-image-2.5-sunburst-2026-09-08",
+      "object": "model",
+      "owned_by": "system",
+      "shutdown_date": null
+    },
+    {
+      "created": 1788889407,
+      "id": "gpt-live-1",
       "object": "model",
       "owned_by": "system",
       "shutdown_date": null
