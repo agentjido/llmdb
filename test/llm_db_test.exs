@@ -627,7 +627,44 @@ defmodule LLMDBTest do
       assert {:error, :unknown_provider} = LLMDB.model("nonexistent:model")
     end
 
-    test "model/1 strips Bedrock inference profile prefixes" do
+    test "model/1 prefers a regional Bedrock entry over the base model" do
+      Store.clear!()
+
+      {:ok, _} =
+        load_with_test_data(%{
+          overrides: %{
+            providers: [%{id: :amazon_bedrock, name: "Amazon Bedrock"}],
+            models: [
+              %{
+                id: "anthropic.claude-sonnet-4-5-20250929-v1:0",
+                provider: :amazon_bedrock,
+                capabilities: %{chat: true},
+                cost: %{input: 3, output: 15}
+              },
+              %{
+                id: "eu.anthropic.claude-sonnet-4-5-20250929-v1:0",
+                provider: :amazon_bedrock,
+                capabilities: %{chat: true},
+                cost: %{input: 3.3, output: 16.5}
+              }
+            ]
+          }
+        })
+
+      assert {:ok, model} =
+               LLMDB.model("amazon_bedrock:eu.anthropic.claude-sonnet-4-5-20250929-v1:0")
+
+      assert model.id == "eu.anthropic.claude-sonnet-4-5-20250929-v1:0"
+      assert model.cost.input == 3.3
+
+      assert {:ok, model} =
+               LLMDB.model("amazon_bedrock:us.anthropic.claude-sonnet-4-5-20250929-v1:0")
+
+      assert model.id == "anthropic.claude-sonnet-4-5-20250929-v1:0"
+      assert model.cost.input == 3
+    end
+
+    test "model/1 strips Bedrock inference profile prefixes without a regional entry" do
       Store.clear!()
 
       {:ok, _} =

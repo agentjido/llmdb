@@ -99,16 +99,58 @@ defmodule LLMDB.CatalogTest do
     assert model.id == "canonical-target"
   end
 
-  test "Bedrock-prefixed bare IDs retain stripped-prefix precedence" do
+  test "Bedrock-prefixed IDs resolve to their regional entry when the catalog has one" do
     provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
-    base = Model.new!(%{id: "anthropic.model", provider: :amazon_bedrock})
-    regional = Model.new!(%{id: "us.anthropic.model", provider: :amazon_bedrock})
+
+    base =
+      Model.new!(%{
+        id: "anthropic.model",
+        provider: :amazon_bedrock,
+        cost: %{input: 5, output: 25}
+      })
+
+    regional =
+      Model.new!(%{
+        id: "eu.anthropic.model",
+        provider: :amazon_bedrock,
+        cost: %{input: 5.5, output: 27.5}
+      })
+
     catalog = build_catalog([provider], [base, regional])
 
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.model", model}} =
+             Catalog.resolve_model(catalog, :amazon_bedrock, "eu.anthropic.model")
+
+    assert model.id == "eu.anthropic.model"
+    assert model.cost.input == 5.5
+
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.model", bare}} =
+             Catalog.resolve_bare(catalog, "eu.anthropic.model")
+
+    assert bare.id == "eu.anthropic.model"
+  end
+
+  test "Bedrock-prefixed IDs fall back to the base model when no regional entry exists" do
+    provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
+
+    base =
+      Model.new!(%{
+        id: "anthropic.model",
+        provider: :amazon_bedrock,
+        cost: %{input: 5, output: 25}
+      })
+
+    catalog = build_catalog([provider], [base])
+
     assert {:ok, {:amazon_bedrock, "us.anthropic.model", model}} =
-             Catalog.resolve_bare(catalog, "us.anthropic.model")
+             Catalog.resolve_model(catalog, :amazon_bedrock, "us.anthropic.model")
 
     assert model.id == "anthropic.model"
+
+    assert {:ok, {:amazon_bedrock, "us.anthropic.model", bare}} =
+             Catalog.resolve_bare(catalog, "us.anthropic.model")
+
+    assert bare.id == "anthropic.model"
   end
 
   defp catalog_fixture do
