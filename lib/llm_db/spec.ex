@@ -20,14 +20,15 @@ defmodule LLMDB.Spec do
   ## Amazon Bedrock Inference Profiles
 
   For Amazon Bedrock models, inference profile IDs with region prefixes (us., eu., ap., apac., ca.,
-  au., jp., us-gov., global.) are supported. The region prefix is stripped for catalog lookup but
-  preserved in the returned model ID. For example:
+  au., jp., us-gov., global.) are supported. A regional catalog entry supplies its own metadata
+  and pricing. If no regional entry exists, lookup can use an alias or the base model, while
+  preserving the region prefix in the returned model ID. For example:
 
       iex> LLMDB.Spec.resolve("amazon_bedrock:us.anthropic.claude-opus-4-1-20250805-v1:0")
       {:ok, {:amazon_bedrock, "us.anthropic.claude-opus-4-1-20250805-v1:0", %LLMDB.Model{}}}
 
-  The lookup uses "anthropic.claude-opus-4-1-20250805-v1:0" to find metadata, but the returned
-  model ID retains the "us." prefix for API routing purposes.
+  When the catalog has only the base entry "anthropic.claude-opus-4-1-20250805-v1:0", the lookup
+  uses its metadata, but the returned model ID retains the "us." prefix for API routing purposes.
   """
 
   alias LLMDB.{Catalog, Normalize}

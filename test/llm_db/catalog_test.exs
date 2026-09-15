@@ -106,6 +106,7 @@ defmodule LLMDB.CatalogTest do
       Model.new!(%{
         id: "anthropic.model",
         provider: :amazon_bedrock,
+        aliases: ["eu.anthropic.model"],
         cost: %{input: 5, output: 25}
       })
 
@@ -151,6 +152,99 @@ defmodule LLMDB.CatalogTest do
              Catalog.resolve_bare(catalog, "us.anthropic.model")
 
     assert bare.id == "anthropic.model"
+  end
+
+  test "Bedrock regional aliases retain their prefix without false ambiguity" do
+    provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
+
+    base =
+      Model.new!(%{
+        id: "anthropic.model",
+        provider: :amazon_bedrock,
+        aliases: ["eu.anthropic.model", "anthropic.alias"],
+        cost: %{input: 5, output: 25}
+      })
+
+    catalog = build_catalog([provider], [base])
+    Catalog.put!(catalog, source: :test)
+
+    for lookup_id <- ["eu.anthropic.model", "eu.anthropic.alias", "us.anthropic.alias"] do
+      {_, prefix} = Catalog.strip_prefix(:amazon_bedrock, lookup_id)
+      expected_id = prefix <> "anthropic.model"
+
+      assert {:ok, {:amazon_bedrock, ^expected_id, ^base}} =
+               Catalog.resolve_model(catalog, :amazon_bedrock, lookup_id)
+
+      assert {:ok, {:amazon_bedrock, ^expected_id, ^base}} =
+               Catalog.resolve_bare(catalog, lookup_id)
+
+      for spec <- [
+            "amazon_bedrock:" <> lookup_id,
+            lookup_id <> "@amazon_bedrock",
+            {:amazon_bedrock, lookup_id},
+            lookup_id
+          ] do
+        assert {:ok, {:amazon_bedrock, ^expected_id, ^base}} = Spec.resolve(spec)
+      end
+    end
+  end
+
+  test "Bedrock regional aliases resolve without a matching stripped ID" do
+    provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
+
+    base =
+      Model.new!(%{
+        id: "anthropic.model",
+        provider: :amazon_bedrock,
+        aliases: ["eu.profile-alias"]
+      })
+
+    catalog = build_catalog([provider], [base])
+
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.model", ^base}} =
+             Catalog.resolve_model(catalog, :amazon_bedrock, "eu.profile-alias")
+
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.model", ^base}} =
+             Catalog.resolve_bare(catalog, "eu.profile-alias")
+  end
+
+  test "Bedrock aliases to regional entries do not add a second prefix" do
+    provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
+    base = Model.new!(%{id: "anthropic.model", provider: :amazon_bedrock})
+
+    regional =
+      Model.new!(%{
+        id: "eu.anthropic.regional-model",
+        provider: :amazon_bedrock,
+        aliases: ["eu.anthropic.model"]
+      })
+
+    catalog = build_catalog([provider], [base, regional])
+
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.regional-model", ^regional}} =
+             Catalog.resolve_model(catalog, :amazon_bedrock, "eu.anthropic.model")
+
+    assert {:ok, {:amazon_bedrock, "eu.anthropic.regional-model", ^regional}} =
+             Catalog.resolve_bare(catalog, "eu.anthropic.model")
+  end
+
+  test "Bedrock regional matches retain ambiguity with another provider" do
+    providers = [
+      Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"}),
+      Provider.new!(%{id: :openrouter, name: "OpenRouter"})
+    ]
+
+    models = [
+      Model.new!(%{
+        id: "anthropic.model",
+        provider: :amazon_bedrock,
+        aliases: ["eu.anthropic.model"]
+      }),
+      Model.new!(%{id: "eu.anthropic.model", provider: :openrouter})
+    ]
+
+    catalog = build_catalog(providers, models)
+    assert {:error, :ambiguous} = Catalog.resolve_bare(catalog, "eu.anthropic.model")
   end
 
   defp catalog_fixture do
