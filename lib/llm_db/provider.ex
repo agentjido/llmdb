@@ -18,6 +18,17 @@ defmodule LLMDB.Provider do
   - `:extra` - Additional provider-specific data; snapshot JSON keys remain strings
   - `:alias_of` - Primary provider ID if this is an alias
 
+  ## Model ID Prefixes
+
+  Set `extra.model_id_prefixes` to declare prefixes for model lookup. For example,
+  `%{extra: %{model_id_prefixes: ["tenant.", "tenant.eu."]}}` enables exact prefixed
+  entries, aliases, and base model fallback for that provider. The longest matching
+  prefix is used. Base aliases and fallbacks retain the prefix in the resolved ID.
+  A prefixed entry supplies its own metadata and pricing.
+
+  Providers without prefix rules use ordinary model and alias lookup. Bedrock has
+  compatibility defaults for existing catalogs. An explicit empty list disables them.
+
   ## Pricing Defaults
 
   The `:pricing_defaults` field defines default pricing for tools and features

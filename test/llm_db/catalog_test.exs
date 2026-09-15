@@ -247,6 +247,99 @@ defmodule LLMDB.CatalogTest do
     assert {:error, :ambiguous} = Catalog.resolve_bare(catalog, "eu.anthropic.model")
   end
 
+  test "provider metadata enables prefix resolution with the longest matching prefix" do
+    provider =
+      Provider.new!(%{
+        id: :openrouter,
+        extra: %{"model_id_prefixes" => ["tenant.", "tenant.eu."]}
+      })
+
+    base =
+      Model.new!(%{
+        id: "model",
+        provider: :openrouter,
+        aliases: ["tenant.eu.model", "short"],
+        cost: %{input: 2, output: 10}
+      })
+
+    scoped =
+      Model.new!(%{
+        id: "tenant.eu.model",
+        provider: :openrouter,
+        aliases: ["tenant.eu.scoped-alias"],
+        cost: %{input: 3, output: 15}
+      })
+
+    catalog = build_catalog([provider], [base, scoped])
+    Catalog.put!(catalog, source: :test)
+
+    assert Spec.strip_prefix(:openrouter, "tenant.eu.model") == {"model", "tenant.eu."}
+
+    for {lookup_id, expected_id, expected_model} <- [
+          {"tenant.eu.model", "tenant.eu.model", scoped},
+          {"tenant.eu.scoped-alias", "tenant.eu.model", scoped},
+          {"tenant.eu.short", "tenant.eu.model", base},
+          {"tenant.model", "tenant.model", base}
+        ] do
+      assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
+               Catalog.resolve_model(catalog, :openrouter, lookup_id)
+
+      assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
+               Catalog.resolve_bare(catalog, lookup_id)
+
+      assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
+               Spec.resolve("openrouter:" <> lookup_id)
+    end
+
+    indexed_only = Map.put(catalog, :providers, [])
+
+    assert {:ok, {:openrouter, "tenant.model", ^base}} =
+             Catalog.resolve_model(indexed_only, :openrouter, "tenant.model")
+
+    legacy = Map.delete(catalog, :__llm_db_model_id_prefixes__)
+
+    assert {:ok, {:openrouter, "tenant.model", ^base}} =
+             Catalog.resolve_model(legacy, :openrouter, "tenant.model")
+  end
+
+  test "prefix rules apply only to providers that declare them" do
+    providers = [
+      Provider.new!(%{id: :openrouter, extra: %{model_id_prefixes: ["tenant."]}}),
+      Provider.new!(%{id: :openai})
+    ]
+
+    models = [
+      Model.new!(%{id: "model", provider: :openrouter}),
+      Model.new!(%{id: "model", provider: :openai})
+    ]
+
+    catalog = build_catalog(providers, models)
+
+    assert {:ok, {:openrouter, "tenant.model", _model}} =
+             Catalog.resolve_bare(catalog, "tenant.model")
+
+    assert {:error, :not_found} = Catalog.resolve_model(catalog, :openai, "tenant.model")
+
+    assert {:error, :ambiguous} =
+             catalog
+             |> Map.put(:__llm_db_model_id_prefixes__, %{
+               openrouter: ["tenant."],
+               openai: ["tenant."]
+             })
+             |> Catalog.resolve_bare("tenant.model")
+  end
+
+  test "provider prefix metadata can disable compatibility defaults" do
+    provider =
+      Provider.new!(%{id: :amazon_bedrock, extra: %{model_id_prefixes: []}})
+
+    base = Model.new!(%{id: "model", provider: :amazon_bedrock})
+    catalog = build_catalog([provider], [base])
+
+    assert {:error, :not_found} = Catalog.resolve_model(catalog, :amazon_bedrock, "eu.model")
+    assert {:error, :not_found} = Catalog.resolve_bare(catalog, "eu.model")
+  end
+
   defp catalog_fixture do
     providers = [
       Provider.new!(%{id: :google_vertex, name: "Google Vertex"}),

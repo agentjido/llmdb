@@ -79,7 +79,7 @@ defmodule LLMDB.MixProject do
           ],
           "Internal Runtime Implementation": [
             LLMDB.Snapshot.ReleaseStore,
-            ~r/^LLMDB\.(Catalog|Config|Generated|Loader|Merge|Normalize|Packaged|Pricing|Query|Runtime)(\.|$)/
+            ~r/^LLMDB\.(Catalog|Config|Generated|Loader|Merge|ModelResolver|Normalize|Packaged|Pricing|Query|Runtime)(\.|$)/
           ]
         ]
       ]

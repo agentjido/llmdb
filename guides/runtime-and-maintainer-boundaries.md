@@ -21,6 +21,7 @@ Runtime implementation modules are internal even though they remain shipped:
 | Modules | Ownership |
 | --- | --- |
 | LLMDB.Catalog, LLMDB.Loader, LLMDB.Packaged, LLMDB.Query, LLMDB.Runtime | Lazy loading, indexing, storage, and query execution |
+| LLMDB.ModelResolver, LLMDB.ModelResolver.Defaults | General model ID prefix resolution and compatibility rule data |
 | LLMDB.Config, LLMDB.ExecutionContract, LLMDB.Merge, LLMDB.Normalize, LLMDB.Pricing, LLMDB.Schema.Pricing | Shared runtime normalization, filtering, execution inference, and pricing support |
 | LLMDB.Generated.ProviderRegistry, LLMDB.Generated.ValidModalities | Generated bounded decode registries |
 | LLMDB.Snapshot.ReleaseStore, LLMDB.Snapshot.Sparse | Shared remote snapshot/history transport and schema-v2 sparse wire codec used by configured runtime readers and maintainer tasks |

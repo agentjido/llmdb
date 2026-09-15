@@ -4,7 +4,6 @@ defmodule LLMDB.Catalog do
   @store_key :llm_db_store
   @load_resource {__MODULE__, :load}
   @provider_aliases %{google_vertex_anthropic: :google_vertex}
-  @bedrock_prefixes ~w(us. eu. ap. apac. ca. au. jp. us-gov. global.)
 
   @typedoc false
   @type t :: map()
@@ -221,61 +220,27 @@ defmodule LLMDB.Catalog do
           {:ok, {atom(), String.t(), map()}} | {:error, :not_found}
   def resolve_model(nil, _provider_id, _model_id), do: {:error, :not_found}
 
-  # A Bedrock inference profile id is looked up as given first: the catalog
-  # carries regional entries (`eu.`, `au.`, ...) with their own pricing. Only
-  # when none exists does the id fall back to the base model it routes to.
   def resolve_model(catalog, provider_id, model_id)
       when is_map(catalog) and is_atom(provider_id) and is_binary(model_id) do
-    {stripped_id, prefix} = strip_prefix(provider_id, model_id)
+    prefixes = Map.get(prefix_rules(catalog), provider_id, [])
 
-    direct =
-      if prefix do
-        lookup_model(catalog, provider_id, model_id, true) ||
-          lookup_model(catalog, provider_id, model_id)
-      else
-        lookup_model(catalog, provider_id, model_id)
-      end
-
-    case direct do
-      {actual_provider, canonical_id, model} ->
-        returned_id = preserve_prefix(canonical_id, prefix)
-
-        {:ok, {provider_id, returned_id, normalize_provider(model, actual_provider, provider_id)}}
-
-      nil when is_nil(prefix) ->
-        {:error, :not_found}
-
-      nil ->
-        case lookup_model(catalog, provider_id, stripped_id) do
-          nil ->
-            {:error, :not_found}
-
-          {actual_provider, canonical_id, model} ->
-            {:ok,
-             {provider_id, prefix <> canonical_id,
-              normalize_provider(model, actual_provider, provider_id)}}
-        end
-    end
-  end
-
-  defp lookup_model(catalog, provider_id, lookup_id, canonical_only \\ false) do
-    catalog
-    |> provider_lookup_ids(provider_id)
-    |> Enum.find_value(fn actual_provider ->
-      case fetch_model(catalog, actual_provider, lookup_id, canonical_only) do
-        nil -> nil
-        {canonical_id, model} -> {actual_provider, canonical_id, model}
-      end
+    LLMDB.ModelResolver.resolve_model(model_id, prefixes, fn lookup_id, mode ->
+      lookup_model(catalog, provider_id, lookup_id, mode)
     end)
   end
 
-  defp preserve_prefix(canonical_id, nil), do: canonical_id
+  defp lookup_model(catalog, provider_id, lookup_id, mode) do
+    catalog
+    |> provider_lookup_ids(provider_id)
+    |> Enum.find_value(fn actual_provider ->
+      case fetch_model(catalog, actual_provider, lookup_id, mode) do
+        nil ->
+          nil
 
-  defp preserve_prefix(canonical_id, prefix) do
-    case strip_prefix(:amazon_bedrock, canonical_id) do
-      {_base_id, nil} -> prefix <> canonical_id
-      {_base_id, _regional_prefix} -> canonical_id
-    end
+        {canonical_id, model} ->
+          {provider_id, canonical_id, normalize_provider(model, actual_provider, provider_id)}
+      end
+    end)
   end
 
   @spec resolve_bare(t() | nil, String.t()) ::
@@ -283,35 +248,13 @@ defmodule LLMDB.Catalog do
   def resolve_bare(nil, _model_id), do: {:error, :not_found}
 
   def resolve_bare(catalog, model_id) when is_map(catalog) and is_binary(model_id) do
-    {_bedrock_id, bedrock_prefix} = strip_prefix(:amazon_bedrock, model_id)
+    direct = Map.get(resolutions_by_model_id(catalog), model_id, [])
 
-    direct =
-      catalog
-      |> resolutions_by_model_id()
-      |> Map.get(model_id, [])
-      |> Enum.reject(fn {provider, _canonical_id, _model} ->
-        bedrock_prefix && provider == :amazon_bedrock
-      end)
-
-    prefixed_bedrock =
-      if bedrock_prefix do
-        case resolve_model(catalog, :amazon_bedrock, model_id) do
-          {:ok, resolution} -> [resolution]
-          {:error, :not_found} -> []
-        end
-      else
-        []
-      end
-
-    matches =
-      (direct ++ prefixed_bedrock)
-      |> Enum.uniq_by(fn {provider, canonical_id, _model} -> {provider, canonical_id} end)
-
-    case matches do
-      [] -> {:error, :not_found}
-      [match] -> {:ok, match}
-      [_ | _] -> {:error, :ambiguous}
+    lookup = fn provider_id, lookup_id, mode ->
+      lookup_model(catalog, provider_id, lookup_id, mode)
     end
+
+    LLMDB.ModelResolver.resolve_bare(model_id, direct, prefix_rules(catalog), lookup)
   end
 
   @spec resolve_bare(String.t()) ::
@@ -322,18 +265,13 @@ defmodule LLMDB.Catalog do
   end
 
   @spec strip_prefix(atom(), String.t()) :: {String.t(), String.t() | nil}
-  def strip_prefix(:amazon_bedrock, model_id) when is_binary(model_id) do
-    case Enum.find_value(@bedrock_prefixes, fn prefix ->
-           if String.starts_with?(model_id, prefix) do
-             {String.replace_prefix(model_id, prefix, ""), prefix}
-           end
-         end) do
-      nil -> {model_id, nil}
-      result -> result
-    end
+  def strip_prefix(provider_id, model_id) when is_binary(model_id) do
+    prefixes = Map.get(prefix_rules(snapshot() || %{}), provider_id, [])
+    LLMDB.ModelResolver.strip_prefix(model_id, prefixes)
   end
 
-  def strip_prefix(_provider, model_id) when is_binary(model_id), do: {model_id, nil}
+  defp prefix_rules(%{__llm_db_model_id_prefixes__: rules}) when is_map(rules), do: rules
+  defp prefix_rules(catalog), do: LLMDB.ModelResolver.prefix_rules(providers(catalog))
 
   @spec prefer(t() | nil) :: [atom()]
   def prefer(%{prefer: prefer}) when is_list(prefer), do: prefer
@@ -365,7 +303,8 @@ defmodule LLMDB.Catalog do
   defp put_resolution_indexes(catalog, models) do
     Map.merge(catalog, %{
       __llm_db_provider_lookup_ids__: index_provider_lookup_ids(catalog.providers),
-      __llm_db_resolutions_by_model_id__: index_resolutions(models)
+      __llm_db_resolutions_by_model_id__: index_resolutions(models),
+      __llm_db_model_id_prefixes__: LLMDB.ModelResolver.prefix_rules(catalog.providers)
     })
   end
 
@@ -483,11 +422,11 @@ defmodule LLMDB.Catalog do
     index_resolutions(models)
   end
 
-  defp fetch_model(catalog, provider, lookup_id, canonical_only) do
+  defp fetch_model(catalog, provider, lookup_id, mode) do
     key = {provider, lookup_id}
 
     canonical_id =
-      if canonical_only, do: lookup_id, else: Map.get(catalog.aliases_by_key, key, lookup_id)
+      if mode == :canonical, do: lookup_id, else: Map.get(catalog.aliases_by_key, key, lookup_id)
 
     case Map.get(catalog.models_by_key, {provider, canonical_id}) do
       nil -> nil

@@ -12,6 +12,34 @@ A **model spec** uniquely identifies an LLM model by combining a provider identi
 
 All three formats can be used interchangeably throughout the API.
 
+## Provider Model ID Prefixes
+
+Providers can declare model ID prefixes in their `extra` metadata:
+
+```elixir
+%{
+  id: :openrouter,
+  extra: %{model_id_prefixes: ["tenant.", "tenant.eu."]}
+}
+```
+
+The same rules apply to each provider that declares prefixes:
+
+- Use the longest matching prefix.
+- Look for an exact prefixed entry first. It takes priority over a colliding base alias.
+- If no exact entry exists, try the full ID as an alias, then the ID without its prefix.
+- Keep the prefix when an alias or fallback resolves to a base model.
+- Do not add a second prefix when the resolved entry already has a declared prefix.
+- Use the metadata and price of the selected entry.
+- Apply the same rules to qualified and bare resolution. Matches from different providers remain ambiguous.
+
+Prefix rules do not apply to other providers. An empty `model_id_prefixes` list disables
+prefix handling for that provider. Invalid or empty prefix strings are ignored.
+
+Bedrock retains its built-in prefix defaults for existing catalogs. Provider metadata
+can override those defaults. Prefix lookup does not change the stored model ID;
+`LLMDB.Spec.resolve/2` returns the resolved route ID separately from the model object.
+
 ## Colon Format (Default)
 
 ```elixir
