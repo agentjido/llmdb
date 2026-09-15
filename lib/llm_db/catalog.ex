@@ -224,9 +224,19 @@ defmodule LLMDB.Catalog do
       when is_map(catalog) and is_atom(provider_id) and is_binary(model_id) do
     prefixes = Map.get(prefix_rules(catalog), provider_id, [])
 
-    LLMDB.ModelResolver.resolve_model(model_id, prefixes, fn lookup_id, mode ->
-      lookup_model(catalog, provider_id, lookup_id, mode)
-    end)
+    result =
+      LLMDB.ModelResolver.resolve_model(model_id, prefixes, fn lookup_id, mode ->
+        lookup_model(catalog, provider_id, lookup_id, mode)
+      end)
+
+    case result do
+      {:ok, {actual_provider, canonical_id, model}} ->
+        {:ok,
+         {provider_id, canonical_id, normalize_provider(model, actual_provider, provider_id)}}
+
+      {:error, :not_found} = error ->
+        error
+    end
   end
 
   defp lookup_model(catalog, provider_id, lookup_id, mode) do
@@ -238,7 +248,7 @@ defmodule LLMDB.Catalog do
           nil
 
         {canonical_id, model} ->
-          {provider_id, canonical_id, normalize_provider(model, actual_provider, provider_id)}
+          {actual_provider, canonical_id, model}
       end
     end)
   end
@@ -271,7 +281,16 @@ defmodule LLMDB.Catalog do
   end
 
   defp prefix_rules(%{__llm_db_model_id_prefixes__: rules}) when is_map(rules), do: rules
-  defp prefix_rules(catalog), do: LLMDB.ModelResolver.prefix_rules(providers(catalog))
+
+  defp prefix_rules(catalog) do
+    provider_metadata =
+      case Map.get(catalog, :providers_by_id) do
+        providers when is_map(providers) -> Map.values(providers)
+        _other -> providers(catalog)
+      end
+
+    LLMDB.ModelResolver.prefix_rules(provider_metadata)
+  end
 
   @spec prefer(t() | nil) :: [atom()]
   def prefer(%{prefer: prefer}) when is_list(prefer), do: prefer

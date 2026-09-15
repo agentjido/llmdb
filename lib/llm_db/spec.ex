@@ -483,13 +483,12 @@ defmodule LLMDB.Spec do
   end
 
   @doc """
-  Strips any inference profile prefix from a model ID.
+  Splits a declared provider prefix from a model ID.
 
-  For Amazon Bedrock, splits prefixes like `"us."`, `"eu."`, `"au."` etc. from the model ID
-  so the base ID can be used for catalog lookup. Returns `{base_id, prefix}` where prefix
-  is `nil` if no prefix was found.
-
-  For other providers, returns `{model_id, nil}` unchanged.
+  Uses the provider's `extra.model_id_prefixes` metadata from the loaded catalog.
+  Amazon Bedrock retains its compatibility defaults when no override is declared.
+  Returns `{base_id, prefix}` using the longest matching prefix. If the provider
+  has no prefix rules or none matches, returns `{model_id, nil}` unchanged.
   """
   @spec strip_prefix(atom(), String.t()) :: {String.t(), String.t() | nil}
   defdelegate strip_prefix(provider, model_id), to: Catalog

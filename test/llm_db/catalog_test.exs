@@ -251,14 +251,14 @@ defmodule LLMDB.CatalogTest do
     provider =
       Provider.new!(%{
         id: :openrouter,
-        extra: %{"model_id_prefixes" => ["tenant.", "tenant.eu."]}
+        extra: %{"model_id_prefixes" => ["tenant.", "", nil, 12, "tenant.eu.", "tenant."]}
       })
 
     base =
       Model.new!(%{
         id: "model",
         provider: :openrouter,
-        aliases: ["tenant.eu.model", "short"],
+        aliases: ["tenant.eu.model", "tenant.eu.base-alias", "short"],
         cost: %{input: 2, output: 10}
       })
 
@@ -278,7 +278,8 @@ defmodule LLMDB.CatalogTest do
     for {lookup_id, expected_id, expected_model} <- [
           {"tenant.eu.model", "tenant.eu.model", scoped},
           {"tenant.eu.scoped-alias", "tenant.eu.model", scoped},
-          {"tenant.eu.short", "tenant.eu.model", base},
+          {"tenant.eu.base-alias", "tenant.eu.model", scoped},
+          {"tenant.eu.short", "tenant.eu.model", scoped},
           {"tenant.model", "tenant.model", base}
         ] do
       assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
@@ -287,8 +288,16 @@ defmodule LLMDB.CatalogTest do
       assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
                Catalog.resolve_bare(catalog, lookup_id)
 
-      assert {:ok, {:openrouter, ^expected_id, ^expected_model}} =
-               Spec.resolve("openrouter:" <> lookup_id)
+      for spec <- [
+            "openrouter:" <> lookup_id,
+            lookup_id <> "@openrouter",
+            {:openrouter, lookup_id},
+            lookup_id
+          ] do
+        assert {:ok, {:openrouter, ^expected_id, ^expected_model}} = Spec.resolve(spec)
+      end
+
+      assert {:ok, ^expected_model} = LLMDB.model("openrouter:" <> lookup_id)
     end
 
     indexed_only = Map.put(catalog, :providers, [])
@@ -296,10 +305,21 @@ defmodule LLMDB.CatalogTest do
     assert {:ok, {:openrouter, "tenant.model", ^base}} =
              Catalog.resolve_model(indexed_only, :openrouter, "tenant.model")
 
-    legacy = Map.delete(catalog, :__llm_db_model_id_prefixes__)
+    legacy =
+      catalog
+      |> Map.delete(:__llm_db_model_id_prefixes__)
+      |> Map.put(:providers, [])
 
     assert {:ok, {:openrouter, "tenant.model", ^base}} =
              Catalog.resolve_model(legacy, :openrouter, "tenant.model")
+
+    filtered = Catalog.with_runtime_view(catalog, [base], %{allow: :all, deny: %{}})
+
+    assert {:ok, {:openrouter, "tenant.eu.model", ^base}} =
+             Catalog.resolve_model(filtered, :openrouter, "tenant.eu.short")
+
+    assert {:ok, {:openrouter, "tenant.eu.model", ^base}} =
+             Catalog.resolve_bare(filtered, "tenant.eu.short")
   end
 
   test "prefix rules apply only to providers that declare them" do
@@ -320,13 +340,74 @@ defmodule LLMDB.CatalogTest do
 
     assert {:error, :not_found} = Catalog.resolve_model(catalog, :openai, "tenant.model")
 
+    both_configured = [
+      hd(providers),
+      Provider.new!(%{id: :openai, extra: %{model_id_prefixes: ["tenant."]}})
+    ]
+
     assert {:error, :ambiguous} =
-             catalog
-             |> Map.put(:__llm_db_model_id_prefixes__, %{
-               openrouter: ["tenant."],
-               openai: ["tenant."]
-             })
+             both_configured
+             |> build_catalog(models)
              |> Catalog.resolve_bare("tenant.model")
+  end
+
+  test "prefix lookup through provider aliases does not create false ambiguity" do
+    primary =
+      Provider.new!(%{id: :google_vertex, extra: %{model_id_prefixes: ["tenant."]}})
+
+    base =
+      Model.new!(%{
+        id: "model",
+        provider: :google_vertex_anthropic,
+        aliases: ["tenant.model", "tenant.base-alias", "short"],
+        cost: %{input: 2, output: 10}
+      })
+
+    scoped =
+      Model.new!(%{
+        id: "tenant.model",
+        provider: :google_vertex_anthropic,
+        cost: %{input: 3, output: 15}
+      })
+
+    normalized = %{scoped | provider: :google_vertex}
+
+    for extra <- [nil, %{model_id_prefixes: ["tenant."]}] do
+      alias_provider = Provider.new!(%{id: :google_vertex_anthropic, extra: extra})
+      catalog = build_catalog([primary, alias_provider], [base, scoped])
+
+      for lookup_id <- ["tenant.model", "tenant.base-alias", "tenant.short"] do
+        assert {:ok, {:google_vertex, "tenant.model", ^normalized}} =
+                 Catalog.resolve_model(catalog, :google_vertex, lookup_id)
+
+        assert {:ok, {:google_vertex_anthropic, "tenant.model", ^scoped}} =
+                 Catalog.resolve_bare(catalog, lookup_id)
+      end
+    end
+  end
+
+  test "different prefix routes through provider aliases remain ambiguous" do
+    providers = [
+      Provider.new!(%{id: :google_vertex, extra: %{model_id_prefixes: ["tenant."]}}),
+      Provider.new!(%{
+        id: :google_vertex_anthropic,
+        extra: %{model_id_prefixes: ["tenant.eu."]}
+      })
+    ]
+
+    model =
+      Model.new!(%{
+        id: "model",
+        provider: :google_vertex_anthropic,
+        aliases: ["tenant.eu.alias"]
+      })
+
+    for ordering <- [providers, Enum.reverse(providers)] do
+      assert {:error, :ambiguous} =
+               ordering
+               |> build_catalog([model])
+               |> Catalog.resolve_bare("tenant.eu.alias")
+    end
   end
 
   test "provider prefix metadata can disable compatibility defaults" do

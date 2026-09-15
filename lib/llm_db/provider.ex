@@ -24,7 +24,7 @@ defmodule LLMDB.Provider do
   `%{extra: %{model_id_prefixes: ["tenant.", "tenant.eu."]}}` enables exact prefixed
   entries, aliases, and base model fallback for that provider. The longest matching
   prefix is used. Base aliases and fallbacks retain the prefix in the resolved ID.
-  A prefixed entry supplies its own metadata and pricing.
+  If that resolved ID names a prefixed entry, its metadata and pricing are used.
 
   Providers without prefix rules use ordinary model and alias lookup. Bedrock has
   compatibility defaults for existing catalogs. An explicit empty list disables them.

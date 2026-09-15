@@ -32,20 +32,7 @@ defmodule LLMDB.ModelResolver do
   @spec resolve_model(String.t(), [String.t()], lookup()) ::
           {:ok, resolution()} | {:error, :not_found}
   def resolve_model(model_id, prefixes, lookup) do
-    resolution =
-      case strip_prefix(model_id, prefixes) do
-        {_base_id, nil} ->
-          lookup.(model_id, :alias)
-
-        {base_id, prefix} ->
-          match =
-            lookup.(model_id, :canonical) || lookup.(model_id, :alias) ||
-              lookup.(base_id, :alias)
-
-          preserve_prefix(match, prefix, prefixes)
-      end
-
-    case resolution do
+    case find_model(model_id, prefixes, lookup) do
       nil -> {:error, :not_found}
       match -> {:ok, match}
     end
@@ -58,29 +45,72 @@ defmodule LLMDB.ModelResolver do
           (atom(), String.t(), mode() -> resolution() | nil)
         ) :: {:ok, resolution()} | {:error, :not_found | :ambiguous}
   def resolve_bare(model_id, direct, rules, lookup) do
-    matches =
-      Enum.reduce(rules, direct, fn {provider_id, prefixes}, matches ->
+    prefixed =
+      Enum.flat_map(rules, fn {provider_id, prefixes} ->
         case strip_prefix(model_id, prefixes) do
           {_base_id, nil} ->
-            matches
+            []
 
           {_base_id, _prefix} ->
-            others = Enum.reject(matches, fn {provider, _, _} -> provider == provider_id end)
-
-            case resolve_model(model_id, prefixes, fn lookup_id, mode ->
-                   lookup.(provider_id, lookup_id, mode)
-                 end) do
-              {:ok, resolution} -> others ++ [resolution]
-              {:error, :not_found} -> others
-            end
+            provider_lookup = fn lookup_id, mode -> lookup.(provider_id, lookup_id, mode) end
+            [{provider_id, find_model(model_id, prefixes, provider_lookup)}]
         end
       end)
+
+    replaced_providers =
+      prefixed
+      |> Enum.flat_map(fn
+        {provider_id, nil} -> [provider_id]
+        {provider_id, {actual_provider, _, _}} -> [provider_id, actual_provider]
+      end)
+      |> MapSet.new()
+
+    direct =
+      Enum.reject(direct, fn {provider, _, _} ->
+        MapSet.member?(replaced_providers, provider)
+      end)
+
+    resolved =
+      Enum.flat_map(prefixed, fn
+        {_provider_id, nil} -> []
+        {_provider_id, resolution} -> [resolution]
+      end)
+
+    matches =
+      (direct ++ resolved)
       |> Enum.uniq_by(fn {provider, canonical_id, _model} -> {provider, canonical_id} end)
 
     case matches do
       [] -> {:error, :not_found}
       [match] -> {:ok, match}
       [_ | _] -> {:error, :ambiguous}
+    end
+  end
+
+  defp find_model(model_id, prefixes, lookup) do
+    case strip_prefix(model_id, prefixes) do
+      {_base_id, nil} ->
+        lookup.(model_id, :alias)
+
+      {base_id, prefix} ->
+        match =
+          lookup.(model_id, :canonical) || lookup.(model_id, :alias) ||
+            lookup.(base_id, :alias)
+
+        resolve_prefixed(match, prefix, prefixes, lookup)
+    end
+  end
+
+  defp resolve_prefixed(nil, _prefix, _prefixes, _lookup), do: nil
+
+  defp resolve_prefixed({provider, canonical_id, model} = match, prefix, prefixes, lookup) do
+    case strip_prefix(canonical_id, prefixes) do
+      {_base_id, nil} ->
+        returned_id = prefix <> canonical_id
+        lookup.(returned_id, :canonical) || {provider, returned_id, model}
+
+      {_base_id, _prefix} ->
+        match
     end
   end
 
@@ -91,18 +121,6 @@ defmodule LLMDB.ModelResolver do
         {String.replace_prefix(model_id, prefix, ""), prefix}
       end
     end)
-  end
-
-  defp preserve_prefix(nil, _prefix, _prefixes), do: nil
-
-  defp preserve_prefix({provider, canonical_id, model}, prefix, prefixes) do
-    returned_id =
-      case strip_prefix(canonical_id, prefixes) do
-        {_base_id, nil} -> prefix <> canonical_id
-        {_base_id, _prefix} -> canonical_id
-      end
-
-    {provider, returned_id, model}
   end
 
   defp field(map, key), do: Map.get(map, key) || Map.get(map, Atom.to_string(key))

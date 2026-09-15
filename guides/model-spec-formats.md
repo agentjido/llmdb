@@ -28,6 +28,7 @@ The same rules apply to each provider that declares prefixes:
 - Use the longest matching prefix.
 - Look for an exact prefixed entry first. It takes priority over a colliding base alias.
 - If no exact entry exists, try the full ID as an alias, then the ID without its prefix.
+- After alias resolution, select the matching prefixed entry when one exists.
 - Keep the prefix when an alias or fallback resolves to a base model.
 - Do not add a second prefix when the resolved entry already has a declared prefix.
 - Use the metadata and price of the selected entry.
