@@ -148,6 +148,29 @@ defmodule LLMDB.PackagedTest do
       end
     end
 
+    test "snapshot contains evaluation-only TypeSafe models" do
+      snapshot = Packaged.snapshot()
+      typesafe = snapshot["providers"]["typesafe"]
+
+      assert typesafe["runtime"]["base_url"] == "https://api.typesafe.ai"
+      assert typesafe["runtime"]["auth"]["env"] == ["TYPESAFE_API_KEY"]
+
+      for id <- ["jev-1.13.0", "jev-latest", "jev-preview"] do
+        model = typesafe["models"][id]
+
+        assert model["id"] == id
+        assert model["capabilities"]["evaluate"] == true
+        assert model["capabilities"]["chat"] == false
+        assert model["capabilities"]["streaming"]["text"] == false
+        assert model["execution"]["evaluate"]["family"] == "typesafe_systemone"
+        assert model["execution"]["evaluate"]["path"] == "/v1/systemone"
+        assert model["cost"]["input"] == 0.042
+        assert model["cost"]["output"] == 0.0
+        refute Map.has_key?(model["execution"], "text")
+        refute Map.has_key?(model["execution"], "object")
+      end
+    end
+
     test "snapshot includes GLM-5.3 for the Z.AI Coding Plan" do
       snapshot = Packaged.snapshot()
 

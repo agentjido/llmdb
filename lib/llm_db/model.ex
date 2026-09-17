@@ -167,6 +167,7 @@ defmodule LLMDB.Model do
   @execution_schema Zoi.object(%{
                       text: @execution_operation_schema |> Zoi.nullish(),
                       object: @execution_operation_schema |> Zoi.nullish(),
+                      evaluate: @execution_operation_schema |> Zoi.nullish(),
                       embed: @execution_operation_schema |> Zoi.nullish(),
                       image: @execution_operation_schema |> Zoi.nullish(),
                       transcription: @execution_operation_schema |> Zoi.nullish(),
@@ -176,6 +177,7 @@ defmodule LLMDB.Model do
 
   @capabilities_schema Zoi.object(%{
                          chat: Zoi.boolean() |> Zoi.default(true),
+                         evaluate: Zoi.boolean() |> Zoi.optional(),
                          embeddings:
                            Zoi.union([Zoi.boolean(), @embeddings_schema]) |> Zoi.default(false),
                          reasoning: @reasoning_schema |> Zoi.default(%{enabled: false}),
@@ -346,7 +348,7 @@ defmodule LLMDB.Model do
   defp normalize_execution_attrs(attrs) do
     update_in_nested_map(attrs, :execution, fn execution ->
       Enum.reduce(
-        [:text, :object, :embed, :image, :transcription, :speech, :realtime],
+        [:text, :object, :evaluate, :embed, :image, :transcription, :speech, :realtime],
         execution,
         fn key, acc ->
           update_in_nested_map(acc, key, fn operation ->

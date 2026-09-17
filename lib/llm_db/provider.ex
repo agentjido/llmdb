@@ -76,6 +76,7 @@ defmodule LLMDB.Provider do
   @runtime_execution_schema Zoi.object(%{
                               text: Zoi.string() |> Zoi.nullish(),
                               object: Zoi.string() |> Zoi.nullish(),
+                              evaluate: Zoi.string() |> Zoi.nullish(),
                               embed: Zoi.string() |> Zoi.nullish(),
                               image: Zoi.string() |> Zoi.nullish(),
                               transcription: Zoi.string() |> Zoi.nullish(),

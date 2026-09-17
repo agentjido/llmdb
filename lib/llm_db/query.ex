@@ -20,6 +20,7 @@ defmodule LLMDB.Query do
   # :tools_streaming map to [:tools, :streaming].
   @capability_paths %{
     chat: [:chat],
+    evaluate: [:evaluate],
     embeddings: [:embeddings],
     reasoning: [:reasoning, :enabled],
     rerank: [:rerank],

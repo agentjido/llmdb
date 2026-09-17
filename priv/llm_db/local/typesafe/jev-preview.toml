@@ -1,0 +1,16 @@
+id = "jev-preview"
+name = "Jev Preview"
+family = "jev"
+doc_url = "https://docs.typesafe.ai/models"
+
+[cost]
+input = 0.042
+output = 0.0
+
+[capabilities]
+chat = false
+evaluate = true
+
+[capabilities.streaming]
+text = false
+tool_calls = false

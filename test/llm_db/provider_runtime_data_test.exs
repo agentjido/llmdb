@@ -56,6 +56,14 @@ defmodule LLMDB.ProviderRuntimeDataTest do
     assert elevenlabs.auth.env == ["ELEVENLABS_API_KEY"]
     assert elevenlabs.execution.speech == "elevenlabs_speech"
     assert elevenlabs.execution.transcription == "elevenlabs_transcription"
+
+    typesafe = provider_runtime(providers, :typesafe)
+    assert typesafe.base_url == "https://api.typesafe.ai"
+    assert typesafe.auth.type == "bearer"
+    assert typesafe.auth.env == ["TYPESAFE_API_KEY"]
+    assert typesafe.execution.evaluate == "typesafe_systemone"
+    assert Map.get(typesafe.execution, :text) == nil
+    assert Map.get(typesafe.execution, :object) == nil
   end
 
   defp provider_runtime(providers, id) do

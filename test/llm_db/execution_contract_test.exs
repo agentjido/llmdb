@@ -43,6 +43,49 @@ defmodule LLMDB.ExecutionContractTest do
     assert :ok = Validate.validate_runtime_contract([provider], [enriched])
   end
 
+  test "evaluation-only models derive evaluation execution without generation" do
+    provider =
+      Provider.new!(%{
+        id: :typesafe,
+        runtime: %{
+          base_url: "https://api.typesafe.ai",
+          auth: %{type: "bearer", env: ["TYPESAFE_API_KEY"]},
+          execution: %{evaluate: "typesafe_systemone"}
+        }
+      })
+      |> ExecutionContract.enrich_provider()
+
+    model =
+      Model.new!(%{
+        id: "jev-latest",
+        provider: :typesafe,
+        capabilities: %{chat: false, evaluate: true, streaming: %{text: false}}
+      })
+
+    enriched = ExecutionContract.enrich_model(model, provider)
+
+    assert ExecutionContract.implied_operations(model, provider) == [:evaluate]
+    assert enriched.catalog_only == false
+    assert enriched.capabilities.evaluate == true
+    assert enriched.capabilities.chat == false
+    assert enriched.execution.evaluate.family == "typesafe_systemone"
+    assert enriched.execution.evaluate.wire_protocol == "typesafe_systemone"
+    assert enriched.execution.evaluate.path == "/v1/systemone"
+    refute Map.has_key?(enriched.execution, :text)
+    refute Map.has_key?(enriched.execution, :object)
+    assert :ok = Validate.validate_runtime_contract([provider], [enriched])
+
+    incomplete = %{enriched | execution: %{}}
+
+    assert {:error, {:invalid_runtime_contract, errors}} =
+             Validate.validate_runtime_contract([provider], [incomplete])
+
+    assert Enum.any?(
+             errors,
+             &(&1.error == :missing_execution_entry and &1.operation == :evaluate)
+           )
+  end
+
   test "explicit model execution overrides inferred provider and modality defaults" do
     provider = executable_provider()
 

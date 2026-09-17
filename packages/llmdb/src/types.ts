@@ -83,6 +83,7 @@ export interface RuntimeAuth {
 export interface RuntimeExecution {
   readonly text?: string | null;
   readonly object?: string | null;
+  readonly evaluate?: string | null;
   readonly embed?: string | null;
   readonly image?: string | null;
   readonly transcription?: string | null;
@@ -183,6 +184,7 @@ export interface EmbeddingCapability {
 
 export interface ModelCapabilities {
   readonly chat: boolean;
+  readonly evaluate?: boolean;
   readonly embeddings: boolean | EmbeddingCapability;
   readonly reasoning: ReasoningCapability;
   readonly rerank: boolean;
@@ -220,6 +222,7 @@ export interface ExecutionOperation {
 export interface ModelExecution {
   readonly text?: ExecutionOperation | null;
   readonly object?: ExecutionOperation | null;
+  readonly evaluate?: ExecutionOperation | null;
   readonly embed?: ExecutionOperation | null;
   readonly image?: ExecutionOperation | null;
   readonly transcription?: ExecutionOperation | null;

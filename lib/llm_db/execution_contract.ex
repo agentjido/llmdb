@@ -35,6 +35,7 @@ defmodule LLMDB.ExecutionContract do
     "anthropic_messages" => "anthropic_messages",
     "google_generate_content" => "google_generate_content",
     "cohere_chat" => "cohere_chat",
+    "typesafe_systemone" => "typesafe_systemone",
     "elevenlabs_speech" => "elevenlabs_speech",
     "elevenlabs_transcription" => "elevenlabs_transcription"
   }
@@ -51,11 +52,21 @@ defmodule LLMDB.ExecutionContract do
     "anthropic_messages" => "/v1/messages",
     "google_generate_content" => "/models/{provider_model_id}:generateContent",
     "cohere_chat" => "/v2/chat",
+    "typesafe_systemone" => "/v1/systemone",
     "elevenlabs_speech" => "/v1/text-to-speech/{provider_model_id}",
     "elevenlabs_transcription" => "/v1/speech-to-text"
   }
 
-  @execution_operations [:text, :object, :embed, :image, :transcription, :speech, :realtime]
+  @execution_operations [
+    :text,
+    :object,
+    :evaluate,
+    :embed,
+    :image,
+    :transcription,
+    :speech,
+    :realtime
+  ]
   @execution_families Map.keys(@family_wire_protocol)
 
   @rerank_capabilities %{
@@ -203,6 +214,7 @@ defmodule LLMDB.ExecutionContract do
     []
     |> maybe_put_entry(:text, text_entry(model, provider))
     |> maybe_put_entry(:object, object_entry(model, provider))
+    |> maybe_put_entry(:evaluate, evaluate_entry(model, provider))
     |> maybe_put_entry(:embed, media_entry(model, provider, :embed, &embedding_model?/1))
     |> maybe_put_entry(:image, media_entry(model, provider, :image, &image_generation_model?/1))
     |> maybe_put_entry(
@@ -228,6 +240,15 @@ defmodule LLMDB.ExecutionContract do
       execution_entry(model, provider, text_object_family(model, provider, :object))
     end
   end
+
+  defp evaluate_entry(%Model{capabilities: %{evaluate: true}} = model, provider) do
+    case provider_family(provider, :evaluate) do
+      family when is_binary(family) -> execution_entry(model, provider, family)
+      _other -> nil
+    end
+  end
+
+  defp evaluate_entry(_model, _provider), do: nil
 
   defp media_entry(model, provider, operation, classifier) do
     family = provider_family(provider, operation)

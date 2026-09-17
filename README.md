@@ -41,6 +41,8 @@ metadata.
   runtime docs
 - `LLMDB.Model.execution` declares operation-specific support and the canonical
   API family used to execute that operation
+- Evaluation-only models use `capabilities.evaluate: true` and
+  `execution.evaluate`. They do not need text or object generation support.
 - `catalog_only: true` marks packaged entries that are intentionally
   non-executable
 

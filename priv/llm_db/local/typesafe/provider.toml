@@ -1,0 +1,16 @@
+id = "typesafe"
+name = "TypeSafe AI"
+base_url = "https://api.typesafe.ai"
+doc = "https://docs.typesafe.ai/api"
+env = ["TYPESAFE_API_KEY"]
+
+[runtime]
+base_url = "https://api.typesafe.ai"
+doc_url = "https://docs.typesafe.ai/api"
+
+[runtime.auth]
+type = "bearer"
+env = ["TYPESAFE_API_KEY"]
+
+[runtime.execution]
+evaluate = "typesafe_systemone"

@@ -68,6 +68,7 @@ defmodule LLMDB.Loader do
     :enabled,
     :encrypted_supported,
     :env,
+    :evaluate,
     :exclude_models,
     :excludes_when,
     :execution,
