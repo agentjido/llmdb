@@ -1,0 +1,20 @@
+id = "typesafe/jev"
+name = "TypeSafe: Jev"
+family = "jev"
+base_url = "https://api.cloudflare.com/client/v4/accounts/{account_id}"
+doc_url = "https://developers.cloudflare.com/ai/models/typesafe/jev/"
+
+[limits]
+context = 32000
+
+[modalities]
+input = ["text"]
+output = ["decisions"]
+
+[capabilities]
+chat = false
+evaluate = true
+
+[capabilities.streaming]
+text = false
+tool_calls = false

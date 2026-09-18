@@ -248,6 +248,7 @@ defmodule LLMDB.Normalize do
                       :code,
                       :document,
                       :embedding,
+                      :decisions,
                       :pdf
                     ])
 

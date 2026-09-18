@@ -171,6 +171,40 @@ defmodule LLMDB.PackagedTest do
       end
     end
 
+    test "snapshot contains verified gateway Jev evaluation contracts" do
+      snapshot = Packaged.snapshot()
+
+      for {provider_id, model_id, family, base_url, path} <- [
+            {"openrouter", "typesafe/jev-1.13", "openrouter_decisions", "https://openrouter.ai",
+             "/api/alpha/decisions"},
+            {"openrouter", "~typesafe/jev-latest", "openrouter_decisions",
+             "https://openrouter.ai", "/api/alpha/decisions"},
+            {"cloudflare_workers_ai", "typesafe/jev", "cloudflare_ai_run",
+             "https://api.cloudflare.com/client/v4/accounts/{account_id}", "/ai/run"}
+          ] do
+        model = snapshot["providers"][provider_id]["models"][model_id]
+        execution = model["execution"]["evaluate"]
+
+        assert model["capabilities"]["evaluate"] == true
+        assert model["capabilities"]["chat"] == false
+        assert model["capabilities"]["json"]["schema"] == false
+        assert model["catalog_only"] != true
+        assert execution["family"] == family
+        assert execution["wire_protocol"] == family
+        assert execution["base_url"] == base_url
+        assert execution["path"] == path
+        assert execution["provider_model_id"] == model_id
+        refute Map.has_key?(model["execution"], "text")
+        refute Map.has_key?(model["execution"], "object")
+      end
+
+      vercel = snapshot["providers"]["vercel"]["models"]["typesafe-ai/jev"]
+      assert vercel["capabilities"]["evaluate"] == true
+      assert vercel["capabilities"]["chat"] == false
+      assert vercel["catalog_only"] == true
+      assert vercel["execution"] == nil
+    end
+
     test "snapshot includes GLM-5.3 for the Z.AI Coding Plan" do
       snapshot = Packaged.snapshot()
 

@@ -1,0 +1,13 @@
+id = "typesafe-ai/jev"
+name = "TypeSafe AI: Jev"
+family = "jev"
+doc_url = "https://vercel.com/ai-gateway/models/jev"
+catalog_only = true
+
+[capabilities]
+chat = false
+evaluate = true
+
+[capabilities.streaming]
+text = false
+tool_calls = false

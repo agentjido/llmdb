@@ -71,6 +71,7 @@ defmodule LLMDB.ExecutionContractTest do
     assert enriched.execution.evaluate.family == "typesafe_systemone"
     assert enriched.execution.evaluate.wire_protocol == "typesafe_systemone"
     assert enriched.execution.evaluate.path == "/v1/systemone"
+    assert enriched.execution.evaluate.provider_model_id == "jev-latest"
     refute Map.has_key?(enriched.execution, :text)
     refute Map.has_key?(enriched.execution, :object)
     assert :ok = Validate.validate_runtime_contract([provider], [enriched])
@@ -84,6 +85,22 @@ defmodule LLMDB.ExecutionContractTest do
              errors,
              &(&1.error == :missing_execution_entry and &1.operation == :evaluate)
            )
+  end
+
+  test "explicit chat false blocks text and object execution even with text output metadata" do
+    provider = executable_provider()
+
+    model =
+      Model.new!(%{
+        id: "jev",
+        provider: :openai,
+        modalities: %{input: [:text], output: [:text]},
+        capabilities: %{chat: false, evaluate: true}
+      })
+
+    enriched = ExecutionContract.enrich_model(model, provider)
+    refute Map.has_key?(enriched.execution || %{}, :text)
+    refute Map.has_key?(enriched.execution || %{}, :object)
   end
 
   test "explicit model execution overrides inferred provider and modality defaults" do

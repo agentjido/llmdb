@@ -178,7 +178,8 @@ defmodule LLMDB.Sources.OpenRouter do
         alias_id = source_model["id"]
         target_id = get_in(source_model, ["alias_target", "slug"])
 
-        if is_binary(alias_id) and is_binary(target_id) and alias_id != target_id and
+        if is_binary(alias_id) and not String.starts_with?(alias_id, "~") and
+             is_binary(target_id) and alias_id != target_id and
              MapSet.member?(model_ids, target_id) do
           Map.put(direct_targets, alias_id, target_id)
         else
@@ -452,6 +453,20 @@ defmodule LLMDB.Sources.OpenRouter do
       if is_list(output_modalities) and
            Enum.any?(output_modalities, &(&1 in ["embedding", "embeddings"])) do
         Map.put(capabilities, :embeddings, true)
+      else
+        capabilities
+      end
+
+    # Only these documented Jev IDs have a confirmed Decisions request contract.
+    # Generic structured output parameters do not imply evaluation support.
+    capabilities =
+      if model.id in ["typesafe/jev-1.13", "~typesafe/jev-latest"] and
+           is_list(output_modalities) and "decisions" in output_modalities do
+        Map.merge(capabilities, %{
+          chat: false,
+          evaluate: true,
+          streaming: %{text: false, tool_calls: false}
+        })
       else
         capabilities
       end

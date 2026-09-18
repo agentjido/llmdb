@@ -36,6 +36,8 @@ defmodule LLMDB.ExecutionContract do
     "google_generate_content" => "google_generate_content",
     "cohere_chat" => "cohere_chat",
     "typesafe_systemone" => "typesafe_systemone",
+    "openrouter_decisions" => "openrouter_decisions",
+    "cloudflare_ai_run" => "cloudflare_ai_run",
     "elevenlabs_speech" => "elevenlabs_speech",
     "elevenlabs_transcription" => "elevenlabs_transcription"
   }
@@ -53,6 +55,8 @@ defmodule LLMDB.ExecutionContract do
     "google_generate_content" => "/models/{provider_model_id}:generateContent",
     "cohere_chat" => "/v2/chat",
     "typesafe_systemone" => "/v1/systemone",
+    "openrouter_decisions" => "/api/alpha/decisions",
+    "cloudflare_ai_run" => "/ai/run",
     "elevenlabs_speech" => "/v1/text-to-speech/{provider_model_id}",
     "elevenlabs_transcription" => "/v1/speech-to-text"
   }
@@ -243,8 +247,13 @@ defmodule LLMDB.ExecutionContract do
 
   defp evaluate_entry(%Model{capabilities: %{evaluate: true}} = model, provider) do
     case provider_family(provider, :evaluate) do
-      family when is_binary(family) -> execution_entry(model, provider, family)
-      _other -> nil
+      family when is_binary(family) ->
+        model
+        |> execution_entry(provider, family)
+        |> Map.put(:provider_model_id, model.provider_model_id || model.id)
+
+      _other ->
+        nil
     end
   end
 
@@ -517,6 +526,9 @@ defmodule LLMDB.ExecutionContract do
 
   defp chat_generation_model?(model) do
     cond do
+      match?(%{chat: false}, model.capabilities) ->
+        false
+
       exclusive_media_model?(model) ->
         false
 

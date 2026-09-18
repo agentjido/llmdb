@@ -17,6 +17,7 @@ defmodule LLMDB.Generated.ValidModalities do
     :document,
     :embedding,
     :embeddings,
+    :decisions,
     :file,
     :rerank,
     :speech,

@@ -1,0 +1,24 @@
+id = "~typesafe/jev-latest"
+name = "TypeSafe: Jev Latest"
+family = "jev"
+base_url = "https://openrouter.ai"
+doc_url = "https://openrouter.ai/typesafe"
+
+[limits]
+context = 32000
+
+[cost]
+input = 0.042
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["decisions"]
+
+[capabilities]
+chat = false
+evaluate = true
+
+[capabilities.streaming]
+text = false
+tool_calls = false

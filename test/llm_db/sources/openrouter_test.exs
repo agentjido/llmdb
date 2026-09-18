@@ -429,6 +429,71 @@ defmodule LLMDB.Sources.OpenRouterTest do
     end
   end
 
+  describe "Decisions models" do
+    test "preserves pinned and moving Jev IDs with evaluation capability" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "~typesafe/jev-latest",
+            "name" => "TypeSafe: Jev Latest",
+            "alias_target" => %{"slug" => "typesafe/jev-1.13"},
+            "architecture" => %{
+              "modality" => "text->decisions",
+              "output_modalities" => ["decisions"]
+            }
+          },
+          %{
+            "id" => "typesafe/jev-1.13",
+            "name" => "TypeSafe: Jev 1.13",
+            "architecture" => %{
+              "modality" => "text->decisions",
+              "output_modalities" => ["decisions"]
+            }
+          }
+        ]
+      }
+
+      provider = OpenRouter.transform(input)["openrouter"]
+      assert provider[:exclude_models] == []
+      assert Enum.map(provider[:models], & &1.id) == ["~typesafe/jev-latest", "typesafe/jev-1.13"]
+
+      for model <- provider[:models] do
+        assert model.capabilities.evaluate == true
+        assert model.capabilities.chat == false
+        assert model.capabilities.streaming.text == false
+        assert model.modalities.output == [:decisions]
+      end
+    end
+
+    test "does not infer evaluation from generic structured output or an unconfirmed ID" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "test/structured",
+            "name" => "Structured chat",
+            "supported_parameters" => ["response_format"],
+            "architecture" => %{
+              "modality" => "text->text",
+              "output_modalities" => ["text"]
+            }
+          },
+          %{
+            "id" => "test/other-decisions",
+            "name" => "Other decisions",
+            "architecture" => %{
+              "modality" => "text->decisions",
+              "output_modalities" => ["decisions"]
+            }
+          }
+        ]
+      }
+
+      for model <- OpenRouter.transform(input)["openrouter"][:models] do
+        refute get_in(model, [:capabilities, :evaluate])
+      end
+    end
+  end
+
   describe "pricing mapping" do
     test "maps OpenRouter token and tool pricing fields" do
       input = %{
@@ -560,6 +625,24 @@ defmodule LLMDB.Sources.OpenRouterTest do
                  extra: %{alias_target: %{"slug" => "anthropic/claude-fable-5"}}
                }
              ] = result["openrouter"][:models]
+    end
+
+    test "keeps a tilde alias as a distinct callable model" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "~test/model-latest",
+            "name" => "Model Latest",
+            "alias_target" => %{"slug" => "test/model-1"}
+          },
+          %{"id" => "test/model-1", "name" => "Model 1"}
+        ]
+      }
+
+      provider = OpenRouter.transform(input)["openrouter"]
+      assert provider[:exclude_models] == []
+      assert Enum.map(provider[:models], & &1.id) == ["~test/model-latest", "test/model-1"]
+      assert Enum.all?(provider[:models], &(Map.get(&1, :aliases, []) == []))
     end
 
     test "resolves an alias chain to the final canonical model" do
