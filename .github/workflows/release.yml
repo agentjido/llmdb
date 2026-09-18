@@ -13,6 +13,11 @@ on:
         required: false
         type: boolean
         default: false
+      hex_only:
+        description: "Publish Hex and HexDocs without publishing NPM"
+        required: false
+        type: boolean
+        default: false
       publish_tag:
         description: "Existing tag to publish or recover (run this workflow at the same tag)"
         required: false
@@ -205,6 +210,7 @@ jobs:
         if: ${{ inputs.dry_run != true }}
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.version }}
+          HEX_ONLY: ${{ inputs.hex_only }}
         run: |
           set -euo pipefail
           RELEASE_SHA=$(git rev-list -n 1 "$RELEASE_VERSION")
@@ -212,7 +218,8 @@ jobs:
           gh workflow run release.yml \
             --repo "$GITHUB_REPOSITORY" \
             --ref "$RELEASE_VERSION" \
-            --field publish_tag="$RELEASE_VERSION"
+            --field publish_tag="$RELEASE_VERSION" \
+            --field hex_only="$HEX_ONLY"
 
           PUBLISH_RUN_ID=""
           for _attempt in $(seq 1 30); do
@@ -360,6 +367,7 @@ jobs:
           echo "### Hex.pm is ready for llm_db $RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
 
   publish_npm:
+    if: ${{ inputs.hex_only != true }}
     needs:
       - publish_context
       - publish_hex
@@ -430,6 +438,7 @@ jobs:
           echo "### NPM is ready for @agentjido/llmdb $RELEASE_VERSION" >> "$GITHUB_STEP_SUMMARY"
 
   github_release:
+    if: ${{ always() && needs.publish_context.result == 'success' && needs.publish_hex.result == 'success' && (inputs.hex_only == true || needs.publish_npm.result == 'success') }}
     needs:
       - publish_context
       - publish_hex
@@ -477,6 +486,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node.js
+        if: ${{ inputs.hex_only != true }}
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "24"
@@ -484,11 +494,13 @@ jobs:
           package-manager-cache: false
 
       - name: Use the pinned NPM version
+        if: ${{ inputs.hex_only != true }}
         run: npm install --global npm@11.19.0
 
       - name: Wait for public registries
         env:
           RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+          HEX_ONLY: ${{ inputs.hex_only }}
         run: |
           set -euo pipefail
 
@@ -497,6 +509,14 @@ jobs:
               curl -fsSL https://hex.pm/api/packages/llm_db 2>/dev/null |
                 jq -r '.latest_stable_version // empty' || true
             )
+            if [[ "$HEX_ONLY" == "true" ]]; then
+              if [[ "$HEX_VERSION" == "$RELEASE_VERSION" ]]; then
+                exit 0
+              fi
+              sleep 5
+              continue
+            fi
+
             NPM_VERSION=$(
               npm view "@agentjido/llmdb@$RELEASE_VERSION" version 2>/dev/null || true
             )
@@ -508,7 +528,7 @@ jobs:
             sleep 5
           done
 
-          echo "::error::The release did not become visible in both public registries."
+          echo "::error::The release did not become visible in the requested public registries."
           exit 1
 
       - name: Verify HexDocs
@@ -522,6 +542,7 @@ jobs:
             "https://hexdocs.pm/llm_db/$RELEASE_VERSION/LLMDB.html"
 
       - name: Verify NPM signatures and provenance
+        if: ${{ inputs.hex_only != true }}
         env:
           RELEASE_SHA: ${{ needs.publish_context.outputs.release_sha }}
           RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
@@ -540,16 +561,22 @@ jobs:
         env:
           RELEASE_SHA: ${{ needs.publish_context.outputs.release_sha }}
           RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+          HEX_ONLY: ${{ inputs.hex_only }}
         run: |
           {
             echo "### Release QA passed"
             echo "- Version: $RELEASE_VERSION"
             echo "- Commit: $RELEASE_SHA"
             echo "- Hex.pm and HexDocs: verified"
-            echo "- NPM signature and provenance: verified"
+            if [[ "$HEX_ONLY" == "true" ]]; then
+              echo "- NPM: not published"
+            else
+              echo "- NPM signature and provenance: verified"
+            fi
           } >> "$GITHUB_STEP_SUMMARY"
 
   verify_npm_runtime:
+    if: ${{ inputs.hex_only != true }}
     needs:
       - publish_context
       - verify_release
