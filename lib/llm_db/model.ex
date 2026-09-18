@@ -381,6 +381,7 @@ defmodule LLMDB.Model do
 
     normalized =
       case value do
+        nil -> nil
         atom when is_atom(atom) -> Atom.to_string(atom)
         other -> other
       end

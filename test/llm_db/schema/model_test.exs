@@ -108,6 +108,24 @@ defmodule LLMDB.Schema.ModelTest do
       assert result.execution.text.transport == "http_request"
     end
 
+    test "keeps an omitted execution transport null" do
+      input = %{
+        id: "jev-1.13",
+        provider: :openrouter,
+        execution: %{
+          evaluate: %{
+            supported: true,
+            family: "openrouter_decisions",
+            wire_protocol: "openrouter_decisions",
+            path: "/api/alpha/decisions"
+          }
+        }
+      }
+
+      assert {:ok, result} = Model.new(input)
+      assert result.execution.evaluate.transport == nil
+    end
+
     test "parses extended limits, capabilities, and pricing component metadata" do
       input = %{
         id: "gpt-5.5",
