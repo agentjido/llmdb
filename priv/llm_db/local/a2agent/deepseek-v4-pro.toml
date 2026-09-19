@@ -1,0 +1,22 @@
+id = "deepseek-v4-pro"
+name = "DeepSeek V4 Pro"
+doc_url = "https://a2agent.me/models/deepseek-v4-pro"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.261
+output = 0.522
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.streaming]
+text = true

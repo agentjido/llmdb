@@ -1,0 +1,22 @@
+id = "minimax-m3"
+name = "MiniMax M3"
+doc_url = "https://a2agent.me/models/minimax-m3"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.15
+output = 0.6
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true

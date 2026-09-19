@@ -1,0 +1,19 @@
+id = "qwen3.8-flash"
+name = "Qwen3.8 Flash"
+doc_url = "https://a2agent.me/models/qwen3.8-flash"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-19, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.135
+output = 0.423
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.streaming]
+text = true

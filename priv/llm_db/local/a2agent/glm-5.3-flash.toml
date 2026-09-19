@@ -1,0 +1,19 @@
+id = "glm-5.3-flash"
+name = "GLM-5.3 Flash"
+doc_url = "https://a2agent.me/models/glm-5.3-flash"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.135
+output = 0.45
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.streaming]
+text = true

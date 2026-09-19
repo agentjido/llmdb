@@ -1,0 +1,16 @@
+id = "a2agent"
+name = "A2Agent"
+base_url = "https://api.a2agent.me/v1"
+doc = "https://docs.a2agent.me"
+env = ["A2AGENT_API_KEY"]
+
+[runtime]
+base_url = "https://api.a2agent.me/v1"
+doc_url = "https://docs.a2agent.me"
+
+[runtime.auth]
+type = "bearer"
+env = ["A2AGENT_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"

@@ -1,0 +1,19 @@
+id = "kimi-k3"
+name = "Kimi K3"
+doc_url = "https://a2agent.me/models/kimi-k3"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 2.4
+output = 12
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.streaming]
+text = true

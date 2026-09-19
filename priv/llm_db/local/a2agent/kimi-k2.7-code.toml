@@ -1,0 +1,19 @@
+id = "kimi-k2.7-code"
+name = "Kimi K2.7 Code"
+doc_url = "https://a2agent.me/models/kimi-k2.7-code"
+
+[limits]
+context = 256000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.665
+output = 2.8
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities.streaming]
+text = true

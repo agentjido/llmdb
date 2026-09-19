@@ -1,0 +1,19 @@
+id = "qwen3.7-plus"
+name = "Qwen3.7 Plus"
+doc_url = "https://a2agent.me/models/qwen3.7-plus"
+
+[limits]
+context = 1000000
+
+# Public catalog rates as of 2026-09-18, USD per million tokens.
+# https://a2agent.me/api/v1/models/catalog-pricing
+[cost]
+input = 0.96
+output = 3.84
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.streaming]
+text = true
