@@ -172012,6 +172012,275 @@
     "annotations": {
       "archived": false,
       "datasets": [],
+      "description": "# Muse-Spark-1.3\n\n## About this model\n\nMuse-Spark-1.3 is a placeholder name for a Meta text-generation model. This model card will be updated when the final model name and verified model details are available.\n\n## Key capabilities\n\nMuse-Spark-1.3 accepts text prompts and generates text responses. Model-specific capabilities, architecture details, context length, and training information are pending verification.\n\n# Use cases\n\n## Intended use cases\n\nThe model is intended for general text-generation scenarios such as drafting, summarization, and question answering. Evaluate the model for quality, safety, and suitability before using it in a production application.\n\n## Out-of-scope use cases\n\nDo not use the model in ways that violate applicable laws, regulations, license terms, or usage policies. The model should not be treated as a source of authoritative medical, legal, financial, or safety-critical advice.\n\n# Technical specifications\n\n| Property | Value |\n| --- | --- |\n| Publisher | Meta |\n| Task | Text generation |\n| Input modality | Text |\n| Output modality | Text |\n| Model architecture | To be confirmed |\n| Context length | To be confirmed |\n| Knowledge cutoff | To be confirmed |\n\n## Input format\n\nThe model accepts text prompts.\n\n## Output format\n\nThe model returns generated text.\n\n## Supported languages\n\nEnglish is currently listed as the supported language. Additional language support is to be confirmed.\n\n## Sample request\n\n```json\n{\n  \"input_data\": {\n    \"input_string\": [\"Write a short welcome message.\"],\n    \"parameters\": {\n      \"max_new_tokens\": 100,\n      \"temperature\": 0.8,\n      \"top_p\": 0.7,\n      \"do_sample\": true\n    }\n  }\n}\n```",
+      "invisibleUntil": "2026-09-21T00:00:00+00:00",
+      "labels": [
+        "invisibleLatest",
+        "default",
+        "latest"
+      ],
+      "name": "Muse-Spark-1.3",
+      "resourceRequirements": null,
+      "sampleInputData": null,
+      "sampleOutputData": null,
+      "stage": "Development",
+      "systemCatalogData": {
+        "evaluation": "# Quality and performance evaluations\n\nModel-specific benchmark and evaluation results are not yet available. Add verified results and evaluation methodology before promoting this model beyond preview.",
+        "azureOpenAIModelName": null,
+        "directoryPath": null,
+        "promptTemplate": null,
+        "fineTuningMethods": null,
+        "toolCallStart": null,
+        "isCustomerInfoRequired": null,
+        "deploymentSkuLocations": [
+          "UAENORTH"
+        ],
+        "modelArchitecture": null,
+        "sharedComputeCapacityEnabled": null,
+        "supportsToolCalling": null,
+        "inferenceRetirementDate": null,
+        "trainingDataSummary": null,
+        "enableMaap": false,
+        "textContextWindow": null,
+        "deploymentSku": [
+          {
+            "locations": [
+              "UAENORTH"
+            ],
+            "name": "GlobalStandard",
+            "prices": null
+          }
+        ],
+        "supportedRegionsLink": null,
+        "rateLimitLink": null,
+        "pricingLink": "https://aka.ms/meta-pricing",
+        "foundryLocal": null,
+        "toolCallEnd": null,
+        "industry": null,
+        "playgroundRateLimitTier": "high",
+        "inferenceLegacyDate": null,
+        "featured": true,
+        "hasDeltaWeights": null,
+        "finetuneMinSkuSpec": null,
+        "modelFlavor": null,
+        "inferenceMinSkuSpec": null,
+        "datasets": null,
+        "alias": null,
+        "deploymentOptionDetails": null,
+        "featureFlags": null,
+        "lifecycle": "Preview",
+        "evaluationMinSkuSpec": null,
+        "preview": true,
+        "isDirectFromAzure": true,
+        "displayName": "Muse-Spark-1.3",
+        "trainingDataDate": null,
+        "toolResponseStart": null,
+        "benchmark": null,
+        "maapSurcharge": null,
+        "inferenceDeprecationDate": "2026-04-07T00:00:00Z",
+        "deploymentOptions": [
+          "ServerlessMaaS",
+          "UnifiedEndpointMaaS",
+          "Serverless API"
+        ],
+        "toolResponseEnd": null,
+        "maapSurchargeType": null,
+        "architecture": null,
+        "modalitiesSupported": null,
+        "maasInference": true,
+        "reasoningStart": null,
+        "openmmlabModelId": null,
+        "enableBatch": false,
+        "maasFineTuning": null,
+        "trainingApproach": null,
+        "huggingFaceModelId": null,
+        "summary": "Muse-Spark-1.3 is a Meta text-generation model for conversational experiences, drafting, summarization, and question answering.",
+        "reportingMechanisms": null,
+        "componentVersion": null,
+        "featuresSupported": [
+          "streaming"
+        ],
+        "skuToNumReplicasMap": null,
+        "fineTuningTasks": null,
+        "inferenceTasks": [
+          "chat-completion"
+        ],
+        "maasFinetuningOffer": null,
+        "evaluationComputeAllowed": null,
+        "evaluationRecommendedSkus": null,
+        "finetuneRetirementDate": null,
+        "azureOffers": [
+          "standard-paygo"
+        ],
+        "maasFinetuningAvailableRegions": null,
+        "terms": null,
+        "minQuotaTier": null,
+        "deploymentSkuNames": [
+          "GlobalStandard"
+        ],
+        "toolsSupported": null,
+        "keywords": [
+          "Conversation"
+        ],
+        "mlflowFlavor": null,
+        "inferenceEnvironmentAssetId": null,
+        "freePlayground": true,
+        "reasoningEnd": null,
+        "maxOutputTokens": null,
+        "softwareRequirements": null,
+        "author": null,
+        "minFLVersion": null,
+        "trainingCompute": null,
+        "parameterSchema": null,
+        "toolRegisterStart": null,
+        "languages": [
+          "en"
+        ],
+        "azureOpenAIVersion": null,
+        "deploymentTypes": [
+          "maas-inference"
+        ],
+        "languagesSupportedLink": null,
+        "endpointsSupported": null,
+        "baseModelWeightsVer": null,
+        "modelCapabilities": [
+          "streaming",
+          "tool-calling",
+          "agentsV2"
+        ],
+        "maasFinetuningTest": null,
+        "trainingTime": null,
+        "hostedOn": null,
+        "publisher": "Meta",
+        "license": "custom",
+        "fineTuneComputeAllowed": null,
+        "hiddenLayerScanned": null,
+        "modelPath": null,
+        "inferenceComputeAllowed": null,
+        "licenseDescription": null,
+        "fineTuneOnlyModel": null,
+        "longContextRetirementDate": null,
+        "contactInformation": null,
+        "finetuneRecommendedSkus": null,
+        "trainingDates": null,
+        "maxInputTokens": null,
+        "domain": null,
+        "toolRegisterEnd": null,
+        "finetuneDeprecationDate": null,
+        "outputModalities": [
+          "text"
+        ],
+        "trademarkInformation": null,
+        "parameterCount": null,
+        "trainingCorpusSize": null,
+        "previewType": null,
+        "aotManifest": null,
+        "inferenceSupportedEnvs": null,
+        "inferenceRecommendedSkus": null,
+        "maasFinetuningDeployRegions": null,
+        "notes": "# Responsible AI considerations\n\n## Safety\n\nModel-specific safety evaluations are pending. Applications should use safeguards appropriate to their use case and should test for inaccurate, biased, harmful, or otherwise unsuitable outputs before deployment.\n\n## Known limitations\n\nThe model's architecture, training data, knowledge cutoff, benchmark results, and detailed limitations have not yet been confirmed. Generated responses may be inaccurate or incomplete and should be reviewed when used in consequential scenarios.\n\n## Acceptable use\n\nUse must comply with applicable laws, regulations, license terms, and usage policies.",
+        "inputModalities": [
+          "text"
+        ]
+      },
+      "tags": {
+        "Featured": "",
+        "InferenceDeprecationDate": "04/07/2026 00:00:00 +00:00",
+        "Preview": "",
+        "author": "Meta",
+        "deploymentOptions": "ServerlessMaaS,UnifiedEndpointMaaS,Serverless API",
+        "disable-batch": "true",
+        "disable-maap": "true",
+        "displayName": "Muse-Spark-1.3",
+        "evaluation": "# Quality and performance evaluations\n\nModel-specific benchmark and evaluation results are not yet available. Add verified results and evaluation methodology before promoting this model beyond preview.",
+        "freePlayground": "true",
+        "inputModalities": "text",
+        "isDirectFromAzure": "true",
+        "keywords": "Conversation",
+        "languages": "en",
+        "license": "custom",
+        "lifecycle": "Preview",
+        "maas-inference": "true",
+        "modelCapabilities": "streaming,tool-calling,agentsV2",
+        "notes": "# Responsible AI considerations\n\n## Safety\n\nModel-specific safety evaluations are pending. Applications should use safeguards appropriate to their use case and should test for inaccurate, biased, harmful, or otherwise unsuitable outputs before deployment.\n\n## Known limitations\n\nThe model's architecture, training data, knowledge cutoff, benchmark results, and detailed limitations have not yet been confirmed. Generated responses may be inaccurate or incomplete and should be reviewed when used in consequential scenarios.\n\n## Acceptable use\n\nUse must comply with applicable laws, regulations, license terms, and usage policies.",
+        "outputModalities": "text",
+        "playgroundRateLimitTier": "high",
+        "pricingLink": "https://aka.ms/meta-pricing",
+        "summary": "Muse-Spark-1.3 is a Meta text-generation model for conversational experiences, drafting, summarization, and question answering.",
+        "task": "chat-completion"
+      }
+    },
+    "assetId": "azureml://registries/azureml-meta/models/Muse-Spark-1.3/versions/1",
+    "entityContainerId": "7a8477e7-97f9-4c75-911f-adfaeeb58689",
+    "entityId": "azureml://registries/7a8477e7-97f9-4c75-911f-adfaeeb58689/type/models/objectId/Muse-Spark-1.3/version/1",
+    "entityObjectId": "Muse-Spark-1.3",
+    "entityResourceName": "azureml-meta",
+    "fragmentId": null,
+    "highlights": {},
+    "internal": {},
+    "isAFragment": false,
+    "kind": "Versioned",
+    "properties": {
+      "allowedDeploymentTemplates": [],
+      "alphanumericVersion": "1",
+      "artifactProfile": null,
+      "creationContext": {
+        "createdBy": {
+          "userName": "azureml-meta",
+          "userObjectId": "00000000-0000-0000-0000-000000000000",
+          "userPrincipalName": null,
+          "userTenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "createdTime": "2026-09-12T01:37:08.27186+00:00",
+        "creationSource": null
+      },
+      "derivedModelIds": null,
+      "experimentName": null,
+      "id": "Muse-Spark-1.3:1",
+      "intellectualProperty": {
+        "publisher": null
+      },
+      "isAnonymous": false,
+      "loraConfig": null,
+      "managedBy": null,
+      "mimeType": "application/json",
+      "modelFormat": "CUSTOM",
+      "modelFramework": "Custom",
+      "modelFrameworkVersion": null,
+      "modifiedTime": "2026-09-12T01:37:06.0910862Z",
+      "name": "Muse-Spark-1.3",
+      "orginAssetId": null,
+      "parentModelId": null,
+      "provisioningState": "Succeeded",
+      "runId": null,
+      "sourceData": null,
+      "systemManaged": false,
+      "unpack": false,
+      "updatedTime": "0001-01-01T00:00:00+00:00",
+      "url": null,
+      "userProperties": {
+        "azureml.copyRegistryFilesToWorkspace": "True"
+      },
+      "variantInfo": null,
+      "version": 1,
+      "weightType": null
+    },
+    "relationships": [],
+    "relevancyScore": 1.0,
+    "resourceType": "Registry",
+    "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
+    "type": "models",
+    "updateSequence": 2,
+    "usage": {
+      "popularity": 1.0,
+      "totalCount": 0
+    },
+    "version": "1"
+  },
+  {
+    "annotations": {
+      "archived": false,
+      "datasets": [],
       "description": "# Direct from Azure models\n Direct from Azure models are a select portfolio curated for their market-differentiated capabilities:\n\n- Secure and managed by Microsoft: Purchase and manage models directly through Azure with a single license, consistent support, and no third-party dependencies, backed by Azure's enterprise-grade infrastructure.\n- Streamlined operations: Benefit from unified billing, governance, and seamless PTU portability across models hosted on Azure - all part of Microsoft Foundry.\n- Future-ready flexibility: Access the latest models as they become available, and easily test, deploy, or switch between them within Microsoft Foundry; reducing integration effort.\n- Cost control and optimization: Scale on demand with pay-as-you-go flexibility or reserve PTUs for predictable performance and savings.\n\nLearn more about [Direct from Azure models](https://aka.ms/DirectfromAzure).\n\n# Key capabilities\n\n## About this model\n\nA bidirectional voice API that lets applications listen and speak simultaneously instead of forcing rigid turn boundaries. It is being developed as a new specialized API surface rather than a small extension of the current Realtime S2S deployment. Includes:\n- Multilingual + accents across 10 languages\n- Instruction following with FEM/BEM architecture\n- Tool calling with FEM/BEM architecture\n\nSupported region: Sweden Central, East US 2, Central US, France Central, South India, Canada Central\n\n## Key model capabilities\n\nKey Features: \n- Multilingual + accents across 10 languages\n- Instruction following with FEM/BEM architecture\n- Tool calling with FEM/BEM architecture which can be used with other gpt models for complex requests\n- Human-like naturalness\n- Simultaneous listen-and-speak interaction\n- Configurable frontend and backend prompts\n- Delegative patterns without rigid turn-taking\n\n\n# Use cases\nSee Responsible AI for additional considerations for responsible use.\n\n## Key use cases\n\n- Contact centers and telephony\n- Conversational assistants\n- Hands-free and accessibility experiences\n- Education/coaching\n- Frontline support\n\n## Out of scope use cases\n\nThe provider has not supplied this information.\n\n# Pricing\nPricing is based on a number of factors, including deployment type and tokens used. [See pricing details here.](https://azure.microsoft.com/en-us/pricing/details/ai-foundry-models/microsoft/?msockid=1775f99b2f8e614e1ba1eb792e496067)\n\n\n# Legal\n\nMicrosoft is acting as the authorized representative of the Publisher in the sale of this Offer. The contract of sale is concluded directly between you and the Offer Provider.\n\n# Technical specs\n\n- WebRTC and WebSocket transports\n- 8 kHz G.711 and 16/24 kHz PCM audio\n- Voice output\n- Configurable frontend/backend prompts\n- Responses and client delegation\n- Continuous transcript events\n- Approved custom voices with speaker consent\n\n## Training cut-off date\n\nThe provider has not supplied this information.\n\n## Training time\n\nThe provider has not supplied this information.\n\n## Input formats\n\nThe provider has not supplied this information.\n\n## Output formats  \n\nThe provider has not supplied this information.\n\n## Supported languages\n\nThe provider has not supplied this information.\n\n## Sample JSON response\n\nThe provider has not supplied this information.\n\n## Model architecture\n\nThe provider has not supplied this information.\n\n## Long context\n\nThe provider has not supplied this information.\n\n## Optimizing model performance\n\nThe provider has not supplied this information.\n\n## Additional assets\n\nThe provider has not supplied this information.\n\n# Training disclosure\n\n## Training, testing and validation \n\nThe provider has not supplied this information.\n\n# Distribution\n\n## Distribution channels\n\nThis model is provided through the Azure OpenAI Service.\n\n# More information\n\nThe following documents are applicable: \n\n- [Overview of Responsible AI practices for Azure OpenAI models](https://learn.microsoft.com/legal/cognitive-services/openai/overview)\n- [Transparency Note for Azure OpenAI Service](https://learn.microsoft.com/legal/cognitive-services/openai/transparency-note)\n",
       "invisibleUntil": "2026-05-06T16:00:00+00:00",
       "labels": [
