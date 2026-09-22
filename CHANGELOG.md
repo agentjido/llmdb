@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.5](https://github.com/agentjido/llmdb/compare/2026.9.4...2026.9.5) (2026-09-22)
+
+
+
+
+### Features:
+
+* providers: add A2Agent OpenAI-compatible model catalog (#329) by a2agent
+
+### Bug Fixes:
+
+* deps: update mint for security advisory by mikehostetler
+
 ## [2026.9.4](https://github.com/agentjido/llmdb/compare/2026.9.3...2026.9.4) (2026-09-18)
 
 
