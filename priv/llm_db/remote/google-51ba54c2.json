@@ -674,6 +674,18 @@
       "version": "0.1"
     },
     {
+      "description": "Latest preview release of Antigravity Agent",
+      "displayName": "Antigravity Agent Preview Latest",
+      "inputTokenLimit": 1048576,
+      "name": "models/antigravity-preview-latest",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens"
+      ],
+      "version": "Antigravity Agent Preview Latest"
+    },
+    {
       "description": "Preview release (April 21st, 2026) of Deep Research Max",
       "displayName": "Deep Research Max Preview (Apr-21-2026)",
       "inputTokenLimit": 131072,

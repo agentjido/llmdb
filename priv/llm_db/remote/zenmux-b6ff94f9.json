@@ -4,6 +4,259 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1048576,
+      "created": 1790046897,
+      "display_name": "Xiaomi: MiMo-V2.6-Pro-UltraSpeed",
+      "id": "xiaomi/mimo-v2.6-pro-ultraspeed",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "xiaomi",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 8.7
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.036
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4.35
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-09-22"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1048576,
+      "created": 1790043997,
+      "display_name": "Xiaomi: MiMo-V2.6-Flash",
+      "id": "xiaomi/mimo-v2.6-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "xiaomi",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.28
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.0028
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.14
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-09-22"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1048576,
+      "created": 1790045814,
+      "display_name": "Xiaomi: MiMo-V2.6-Pro",
+      "id": "xiaomi/mimo-v2.6-pro",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "xiaomi",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.87
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.0036
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.435
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-09-22"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 500000,
+      "created": 1790007629,
+      "display_name": "xAI: Grok 4.7",
+      "id": "x-ai/grok-4.7",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "x-ai",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "200",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 12
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "200",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "200",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.005
+          }
+        ]
+      },
+      "publish_time": "2026-09-21"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1000000,
       "created": 1789874951,
       "display_name": "StepFun: Step 5 Preview",
@@ -679,6 +932,47 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 262144,
+      "created": 1789974132,
+      "display_name": "inclusionAI: Ling-3.0-flash-Sante",
+      "id": "inclusionai/ling-3.0-flash-sante",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "inclusionai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-09-04"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1048576,
       "created": 1788402390,
       "display_name": "Meta: Muse Spark 1.3",
@@ -1119,6 +1413,47 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 262144,
+      "created": 1789971172,
+      "display_name": "inclusionAI: Ling-3.0-flash-Fin",
+      "id": "inclusionai/ling-3.0-flash-fin",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "inclusionai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-08-27"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1000000,
       "created": 1787754576,
       "display_name": "Z.AI: GLM 5.3 Flash",
@@ -1495,28 +1830,28 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7.5
+            "value": 3.75
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.15
+            "value": 0.075
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1.5
+            "value": 0.75
           }
         ],
         "web_search": [
           {
             "currency": "USD",
             "unit": "perCount",
-            "value": 0.014
+            "value": 0.007
           }
         ]
       },
