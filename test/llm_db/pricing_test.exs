@@ -219,4 +219,59 @@ defmodule LLMDB.PricingTest do
     assert %{components: components, unresolved: []} = Pricing.components_for(model)
     assert Enum.map(components, & &1.id) == ["token.input", "token.output"]
   end
+
+  test "a known non-match excludes a component even when its exclusion is unknown" do
+    component = %{
+      id: "pricing.flex",
+      applies_when: %{service_tier: "flex"},
+      excludes_when: %{api: "batch"}
+    }
+
+    model = %{pricing: %{components: [component]}}
+
+    assert %{components: [], unresolved: []} =
+             Pricing.components_for(model, service_tier: "default")
+
+    assert %{components: [], unresolved: [^component]} =
+             Pricing.components_for(model, service_tier: "flex")
+
+    assert %{components: [], unresolved: []} = Pricing.components_for(model, api: "batch")
+  end
+
+  test "nil request values remain unresolved for scalar, nested, and numeric conditions" do
+    for {key, expected} <- [
+          {:cache_ttl, "1h"},
+          {:regional_processing, true},
+          {:request_body, %{speed: "fast"}},
+          {:input_tokens, %{gt: 272_000}}
+        ] do
+      component = %{id: "conditional", applies_when: %{key => expected}}
+      model = %{pricing: %{components: [component]}}
+
+      assert %{components: [], unresolved: [^component]} =
+               Pricing.components_for(model, %{key => nil})
+    end
+  end
+
+  test "JSON string keys match nested atom-keyed context without creating atoms" do
+    key = "unknown-pricing-header-#{System.unique_integer([:positive])}"
+
+    component = %{
+      "id" => "pricing.fast",
+      "applies_when" => %{
+        "request_body" => %{"speed" => "fast"},
+        "request_headers" => %{key => "on"}
+      }
+    }
+
+    model = %{"pricing" => %{"components" => [component]}}
+
+    assert %{components: [^component], unresolved: []} =
+             Pricing.components_for(model,
+               request_body: %{speed: "fast"},
+               request_headers: %{key => "on"}
+             )
+
+    assert_raise ArgumentError, fn -> String.to_existing_atom(key) end
+  end
 end

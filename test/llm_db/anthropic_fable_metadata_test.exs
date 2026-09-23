@@ -65,14 +65,11 @@ defmodule LLMDB.AnthropicFableMetadataTest do
     assert components["token.cache_read"].rate == 0.25
     assert components["token.cache_write"].rate == 12.5
 
-    assert components["token.cache_write"].applies_when == %{
-             cache_operation: "write",
-             cache_ttl: "5m"
-           }
-
-    assert components["token.cache_write.1h"].rate == 20.0
-    assert components["token.input.batch"].rate == 5.0
-    assert components["token.output.batch"].rate == 25.0
+    assert components["token.cache_write"].applies_when == %{cache_ttl: "5m"}
+    assert components["token.cache_write.1h"].derives_from == "token.input"
+    assert components["token.cache_write.1h"].multiplier == 2.0
+    assert components["pricing.batch"].multiplier == 0.5
+    assert components["pricing.batch"].applies_to == ["token.*"]
   end
 
   defp fable_model do

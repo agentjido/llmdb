@@ -111,7 +111,15 @@ defmodule LLMDB.Pricing do
 
   This helper does not calculate final cost. It separates components with fully
   satisfied conditions from components that cannot be resolved because the
-  supplied context is incomplete.
+  supplied context is incomplete. Missing or `nil` context values are unknown;
+  a known non-matching application condition or matching exclusion rules a
+  component out even if another condition is unknown.
+
+  Conditions are conjunctive and accept atom or string keys, nested maps, and
+  numeric `gt`/`gte`/`lt`/`lte` comparisons. Selected components are returned
+  unchanged: callers must resolve derived rates and apply matching modifiers
+  once. This helper neither resolves overlapping rate components nor validates
+  provider request eligibility. See the pricing guide for current-model examples.
 
   ## Examples
 
@@ -213,19 +221,14 @@ defmodule LLMDB.Pricing do
     excludes_when = Map.get(component, :excludes_when) || Map.get(component, "excludes_when")
     applies_when = Map.get(component, :applies_when) || Map.get(component, "applies_when")
 
-    case conditions_status(excludes_when, context, :exclusion) do
-      :match ->
-        :excluded
+    application = conditions_status(applies_when, context, :application)
+    exclusion = conditions_status(excludes_when, context, :exclusion)
 
-      :no_match ->
-        case conditions_status(applies_when, context, :application) do
-          :match -> :applies
-          :unknown -> :unresolved
-          :no_match -> :excluded
-        end
-
-      :unknown ->
-        :unresolved
+    case {application, exclusion} do
+      {:no_match, _} -> :excluded
+      {_, :match} -> :excluded
+      {:match, :no_match} -> :applies
+      _ -> :unresolved
     end
   end
 
@@ -248,6 +251,8 @@ defmodule LLMDB.Pricing do
       :error -> :unknown
     end
   end
+
+  defp expected_status(_expected, nil), do: :unknown
 
   defp expected_status(expected, actual) when is_map(expected) and is_map(actual) do
     if comparison_map?(expected) do
@@ -291,7 +296,6 @@ defmodule LLMDB.Pricing do
   defp comparison_status(_comparisons, _actual), do: :unknown
 
   defp truthy_status(false), do: :no_match
-  defp truthy_status(nil), do: :unknown
   defp truthy_status(_actual), do: :match
 
   defp merge_condition_statuses(statuses) do

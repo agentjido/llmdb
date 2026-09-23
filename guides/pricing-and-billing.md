@@ -255,42 +255,117 @@ The helper does not calculate invoices. It preserves the distinction between
 base rates, conditional rates, derived rates, and stackable modifiers so billing
 logic can make provider-specific choices explicitly.
 
-### Calculate Costs
+### Current OpenAI and Claude overlays
+
+The curated pricing overlays checked on September 22, 2026 cover:
+
+| Provider | Models | Conditional pricing |
+| --- | --- | --- |
+| OpenAI | GPT-6 Astra, Sol, Luna | 272K context boundary, Batch, Flex, Fast/Priority, regional processing |
+| Anthropic | Claude Fable 5.1, Opus 5.5, Opus 5, Sonnet 5 | 5m/1h cache writes, Batch, US-only inference |
+| Anthropic | Claude Opus 5.5, Opus 5 | Fast mode in addition to the conditions above |
+| Anthropic | Claude Haiku 4.5 | 5m/1h cache writes and Batch |
+
+These are first-party prices. Cloud partner and gateway catalogs have independent
+pricing. The evidence links and verification date are stored under each model's
+`extra.pricing`. Sources: [OpenAI pricing](https://developers.openai.com/api/docs/pricing),
+[Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing), and
+[Claude prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching).
+
+#### GPT-6 context and processing tiers
 
 ```elixir
-defmodule CostCalculator do
-  def token_cost(model, input_tokens, output_tokens) do
-    components = model.pricing.components
+{:ok, model} = LLMDB.model("openai:gpt-6-sol")
 
-    input_rate = get_rate(components, "token.input")
-    output_rate = get_rate(components, "token.output")
-
-    (input_tokens * input_rate / 1_000_000) + (output_tokens * output_rate / 1_000_000)
-  end
-
-  def tool_cost(model, tool_name, call_count) do
-    component = Enum.find(model.pricing.components, & &1.tool == tool_name)
-
-    if component do
-      call_count * component.rate / component.per
-    else
-      0.0
-    end
-  end
-
-  defp get_rate(components, id) do
-    case Enum.find(components, & &1.id == id) do
-      nil -> 0.0
-      comp -> comp.rate
-    end
-  end
-end
-
-# Usage
-{:ok, model} = LLMDB.model("openai:gpt-4o")
-CostCalculator.token_cost(model, 1000, 500)      # => 0.0075
-CostCalculator.tool_cost(model, "web_search", 5) # => 0.05
+selection = LLMDB.Pricing.components_for(model,
+  input_tokens: 272_001,
+  api: "responses",
+  service_tier: "flex",
+  regional_processing: false
+)
 ```
+
+For this context, the selected token rates are the long-context Standard rates:
+input $4, output $15, cache read $0.40, and cache write $5 per million tokens.
+The selected `pricing.flex` component multiplies each by 0.5. Exactly 272,000
+input tokens selects the short tier; 272,001 selects the long tier for **all**
+tokens in the request, including output, rather than just the excess tokens.
+`input_tokens` here means the total prompt length, including cached tokens; the
+billing meters separately count uncached input, cache reads, and cache writes.
+
+Use `api: "batch"` for Batch jobs. For synchronous requests, supply the actual
+response `service_tier` (`"default"`, `"flex"`, `"fast"`, or the `"priority"`
+alias), accounting for any provider fallback. `"auto"` is a request preference,
+not evidence of the tier that was billed. Batch excludes synchronous processing
+modifiers so it cannot also receive a Flex discount or Fast premium.
+
+`regional_processing` is a caller-supplied boolean indicating use of a regional
+processing endpoint; it is not an OpenAI request parameter. The 1.1 multiplier
+stacks with processing and context tiers. Pricing selection does not validate
+endpoint eligibility: Sol and Luna allow EU residency only with Standard
+processing; Astra Fast mode is unavailable with EU residency. These restrictions
+are also recorded in `extra.pricing`.
+
+Reasoning effort changes usage, not the per-token rate. Count billed reasoning
+tokens within output usage, rather than charging for them a second time.
+
+#### Claude cache duration and modifiers
+
+```elixir
+{:ok, model} = LLMDB.model("anthropic:claude-fable-5-1")
+
+selection = LLMDB.Pricing.components_for(model,
+  api: "batch",
+  cache_ttl: "1h",
+  inference_geo: "us"
+)
+```
+
+The one-hour cache-write component derives its rate from `token.input` with a
+2.0 multiplier. Batch contributes a 0.5 modifier and US-only inference contributes
+1.1, so the cache-write rate is `10 * 2 * 0.5 * 1.1 = $11 / MTok`.
+`inference_geo: "global"` has no residency premium. Cache reads retain each
+model's documented rate: Fable 5.1 and Opus 5.5 have different read discounts.
+Haiku 4.5 does not support first-party inference geography.
+
+For synchronous Opus 5.5 or Opus 5, also supply
+`request_body: %{speed: "standard"}` or `%{speed: "fast"}`. Fast contributes a
+2.0 modifier to token rates, including cache rates, and is unavailable with
+Batch. These current Claude models have no long-context premium.
+
+`cache_ttl` selects the rate for a cache-write usage group, not a property of all
+tokens in a request. When a response reports both 5m and 1h writes, select each
+TTL separately and apply its rate only to that duration's reported token count.
+Count input, output, and cache reads once. An omitted or `nil` TTL leaves both
+cache-write variants unresolved; it does not assume the cheaper duration.
+
+### Using selected components in a billing consumer
+
+`components_for/2` selects metadata; it does not produce final rates or validate
+all provider request combinations. For the curated overlays above:
+
+1. Supply known request/response context, including explicit defaults. Missing
+   or `nil` values remain unknown. Inspect `selection.unresolved` before pricing
+   a usage meter; a missing price or unresolved modifier is not zero cost.
+2. Identify each token meter's selected rate. Mutually exclusive context/TTL
+   conditions select one rate per meter. Arbitrary custom metadata can still
+   contain overlapping rates; the helper does not choose a winner for them.
+3. Resolve `derives_from` against the selected base component **before** applying
+   token-wide modifiers. Then apply each matching modifier once to each resolved
+   rate. Do not apply residency or Batch again through a derived dependency.
+4. Match `applies_to` as exact IDs, or as a dotted prefix for patterns ending in
+   `.*`. `"token.*"` does not include provider tool or storage fees.
+5. Multiply the disjoint measured usage by `rate / per`. Input/cache accounting
+   differs across providers; normalize provider usage before calculating cost.
+   Preserve `charge_scope` when interpreting tiers. Apply appropriate currency
+   precision and rounding in your billing system.
+
+The flat `cost` map remains Standard/default pricing. Existing consumers can
+continue reading it, but it cannot estimate a conditional request accurately.
+Astra's legacy `extra.pricing.mode_multipliers` is retained for compatibility;
+consumers using the canonical modifier components must not apply that legacy
+map again. Fable 5.1's former input/output-only Batch variants are replaced by a
+single token-wide modifier so cache usage receives the discount too.
 
 ## Migration from Legacy Cost Format
 
@@ -408,5 +483,5 @@ model.pricing.components
 ## Next Steps
 
 - **[Schema System](schema-system.md)**: Full schema definitions including pricing
-- **[Model Struct Evolution Proposal](model-struct-evolution-proposal.md)**: Proposed conditional pricing extensions
+- **[Model Struct Evolution Proposal](model-struct-evolution-proposal.md)**: Conditional pricing design and implementation status
 - **[Using the Data](using-the-data.md)**: Runtime API and queries
