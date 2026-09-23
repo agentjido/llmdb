@@ -42,6 +42,45 @@ defmodule LLMDB.PricingTest do
     assert output.rate == 3.0
   end
 
+  test "excluded legacy conversions preserve explicit rates and the original summary" do
+    explicit = %{
+      id: "token.output",
+      kind: "token",
+      unit: "token",
+      per: 10_000,
+      rate: 24.0,
+      applies_when: %{pricing_period: "peak"}
+    }
+
+    model = %LLMDB.Model{
+      id: "credits",
+      provider: :test,
+      cost: %{output: 0, reasoning: 4.0},
+      pricing: %{
+        currency: "credits",
+        excluded_cost_components: ["token.output", "token.reasoning"],
+        components: [explicit]
+      }
+    }
+
+    [updated] = Pricing.apply_cost_components([model])
+    assert updated.cost == model.cost
+    assert updated.pricing.currency == "credits"
+    assert updated.pricing.components == [explicit]
+    assert Pricing.apply_cost_components([updated]) == [updated]
+    assert Pricing.components_for(updated).components == []
+  end
+
+  test "JSON exclusions suppress only the named legacy components" do
+    model = %{
+      "cost" => %{"input" => 1.0, "output" => 2.0, "reasoning" => 2.0},
+      "pricing" => %{"excluded_cost_components" => ["token.reasoning"]}
+    }
+
+    [updated] = Pricing.apply_cost_components([model])
+    assert Enum.map(updated.pricing.components, & &1.id) == ["token.input", "token.output"]
+  end
+
   test "preserves explicit conditional components when converting legacy cost" do
     model = %LLMDB.Model{
       id: "m1",

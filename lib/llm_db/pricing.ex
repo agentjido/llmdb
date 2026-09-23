@@ -50,7 +50,10 @@ defmodule LLMDB.Pricing do
   | `reasoning` | `token.reasoning` |
 
   Existing `pricing.components` are preserved and take precedence over
-  generated components (merged by ID).
+  generated components (merged by ID). Model-level `excluded_cost_components`
+  suppresses specified legacy conversions without deleting explicit components
+  or changing the legacy `cost` summary. This avoids counting included reasoning
+  twice or interpreting subscription summaries as token-credit tariffs.
 
   ## Examples
 
@@ -159,7 +162,8 @@ defmodule LLMDB.Pricing do
     if is_map(cost) and map_size(cost) > 0 do
       pricing = Map.get(model, :pricing) || Map.get(model, "pricing") || %{}
       existing_components = components_list(pricing)
-      cost_components = cost_components(cost)
+
+      cost_components = cost_components(cost, pricing)
       merged_components = Merge.merge_list_by_id(cost_components, existing_components)
 
       currency =
@@ -345,6 +349,14 @@ defmodule LLMDB.Pricing do
   defp context_map(context) when is_list(context), do: Map.new(context)
   defp context_map(context) when is_map(context), do: context
   defp context_map(_context), do: %{}
+
+  defp cost_components(cost, pricing) do
+    excluded =
+      Map.get(pricing, :excluded_cost_components) ||
+        Map.get(pricing, "excluded_cost_components") || []
+
+    Enum.reject(cost_components(cost), &(&1.id in excluded))
+  end
 
   defp cost_components(cost) when is_map(cost) do
     []

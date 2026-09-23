@@ -1,7 +1,7 @@
 defmodule LLMDB.Schema.PricingTest do
   use ExUnit.Case, async: true
 
-  alias LLMDB.{Model, Provider}
+  alias LLMDB.{Model, Provider, Validate}
 
   @pricing %{
     currency: "USD",
@@ -59,5 +59,18 @@ defmodule LLMDB.Schema.PricingTest do
 
     assert inspect(model_error) =~ "per"
     assert inspect(provider_error) =~ "per"
+  end
+
+  test "legacy conversion exclusions survive model and sparse overlay validation" do
+    pricing = Map.put(@pricing, :excluded_cost_components, ["token.reasoning"])
+    input = %{id: "model", provider: :provider, pricing: pricing}
+    assert Model.new!(input).pricing.excluded_cost_components == ["token.reasoning"]
+    assert {:ok, overlay} = Validate.validate_model_overlay(input)
+    assert overlay.pricing.excluded_cost_components == ["token.reasoning"]
+
+    for invalid <- [["tool.search"], ["token.*"], "token.reasoning"] do
+      assert {:error, _} =
+               Model.new(put_in(input, [:pricing, :excluded_cost_components], invalid))
+    end
   end
 end

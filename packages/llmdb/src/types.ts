@@ -36,8 +36,8 @@ export interface PricingComponent {
     | "source"
     | "other"
     | null;
-  readonly per: number | null;
-  readonly rate: number | null;
+  readonly per?: number | null;
+  readonly rate?: number | null;
   readonly meter?: string | null;
   readonly tool?: string | null;
   readonly size_class?: string | null;
@@ -57,6 +57,13 @@ export interface Pricing {
   readonly currency: string | null;
   readonly components: readonly PricingComponent[];
   readonly merge?: "replace" | "merge_by_id";
+  readonly excluded_cost_components?: readonly (
+    | "token.input"
+    | "token.output"
+    | "token.cache_read"
+    | "token.cache_write"
+    | "token.reasoning"
+  )[] | null;
   readonly [key: string]: unknown;
 }
 

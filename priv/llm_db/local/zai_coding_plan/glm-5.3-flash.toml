@@ -1,47 +1,4 @@
-id = "glm-5.3"
-name = "GLM-5.3"
-provider_model_id = "glm-5.3"
-release_date = "2026-08-14"
-last_updated = "2026-08-14"
-
-[limits]
-context = 1000000
-output = 131072
-
-[modalities]
-input = ["text"]
-output = ["text"]
-
-[capabilities]
-chat = true
-embeddings = false
-
-[capabilities.reasoning]
-enabled = true
-
-[capabilities.reasoning.effort]
-supported = true
-values = ["low", "high", "max"]
-default = "max"
-
-[capabilities.reasoning.thinking]
-supported = true
-types = ["enabled"]
-default_type = "enabled"
-disable_supported = false
-
-[capabilities.tools]
-enabled = true
-
-[capabilities.streaming]
-text = true
-
-[extra]
-attachment = false
-description = "Flagship GLM model for complex software engineering and long-horizon agent tasks"
-family = "glm"
-reasoning_options = [{ type = "effort", values = ["low", "high", "max"] }]
-structured_output = true
+id = "glm-5.3-flash"
 
 # Current token-credit Coding Plan tariffs; these rates are credits, not USD.
 [pricing]
@@ -55,7 +12,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "input_tokens"
-rate = 6.9
+rate = 2.3
 mode = "peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -68,7 +25,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "cache_read_tokens"
-rate = 1.7
+rate = 0.56
 mode = "peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -81,7 +38,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "output_tokens"
-rate = 24
+rate = 8
 mode = "peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -94,7 +51,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "input_tokens"
-rate = 3.45
+rate = 1.15
 mode = "off_peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -107,7 +64,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "cache_read_tokens"
-rate = 0.85
+rate = 0.28
 mode = "off_peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -120,7 +77,7 @@ kind = "token"
 unit = "token"
 per = 10000
 meter = "output_tokens"
-rate = 12
+rate = 4
 mode = "off_peak"
 charge_scope = "full_request"
 source = "provider_docs"
@@ -160,3 +117,19 @@ published_end_date = "2026-10-07"
 pricing_period = "off_peak"
 description = "The current individual-plan guide publishes all-day half-credit consumption during this date range. No recurring holiday calendar is inferred."
 source_url = "https://docs.z.ai/devpack/overview"
+
+[[extra.pricing.quota_campaigns]]
+billing_product = "coding_plan"
+published_start_date = "2026-09-03"
+published_end_date = "2026-10-07"
+timezone = "Asia/Singapore"
+start_time = "23:00"
+end_time_next_day = "09:00"
+includes_weekends_and_public_holidays = true
+paid_plan_required = true
+zcode_minimum_version = "3.10"
+zcode_benefit = "Zero quota consumption for unlimited usage during the campaign window."
+other_supported_agents_benefit = "Doubled quota based on the plan's standard quota rules."
+eligibility = "An exhausted 5-hour or weekly quota can prevent participation until reset."
+credit_tariff_effect = "Not modeled as zero credits or a stackable token-price multiplier; the provider describes a quota benefit."
+source_url = "https://docs.z.ai/devpack/notice/event-glm-5.3-flash"

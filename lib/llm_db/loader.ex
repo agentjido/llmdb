@@ -70,6 +70,7 @@ defmodule LLMDB.Loader do
     :env,
     :evaluate,
     :exclude_models,
+    :excluded_cost_components,
     :excludes_when,
     :execution,
     :extra,

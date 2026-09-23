@@ -10,7 +10,8 @@ components, reasoning capabilities, provider capability groups, Anthropic
 direct-source mapping, and conditional pricing component selection.
 
 The curated overlays cover GPT-5.6/GPT-6, current Claude models, Gemini 3.1 Pro,
-recent Grok models, selected Qwen models, and Kimi K3. They include context tiers where
+recent Grok models, selected Qwen models, Kimi K3, MiniMax-M3, DeepSeek, and GLM
+Coding Plan credits. They include context tiers where
 published, cache durations, processing discounts/premiums, and applicable
 regional uplifts. See [Pricing and Billing](pricing-and-billing.md) for the
 implemented context contract and worked examples. The older model examples below
@@ -23,6 +24,12 @@ modifier once to the resulting rate. This avoids applying the same discount or
 uplift both through a dependency and directly. The selector returns applicable
 metadata and unresolved conditions; final invoice calculation and validation of
 provider-specific request eligibility remain consumer responsibilities.
+
+Calendar tariffs use explicit pricing-period context with published schedules
+and exceptions in metadata. MiniMax's documented band labels are preserved where
+the provider has not specified an integer boundary. Model-level
+`pricing.excluded_cost_components` prevents inappropriate legacy summaries from
+reintroducing duplicate reasoning charges or monetary values into credit tariffs.
 
 ## Why This Is Needed
 

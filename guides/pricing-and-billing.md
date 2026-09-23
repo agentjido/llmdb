@@ -19,6 +19,11 @@ The pricing system has two layers:
 2. **New `pricing` field** - Component-based pricing with full flexibility
 
 Legacy `cost` data is automatically converted to `pricing.components` at load time, ensuring backward compatibility.
+Model-level `pricing.excluded_cost_components` can suppress specific legacy
+conversions when a legacy field is already included in another meter or does
+not describe the canonical tariff's denomination. Explicit components remain
+authoritative. Always check `pricing.currency`: a subscription's `"credits"`
+are not USD.
 
 ## Pricing Components
 
@@ -274,6 +279,9 @@ The curated pricing overlays checked on September 22, 2026 cover:
 | Alibaba | Qwen3.7-Plus, Qwen3.6-Plus | Above 256,000 input tokens; Singapore International list prices, explicit/implicit cache distinctions |
 | Alibaba | Qwen3.6-Max-preview | Above 128,000 input tokens; Singapore International list prices and explicit cache |
 | Moonshot AI | Kimi K3 | 5m/1h cache writes and separate cache reads |
+| MiniMax | MiniMax-M3 | Provider-defined 512k context bands, cache reads, Priority |
+| DeepSeek | Flash and its two compatibility IDs, V4 Pro | Peak/off-peak USD tariffs, weekday windows and Chinese holiday exception |
+| ZAI Coding Plan | GLM-5.3, GLM-5.3-Flash | Peak/off-peak token credits, Singapore schedule and plan-specific dated campaigns |
 
 These are first-party prices. Cloud partner and gateway catalogs have independent
 pricing. The evidence links and verification date are stored under each model's
@@ -285,6 +293,9 @@ Other provider references: [Gemini pricing](https://ai.google.dev/gemini-api/doc
 [Alibaba pricing](https://www.alibabacloud.com/help/en/model-studio/model-pricing),
 [Alibaba caching](https://www.alibabacloud.com/help/en/model-studio/context-cache), and
 [Kimi caching](https://platform.kimi.ai/docs/guide/use-context-caching-feature-of-kimi-api).
+Additional references: [MiniMax pay-as-you-go](https://platform.minimax.io/docs/guides/pricing-paygo),
+[DeepSeek pricing](https://api-docs.deepseek.com/quick_start/pricing/), and
+[GLM Coding Plan credits](https://docs.z.ai/devpack/overview).
 
 #### OpenAI context and processing tiers
 
@@ -393,6 +404,93 @@ until expiry. Chat Completions and Responses write implicitly by default;
 Messages requires top-level cache configuration to write.
 The overlay does not infer a context-price cliff from the model's context limit.
 
+#### MiniMax provider-defined context bands
+
+```elixir
+{:ok, model} = LLMDB.model("minimax:MiniMax-M3")
+
+selection = LLMDB.Pricing.components_for(model,
+  context_tier: "gt_512k",
+  service_tier: "priority"
+)
+```
+
+MiniMax's published bands are `"lte_512k"` and `"gt_512k"`. Standard input,
+output, and cached-input rates are $0.30/$1.20/$0.06 per million in the first
+band and $0.60/$2.40/$0.12 in the second. Priority multiplies all three by 1.5.
+The selected tier applies to the whole request, and total input includes cache
+hits. The rates already include the permanent discount; passive cache writes
+have no additional charge.
+
+The official docs and public pricing configuration do not expand the billing
+label `512k` to an integer. The model's output limit does not establish that
+billing boundary. `extra.pricing.context_tiers` preserves the provider's labels
+and operators, while `boundary_numeric_status` is `"unknown"`. Supply a
+provider-confirmed band; `input_tokens` alone leaves both tariffs unresolved.
+These components can price a known band, but cannot establish an exact numeric
+compaction boundary without additional provider evidence.
+
+#### DeepSeek time-of-day tariffs
+
+```elixir
+{:ok, model} = LLMDB.model("deepseek:deepseek-v4-pro")
+selection = LLMDB.Pricing.components_for(model, pricing_period: "off_peak")
+```
+
+Select `"peak"` or `"off_peak"` explicitly. Peak rates are twice off-peak
+rates for input, output, and cache reads. The off-peak input/output/cache-read
+rates per million are $0.15/$0.60/$0.003 for Flash and $0.66/$1.98/$0.022 for
+V4 Pro. Both legacy Flash IDs use the Flash tariff; Pro retains its own rates.
+The legacy `cost` summary uses off-peak prices and must not select a period.
+
+`extra.pricing.period_schedule` records the published UTC windows of 01:00–04:00
+and 06:00–10:00, Monday through Friday, excluding Chinese public holidays.
+Weekends and other hours are off-peak. Holiday interpretation uses China local
+dates. Input billing separates cache hits from misses. Output includes reasoning;
+`excluded_cost_components = ["token.reasoning"]` prevents the legacy reasoning
+summary from becoming an additional charge.
+
+#### GLM Coding Plan credits
+
+```elixir
+{:ok, model} = LLMDB.model("zai_coding_plan:glm-5.3")
+selection = LLMDB.Pricing.components_for(model,
+  billing_product: "coding_plan",
+  plan_generation: "token_credits",
+  pricing_period: "off_peak"
+)
+```
+
+The canonical denomination is `"credits"`, with rates per **10,000** tokens.
+Peak input/cache-read/output rates are 6.9/1.7/24 for GLM-5.3 and 2.3/0.56/8
+for Flash. Off-peak consumption is half those values. These rates belong to the
+current token-credit subscription generation, not legacy plan quotas or the
+ordinary `zai` API's USD prices. Legacy zero `cost` summaries remain for
+compatibility; they do not mean free subscription usage. All legacy token-cost
+conversions are excluded from this credit tariff.
+
+The shared `period_schedule` shape records weekdays 14:00–18:00 in
+Asia/Singapore (UTC+8) as peak and other times as off-peak. `period_overrides`
+records the current individual-plan September 25–October 7, 2026 all-day
+off-peak campaign, scoped to that plan generation and audience. It is not a
+recurring holiday rule or evidence of the same campaign for team accounts.
+Flash's separate overnight quota campaign has its own dates, client-version,
+paid-plan and remaining-quota conditions in `quota_campaigns`; it does not
+establish a zero-credit token tariff. FlashX is not a supported Coding Plan model.
+
+#### Selecting a calendar period
+
+The schedules are machine-readable provider metadata, not automatic clock
+evaluation. `pricing_period`, `context_tier`, `billing_product`, and
+`plan_generation` above are normalized caller context, not API parameters.
+The caller must establish the applicable period and account eligibility.
+Published schedules do not establish whether arrival, generation start, or
+completion determines billing for a request crossing a window. Neither a local
+clock nor a response `created` timestamp proves that period. Undocumented exact
+instant boundaries and DeepSeek's unpublished holiday-date list remain explicit
+in the metadata. Missing selection context stays unresolved rather than choosing
+the cheaper price.
+
 ### Using selected components in a billing consumer
 
 `components_for/2` selects metadata; it does not produce final rates or validate
@@ -425,8 +523,8 @@ single token-wide modifier so cache usage receives the discount too.
 
 A consumer can use these components to compare projected request costs before
 and after reducing a prompt. Build a curve only for a resolved provider/model
-and a fixed, supported mode, region, and cache policy. Keep source URLs and the
-verification date with that curve so it can be refreshed. Do not substitute a
+and a fixed, supported mode, region, cache policy, and billing period. Keep source
+URLs and the verification date with that curve so it can be refreshed. Do not substitute a
 first-party tariff for a gateway route merely because the model name matches.
 
 For each input-token interval, require one applicable input rate and one output
@@ -457,6 +555,12 @@ priced summarization request. An input/output/cache-read-only curve cannot
 price explicit cache creation or retained cache storage; extend the evaluator
 or decline that estimate. A flat-rate model can still save tokens, but does not
 provide evidence of a context-price cliff.
+
+Context bands and calendar periods are independent: a time-of-day discount does
+not imply that shortening a prompt crosses a context-price boundary. Compare
+before/after costs within the same established period and denomination. Do not
+compare subscription credits directly with USD summarization costs, or freeze a
+calendar-dependent estimate past the next period change.
 
 ## Migration from Legacy Cost Format
 
@@ -495,6 +599,14 @@ The legacy `cost` field is automatically converted to `pricing.components` at lo
 ```
 
 The legacy `cost` field remains available for backward compatibility with existing code.
+
+To prevent a known inappropriate legacy conversion, set
+`pricing.excluded_cost_components` to canonical IDs from the table above. The
+schema accepts those five IDs only, not wildcards. Exclusion applies only to
+cost synthesis: it does not remove explicit tariff components, change `cost`,
+or suppress provider defaults. For a separately denominated subscription tariff,
+use `merge = "replace"` as well to avoid mixing provider-default monetary fees
+into credits.
 
 ## Custom Providers with Pricing
 

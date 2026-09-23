@@ -55,6 +55,33 @@ defmodule LLMDB.LoaderSnapshotSafetyTest do
     assert_not_existing_atom(provider_id)
   end
 
+  test "model cost exclusions survive snapshot loading and block legacy synthesis" do
+    path =
+      write_snapshot!(%{
+        "test_provider_alpha" => %{
+          "id" => "test_provider_alpha",
+          "models" => %{
+            "priced-model" => %{
+              "id" => "priced-model",
+              "provider" => "test_provider_alpha",
+              "cost" => %{"output" => 2, "reasoning" => 2},
+              "pricing" => %{
+                "excluded_cost_components" => ["token.reasoning"],
+                "components" => []
+              }
+            }
+          }
+        }
+      })
+
+    on_exit(fn -> File.rm(path) end)
+
+    assert {:ok, snapshot} = Loader.load(snapshot_source: {:file, path})
+    model = snapshot.models_by_key[{:test_provider_alpha, "priced-model"}]
+    assert model.pricing.excluded_cost_components == ["token.reasoning"]
+    assert Enum.map(model.pricing.components, & &1.id) == ["token.output"]
+  end
+
   test "unknown modalities are rejected without creating atoms" do
     modality = unique_identifier("unknown_modality")
     assert_not_existing_atom(modality)
