@@ -4,6 +4,256 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1050000,
+      "created": 1790127532,
+      "display_name": "OpenAI: GPT-6 Luna",
+      "id": "openai/gpt-6-luna",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.75
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.01
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.02
+          }
+        ],
+        "input_cache_write": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.125
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.25
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-09-23"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1050000,
+      "created": 1790126722,
+      "display_name": "OpenAI: GPT-6 Sol",
+      "id": "openai/gpt-6-sol",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 15
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.4
+          }
+        ],
+        "input_cache_write": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 5
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "272",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-09-23"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1000000,
       "created": 1790095883,
       "display_name": "Anthropic: Claude Opus 5.5",

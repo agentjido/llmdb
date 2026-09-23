@@ -21168,7 +21168,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -21179,15 +21178,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -21211,7 +21209,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -21222,15 +21219,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -21393,6 +21389,72 @@
         "release_date": "2026-07-15",
         "structured_output": false,
         "temperature": true,
+        "tool_call": true
+      },
+      "gpt-6-sol@eu": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.24,
+          "context_over_200k": {
+            "cache_read": 0.48,
+            "input": 4.8,
+            "output": 18
+          },
+          "input": 2.4,
+          "output": 12,
+          "tiers": [
+            {
+              "cache_read": 0.48,
+              "input": 4.8,
+              "output": 18,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-6-sol@eu",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol (EU)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
+            "type": "budget_tokens"
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "claude-opus-5-5@eu": {
@@ -24472,6 +24534,72 @@
         "temperature": false,
         "tool_call": true
       },
+      "gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
+            "type": "budget_tokens"
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "claude-opus-4-7@eu": {
         "attachment": true,
         "cost": {
@@ -25109,6 +25237,72 @@
         "release_date": "2026-06-23",
         "structured_output": false,
         "tool_call": false
+      },
+      "gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
+            "type": "budget_tokens"
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
       },
       "claude-sonnet-4-6": {
         "attachment": true,
@@ -26030,6 +26224,72 @@
         "release_date": "2026-07-21",
         "structured_output": true,
         "temperature": true,
+        "tool_call": true
+      },
+      "gpt-6-luna@eu": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.012,
+          "context_over_200k": {
+            "cache_read": 0.024,
+            "input": 0.24,
+            "output": 0.9
+          },
+          "input": 0.12,
+          "output": 0.6,
+          "tiers": [
+            {
+              "cache_read": 0.024,
+              "input": 0.24,
+              "output": 0.9,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "gpt-6-luna@eu",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna (EU)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          },
+          {
+            "type": "budget_tokens"
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "gpt-4.1-mini@eu": {
@@ -46397,6 +46657,53 @@
         "structured_output": true,
         "tool_call": true
       },
+      "openai/gpt-6-luna-pro": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.005,
+          "cache_write": 0.0625,
+          "input": 0.05,
+          "output": 0.25
+        },
+        "description": "GPT-6 Luna Pro uses the same underlying model as GPT-6 Luna with Pro reasoning mode enabled for higher-quality responses on complex tasks.",
+        "family": "gpt",
+        "id": "openai/gpt-6-luna-pro",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 1050000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT 6 Luna Pro",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "tool_call": true
+      },
       "anthropic/claude-opus-4.8:thinking": {
         "attachment": true,
         "cost": {
@@ -48045,6 +48352,37 @@
         "structured_output": true,
         "tool_call": true
       },
+      "nano/lumen-stealth": {
+        "attachment": true,
+        "cost": {
+          "input": 0.05,
+          "output": 0
+        },
+        "description": "Experimental multimodal model focused on reasoning, creative writing, roleplay, and agentic workflows. Available temporarily for evaluation ahead of public release. During this evaluation, prompts and responses are logged and may be reviewed to evaluate and improve the model. Do not send sensitive or confidential information.",
+        "id": "nano/lumen-stealth",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 200000,
+          "input": 200000,
+          "output": 16000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Lumen Stealth",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [],
+        "release_date": "2026-09-22",
+        "structured_output": false,
+        "tool_call": false
+      },
       "anthropic/claude-opus-4:thinking:32768": {
         "attachment": true,
         "cost": {
@@ -49247,6 +49585,53 @@
         "structured_output": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol-pro": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10
+        },
+        "description": "GPT-6 Sol Pro uses the same underlying model as GPT-6 Sol with Pro reasoning mode enabled for higher-quality responses on complex tasks.",
+        "family": "gpt",
+        "id": "openai/gpt-6-sol-pro",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 1050000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT 6 Sol Pro",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "tool_call": true
+      },
       "perceptron/perceptron-mk1": {
         "attachment": true,
         "cost": {
@@ -50363,9 +50748,9 @@
       "deepseek/deepseek-v4-flash-vision-exp": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.007,
-          "input": 0.22,
-          "output": 0.66
+          "cache_read": 0.014,
+          "input": 0.44,
+          "output": 1.32
         },
         "description": "Experimental multimodal DeepSeek V4 Flash model for image understanding, coding, and agentic work",
         "family": "deepseek-flash",
@@ -53251,6 +53636,55 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 1050000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT 6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "qwen/qwen3-coder": {
         "attachment": false,
         "cost": {
@@ -53822,7 +54256,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -53841,7 +54274,7 @@
           ]
         },
         "name": "MiMo V2.6 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -58497,15 +58930,15 @@
           "input": [
             "text",
             "image",
-            "video",
-            "audio"
+            "audio",
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo V2.6 Pro UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -58689,6 +59122,55 @@
         ],
         "release_date": "2024-01-01",
         "structured_output": true,
+        "tool_call": true
+      },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.005,
+          "cache_write": 0.0625,
+          "input": 0.05,
+          "output": 0.25
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 1050000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT 6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "anthropic/claude-opus-4:thinking": {
@@ -59630,7 +60112,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -59649,7 +60130,7 @@
           ]
         },
         "name": "MiMo V2.6 Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -70079,9 +70560,9 @@
       "~deepseek/deepseek-pro-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.017304,
-          "input": 0.54384,
-          "output": 1.63152
+          "cache_read": 0.033,
+          "input": 0.4,
+          "output": 4.3
         },
         "description": "Flagship DeepSeek model for coding, reasoning, and agentic work",
         "family": "deepseek",
@@ -70089,7 +70570,7 @@
         "last_updated": "2026-09-14",
         "limit": {
           "context": 1048576,
-          "output": 393216
+          "output": 384000
         },
         "modalities": {
           "input": [
@@ -70368,6 +70849,48 @@
           }
         ],
         "release_date": "2026-08-27",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
+      "qwen/qwen3.8-omni-flash": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.016,
+          "input": 0.15,
+          "output": 0.47
+        },
+        "description": "Qwen omni model for text, vision, audio, and multimodal agent tasks",
+        "family": "qwen",
+        "id": "qwen/qwen3.8-omni-flash",
+        "last_updated": "2026-09-17",
+        "limit": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Qwen3.8 Omni Flash",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "budget_tokens"
+          }
+        ],
+        "release_date": "2026-09-17",
         "structured_output": true,
         "temperature": true,
         "tool_call": true
@@ -71473,9 +71996,9 @@
       "~z-ai/glm-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.12142,
-          "input": 0.6538,
-          "output": 2.0548
+          "cache_read": 0.125,
+          "input": 0.5625,
+          "output": 2.5
         },
         "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
         "family": "glm",
@@ -73042,9 +73565,9 @@
       "~moonshotai/kimi-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.15,
-          "input": 1.5,
-          "output": 7.5
+          "cache_read": 0.3,
+          "input": 1.4989,
+          "output": 10.758
         },
         "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
         "family": "kimi",
@@ -74474,9 +74997,9 @@
       "~deepseek/deepseek-flash-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.0036,
-          "input": 0.12,
-          "output": 0.48
+          "cache_read": 0.01,
+          "input": 0.1,
+          "output": 0.5
         },
         "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
         "family": "deepseek-flash",
@@ -74742,7 +75265,7 @@
         "id": "aion-labs/aion-2.0",
         "last_updated": "2026-02-23",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -74765,9 +75288,9 @@
       "tencent/hy3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.020625,
-          "input": 0.0825,
-          "output": 0.33
+          "cache_read": 0.033,
+          "input": 0.132,
+          "output": 0.528
         },
         "description": "Tencent Hy reasoning model for coding, instruction following, and agent tasks",
         "family": "Hy",
@@ -76340,7 +76863,7 @@
         "id": "aion-labs/aion-3.0",
         "last_updated": "2026-07-07",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -76863,9 +77386,9 @@
       "z-ai/glm-5.3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.12142,
-          "input": 0.6538,
-          "output": 2.0548
+          "cache_read": 0.156,
+          "input": 0.84,
+          "output": 2.64
         },
         "description": "Flagship GLM model for hybrid reasoning, coding, and agentic engineering",
         "family": "glm",
@@ -78283,6 +78806,43 @@
         "temperature": true,
         "tool_call": false
       },
+      "cohere/command-a-plus": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.15,
+          "input": 0.3,
+          "output": 1.5
+        },
+        "description": "Cohere command model for multilingual enterprise agents, tools, and chat",
+        "family": "command-a",
+        "id": "cohere/command-a-plus",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 192000,
+          "output": 64000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Command A+",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
       "perplexity/sonar-pro": {
         "attachment": true,
         "cost": {
@@ -78415,9 +78975,9 @@
       "deepseek/deepseek-v4-flash": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.0098,
-          "input": 0.049,
-          "output": 0.098
+          "cache_read": 0.017721,
+          "input": 0.088606,
+          "output": 0.177212
         },
         "description": "Fast DeepSeek V4 lane for economical reasoning, coding, and long-context work",
         "family": "deepseek-flash",
@@ -80385,9 +80945,9 @@
       "deepseek/deepseek-v4.1-flash": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.003,
-          "input": 0.15,
-          "output": 0.6
+          "cache_read": 0.01,
+          "input": 0.1,
+          "output": 0.5
         },
         "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
         "family": "deepseek-flash",
@@ -80396,7 +80956,7 @@
         "last_updated": "2026-09-10",
         "limit": {
           "context": 1048576,
-          "output": 384000
+          "output": 943718
         },
         "modalities": {
           "input": [
@@ -80871,18 +81431,20 @@
           ]
         },
         "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
-        "family": "gpt",
+        "family": "gpt-sol",
         "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1050000,
+          "input": 922000,
           "output": 128000
         },
         "modalities": {
           "input": [
-            "pdf",
+            "text",
             "image",
-            "text"
+            "pdf"
           ],
           "output": [
             "text"
@@ -81021,7 +81583,7 @@
         "last_updated": "2026-08-27",
         "limit": {
           "context": 1310720,
-          "output": 943718
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -81261,7 +81823,7 @@
         "cost": {
           "cache_read": 0.008,
           "input": 0.03,
-          "output": 1
+          "output": 0.8
         },
         "description": "Fast DeepSeek model for efficient chat, coding help, and agent loops",
         "family": "deepseek",
@@ -81370,7 +81932,6 @@
         "description": "MiMo flash model for fast multimodal assistance and agent workflows",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -81388,7 +81949,7 @@
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -82789,9 +83350,9 @@
       "deepseek/deepseek-v4-pro-0813": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.022,
-          "input": 0.66,
-          "output": 1.98
+          "cache_read": 0.044,
+          "input": 1.32,
+          "output": 3.96
         },
         "description": "DeepSeek V4 Pro snapshot with million-token context and support for thinking and non-thinking modes",
         "family": "deepseek-thinking",
@@ -83520,9 +84081,9 @@
       "deepseek/deepseek-v4-pro": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.075342,
-          "input": 0.904104,
-          "output": 1.808208
+          "cache_read": 0.079605,
+          "input": 0.95526,
+          "output": 1.91052
         },
         "description": "Open MoE flagship with million-token context for coding and long agent runs",
         "family": "deepseek-thinking",
@@ -84013,7 +84574,7 @@
         "id": "aion-labs/aion-3.0-mini",
         "last_updated": "2026-07-07",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -84149,15 +84710,15 @@
           "input": [
             "text",
             "image",
-            "video",
-            "audio"
+            "audio",
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro-UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -84332,18 +84893,20 @@
           ]
         },
         "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
-        "family": "gpt",
+        "family": "gpt-luna",
         "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1050000,
+          "input": 922000,
           "output": 128000
         },
         "modalities": {
           "input": [
-            "pdf",
+            "text",
             "image",
-            "text"
+            "pdf"
           ],
           "output": [
             "text"
@@ -84938,7 +85501,6 @@
         "description": "MiMo pro model for strong multimodal reasoning and agent execution",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -84956,7 +85518,7 @@
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -87664,6 +88226,51 @@
         ],
         "release_date": "2026-05-29",
         "temperature": true,
+        "tool_call": true
+      },
+      "step-5-preview": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.048,
+          "input": 0.959,
+          "output": 2.741
+        },
+        "description": "StepFun's next-generation flagship base model for coding and professional knowledge work, with native text, image, and video input and a 1M-token context window",
+        "id": "step-5-preview",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-09-20",
+        "limit": {
+          "context": 1000000,
+          "input": 1000000,
+          "output": 1000000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Step 5 Preview",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-09-16",
+        "structured_output": true,
         "tool_call": true
       },
       "step-tts-2": {
@@ -107733,6 +108340,69 @@
         "temperature": true,
         "tool_call": true
       },
+      "anthropic-claude-opus-5.5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 10,
+            "input": 8,
+            "output": 30
+          },
+          "input": 4,
+          "output": 20,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 10,
+              "input": 8,
+              "output": 30,
+              "tier": {
+                "size": 200000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "anthropic-claude-opus-5.5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Anthropic Claude Opus 5.5",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "temperature": false,
+        "tool_call": true
+      },
       "anthropic-claude-haiku-4.5": {
         "attachment": true,
         "cost": {
@@ -109245,6 +109915,68 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai-gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai-gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "OpenAI GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "anthropic-claude-opus-4.8": {
         "attachment": true,
         "cost": {
@@ -109617,6 +110349,68 @@
         "reasoning": false,
         "release_date": "2024-07-23",
         "temperature": true,
+        "tool_call": true
+      },
+      "openai-gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai-gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "OpenAI GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "openai-gpt-image-1.5": {
@@ -122121,6 +122915,76 @@
         "temperature": false,
         "tool_call": true
       },
+      "gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "provider": {
+          "npm": "@ai-sdk/openai"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "gpt-5-nano": {
         "attachment": true,
         "cost": {
@@ -122540,6 +123404,76 @@
         "temperature": true,
         "tool_call": true
       },
+      "gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 5,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "provider": {
+          "npm": "@ai-sdk/openai"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "claude-sonnet-4-6": {
         "attachment": true,
         "cost": {
@@ -122664,6 +123598,70 @@
         "reasoning_options": [],
         "release_date": "2026-02-12",
         "status": "deprecated",
+        "temperature": true,
+        "tool_call": true
+      },
+      "grok-4.7": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.35,
+          "context_over_200k": {
+            "cache_read": 0.7,
+            "input": 2.8,
+            "output": 8.4
+          },
+          "input": 1.4,
+          "output": 4.2,
+          "tiers": [
+            {
+              "cache_read": 0.7,
+              "input": 2.8,
+              "output": 8.4,
+              "tier": {
+                "size": 200000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
+        "family": "grok",
+        "id": "grok-4.7",
+        "knowledge": "2026-05",
+        "last_updated": "2026-09-21",
+        "limit": {
+          "context": 500000,
+          "output": 500000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Grok 4.7 (30% Off)",
+        "open_weights": false,
+        "provider": {
+          "npm": "@ai-sdk/openai"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "release_date": "2026-09-21",
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -122904,6 +123902,55 @@
         ],
         "release_date": "2026-04-23",
         "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "claude-opus-5-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "input": 4,
+          "output": 20
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "claude-opus-5-5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5.5",
+        "open_weights": false,
+        "provider": {
+          "npm": "@ai-sdk/anthropic"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
         "temperature": false,
         "tool_call": true
       },
@@ -124685,7 +125732,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 200000,
@@ -124696,15 +125742,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash Free",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-09-22",
@@ -133691,7 +134736,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -133702,15 +134746,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -134490,6 +135533,55 @@
         "temperature": true,
         "tool_call": false
       },
+      "gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "input": 0.1,
+          "output": 0.5
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "nemotron-3-ultra-550b": {
         "attachment": false,
         "cost": {
@@ -135107,6 +136199,55 @@
         "temperature": true,
         "tool_call": true
       },
+      "gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "mimo-v2.6-flash": {
         "attachment": true,
         "cost": {
@@ -135117,7 +136258,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -135128,15 +136268,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -135717,6 +136856,52 @@
         ],
         "release_date": "2026-04-23",
         "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "claude-opus-5-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "input": 4,
+          "output": 20
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "claude-opus-5-5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5.5",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
         "temperature": false,
         "tool_call": true
       },
@@ -141995,7 +143180,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -142006,15 +143190,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-09-22",
@@ -142299,7 +143482,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -142310,15 +143492,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-09-22",
@@ -144200,7 +145381,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -144211,15 +145391,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -144243,7 +145422,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -144254,15 +145432,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -144295,15 +145472,15 @@
           "input": [
             "text",
             "image",
-            "video",
-            "audio"
+            "audio",
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro-UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -148055,6 +149232,72 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 5,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai/gpt-5.6-terra": {
         "attachment": true,
         "cost": {
@@ -148132,7 +149375,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -148150,7 +149392,7 @@
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -148738,6 +149980,117 @@
         "temperature": false,
         "tool_call": true
       },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "anthropic/claude-opus-5-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "input": 4,
+          "output": 20
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "anthropic/claude-opus-5-5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5.5",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "temperature": false,
+        "tool_call": true
+      },
       "gemini/gemini-3.8-flash": {
         "attachment": true,
         "cost": {
@@ -148898,7 +150251,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -148916,7 +150268,7 @@
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -151357,9 +152709,8 @@
             "values": [
               "none",
               "low",
-              "medium",
               "high",
-              "xhigh"
+              "max"
             ]
           }
         ],
@@ -151400,10 +152751,8 @@
             "type": "effort",
             "values": [
               "none",
-              "low",
-              "medium",
               "high",
-              "xhigh"
+              "max"
             ]
           }
         ],
@@ -151446,9 +152795,8 @@
             "values": [
               "none",
               "low",
-              "medium",
               "high",
-              "xhigh"
+              "max"
             ]
           }
         ],
@@ -151488,10 +152836,8 @@
             "type": "effort",
             "values": [
               "none",
-              "low",
-              "medium",
               "high",
-              "xhigh"
+              "max"
             ]
           }
         ],
@@ -151622,14 +152968,7 @@
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "type": "toggle"
           }
         ],
         "release_date": "2026-04-21",
@@ -151666,18 +153005,7 @@
         "name": "Kimi K2.7 Code",
         "open_weights": true,
         "reasoning": true,
-        "reasoning_options": [
-          {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
-          }
-        ],
+        "reasoning_options": [],
         "release_date": "2026-06-12",
         "structured_output": true,
         "temperature": false,
@@ -151717,9 +153045,8 @@
             "values": [
               "none",
               "low",
-              "medium",
               "high",
-              "xhigh"
+              "max"
             ]
           }
         ],
@@ -151760,14 +153087,7 @@
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "type": "toggle"
           }
         ],
         "release_date": "2026-04-22",
@@ -151803,6 +153123,44 @@
         "reasoning": true,
         "reasoning_options": [
           {
+            "type": "toggle"
+          }
+        ],
+        "release_date": "2026-04-22",
+        "temperature": true,
+        "tool_call": true
+      },
+      "cline-pass/mimo-v2.6-flash": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.0028,
+          "input": 0.14,
+          "output": 0.28
+        },
+        "description": "MiMo Flash model for multimodal coding agents and long-context automation",
+        "family": "mimo",
+        "id": "cline-pass/mimo-v2.6-flash",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "MiMo-V2.6-Flash",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
             "type": "effort",
             "values": [
               "none",
@@ -151813,7 +153171,52 @@
             ]
           }
         ],
-        "release_date": "2026-04-22",
+        "release_date": "2026-09-22",
+        "temperature": true,
+        "tool_call": true
+      },
+      "cline-pass/mimo-v2.6-pro": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.0036,
+          "input": 0.435,
+          "output": 0.87
+        },
+        "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
+        "family": "mimo",
+        "id": "cline-pass/mimo-v2.6-pro",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "MiMo-V2.6-Pro",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
         "temperature": true,
         "tool_call": true
       },
@@ -151847,9 +153250,43 @@
         "reasoning": true,
         "reasoning_options": [
           {
+            "type": "toggle"
+          }
+        ],
+        "release_date": "2026-06-01",
+        "temperature": true,
+        "tool_call": true
+      },
+      "cline-pass/muse-spark-1.3-contributor": {
+        "attachment": true,
+        "description": "Muse Spark 1.3 is a multimodal reasoning model from Meta for long-running agentic, multi-agent, and coding workflows. It improves long-horizon agent collaboration, instruction following, and coding efficiency relative to Muse Spark 1.2.",
+        "family": "muse",
+        "id": "cline-pass/muse-spark-1.3-contributor",
+        "last_updated": "2026-09-02",
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "pdf",
+            "audio"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Muse Spark 1.3 Contributor",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
             "type": "effort",
             "values": [
-              "none",
+              "minimal",
               "low",
               "medium",
               "high",
@@ -151857,7 +153294,8 @@
             ]
           }
         ],
-        "release_date": "2026-06-01",
+        "release_date": "2026-09-02",
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -151890,14 +153328,7 @@
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "type": "toggle"
           }
         ],
         "release_date": "2026-05-21",
@@ -151954,14 +153385,7 @@
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "effort",
-            "values": [
-              "none",
-              "low",
-              "medium",
-              "high",
-              "xhigh"
-            ]
+            "type": "toggle"
           }
         ],
         "release_date": "2026-06-02",
@@ -152002,10 +153426,9 @@
           {
             "type": "effort",
             "values": [
-              "minimal",
+              "none",
               "low",
               "medium",
-              "high",
               "xhigh"
             ]
           }
@@ -160136,6 +161559,52 @@
         "temperature": false,
         "tool_call": true
       },
+      "duo-chat-opus-5-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0,
+          "cache_write": 0,
+          "input": 0,
+          "output": 0
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "duo-chat-opus-5-5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Agentic Chat (Claude Opus 5.5)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "temperature": false,
+        "tool_call": true
+      },
       "duo-chat-sonnet-4-5": {
         "attachment": true,
         "cost": {
@@ -162797,9 +164266,9 @@
       "~deepseek/deepseek-pro-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.017304,
-          "input": 0.54384,
-          "output": 1.63152
+          "cache_read": 0.033,
+          "input": 0.4,
+          "output": 4.3
         },
         "description": "This model always redirects to the latest model in the DeepSeek Pro family.",
         "family": "deepseek",
@@ -162807,7 +164276,7 @@
         "last_updated": "2026-09-14",
         "limit": {
           "context": 1048576,
-          "output": 393216
+          "output": 384000
         },
         "modalities": {
           "input": [
@@ -163092,6 +164561,49 @@
           }
         ],
         "release_date": "2026-08-27",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
+      "qwen/qwen3.8-omni-flash": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.016,
+          "input": 0.15,
+          "output": 0.47
+        },
+        "description": "Qwen3.8 Omni Flash is an omni-modal reasoning model from Alibaba, the first Qwen model built around agentic capabilities with native audio-video understanding. It is suited for audio-video analysis and summarization,...",
+        "family": "qwen",
+        "id": "qwen/qwen3.8-omni-flash",
+        "last_updated": "2026-09-17",
+        "limit": {
+          "context": 1000000,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "audio",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Qwen3.8 Omni Flash",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-09-17",
         "structured_output": true,
         "temperature": true,
         "tool_call": true
@@ -164118,9 +165630,9 @@
       "~z-ai/glm-latest": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.12142,
-          "input": 0.6538,
-          "output": 2.0548
+          "cache_read": 0.125,
+          "input": 0.5625,
+          "output": 2.5
         },
         "description": "This model always redirects to the latest GLM model from Z.ai.",
         "family": "glm",
@@ -165609,9 +167121,9 @@
       "~moonshotai/kimi-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.15,
-          "input": 1.5,
-          "output": 7.5
+          "cache_read": 0.3,
+          "input": 1.4989,
+          "output": 10.758
         },
         "description": "Kimi multimodal agent model for visual understanding, coding, and planning",
         "family": "kimi",
@@ -166998,9 +168510,9 @@
       "~deepseek/deepseek-flash-latest": {
         "attachment": true,
         "cost": {
-          "cache_read": 0.0036,
-          "input": 0.12,
-          "output": 0.48
+          "cache_read": 0.01,
+          "input": 0.1,
+          "output": 0.5
         },
         "description": "This model always redirects to the latest model in the DeepSeek Flash family.",
         "family": "deepseek-flash",
@@ -167268,7 +168780,7 @@
         "id": "aion-labs/aion-2.0",
         "last_updated": "2026-02-23",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -167298,9 +168810,9 @@
       "tencent/hy3": {
         "attachment": false,
         "cost": {
-          "cache_read": 0.020625,
-          "input": 0.0825,
-          "output": 0.33
+          "cache_read": 0.033,
+          "input": 0.13,
+          "output": 0.53
         },
         "description": "Hy3 is a 295B-parameter Mixture-of-Experts model from Tencent (21B active, 192 experts with top-8 routing) built for reasoning, agentic workflows, and real-world production use. It supports a configurable reasoning effort:...",
         "family": "Hy",
@@ -168839,7 +170351,7 @@
         "id": "aion-labs/aion-3.0",
         "last_updated": "2026-07-07",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -170743,6 +172255,47 @@
         "structured_output": false,
         "temperature": true,
         "tool_call": false
+      },
+      "cohere/command-a-plus": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.15,
+          "input": 0.3,
+          "output": 1.5
+        },
+        "description": "Command A+ is Cohere's flagship model for enterprise agentic workflows. It accepts text and image inputs with a 192K context window, supports native tool calling with strict tool schemas, structured...",
+        "family": "command-a",
+        "id": "cohere/command-a-plus",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 192000,
+          "output": 64000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Cohere: Command A+",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
       },
       "perplexity/sonar-pro": {
         "attachment": true,
@@ -172995,7 +174548,7 @@
         "last_updated": "2026-09-10",
         "limit": {
           "context": 1048576,
-          "output": 384000
+          "output": 943718
         },
         "modalities": {
           "input": [
@@ -173418,24 +174971,26 @@
           "output": 10
         },
         "description": "GPT-6 Sol is the cost-efficient high-end model in OpenAI's GPT-6 series, positioned below the flagship GPT-6 Astra and above the fast GPT-6 Luna tier. It is suited for demanding professional...",
-        "family": "gpt",
+        "family": "gpt-sol",
         "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1050000,
+          "input": 922000,
           "output": 128000
         },
         "modalities": {
           "input": [
-            "pdf",
+            "text",
             "image",
-            "text"
+            "pdf"
           ],
           "output": [
             "text"
           ]
         },
-        "name": "OpenAI: GPT-6 Sol",
+        "name": "GPT-6 Sol",
         "open_weights": false,
         "reasoning": true,
         "reasoning_options": [
@@ -173548,7 +175103,7 @@
         "last_updated": "2026-08-27",
         "limit": {
           "context": 1048576,
-          "output": 943718
+          "output": 131072
         },
         "modalities": {
           "input": [
@@ -173760,7 +175315,7 @@
         "cost": {
           "cache_read": 0.008,
           "input": 0.03,
-          "output": 1
+          "output": 0.8
         },
         "description": "This model always redirects to the latest model in the DeepSeek V4 Flash family.",
         "family": "deepseek",
@@ -173866,7 +175421,6 @@
         "description": "MiMo-V2.6-Flash is an open-source foundation model developed by Xiaomi. Built on a Mixture-of-Experts architecture with 309B total parameters and 15B activated per token, it employs a hybrid attention mechanism for...",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -173884,7 +175438,7 @@
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -176471,7 +178025,7 @@
         "id": "aion-labs/aion-3.0-mini",
         "last_updated": "2026-07-07",
         "limit": {
-          "context": 1048576,
+          "context": 131072,
           "output": 32768
         },
         "modalities": {
@@ -176620,15 +178174,15 @@
           "input": [
             "text",
             "image",
-            "video",
-            "audio"
+            "audio",
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro-UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -176802,24 +178356,26 @@
           "output": 0.5
         },
         "description": "GPT-6 Luna is the fast, cost-efficient model in OpenAI's GPT-6 series, positioned below GPT-6 Sol. It is suited for high-volume and latency-sensitive workloads such as chat, classification, and lightweight agentic...",
-        "family": "gpt",
+        "family": "gpt-luna",
         "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1050000,
+          "input": 922000,
           "output": 128000
         },
         "modalities": {
           "input": [
-            "pdf",
+            "text",
             "image",
-            "text"
+            "pdf"
           ],
           "output": [
             "text"
           ]
         },
-        "name": "OpenAI: GPT-6 Luna",
+        "name": "GPT-6 Luna",
         "open_weights": false,
         "reasoning": true,
         "reasoning_options": [
@@ -177428,7 +178984,6 @@
         "description": "MiMo-V2.6-Pro is the flagship foundation model developed by Xiaomi. Built at a scale of over 1T parameters, it is designed to push the ceiling of capability for the most demanding...",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -177446,7 +179001,7 @@
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -181053,6 +182608,48 @@
         "reasoning": true,
         "reasoning_options": [],
         "release_date": "2026-01-19",
+        "temperature": true,
+        "tool_call": true
+      },
+      "deepseek-v4-1-flash": {
+        "attachment": true,
+        "cost": {
+          "input": 0,
+          "output": 0
+        },
+        "description": "DeepSeek V4.1 Flash model for reasoning and agentic coding",
+        "family": "deepseek-flash",
+        "id": "deepseek-v4-1-flash",
+        "knowledge": "2025-05",
+        "last_updated": "2026-09-10",
+        "limit": {
+          "context": 1000000,
+          "output": 384000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "DeepSeek V4.1 Flash",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-10",
+        "structured_output": true,
         "temperature": true,
         "tool_call": true
       },
@@ -194846,7 +196443,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -194857,15 +196453,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -194889,7 +196484,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -194900,15 +196494,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -200742,6 +202335,7 @@
         "attachment": true,
         "cost": {
           "cache_read": 1,
+          "cache_write": 12.5,
           "input": 10,
           "output": 50
         },
@@ -205232,6 +206826,57 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai/gpt-5.6-terra": {
         "attachment": true,
         "cost": {
@@ -206807,6 +208452,57 @@
         "release_date": "2025-07-28",
         "structured_output": true,
         "temperature": true,
+        "tool_call": true
+      },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "input": 0.1,
+          "output": 0.5
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "minimax/minimax-m2.5-highspeed": {
@@ -211083,7 +212779,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "mimo-v2-6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -211101,7 +212796,7 @@
           ]
         },
         "name": "MiMo V2.6 Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -212070,15 +213765,15 @@
           "input": [
             "text",
             "image",
-            "video",
-            "audio"
+            "audio",
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo V2.6 Pro UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -212527,7 +214222,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "mimo-v2-6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -212545,7 +214239,7 @@
           ]
         },
         "name": "MiMo V2.6 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -222022,6 +223716,51 @@
         "temperature": true,
         "tool_call": true
       },
+      "x-ai/grok-4.7": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.5,
+          "input": 2,
+          "output": 6
+        },
+        "description": "xAI's frontier model for long-running agents, coding, knowledge work, and visual projects",
+        "family": "grok",
+        "id": "x-ai/grok-4.7",
+        "knowledge": "2026-05",
+        "last_updated": "2026-09-21",
+        "limit": {
+          "context": 500000,
+          "output": 65536
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Grok 4.7",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
+          }
+        ],
+        "release_date": "2026-09-21",
+        "structured_output": true,
+        "temperature": true,
+        "tool_call": true
+      },
       "volcengine/doubao-seed-2.0-code": {
         "attachment": true,
         "cost": {
@@ -222103,6 +223842,59 @@
         ],
         "release_date": "2025-09-29",
         "temperature": true,
+        "tool_call": true
+      },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.16,
+          "cache_write": 2,
+          "input": 1.6,
+          "output": 8
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "provider": {
+          "api": "https://api.ofox.ai/v1",
+          "npm": "@ai-sdk/openai"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "openai/gpt-5.6-terra": {
@@ -223559,6 +225351,59 @@
         ],
         "release_date": "2025-07-28",
         "temperature": true,
+        "tool_call": true
+      },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.008,
+          "cache_write": 0.1,
+          "input": 0.08,
+          "output": 0.4
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "provider": {
+          "api": "https://api.ofox.ai/v1",
+          "npm": "@ai-sdk/openai"
+        },
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "bailian/qwen3.8-max": {
@@ -229857,6 +231702,49 @@
         "temperature": true,
         "tool_call": true
       },
+      "fastino/gliguard-PII-multi": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.15,
+          "cache_write": 0.15,
+          "input": 0.15,
+          "output": 0.15
+        },
+        "description": "A 300M-parameter multilingual model that runs LLM safety moderation and PII detection in a single forward pass.",
+        "id": "fastino/gliguard-PII-multi",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-07-08",
+        "limit": {
+          "context": 8192,
+          "output": 8192
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GLiNER2-Guardrails-PII-Multi",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-07-08",
+        "temperature": true,
+        "tool_call": true
+      },
       "Qwen/Qwen3.6-35B-A3B": {
         "attachment": true,
         "cost": {
@@ -230707,6 +232595,49 @@
           }
         ],
         "release_date": "2025-11-30",
+        "temperature": true,
+        "tool_call": true
+      },
+      "fastino/gliner2.5-multi-v1": {
+        "attachment": false,
+        "cost": {
+          "cache_read": 0.15,
+          "cache_write": 0.15,
+          "input": 0.15,
+          "output": 0.15
+        },
+        "description": "Multilingual boundary NER and span extraction; non-trainable encoder.",
+        "id": "fastino/gliner2.5-multi-v1",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-08-24",
+        "limit": {
+          "context": 4096,
+          "output": 4096
+        },
+        "modalities": {
+          "input": [
+            "text"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GLiNER 2.5 Multi",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-08-24",
         "temperature": true,
         "tool_call": true
       },
@@ -245044,6 +246975,55 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "input": 2,
+          "output": 10
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol (OpenAI)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai/gpt-5.6-terra": {
         "attachment": true,
         "cost": {
@@ -245484,7 +247464,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -245495,15 +247474,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo V2.6 Flash (Xiaomi)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -248918,6 +250896,55 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "input": 0.1,
+          "output": 0.5
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna (OpenAI)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "alibaba/glm-5": {
         "attachment": false,
         "cost": {
@@ -249303,6 +251330,53 @@
         "structured_output": false,
         "temperature": true,
         "tool_call": false
+      },
+      "anthropic/claude-opus-5-5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "input": 4,
+          "output": 20
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "anthropic/claude-opus-5-5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5.5 (Anthropic)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
       },
       "aws-mantle/gpt-6-astra": {
         "attachment": true,
@@ -249716,7 +251790,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1000000,
@@ -249727,15 +251800,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo V2.6 Pro (Xiaomi)",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -272066,7 +274138,16 @@
         "name": "GPT OSS 20B",
         "open_weights": true,
         "reasoning": true,
-        "reasoning_options": [],
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
         "release_date": "2025-08-05",
         "structured_output": true,
         "temperature": true,
@@ -278593,6 +280674,72 @@
         "temperature": true,
         "tool_call": true
       },
+      "global.openai.gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 5,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "global.openai.gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol (Global)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "mistral.voxtral-small-24b-2507": {
         "attachment": true,
         "cost": {
@@ -279016,6 +281163,72 @@
         "release_date": "2025-08-05",
         "structured_output": true,
         "temperature": true,
+        "tool_call": true
+      },
+      "us.openai.gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.22,
+          "cache_write": 2.75,
+          "context_over_200k": {
+            "cache_read": 0.44,
+            "cache_write": 5.5,
+            "input": 4.4,
+            "output": 16.5
+          },
+          "input": 2.2,
+          "output": 11,
+          "tiers": [
+            {
+              "cache_read": 0.44,
+              "cache_write": 5.5,
+              "input": 4.4,
+              "output": 16.5,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "us.openai.gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol (US)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "au.anthropic.claude-opus-4-7": {
@@ -281418,6 +283631,41 @@
         "temperature": true,
         "tool_call": true
       },
+      "global.moonshotai.kimi-k3": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.3,
+          "cache_write": 3.75,
+          "input": 3,
+          "output": 15
+        },
+        "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+        "family": "kimi-k3",
+        "id": "global.moonshotai.kimi-k3",
+        "interleaved": true,
+        "last_updated": "2026-07-16",
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Kimi K3 (Global)",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [],
+        "release_date": "2026-07-16",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai.gpt-oss-120b-1:0": {
         "attachment": false,
         "cost": {
@@ -282488,6 +284736,72 @@
         "temperature": true,
         "tool_call": true
       },
+      "global.openai.gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "global.openai.gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna (Global)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "global.anthropic.claude-opus-5-5": {
         "attachment": true,
         "cost": {
@@ -282895,6 +285209,41 @@
         ],
         "release_date": "2025-12-02",
         "temperature": true,
+        "tool_call": true
+      },
+      "us.moonshotai.kimi-k3": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.33,
+          "cache_write": 4.125,
+          "input": 3.3,
+          "output": 16.5
+        },
+        "description": "Multimodal Kimi model with 1M context and toggleable max-effort thinking for long-horizon agent work",
+        "family": "kimi-k3",
+        "id": "us.moonshotai.kimi-k3",
+        "interleaved": true,
+        "last_updated": "2026-07-16",
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Kimi K3 (US)",
+        "open_weights": true,
+        "reasoning": true,
+        "reasoning_options": [],
+        "release_date": "2026-07-16",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "anthropic.claude-opus-4-5-20251101-v1:0": {
@@ -285093,6 +287442,72 @@
         "temperature": false,
         "tool_call": true
       },
+      "us.openai.gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.011,
+          "cache_write": 0.1375,
+          "context_over_200k": {
+            "cache_read": 0.022,
+            "cache_write": 0.275,
+            "input": 0.22,
+            "output": 0.825
+          },
+          "input": 0.11,
+          "output": 0.55,
+          "tiers": [
+            {
+              "cache_read": 0.022,
+              "cache_write": 0.275,
+              "input": 0.22,
+              "output": 0.825,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "us.openai.gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna (US)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "global.anthropic.claude-fable-5": {
         "attachment": true,
         "cost": {
@@ -285314,6 +287729,46 @@
         ],
         "release_date": "2026-05-29",
         "temperature": true,
+        "tool_call": true
+      },
+      "step-5-preview": {
+        "attachment": true,
+        "description": "StepFun's next-generation flagship base model for coding and professional knowledge work, with native text, image, and video input and a 1M-token context window",
+        "id": "step-5-preview",
+        "interleaved": {
+          "field": "reasoning_content"
+        },
+        "last_updated": "2026-09-20",
+        "limit": {
+          "context": 1000000,
+          "input": 1000000,
+          "output": 1000000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Step 5 Preview",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "release_date": "2026-09-16",
+        "structured_output": true,
         "tool_call": true
       }
     },
@@ -285631,7 +288086,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -285642,15 +288096,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -285674,7 +288127,6 @@
         "interleaved": {
           "field": "reasoning_content"
         },
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -285685,15 +288137,14 @@
             "text",
             "image",
             "audio",
-            "video",
-            "pdf"
+            "video"
           ],
           "output": [
             "text"
           ]
         },
         "name": "MiMo-V2.6-Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -287871,6 +290322,52 @@
         "temperature": false,
         "tool_call": true
       },
+      "claude-opus-5.5": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 5,
+          "input": 4,
+          "output": 20
+        },
+        "description": "Claude model for long-running agentic coding and knowledge work",
+        "family": "claude-opus",
+        "id": "claude-opus-5.5",
+        "knowledge": "2026-06",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1000000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "Claude Opus 5.5",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "temperature": false,
+        "tool_call": true
+      },
       "claude-sonnet-4.6": {
         "attachment": true,
         "cost": {
@@ -288720,6 +291217,140 @@
           }
         ],
         "release_date": "2026-09-04",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 5,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
         "structured_output": true,
         "temperature": false,
         "tool_call": true
@@ -312419,6 +315050,73 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.2,
+          "cache_write": 2.5,
+          "context_over_200k": {
+            "cache_read": 0.4,
+            "cache_write": 5,
+            "input": 4,
+            "output": 15
+          },
+          "input": 2,
+          "output": 10,
+          "tiers": [
+            {
+              "cache_read": 0.4,
+              "cache_write": 5,
+              "input": 4,
+              "output": 15,
+              "tier": {
+                "size": 272001,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai/gpt-5.6-terra": {
         "attachment": true,
         "cost": {
@@ -312501,7 +315199,7 @@
         "last_updated": "2025-05-22",
         "limit": {
           "context": 200000,
-          "output": 8192
+          "output": 32000
         },
         "modalities": {
           "input": [
@@ -312845,7 +315543,6 @@
         "description": "MiMo Flash model for multimodal coding agents and long-context automation",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-flash",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -312861,7 +315558,7 @@
           ]
         },
         "name": "MiMo V2.6 Flash",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -312981,7 +315678,7 @@
         "last_updated": "2026-09-02",
         "limit": {
           "context": 1000000,
-          "output": 65536
+          "output": 65535
         },
         "modalities": {
           "input": [
@@ -313306,11 +316003,11 @@
         "description": "Nano Banana image model for fast generation, edits, and character-consistent assets",
         "family": "gemini-flash",
         "id": "google/gemini-2.5-flash-image",
-        "knowledge": "2025-01",
+        "knowledge": "2024-06",
         "last_updated": "2025-08-26",
         "limit": {
           "context": 32768,
-          "output": 65536
+          "output": 65535
         },
         "modalities": {
           "input": [
@@ -313391,7 +316088,7 @@
         "last_updated": "2025-05-22",
         "limit": {
           "context": 1000000,
-          "output": 8192
+          "output": 64000
         },
         "modalities": {
           "input": [
@@ -314859,7 +317556,7 @@
         "last_updated": "2026-08-13",
         "limit": {
           "context": 1000000,
-          "output": 65536
+          "output": 65535
         },
         "modalities": {
           "input": [
@@ -314922,6 +317619,73 @@
         "release_date": "2024-05-13",
         "structured_output": true,
         "temperature": true,
+        "tool_call": true
+      },
+      "openai/gpt-6-luna-fast": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.02,
+          "cache_write": 0.25,
+          "context_over_200k": {
+            "cache_read": 0.04,
+            "cache_write": 0.5,
+            "input": 0.4,
+            "output": 1.5
+          },
+          "input": 0.2,
+          "output": 1,
+          "tiers": [
+            {
+              "cache_read": 0.04,
+              "cache_write": 0.5,
+              "input": 0.4,
+              "output": 1.5,
+              "tier": {
+                "size": 272001,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna-fast",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna (Fast)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
         "tool_call": true
       },
       "bytedance/seed-2.1-turbo": {
@@ -315134,7 +317898,7 @@
         "last_updated": "2025-06-17",
         "limit": {
           "context": 1048576,
-          "output": 65536
+          "output": 65535
         },
         "modalities": {
           "input": [
@@ -316322,7 +319086,7 @@
           ]
         },
         "name": "MiMo V2.6 Pro UltraSpeed",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -316518,6 +319282,73 @@
         "reasoning": false,
         "release_date": "2026-07-30",
         "tool_call": false
+      },
+      "openai/gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.01,
+          "cache_write": 0.125,
+          "context_over_200k": {
+            "cache_read": 0.02,
+            "cache_write": 0.25,
+            "input": 0.2,
+            "output": 0.75
+          },
+          "input": 0.1,
+          "output": 0.5,
+          "tiers": [
+            {
+              "cache_read": 0.02,
+              "cache_write": 0.25,
+              "input": 0.2,
+              "output": 0.75,
+              "tier": {
+                "size": 272001,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI's most efficient model for focused, high-volume tasks",
+        "family": "gpt-luna",
+        "id": "openai/gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
       },
       "minimax/minimax-m2.5-highspeed": {
         "attachment": false,
@@ -316821,6 +319652,73 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai/gpt-6-sol-fast": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.4,
+          "cache_write": 5,
+          "context_over_200k": {
+            "cache_read": 0.8,
+            "cache_write": 10,
+            "input": 8,
+            "output": 30
+          },
+          "input": 4,
+          "output": 20,
+          "tiers": [
+            {
+              "cache_read": 0.8,
+              "cache_write": 10,
+              "input": 8,
+              "output": 30,
+              "tier": {
+                "size": 272001,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "OpenAI model for complex coding and agentic workflows",
+        "family": "gpt-sol",
+        "id": "openai/gpt-6-sol-fast",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol (Fast)",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "alibaba/qwen3.5-flash": {
         "attachment": true,
         "cost": {
@@ -317101,7 +319999,6 @@
         "description": "Stronger MiMo Pro tier for multimodal reasoning and coding-agent execution",
         "family": "mimo",
         "id": "xiaomi/mimo-v2.6-pro",
-        "knowledge": "2026-09-22",
         "last_updated": "2026-09-22",
         "limit": {
           "context": 1048576,
@@ -317117,7 +320014,7 @@
           ]
         },
         "name": "MiMo V2.6 Pro",
-        "open_weights": false,
+        "open_weights": true,
         "reasoning": true,
         "reasoning_options": [
           {
@@ -321442,6 +324339,72 @@
         "temperature": true,
         "tool_call": true
       },
+      "openai-gpt-6-sol": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.25,
+          "cache_write": 3.125,
+          "context_over_200k": {
+            "cache_read": 0.5,
+            "cache_write": 6.25,
+            "input": 5,
+            "output": 18.75
+          },
+          "input": 2.5,
+          "output": 12.5,
+          "tiers": [
+            {
+              "cache_read": 0.5,
+              "cache_write": 6.25,
+              "input": 5,
+              "output": 18.75,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
+        "family": "gpt-sol",
+        "id": "openai-gpt-6-sol",
+        "knowledge": "2026-04-20",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Sol",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
       "openai-gpt-56-sol-pro": {
         "attachment": true,
         "cost": {
@@ -322046,6 +325009,72 @@
           }
         ],
         "release_date": "2026-06-29",
+        "structured_output": true,
+        "temperature": false,
+        "tool_call": true
+      },
+      "openai-gpt-6-luna": {
+        "attachment": true,
+        "cost": {
+          "cache_read": 0.0125,
+          "cache_write": 0.15625,
+          "context_over_200k": {
+            "cache_read": 0.025,
+            "cache_write": 0.3125,
+            "input": 0.25,
+            "output": 0.9375
+          },
+          "input": 0.125,
+          "output": 0.625,
+          "tiers": [
+            {
+              "cache_read": 0.025,
+              "cache_write": 0.3125,
+              "input": 0.25,
+              "output": 0.9375,
+              "tier": {
+                "size": 272000,
+                "type": "context"
+              }
+            }
+          ]
+        },
+        "description": "GPT model for general reasoning, writing, coding, and tool-assisted tasks",
+        "family": "gpt-luna",
+        "id": "openai-gpt-6-luna",
+        "knowledge": "2026-05-18",
+        "last_updated": "2026-09-22",
+        "limit": {
+          "context": 1050000,
+          "input": 922000,
+          "output": 128000
+        },
+        "modalities": {
+          "input": [
+            "text",
+            "image"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "name": "GPT-6 Luna",
+        "open_weights": false,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
+          }
+        ],
+        "release_date": "2026-09-22",
         "structured_output": true,
         "temperature": false,
         "tool_call": true
