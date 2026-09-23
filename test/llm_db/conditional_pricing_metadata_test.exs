@@ -5,6 +5,10 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
   alias LLMDB.Sources.Local
 
   @openai %{
+    "gpt-5.6" => [4.0, 20.0, 0.4, 5.0],
+    "gpt-5.6-sol" => [4.0, 20.0, 0.4, 5.0],
+    "gpt-5.6-terra" => [2.0, 12.0, 0.2, 2.5],
+    "gpt-5.6-luna" => [0.2, 1.2, 0.02, 0.25],
     "gpt-6-astra" => [10.0, 50.0, 1.0, 12.5],
     "gpt-6-sol" => [2.0, 10.0, 0.2, 2.5],
     "gpt-6-luna" => [0.1, 0.5, 0.01, 0.125]
@@ -32,7 +36,8 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
     %{models: models}
   end
 
-  test "GPT-6 selects exactly one full-request rate per meter on both sides of 272K", ctx do
+  test "GPT-5.6 and GPT-6 select exactly one full-request rate per meter on both sides of 272K",
+       ctx do
     for {id, short_rates} <- @openai,
         {tokens, factors} <- [{272_000, [1, 1, 1, 1]}, {272_001, [2, 1.5, 2, 2]}] do
       model = ctx.models[id]
@@ -45,7 +50,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
     end
   end
 
-  test "GPT-6 processing modifiers stack with context and residency exactly once", ctx do
+  test "OpenAI processing modifiers stack with context and residency exactly once", ctx do
     for id <- Map.keys(@openai),
         tokens <- [272_000, 272_001],
         {api, tier, multiplier} <- [
@@ -185,7 +190,8 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
                custom: %{}
              )
 
-    assert Enum.sum(Enum.map(Map.values(loaded.models), &length/1)) == 8
+    assert Enum.sum(Enum.map(Map.values(loaded.models), &length/1)) ==
+             map_size(@openai) + map_size(@anthropic)
 
     for provider <- [:openai, :anthropic], model <- loaded.models[provider] do
       expected = ctx.models[model.id]

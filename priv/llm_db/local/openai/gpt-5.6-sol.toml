@@ -1,0 +1,170 @@
+id = "gpt-5.6-sol"
+
+# Standard short-context rates; conditional rates are in pricing.components.
+[cost]
+input = 4.0
+output = 20.0
+cache_read = 0.4
+cache_write = 5.0
+
+# Verified 2026-09-22 against the model page and pricing page below.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 4.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 8.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 20.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 30.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.4
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.8
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 5.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 10.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+# Apply one processing modifier to the selected context tier, then residency.
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[[pricing.components]]
+id = "pricing.flex"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { service_tier = "flex" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "flex"
+
+[[pricing.components]]
+id = "pricing.fast"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "fast" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "fast"
+
+[[pricing.components]]
+id = "pricing.priority"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "priority" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "priority"
+
+[[pricing.components]]
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { regional_processing = true }
+source = "provider_docs"
+notes = "Regional processing endpoint uplift. Eligibility is separate from pricing; see extra.pricing."
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-5.6-sol", "https://developers.openai.com/api/docs/pricing", "https://developers.openai.com/zh-Hans/api/docs/pricing", "https://developers.openai.com/api/docs/guides/fast-mode", "https://developers.openai.com/api/docs/guides/prompt-caching"]
+context_tier_basis = "Total input tokens, including cache reads and writes. The selected tier prices the entire request, including output."
+promotion = "Current Sol promotional rates are available at least through 2026-11-21; this is not a confirmed expiry date."

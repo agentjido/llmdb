@@ -29,3 +29,36 @@ temperature = true
 [extra.constraints]
 reasoning_effort = "supported"
 reasoning_effort_values = ["low", "medium", "high"]
+
+# Rates and context bands come from the xAI model API; these modifiers are docs-only.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.8
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+notes = "The model-specific Batch discount applies to all token types."
+
+[[pricing.components]]
+id = "pricing.priority"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "priority" }
+excludes_when = { api = "batch" }
+source = "provider_docs"
+mode = "priority"
+notes = "Use the response's confirmed service_tier for settled costs; requested priority can fall back to default."
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://docs.x.ai/developers/advanced-api-usage/prompt-caching/usage-and-pricing", "https://api.x.ai/v1/models", "https://docs.x.ai/developers/pricing", "https://docs.x.ai/developers/models/grok-4.3"]
+context_basis = "Total prompt tokens, including cached input; the long-context rate applies to the entire request at or above the threshold."

@@ -172,53 +172,41 @@ defmodule LLMDB.Sources.XAI do
     |> empty_to_nil()
   end
 
-  defp pricing_from_model(model) do
+  defp pricing_from_model(%{"long_context_threshold" => threshold} = model)
+       when is_integer(threshold) and threshold > 0 do
     components =
-      []
-      |> maybe_add_long_context_component(
-        "token.input.long_context",
-        model["prompt_text_token_price_long_context"],
-        model["long_context_threshold"]
-      )
-      |> maybe_add_long_context_component(
-        "token.cache_read.long_context",
-        model["cached_prompt_text_token_price_long_context"],
-        model["long_context_threshold"]
-      )
-      |> maybe_add_long_context_component(
-        "token.output.long_context",
-        model["completion_text_token_price_long_context"],
-        model["long_context_threshold"]
-      )
+      for {id, meter, field} <- [
+            {"token.input", "input_tokens", "prompt_text_token_price"},
+            {"token.cache_read", "cache_read_tokens", "cached_prompt_text_token_price"},
+            {"token.output", "output_tokens", "completion_text_token_price"}
+          ],
+          {suffix, comparison} <- [{"", :lt}, {".long_context", :gte}],
+          key = if(suffix == "", do: field, else: field <> "_long_context"),
+          rate <- [token_price(model[key])],
+          is_number(rate) or suffix == "" do
+        # An unpriced base component still constrains its context. Otherwise a
+        # lower-precedence legacy cost could become an unconditional fallback.
+        %{
+          id: id <> suffix,
+          kind: "token",
+          unit: "token",
+          per: 1_000_000,
+          meter: meter,
+          applies_when: %{input_tokens: %{comparison => threshold}},
+          mode: "standard",
+          charge_scope: "full_request",
+          source: "provider_api",
+          notes:
+            "Prompt length selects the rate for all tokens in the request; " <>
+              "the long-context threshold is inclusive. See https://docs.x.ai/developers/pricing."
+        }
+        |> maybe_put(:rate, rate)
+      end
 
-    case components do
-      [] -> nil
-      _ -> %{currency: "USD", merge: "merge_by_id", components: components}
-    end
+    %{currency: "USD", merge: "merge_by_id", components: components}
   end
 
-  defp maybe_add_long_context_component(components, _id, nil, _threshold), do: components
-  defp maybe_add_long_context_component(components, _id, _price, nil), do: components
-
-  defp maybe_add_long_context_component(components, id, price, threshold) do
-    case token_price(price) do
-      nil ->
-        components
-
-      rate ->
-        components ++
-          [
-            %{
-              id: id,
-              kind: "token",
-              unit: "token",
-              per: 1_000_000,
-              rate: rate,
-              notes: "Applies above #{threshold} context tokens"
-            }
-          ]
-    end
-  end
+  defp pricing_from_model(_model), do: nil
 
   defp token_price(nil), do: nil
   defp token_price(price) when is_number(price), do: price / 10_000

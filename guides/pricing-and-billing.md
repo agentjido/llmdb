@@ -144,6 +144,10 @@ When a model defines its own `pricing`, you can control how it combines with pro
 ### merge_by_id (Default)
 
 Merges components by their `id`. Model components override matching defaults; non-matching defaults are preserved.
+Source layers and runtime model overlays also merge pricing by component ID, so
+a docs-only modifier does not discard provider API context rates. A matching ID
+replaces the entire component, including its conditions. Use `merge = "replace"`
+to discard lower-precedence pricing components deliberately.
 
 ```elixir
 # Provider default
@@ -255,24 +259,34 @@ The helper does not calculate invoices. It preserves the distinction between
 base rates, conditional rates, derived rates, and stackable modifiers so billing
 logic can make provider-specific choices explicitly.
 
-### Current OpenAI and Claude overlays
+### Curated conditional pricing
 
 The curated pricing overlays checked on September 22, 2026 cover:
 
 | Provider | Models | Conditional pricing |
 | --- | --- | --- |
-| OpenAI | GPT-6 Astra, Sol, Luna | 272K context boundary, Batch, Flex, Fast/Priority, regional processing |
+| OpenAI | GPT-5.6 (Sol alias), Sol, Terra, Luna; GPT-6 Astra, Sol, Luna | Above 272,000 input tokens, Batch, Flex, Fast/Priority, regional processing |
 | Anthropic | Claude Fable 5.1, Opus 5.5, Opus 5, Sonnet 5 | 5m/1h cache writes, Batch, US-only inference |
 | Anthropic | Claude Opus 5.5, Opus 5 | Fast mode in addition to the conditions above |
 | Anthropic | Claude Haiku 4.5 | 5m/1h cache writes and Batch |
+| Google | Gemini 3.1 Pro Preview, including Customtools | Above 200,000 prompt tokens, Batch/Flex, Priority, explicit cache storage |
+| xAI | API models with a published long-context threshold, including Grok 4.3, 4.6, 4.7 | At or above 200,000 prompt tokens; selected models have Priority, Batch, US endpoint modifiers |
+| Alibaba | Qwen3.7-Plus, Qwen3.6-Plus | Above 256,000 input tokens; Singapore International list prices, explicit/implicit cache distinctions |
+| Alibaba | Qwen3.6-Max-preview | Above 128,000 input tokens; Singapore International list prices and explicit cache |
+| Moonshot AI | Kimi K3 | 5m/1h cache writes and separate cache reads |
 
 These are first-party prices. Cloud partner and gateway catalogs have independent
 pricing. The evidence links and verification date are stored under each model's
 `extra.pricing`. Sources: [OpenAI pricing](https://developers.openai.com/api/docs/pricing),
 [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing), and
 [Claude prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching).
+Other provider references: [Gemini pricing](https://ai.google.dev/gemini-api/docs/pricing),
+[xAI pricing](https://docs.x.ai/developers/pricing),
+[Alibaba pricing](https://www.alibabacloud.com/help/en/model-studio/model-pricing),
+[Alibaba caching](https://www.alibabacloud.com/help/en/model-studio/context-cache), and
+[Kimi caching](https://platform.kimi.ai/docs/guide/use-context-caching-feature-of-kimi-api).
 
-#### GPT-6 context and processing tiers
+#### OpenAI context and processing tiers
 
 ```elixir
 {:ok, model} = LLMDB.model("openai:gpt-6-sol")
@@ -302,9 +316,15 @@ modifiers so it cannot also receive a Flex discount or Fast premium.
 `regional_processing` is a caller-supplied boolean indicating use of a regional
 processing endpoint; it is not an OpenAI request parameter. The 1.1 multiplier
 stacks with processing and context tiers. Pricing selection does not validate
-endpoint eligibility: Sol and Luna allow EU residency only with Standard
+endpoint eligibility: GPT-6 Sol and Luna allow EU residency only with Standard
 processing; Astra Fast mode is unavailable with EU residency. These restrictions
 are also recorded in `extra.pricing`.
+
+GPT-5.6 uses the same context boundary and processing multipliers, with its own
+base rates. Its Sol rates are promotional, available at least through November
+21, 2026; that date is not a confirmed expiry. The `gpt-5.6` alias currently
+resolves to Sol. Recheck the resolved model and current provider prices when
+refreshing a long-lived estimate.
 
 Reasoning effort changes usage, not the per-token rate. Count billed reasoning
 tokens within output usage, rather than charging for them a second time.
@@ -339,6 +359,40 @@ TTL separately and apply its rate only to that duration's reported token count.
 Count input, output, and cache reads once. An omitted or `nil` TTL leaves both
 cache-write variants unresolved; it does not assume the cheaper duration.
 
+#### Other provider contexts
+
+For Gemini 3.1 Pro, supply `api: "generate_content"` (or `"batch"`),
+`service_tier: "standard"` (or `"flex"`/`"priority"`), and
+`cache_type: "implicit"` (or `"explicit"`). Batch and Flex halve input/output
+rates but leave cache-read rates unchanged. Priority multiplies token rates and
+explicit storage by 1.8. Explicit storage uses `cache_storage_token_hours`,
+priced separately from the cached tokens read by each request. Count thinking
+tokens as output. These are Gemini API prices, not Vertex AI prices.
+
+For xAI, supply the confirmed `service_tier`, `api`, and normalized `base_url`.
+Grok 4.6/4.7 apply the US uplift only for `"https://us.api.x.ai/v1"`.
+Grok 4.3 has a 20% Batch discount; this is not a provider-wide discount. The
+source mapper preserves API rate values and makes the short/long bands mutually
+exclusive. At exactly 200,000 input tokens, Grok selects the **long** band;
+Gemini still selects its **short** band.
+
+For the curated Qwen models, supply `region: "singapore"`,
+`deployment: "international"`, `api: "chat"`, and `cache_mode: "explicit"`.
+Qwen3.7-Plus also has an `"implicit"` cache-read rate; the other two overlays
+only assert explicit-cache support. Rates are public list prices, excluding
+temporary promotions. These are not prices for other Alibaba regions or
+deployments. Missing scope stays unresolved, and an unsupported scope or input
+above the documented maximum has no selected rate. Neither outcome is free
+usage. Batch excludes the documented cache discounts; it does not establish a
+complete Batch tariff.
+
+For Kimi K3, select cache writes with `cache_ttl: "5m"` or `"1h"`. Keep
+uncached input, cache reads, and cache writes as disjoint usage categories.
+Use the effective billed TTL: an existing cached prefix keeps its original TTL
+until expiry. Chat Completions and Responses write implicitly by default;
+Messages requires top-level cache configuration to write.
+The overlay does not infer a context-price cliff from the model's context limit.
+
 ### Using selected components in a billing consumer
 
 `components_for/2` selects metadata; it does not produce final rates or validate
@@ -366,6 +420,43 @@ Astra's legacy `extra.pricing.mode_multipliers` is retained for compatibility;
 consumers using the canonical modifier components must not apply that legacy
 map again. Fable 5.1's former input/output-only Batch variants are replaced by a
 single token-wide modifier so cache usage receives the discount too.
+
+### Building context-price bands for preflight decisions
+
+A consumer can use these components to compare projected request costs before
+and after reducing a prompt. Build a curve only for a resolved provider/model
+and a fixed, supported mode, region, and cache policy. Keep source URLs and the
+verification date with that curve so it can be refreshed. Do not substitute a
+first-party tariff for a gateway route merely because the model name matches.
+
+For each input-token interval, require one applicable input rate and one output
+rate, plus every cache meter the consumer actually uses. Resolve supported
+modifiers and derived rates as described above. Require matching currency,
+denominators, and `charge_scope: "full_request"`; marginal tiers need different
+arithmetic. Require numeric rates; a missing rate is not zero. Reject gaps,
+overlaps, relevant unresolved conditions, and modifiers
+or usage meters the consumer cannot evaluate. An empty `unresolved` list alone
+does not prove that a tariff is complete or a request mode is supported.
+
+If an adapter represents bands with inclusive `up_to` limits, preserve the
+provider's exact boundary: Gemini's first band ends at `200_000`, while Grok's
+ends at `199_999`. Qwen uses decimal thousands. Never guess a billing boundary
+from `limits.context` or the model name, and do not extend a finite published
+band to infinity.
+
+Use **total prompt tokens, including cached content**, to select a context
+band. Use separate billable token counts to calculate its cost. The output
+rate is selected by input length too; a large output does not itself move the
+request into a more expensive input band. Cache hits reduce the billable input
+cost but do not remove cached tokens from the context threshold.
+
+A price-aware compaction decision should compare the complete projected request
+in the higher band with the expected reduced request in the lower band,
+including expected output and cache usage. Savings must exceed the separately
+priced summarization request. An input/output/cache-read-only curve cannot
+price explicit cache creation or retained cache storage; extend the evaluator
+or decline that estimate. A flat-rate model can still save tokens, but does not
+provide evidence of a context-price cliff.
 
 ## Migration from Legacy Cost Format
 

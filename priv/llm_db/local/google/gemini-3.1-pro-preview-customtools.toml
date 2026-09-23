@@ -1,0 +1,137 @@
+id = "gemini-3.1-pro-preview-customtools"
+
+# Standard short-context rates; conditional rates are in pricing.components.
+[cost]
+input = 2.0
+output = 12.0
+cache_read = 0.2
+
+# Verified 2026-09-22 against the official Gemini API pricing table.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 2.0
+applies_when = { input_tokens = { lte = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 4.0
+applies_when = { input_tokens = { gt = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 12.0
+applies_when = { input_tokens = { lte = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 18.0
+applies_when = { input_tokens = { gt = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.2
+applies_when = { input_tokens = { lte = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.4
+applies_when = { input_tokens = { gt = 200000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "storage.cache"
+kind = "storage"
+unit = "other"
+per = 1000000
+meter = "cache_storage_token_hours"
+rate = 4.5
+applies_when = { cache_type = "explicit" }
+mode = "standard"
+source = "provider_docs"
+notes = "Explicit cache storage per million token-hours; separate from per-request cached token reads."
+
+# Batch and Flex discount input/output only; cached reads and storage retain
+# their Standard rates. Priority also increases cached reads and storage.
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.input", "token.input.long_context", "token.output", "token.output.long_context"]
+applies_when = { api = "batch" }
+mode = "batch"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.flex"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.input", "token.input.long_context", "token.output", "token.output.long_context"]
+applies_when = { service_tier = "flex" }
+excludes_when = { api = "batch" }
+mode = "flex"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.priority"
+kind = "other"
+unit = "other"
+multiplier = 1.8
+applies_to = ["token.*", "storage.cache"]
+applies_when = { service_tier = "priority" }
+excludes_when = { api = "batch" }
+mode = "priority"
+source = "provider_docs"
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-pro-preview", "https://ai.google.dev/api/generate-content#UsageMetadata", "https://ai.google.dev/gemini-api/docs/caching"]
+context_tier_basis = "Total prompt tokens, including cached content. The input meter is billed only for uncached tokens; cached tokens use the cache-read meter."
+output_meter = "Includes generated response and thinking tokens."
+cache_storage = "Set cache_type to explicit for separately billed storage, or implicit when no explicit cache is stored. Meter storage as cached tokens multiplied by hours retained."

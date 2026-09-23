@@ -1,0 +1,128 @@
+id = "qwen3.6-plus"
+
+# Singapore International list rates; cost summarizes the first tier and explicit cache.
+[cost]
+input = 0.5
+output = 3.0
+cache_read = 0.05
+cache_write = 0.625
+
+# Verified 2026-09-22. K means 1,000; the full input selects every token rate.
+# Cache-hit and cache-creation tokens count toward that input threshold.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.5
+applies_when = { region = "singapore", deployment = "international", input_tokens = { lte = 256000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Tier uses total input including cached tokens. Apply this rate only to input tokens outside cache reads and explicit cache creation."
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 2.0
+applies_when = { region = "singapore", deployment = "international", input_tokens = { gt = 256000, lte = 1000000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Tier uses total input including cached tokens. Apply this rate only to input tokens outside cache reads and explicit cache creation."
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 3.0
+applies_when = { region = "singapore", deployment = "international", input_tokens = { lte = 256000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 6.0
+applies_when = { region = "singapore", deployment = "international", input_tokens = { gt = 256000, lte = 1000000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.05
+applies_when = { region = "singapore", deployment = "international", input_tokens = { lte = 256000 }, cache_mode = "explicit" }
+excludes_when = { api = "batch" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.2
+applies_when = { region = "singapore", deployment = "international", input_tokens = { gt = 256000, lte = 1000000 }, cache_mode = "explicit" }
+excludes_when = { api = "batch" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 0.625
+applies_when = { region = "singapore", deployment = "international", input_tokens = { lte = 256000 }, cache_mode = "explicit" }
+excludes_when = { api = "batch" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Explicit 5-minute cache creation; only newly cached tokens are charged at this rate."
+
+[[pricing.components]]
+id = "token.cache_write.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 2.5
+applies_when = { region = "singapore", deployment = "international", input_tokens = { gt = 256000, lte = 1000000 }, cache_mode = "explicit" }
+excludes_when = { api = "batch" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Explicit 5-minute cache creation; only newly cached tokens are charged at this rate."
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://www.alibabacloud.com/help/en/model-studio/model-pricing", "https://www.alibabacloud.com/help/en/model-studio/context-cache"]
+region = "singapore"
+deployment = "international"
+price_basis = "list"
+context_tier_basis = "total_input_tokens_including_cache"
+cache_ttl = "5m"
+notes = "Only explicit cache is documented for this model in Singapore. Implicit cache rates are not inferred from other Qwen models."

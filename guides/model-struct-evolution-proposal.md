@@ -9,14 +9,15 @@ contract supports the additive schema fields described here for limits, pricing
 components, reasoning capabilities, provider capability groups, Anthropic
 direct-source mapping, and conditional pricing component selection.
 
-The curated overlays now cover GPT-6 Astra/Sol/Luna and Claude Fable 5.1,
-Opus 5.5, Opus 5, Sonnet 5, and Haiku 4.5. They include context tiers where
+The curated overlays cover GPT-5.6/GPT-6, current Claude models, Gemini 3.1 Pro,
+recent Grok models, selected Qwen models, and Kimi K3. They include context tiers where
 published, cache durations, processing discounts/premiums, and applicable
 regional uplifts. See [Pricing and Billing](pricing-and-billing.md) for the
 implemented context contract and worked examples. The older model examples below
 remain design illustrations, not a current price list.
 
-The implementation uses token-wide modifiers for Batch/Flex/Fast and residency.
+The implementation uses targeted modifiers for Batch/Flex/Fast and residency;
+their `applies_to` lists preserve provider differences in cache discounts.
 For derived cache rates, resolve the base rate first and apply each token-wide
 modifier once to the resulting rate. This avoids applying the same discount or
 uplift both through a dependency and directly. The selector returns applicable
