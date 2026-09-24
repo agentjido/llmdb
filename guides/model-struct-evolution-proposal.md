@@ -590,12 +590,16 @@ Add optional Zoi schemas for:
 - `pricing.components[].multiplier`
 - `pricing.components[].derives_from`
 - `pricing.components[].applies_to`
+- `pricing.components[].role`
+- `pricing.components[].rate_group`
+- `pricing.components[].rate_group_policy`
 - `pricing.components[].charge_scope`
 - `pricing.components[].source`
 
 Validation should remain permissive for unknown provider-specific condition keys
 inside `applies_when` so new provider pricing modes do not require immediate
-library releases.
+library releases. A declared component role should enforce its required and
+incompatible fields. Untyped legacy components must continue to parse.
 
 ### 5. Merge
 
@@ -658,14 +662,22 @@ LLMDB.Pricing.components_for(model,
   cache_ttl: "1h",
   inference_geo: "us"
 )
+
+LLMDB.Pricing.select_components(model,
+  api: "batch",
+  input_tokens: 900_000,
+  cache_ttl: "1h",
+  inference_geo: "us"
+)
 ```
 
 This keeps `%LLMDB.Model{}` as metadata and lets billing logic evolve
 independently.
 
-The helper should return both selected components and unresolved modifiers when
-conditions are incomplete. Silent best guesses are worse than partial answers for
-billing.
+The compatible helper should return both selected components and unresolved
+modifiers when conditions are incomplete. The strict helper should also validate
+component roles, references, conditions, and rate-group cardinality. Silent best
+guesses are worse than explicit errors for billing.
 
 ## Backward Compatibility Plan
 

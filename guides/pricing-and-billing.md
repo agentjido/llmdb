@@ -32,6 +32,7 @@ Each pricing component describes a single billable item with the following field
 ```elixir
 %{
   id: "token.input",           # Unique identifier
+  role: "rate",                # Optional strict role: rate, derived_rate, modifier
   kind: "token",               # Category: token, tool, image, storage, request, other
   unit: "token",               # Unit type: token, call, query, session, gb_day, image, source, other
   per: 1_000_000,              # Rate denominator (e.g., per 1M tokens)
@@ -39,9 +40,8 @@ Each pricing component describes a single billable item with the following field
   meter: "input_tokens",       # Optional: billing meter name
   tool: "web_search",          # Optional: tool name (for kind: "tool")
   size_class: "1024x1024",     # Optional: size variant (for images)
-  multiplier: 1.1,             # Optional: multiplier for derived/modifier pricing
-  derives_from: "token.input", # Optional: base component for derived rates
-  applies_to: ["token.*"],     # Optional: component ids/prefixes affected by modifier
+  rate_group: "input_tokens",  # Optional: mutually exclusive rate group
+  rate_group_policy: "exactly_one", # Optional: at_most_one or exactly_one
   applies_when: %{api: "batch"},       # Optional: conditions that activate this component
   excludes_when: %{region: "legacy"},  # Optional: conditions that suppress it
   mode: "standard",            # Optional: provider/request mode label
@@ -61,6 +61,27 @@ Each pricing component describes a single billable item with the following field
 | `storage` | Data storage fees | `gb_day` |
 | `request` | Per-request fees | `call` |
 | `other` | Custom billing types | varies |
+
+### Component roles and compatibility
+
+New component metadata should set one of these roles:
+
+| Role | Required value fields | Fields it must not use |
+| --- | --- | --- |
+| `rate` | `rate`, `unit`, `per` | `multiplier`, `derives_from`, `applies_to` |
+| `derived_rate` | `multiplier`, `derives_from`, `unit`, `per` | `rate`, `applies_to` |
+| `modifier` | `multiplier`, non-empty `applies_to` | `rate`, `per`, `meter`, `derives_from`, rate-group fields |
+
+The declared role enables strict schema checks. Existing components without a
+role remain valid. `LLMDB.Pricing.component_role/1` infers their role from
+`rate`, `derives_from`, or `applies_to`. Strict validation rejects a legacy
+component when it contains more than one of those signatures.
+
+Use `rate_group` to identify rates that price the same usage meter. Strict
+selection allows at most one selected rate in a group. Set
+`rate_group_policy: "exactly_one"` when a complete context must select one rate.
+The policy requires an explicit group. Components without a group use `meter`,
+then the canonical `token.*` ID, as a compatibility fallback for conflict checks.
 
 ### Standard Component IDs
 
@@ -263,6 +284,24 @@ selection.unresolved
 The helper does not calculate invoices. It preserves the distinction between
 base rates, conditional rates, derived rates, and stackable modifiers so billing
 logic can make provider-specific choices explicitly.
+
+For new billing consumers, use the strict selector:
+
+```elixir
+case LLMDB.Pricing.select_components(model, context) do
+  {:ok, %{components: components, errors: []}} ->
+    components
+
+  {:error, %{unresolved: unresolved, errors: errors}} ->
+    {:cannot_price, unresolved, errors}
+end
+```
+
+`select_components/2` keeps the selected components unchanged, but it also
+validates roles, numeric comparisons, unique IDs, derived-rate dependencies,
+modifier targets, and rate-group cardinality. It rejects unresolved selection.
+`components_for/2` retains its existing return shape and selection behavior for
+backward compatibility.
 
 ### Curated conditional pricing
 
@@ -490,8 +529,8 @@ stays unresolved rather than choosing the cheaper price.
 
 ### Using selected components in a billing consumer
 
-`components_for/2` selects metadata; it does not produce final rates or validate
-all provider request combinations. For the curated overlays above:
+The selectors return metadata; they do not produce final rates or validate all
+provider request combinations. For the curated overlays above:
 
 1. Supply known request/response context, including explicit defaults. Missing
    or `nil` values remain unknown. Inspect `selection.unresolved` before pricing

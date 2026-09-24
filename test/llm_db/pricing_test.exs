@@ -194,6 +194,10 @@ defmodule LLMDB.PricingTest do
 
     assert %{components: [], unresolved: []} = Pricing.components_for(%{pricing: nil})
     assert %{components: [], unresolved: []} = Pricing.components_for(%{}, nil)
+
+    assert {:error, strict} = Pricing.select_components(%{})
+    assert strict.components == []
+    assert Enum.any?(strict.errors, &(&1.code == :missing_pricing_components))
   end
 
   test "components_for selects matching components and reports incomplete conditions" do
@@ -312,5 +316,156 @@ defmodule LLMDB.PricingTest do
              )
 
     assert_raise ArgumentError, fn -> String.to_existing_atom(key) end
+  end
+
+  test "component roles are declared or inferred without changing legacy maps" do
+    assert Pricing.component_role(%{id: "direct", rate: 1.0}) == {:ok, :rate}
+
+    assert Pricing.component_role(%{id: "derived", derives_from: "direct", multiplier: 2.0}) ==
+             {:ok, :derived_rate}
+
+    assert Pricing.component_role(%{id: "modifier", applies_to: ["token.*"], multiplier: 0.5}) ==
+             {:ok, :modifier}
+
+    assert Pricing.component_role(%{id: "typed", role: "modifier", rate: 1.0}) ==
+             {:ok, :modifier}
+
+    assert Pricing.component_role(%{id: "ambiguous", rate: 1.0, applies_to: ["token.*"]}) ==
+             {:error, :ambiguous_component_role}
+
+    assert Pricing.component_role(%{id: "empty"}) == {:error, :missing_component_role}
+
+    assert Pricing.component_role(%{id: "invalid", role: "discount"}) ==
+             {:error, :invalid_component_role}
+  end
+
+  test "strict component validation checks shapes, references, conditions, and cycles" do
+    valid = [
+      %{
+        id: "token.input",
+        role: "rate",
+        unit: "token",
+        per: 1_000_000,
+        rate: 2.0,
+        rate_group: "input_tokens"
+      },
+      %{
+        id: "token.cache_write",
+        role: "derived_rate",
+        unit: "token",
+        per: 1_000_000,
+        derives_from: "token.input",
+        multiplier: 1.25,
+        applies_when: %{input_tokens: %{gte: 1}}
+      },
+      %{
+        id: "pricing.batch",
+        role: "modifier",
+        multiplier: 0.5,
+        applies_to: ["token.*"]
+      }
+    ]
+
+    assert :ok = Pricing.validate_components(valid)
+
+    invalid = [
+      %{id: "token.input", rate: 2.0, applies_to: ["token.*"], unit: "token", per: 1},
+      %{
+        id: "token.a",
+        derives_from: "token.b",
+        multiplier: 1.0,
+        unit: "token",
+        per: 1
+      },
+      %{
+        id: "token.b",
+        derives_from: "token.a",
+        multiplier: 1.0,
+        unit: "token",
+        per: 1,
+        applies_when: %{input_tokens: %{gt: "many", approximately: 10}}
+      },
+      %{id: "pricing.bad", multiplier: 0.5, applies_to: ["token.missing"]}
+    ]
+
+    assert {:error, errors} = Pricing.validate_components(invalid)
+    codes = MapSet.new(errors, & &1.code)
+
+    assert :ambiguous_component_role in codes
+    assert :derived_rate_cycle in codes
+    assert :invalid_comparison_operator in codes
+    assert :invalid_comparison_value in codes
+    assert :missing_modifier_target in codes
+  end
+
+  test "strict selection accepts one resolved rate in an exact group" do
+    model = strict_selection_model()
+
+    assert {:ok, selection} =
+             Pricing.select_components(model, context_tier: "long", api: "responses")
+
+    assert selection.errors == []
+    assert selection.unresolved == []
+    assert Enum.map(selection.components, & &1.id) == ["token.input.long"]
+  end
+
+  test "strict selection reports unresolved, conflicting, and missing grouped rates" do
+    model = strict_selection_model()
+
+    assert {:error, unresolved} = Pricing.select_components(model, api: "responses")
+    assert Enum.any?(unresolved.errors, &(&1.code == :unresolved_components))
+
+    assert {:error, missing} =
+             Pricing.select_components(model, context_tier: "unsupported", api: "responses")
+
+    assert Enum.any?(missing.errors, &(&1.code == :missing_rate_for_group))
+
+    conflicting = %{
+      pricing: %{
+        components: [
+          %{id: "token.input.a", rate: 1.0, unit: "token", per: 1, rate_group: "input"},
+          %{id: "token.input.b", rate: 2.0, unit: "token", per: 1, rate_group: "input"}
+        ]
+      }
+    }
+
+    assert {:error, conflict} = Pricing.select_components(conflicting)
+    assert Enum.any?(conflict.errors, &(&1.code == :multiple_rates_for_group))
+  end
+
+  defp strict_selection_model do
+    %{
+      pricing: %{
+        components: [
+          %{
+            id: "token.input.short",
+            role: "rate",
+            unit: "token",
+            per: 1_000_000,
+            rate: 1.0,
+            rate_group: "input_tokens",
+            rate_group_policy: "exactly_one",
+            applies_when: %{context_tier: "short"}
+          },
+          %{
+            id: "token.input.long",
+            role: "rate",
+            unit: "token",
+            per: 1_000_000,
+            rate: 2.0,
+            rate_group: "input_tokens",
+            rate_group_policy: "exactly_one",
+            applies_when: %{context_tier: "long"}
+          },
+          %{
+            id: "pricing.batch",
+            role: "modifier",
+            multiplier: 0.5,
+            applies_to: ["token.*"],
+            applies_when: %{api: "batch"}
+          }
+        ]
+      }
+    }
   end
 end

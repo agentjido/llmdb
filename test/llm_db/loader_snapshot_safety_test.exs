@@ -82,6 +82,44 @@ defmodule LLMDB.LoaderSnapshotSafetyTest do
     assert Enum.map(model.pricing.components, & &1.id) == ["token.output"]
   end
 
+  test "declared pricing roles and selection rules survive snapshot loading" do
+    path =
+      write_snapshot!(%{
+        "test_provider_alpha" => %{
+          "id" => "test_provider_alpha",
+          "models" => %{
+            "priced-model" => %{
+              "id" => "priced-model",
+              "provider" => "test_provider_alpha",
+              "pricing" => %{
+                "components" => [
+                  %{
+                    "id" => "token.input",
+                    "role" => "rate",
+                    "kind" => "token",
+                    "unit" => "token",
+                    "per" => 1_000_000,
+                    "rate" => 1.0,
+                    "rate_group" => "input_tokens",
+                    "rate_group_policy" => "exactly_one"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      })
+
+    on_exit(fn -> File.rm(path) end)
+
+    assert {:ok, snapshot} = Loader.load(snapshot_source: {:file, path})
+    model = snapshot.models_by_key[{:test_provider_alpha, "priced-model"}]
+    assert [component] = model.pricing.components
+    assert component.role == "rate"
+    assert component.rate_group == "input_tokens"
+    assert component.rate_group_policy == "exactly_one"
+  end
+
   test "unknown modalities are rejected without creating atoms" do
     modality = unique_identifier("unknown_modality")
     assert_not_existing_atom(modality)
