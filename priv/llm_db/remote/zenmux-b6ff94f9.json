@@ -418,6 +418,75 @@
     },
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 8000,
+      "created": 1790148935,
+      "display_name": "inclusionAI: Ming Image 0.1 Design",
+      "id": "inclusionai/ming-image-0.1-design",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "inclusionai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-09-22"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 8000,
+      "created": 1790215997,
+      "display_name": "inclusionAI: Ming Image 0.1 Design Layer",
+      "id": "inclusionai/ming-image-0.1-design-layer",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "inclusionai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-09-22"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1048576,
@@ -684,21 +753,21 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.18
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.012
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.06
           }
         ]
       },
@@ -1045,14 +1114,14 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 1.25
+            "value": 0.875
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 5
+            "value": 3.5
           }
         ]
       },
@@ -1263,21 +1332,21 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.18
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.012
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.06
           }
         ]
       },
@@ -1840,34 +1909,34 @@
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.035
+            "value": 0.05
           },
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.07
+            "value": 0.1
           },
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.14
+            "value": 0.2
           }
         ],
         "video": [
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.035
+            "value": 0.05
           },
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.07
+            "value": 0.1
           },
           {
             "currency": "USD",
             "unit": "perSecond",
-            "value": 0.14
+            "value": 0.2
           }
         ]
       },

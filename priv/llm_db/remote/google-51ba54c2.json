@@ -614,6 +614,40 @@
       "version": "3.1-flash-tts-preview"
     },
     {
+      "description": "Gemini 3.8 Flash TTS",
+      "displayName": "Gemini 3.8 Flash TTS",
+      "inputTokenLimit": 8192,
+      "maxTemperature": 2,
+      "name": "models/gemini-3.8-flash-tts",
+      "outputTokenLimit": 16384,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.8-flash-tts"
+    },
+    {
+      "description": "Gemini 3.8 Flash Lite TTS",
+      "displayName": "Gemini 3.8 Flash Lite TTS",
+      "inputTokenLimit": 8192,
+      "maxTemperature": 2,
+      "name": "models/gemini-3.8-flash-lite-tts",
+      "outputTokenLimit": 16384,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.8-flash-lite-tts"
+    },
+    {
       "description": "Gemini Robotics-ER 2 Preview",
       "displayName": "Gemini Robotics-ER 2 Preview",
       "inputTokenLimit": 131072,
