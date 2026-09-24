@@ -99,19 +99,3 @@ served_model = "DeepSeek-V4.1-Flash"
 output_includes_reasoning = true
 long_context_premium = false
 notes = "This callable compatibility ID routes to V4.1-Flash and uses Flash rates; the previous underlying model is retired."
-
-[extra.pricing.period_schedule]
-context_key = "pricing_period"
-timezone = "UTC"
-weekday_numbering = "iso8601"
-peak_weekdays = [1, 2, 3, 4, 5]
-peak_windows = [{ start = "01:00", end = "04:00" }, { start = "06:00", end = "10:00" }]
-off_peak_weekdays = [6, 7]
-other_hours_period = "off_peak"
-holiday_region = "CN"
-holiday_timezone = "Asia/Shanghai"
-holiday_period = "off_peak"
-holiday_calendar_status = "not_published"
-billing_timestamp_status = "not_published"
-instant_boundary_semantics = "not_published"
-notes = "Callers supply pricing_period. The published schedule excludes Chinese public holidays and all weekends, including adjusted work weekends. The docs do not identify a billable timestamp or provide holiday dates; created is not documented as a tariff-selection timestamp."

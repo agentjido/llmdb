@@ -280,7 +280,7 @@ The curated pricing overlays checked on September 22, 2026 cover:
 | Alibaba | Qwen3.6-Max-preview | Above 128,000 input tokens; Singapore International list prices and explicit cache |
 | Moonshot AI | Kimi K3 | 5m/1h cache writes and separate cache reads |
 | MiniMax | MiniMax-M3 | Provider-defined 512k context bands, cache reads, Priority |
-| DeepSeek | Flash and its two compatibility IDs, V4 Pro | Peak/off-peak USD tariffs, weekday windows and Chinese holiday exception |
+| DeepSeek | Flash and its two compatibility IDs, V4 Pro | Peak/off-peak USD tariffs selected from a caller-supplied period |
 | ZAI Coding Plan | GLM-5.3, GLM-5.3-Flash | Peak/off-peak token credits, Singapore schedule and plan-specific dated campaigns |
 
 These are first-party prices. Cloud partner and gateway catalogs have independent
@@ -443,10 +443,10 @@ rates per million are $0.15/$0.60/$0.003 for Flash and $0.66/$1.98/$0.022 for
 V4 Pro. Both legacy Flash IDs use the Flash tariff; Pro retains its own rates.
 The legacy `cost` summary uses off-peak prices and must not select a period.
 
-`extra.pricing.period_schedule` records the published UTC windows of 01:00–04:00
-and 06:00–10:00, Monday through Friday, excluding Chinese public holidays.
-Weekends and other hours are off-peak. Holiday interpretation uses China local
-dates. Input billing separates cache hits from misses. Output includes reasoning;
+The DeepSeek metadata does not map a timestamp to a tariff period. Supply a
+provider-confirmed `pricing_period`; do not infer one from a request timestamp,
+weekday, or local holiday calendar. Input billing separates cache hits from
+misses. Output includes reasoning;
 `excluded_cost_components = ["token.reasoning"]` prevents the legacy reasoning
 summary from becoming an additional charge.
 
@@ -478,18 +478,15 @@ Flash's separate overnight quota campaign has its own dates, client-version,
 paid-plan and remaining-quota conditions in `quota_campaigns`; it does not
 establish a zero-credit token tariff. FlashX is not a supported Coding Plan model.
 
-#### Selecting a calendar period
+#### Selecting a pricing period
 
-The schedules are machine-readable provider metadata, not automatic clock
+Where schedule metadata exists, it is provider metadata, not automatic clock
 evaluation. `pricing_period`, `context_tier`, `billing_product`, and
 `plan_generation` above are normalized caller context, not API parameters.
 The caller must establish the applicable period and account eligibility.
-Published schedules do not establish whether arrival, generation start, or
-completion determines billing for a request crossing a window. Neither a local
-clock nor a response `created` timestamp proves that period. Undocumented exact
-instant boundaries and DeepSeek's unpublished holiday-date list remain explicit
-in the metadata. Missing selection context stays unresolved rather than choosing
-the cheaper price.
+DeepSeek has no schedule metadata in this catalog. A local clock or response
+`created` timestamp does not prove its tariff period. Missing selection context
+stays unresolved rather than choosing the cheaper price.
 
 ### Using selected components in a billing consumer
 

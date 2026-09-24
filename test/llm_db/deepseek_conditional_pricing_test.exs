@@ -130,30 +130,13 @@ defmodule LLMDB.DeepSeekConditionalPricingTest do
     refute pro.pricing.components == ctx.models["deepseek-flash"].pricing.components
   end
 
-  test "published schedule and missing billing evidence remain machine-readable", ctx do
+  test "pricing evidence does not assert an unpublished period schedule", ctx do
     for model <- Map.values(ctx.models) do
       pricing = model.extra.pricing
       assert pricing.sources_checked_at == "2026-09-22"
       assert pricing.output_includes_reasoning
       assert pricing.price_basis == "off_peak"
-
-      schedule = pricing.period_schedule
-      assert schedule.context_key == "pricing_period"
-      assert schedule.timezone == "UTC"
-      assert schedule.weekday_numbering == "iso8601"
-      assert schedule.peak_weekdays == [1, 2, 3, 4, 5]
-      assert schedule.off_peak_weekdays == [6, 7]
-
-      assert schedule.peak_windows == [
-               %{start: "01:00", end: "04:00"},
-               %{start: "06:00", end: "10:00"}
-             ]
-
-      assert schedule.holiday_region == "CN"
-      assert schedule.holiday_timezone == "Asia/Shanghai"
-      assert schedule.holiday_period == "off_peak"
-      assert schedule.holiday_calendar_status == "not_published"
-      assert schedule.billing_timestamp_status == "not_published"
+      refute Map.has_key?(pricing, :period_schedule)
     end
   end
 
