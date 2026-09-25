@@ -367,7 +367,7 @@ defmodule LLMDB.Engine do
   # Private helpers
 
   # Merge models with special list handling rules
-  # Union for known list fields (:aliases, :tags, modalities :input/:output), replace for others
+  # Pricing components merge by ID; known descriptive lists union; other lists replace.
   defp merge_models_with_list_rules(base_models, override_models) do
     base_map = Map.new(base_models, fn m -> {{Map.get(m, :provider), Map.get(m, :id)}, m} end)
 

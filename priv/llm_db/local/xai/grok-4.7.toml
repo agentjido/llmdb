@@ -1,26 +1,4 @@
-id = "grok-4.6"
-name = "Grok 4.6"
-provider_model_id = "grok-4.6"
-release_date = "2026-08-12"
-last_updated = "2026-08-12"
-knowledge = "2026-02-01"
-
-[modalities]
-input = ["text", "image"]
-output = ["text"]
-
-[capabilities.json]
-schema = true
-
-[capabilities.reasoning]
-enabled = true
-
-[capabilities.tools]
-enabled = true
-
-[extra.constraints]
-reasoning_effort = "required"
-reasoning_effort_values = ["low", "medium", "high", "xhigh"]
+id = "grok-4.7"
 
 # Rates and context bands come from the xAI model API; these modifiers are docs-only.
 [pricing]
@@ -51,5 +29,5 @@ notes = "The US endpoint premium applies to input, cached input and output, incl
 
 [extra.pricing]
 sources_checked_at = "2026-09-22"
-source_urls = ["https://docs.x.ai/developers/advanced-api-usage/prompt-caching/usage-and-pricing", "https://api.x.ai/v1/models", "https://docs.x.ai/developers/pricing", "https://docs.x.ai/developers/models/grok-4.6"]
+source_urls = ["https://docs.x.ai/developers/advanced-api-usage/prompt-caching/usage-and-pricing", "https://api.x.ai/v1/models", "https://docs.x.ai/developers/pricing", "https://docs.x.ai/developers/models/grok-4.7"]
 context_basis = "Total prompt tokens, including cached input; the long-context rate applies to the entire request at or above the threshold."

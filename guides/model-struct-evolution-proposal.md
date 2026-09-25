@@ -4,11 +4,32 @@ This proposal describes how to evolve `%LLMDB.Model{}` and the build/runtime
 pipeline so LLMDB can represent provider-published conditional pricing and richer
 runtime capabilities without breaking existing consumers.
 
-Status: phase 1 implemented. The runtime contract now supports the additive
-schema fields described here for limits, pricing components, reasoning
-capabilities, provider capability groups, Anthropic direct-source mapping, and
-conditional pricing component selection. The OpenAI and Anthropic docs-sourced
-pricing overlays remain follow-up curation work.
+Status: phase 1 and current-model pricing overlays implemented. The runtime
+contract supports the additive schema fields described here for limits, pricing
+components, reasoning capabilities, provider capability groups, Anthropic
+direct-source mapping, and conditional pricing component selection.
+
+The curated overlays cover GPT-5.6/GPT-6, current Claude models, Gemini 3.1 Pro,
+recent Grok models, selected Qwen models, Kimi K3, MiniMax-M3, DeepSeek, and GLM
+Coding Plan credits. They include context tiers where
+published, cache durations, processing discounts/premiums, and applicable
+regional uplifts. See [Pricing and Billing](pricing-and-billing.md) for the
+implemented context contract and worked examples. The older model examples below
+remain design illustrations, not a current price list.
+
+The implementation uses targeted modifiers for Batch/Flex/Fast and residency;
+their `applies_to` lists preserve provider differences in cache discounts.
+For derived cache rates, resolve the base rate first and apply each token-wide
+modifier once to the resulting rate. This avoids applying the same discount or
+uplift both through a dependency and directly. The selector returns applicable
+metadata and unresolved conditions; final invoice calculation and validation of
+provider-specific request eligibility remain consumer responsibilities.
+
+Calendar tariffs use explicit pricing-period context with published schedules
+and exceptions in metadata. MiniMax's documented band labels are preserved where
+the provider has not specified an integer boundary. Model-level
+`pricing.excluded_cost_components` prevents inappropriate legacy summaries from
+reintroducing duplicate reasoning charges or monetary values into credit tariffs.
 
 ## Why This Is Needed
 
@@ -569,12 +590,16 @@ Add optional Zoi schemas for:
 - `pricing.components[].multiplier`
 - `pricing.components[].derives_from`
 - `pricing.components[].applies_to`
+- `pricing.components[].role`
+- `pricing.components[].rate_group`
+- `pricing.components[].rate_group_policy`
 - `pricing.components[].charge_scope`
 - `pricing.components[].source`
 
 Validation should remain permissive for unknown provider-specific condition keys
 inside `applies_when` so new provider pricing modes do not require immediate
-library releases.
+library releases. A declared component role should enforce its required and
+incompatible fields. Untyped legacy components must continue to parse.
 
 ### 5. Merge
 
@@ -637,14 +662,22 @@ LLMDB.Pricing.components_for(model,
   cache_ttl: "1h",
   inference_geo: "us"
 )
+
+LLMDB.Pricing.select_components(model,
+  api: "batch",
+  input_tokens: 900_000,
+  cache_ttl: "1h",
+  inference_geo: "us"
+)
 ```
 
 This keeps `%LLMDB.Model{}` as metadata and lets billing logic evolve
 independently.
 
-The helper should return both selected components and unresolved modifiers when
-conditions are incomplete. Silent best guesses are worse than partial answers for
-billing.
+The compatible helper should return both selected components and unresolved
+modifiers when conditions are incomplete. The strict helper should also validate
+component roles, references, conditions, and rate-group cardinality. Silent best
+guesses are worse than explicit errors for billing.
 
 ## Backward Compatibility Plan
 

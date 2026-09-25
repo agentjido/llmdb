@@ -3,3 +3,111 @@ id = "MiniMax-M3"
 [limits]
 context = 1000000
 output = 524288
+
+# Current discounted Standard rates for the provider's short-context band.
+[cost]
+input = 0.3
+output = 1.2
+cache_read = 0.06
+
+# MiniMax publishes the tariff boundary as 512k without an integer expansion.
+# Select a provider-confirmed context_tier; do not guess it from input_tokens.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.3
+applies_when = { context_tier = "lte_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.6
+applies_when = { context_tier = "gt_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 1.2
+applies_when = { context_tier = "lte_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 2.4
+applies_when = { context_tier = "gt_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.06
+applies_when = { context_tier = "lte_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.12
+applies_when = { context_tier = "gt_512k" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.priority"
+kind = "other"
+unit = "other"
+multiplier = 1.5
+applies_to = ["token.*"]
+applies_when = { service_tier = "priority" }
+mode = "priority"
+source = "provider_docs"
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://platform.minimax.io/docs/guides/pricing-paygo", "https://platform.minimax.io/docs/api-reference/text-prompt-caching", "https://platform.minimax.io/setting/get_app_settings?fe_setting_key=code_plan_landing", "https://www.minimax.io/blog/minimax-m3"]
+context_tier_basis = "Total input tokens, including cache-hit tokens; the selected rates apply to the full request's respective token meters."
+context_tier_selection = "Supply a provider-confirmed context_tier. Numeric input_tokens alone cannot resolve the tariff because the exact integer represented by 512k is not published."
+boundary_provider_value = "512k"
+boundary_numeric_status = "unknown"
+context_tiers = [{ id = "lte_512k", provider_label = "<= 512k input tokens", operator = "lte" }, { id = "gt_512k", provider_label = "> 512k input tokens", operator = "gt" }]
+discount = "Rates already include the permanent 50% reduction; do not apply an additional discount."
+cache_billing = "Cache hits use cache-read rates; new input uses input rates. Passive caching has no additional write charge."
+service_tiers = ["standard", "priority"]
+thinking_pricing = "Thinking enabled and disabled use the same rates."
+pricing_scope = "International pay-as-you-go API; excludes mainland China and Token Plan subscription pricing."

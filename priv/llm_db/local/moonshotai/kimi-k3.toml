@@ -33,3 +33,85 @@ family = "openai_chat_compatible"
 wire_protocol = "openai_chat"
 transport = "http_request"
 path = "/chat/completions"
+
+# Public K3 pricing is flat across its context window; cache-write rates depend on TTL.
+[cost]
+input = 3.0
+output = 15.0
+cache_read = 0.3
+cache_write = 3.0
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 3.0
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Bill only uncached input, excluding cache-read and cache-write tokens."
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 15.0
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Includes reasoning and final output tokens."
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.3
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Cache hits do not incur a cache-write charge."
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 3.0
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+applies_when = { cache_ttl = "5m" }
+notes = "Charge written tokens once at their effective TTL, excluding them from uncached input. The default write TTL is 5m."
+
+[[pricing.components]]
+id = "token.cache_write.1h"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 6.0
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+applies_when = { cache_ttl = "1h" }
+notes = "Charge written tokens once at their effective TTL. An existing prefix retains its original TTL until it expires."
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://platform.kimi.ai/docs/pricing/chat", "https://platform.kimi.ai/docs/guide/use-context-caching-feature-of-kimi-api", "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart"]
+long_context_premium = false
+cache_ttl_default = "5m"
+cache_ttl_basis = "Effective cache-write TTL; a cached prefix keeps its original TTL until expiration, even if the request asks for another TTL."
+input_token_accounting = "Input, cache-read and cache-write quantities are disjoint. Chat Completions and Responses input totals include all three; Messages input_tokens excludes reads and writes."
+cache_write_eligibility = "Chat Completions and Responses write implicitly at 5m unless configured otherwise. Messages writes require top-level cache_control; without it only the 5m cache is read."

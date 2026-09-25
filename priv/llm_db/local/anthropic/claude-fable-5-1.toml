@@ -18,17 +18,46 @@ output = 50.0
 cache_read = 0.25
 cache_write = 12.5
 
+# Verified 2026-09-22 against Anthropic pricing and prompt-caching docs.
 [pricing]
 currency = "USD"
 merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 10.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 50.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.25
+source = "provider_docs"
 
 [[pricing.components]]
 id = "token.cache_write"
 kind = "token"
 unit = "token"
 per = 1000000
+meter = "cache_write_tokens"
 rate = 12.5
-applies_when = { cache_operation = "write", cache_ttl = "5m" }
+applies_when = { cache_ttl = "5m" }
 source = "provider_docs"
 
 [[pricing.components]]
@@ -36,29 +65,32 @@ id = "token.cache_write.1h"
 kind = "token"
 unit = "token"
 per = 1000000
-rate = 20.0
-applies_when = { cache_operation = "write", cache_ttl = "1h" }
+meter = "cache_write_tokens"
+derives_from = "token.input"
+multiplier = 2.0
+applies_when = { cache_ttl = "1h" }
+notes = "Derive before applying token-wide modifiers; do not apply a modifier twice through the input dependency."
 source = "provider_docs"
 
 [[pricing.components]]
-id = "token.input.batch"
-kind = "token"
-unit = "token"
-per = 1000000
-rate = 5.0
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
 applies_when = { api = "batch" }
-mode = "batch"
 source = "provider_docs"
+mode = "batch"
 
 [[pricing.components]]
-id = "token.output.batch"
-kind = "token"
-unit = "token"
-per = 1000000
-rate = 25.0
-applies_when = { api = "batch" }
-mode = "batch"
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { inference_geo = "us" }
 source = "provider_docs"
+notes = "US-only inference; global routing uses standard pricing. Cloud partner pricing is independent."
 
 [modalities]
 input = ["text", "image"]
@@ -133,3 +165,8 @@ amazon_bedrock = "anthropic.claude-fable-5-1"
 google_cloud = "claude-fable-5-1"
 microsoft_foundry = "claude-fable-5-1"
 claude_platform_on_aws = "claude-fable-5-1"
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
+long_context_premium = false

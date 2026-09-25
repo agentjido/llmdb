@@ -1,0 +1,101 @@
+id = "deepseek-v4-pro"
+
+# Legacy summary uses off-peak rates; callers must select a pricing period.
+# Reasoning is included in output, not an additional output charge.
+[cost]
+input = 0.66
+output = 1.98
+cache_read = 0.022
+reasoning = 1.98
+
+# Verified 2026-09-22 against current pricing and the corrected change log.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+excluded_cost_components = ["token.reasoning"]
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.66
+applies_when = { pricing_period = "off_peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Charge cache-miss input only; prompt_cache_hit_tokens is billed separately."
+
+[[pricing.components]]
+id = "token.input.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 1.32
+applies_when = { pricing_period = "peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Charge cache-miss input only; prompt_cache_hit_tokens is billed separately."
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 1.98
+applies_when = { pricing_period = "off_peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Total completion tokens include reasoning tokens. Do not add reasoning_tokens a second time."
+
+[[pricing.components]]
+id = "token.output.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 3.96
+applies_when = { pricing_period = "peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "Total completion tokens include reasoning tokens. Do not add reasoning_tokens a second time."
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.022
+applies_when = { pricing_period = "off_peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.044
+applies_when = { pricing_period = "peak" }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[extra.pricing]
+sources_checked_at = "2026-09-22"
+source_urls = ["https://api-docs.deepseek.com/quick_start/pricing/", "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/", "https://api-docs.deepseek.com/updates/", "https://api-docs.deepseek.com/guides/kv_cache/", "https://api-docs.deepseek.com/api/create-chat-completion"]
+price_basis = "off_peak"
+canonical_model_id = "deepseek-v4-pro"
+served_model = "DeepSeek-V4-Pro-0813"
+output_includes_reasoning = true
+long_context_premium = false
+notes = "The current change log retains V4 Pro after September 14, 2026; the earlier announcement of a redirect to Flash was superseded."

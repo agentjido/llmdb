@@ -79,7 +79,18 @@ defmodule LLMDB.Model do
                })
 
   @pricing_schema LLMDB.Schema.Pricing.schema(%{
-                    merge: Zoi.enum(["replace", "merge_by_id"]) |> Zoi.default("merge_by_id")
+                    merge: Zoi.enum(["replace", "merge_by_id"]) |> Zoi.default("merge_by_id"),
+                    excluded_cost_components:
+                      Zoi.array(
+                        Zoi.enum([
+                          "token.input",
+                          "token.output",
+                          "token.cache_read",
+                          "token.cache_write",
+                          "token.reasoning"
+                        ])
+                      )
+                      |> Zoi.nullish()
                   })
 
   @token_budget_schema Zoi.object(%{

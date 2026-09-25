@@ -8,6 +8,10 @@ defmodule LLMDB.Merge do
 
   @continue_deep_merge {__MODULE__, :continue_deep_merge}
 
+  defguardp is_pricing_pair(left, right)
+            when is_map(left) and is_map(right) and
+                   (is_map_key(left, :components) or is_map_key(right, :components))
+
   @type resolver3 :: (any(), any(), any() -> any())
   @type continue_deep_merge :: {module(), :continue_deep_merge}
 
@@ -21,6 +25,9 @@ defmodule LLMDB.Merge do
 
   - `:union_list_keys` - List of keys whose list values should be unioned (default: [])
   - `:preserve_empty_list_keys` - List of keys where empty list on right preserves left (default: [])
+
+  Normalized `:pricing` maps merge components by ID unless the higher-precedence
+  map explicitly uses `merge: "replace"`.
 
   ## Examples
 
@@ -38,6 +45,9 @@ defmodule LLMDB.Merge do
     preserve_empty_keys = Keyword.get(opts, :preserve_empty_list_keys, [])
 
     fn
+      :pricing, left, right when is_pricing_pair(left, right) ->
+        merge_pricing(left, right)
+
       key, left, right when is_list(left) and is_list(right) ->
         cond do
           key in union_keys -> union_unique(left, right)
@@ -84,6 +94,7 @@ defmodule LLMDB.Merge do
   - Scalar values: higher precedence wins
   - Maps: deep merge recursively
   - Lists: concat and de-dup by value
+  - Pricing components: merge by ID, respecting an explicit `"replace"` mode
   - Higher precedence source always wins on scalars
 
   ## Examples
@@ -364,18 +375,47 @@ defmodule LLMDB.Merge do
 
   defp precedence_resolver(:higher) do
     fn
-      _key, left, right when is_map(left) and is_map(right) -> continue_deep_merge()
-      _key, left, right when is_list(left) and is_list(right) -> union_unique(left, right)
-      _key, _left, right -> right
+      :pricing, left, right when is_pricing_pair(left, right) ->
+        merge_pricing(left, right)
+
+      _key, left, right when is_map(left) and is_map(right) ->
+        continue_deep_merge()
+
+      _key, left, right when is_list(left) and is_list(right) ->
+        union_unique(left, right)
+
+      _key, _left, right ->
+        right
     end
   end
 
   defp precedence_resolver(:lower) do
     fn
-      _key, left, right when is_map(left) and is_map(right) -> continue_deep_merge()
-      _key, left, right when is_list(left) and is_list(right) -> union_unique(left, right)
-      _key, left, _right -> left
+      :pricing, left, right when is_pricing_pair(left, right) ->
+        merge_pricing(right, left)
+
+      _key, left, right when is_map(left) and is_map(right) ->
+        continue_deep_merge()
+
+      _key, left, right when is_list(left) and is_list(right) ->
+        union_unique(left, right)
+
+      _key, left, _right ->
+        left
     end
+  end
+
+  # Normalized pricing maps use component IDs as identities at both build and
+  # runtime. Replace whole matching components so obsolete conditions cannot leak
+  # into a higher-precedence rate; preserve unrelated API rates and modifiers.
+  defp merge_pricing(_left, %{merge: mode} = right) when mode in ["replace", :replace], do: right
+
+  defp merge_pricing(left, right) do
+    components = merge_list_by_id(Map.get(left, :components, []), Map.get(right, :components, []))
+
+    left
+    |> Map.merge(right)
+    |> Map.put(:components, components)
   end
 
   defp union_unique(left, right) when is_list(left) and is_list(right) do

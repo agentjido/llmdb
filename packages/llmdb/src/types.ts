@@ -18,6 +18,7 @@ export interface ConfigField {
 
 export interface PricingComponent {
   readonly id: string;
+  readonly role?: "rate" | "derived_rate" | "modifier" | null;
   readonly kind:
     | "token"
     | "tool"
@@ -36,14 +37,16 @@ export interface PricingComponent {
     | "source"
     | "other"
     | null;
-  readonly per: number | null;
-  readonly rate: number | null;
+  readonly per?: number | null;
+  readonly rate?: number | null;
   readonly meter?: string | null;
   readonly tool?: string | null;
   readonly size_class?: string | null;
   readonly multiplier?: number | null;
   readonly derives_from?: string | null;
   readonly applies_to?: readonly string[] | null;
+  readonly rate_group?: string | null;
+  readonly rate_group_policy?: "at_most_one" | "exactly_one" | null;
   readonly applies_when?: Readonly<Record<string, JsonValue>> | null;
   readonly excludes_when?: Readonly<Record<string, JsonValue>> | null;
   readonly mode?: string | null;
@@ -57,6 +60,13 @@ export interface Pricing {
   readonly currency: string | null;
   readonly components: readonly PricingComponent[];
   readonly merge?: "replace" | "merge_by_id";
+  readonly excluded_cost_components?: readonly (
+    | "token.input"
+    | "token.output"
+    | "token.cache_read"
+    | "token.cache_write"
+    | "token.reasoning"
+  )[] | null;
   readonly [key: string]: unknown;
 }
 

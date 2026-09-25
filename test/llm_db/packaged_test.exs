@@ -326,7 +326,13 @@ defmodule LLMDB.PackagedTest do
         refute model["catalog_only"] == true
         assert model["limits"]["context"] == 1_048_576
         assert model["limits"]["output"] == 1_048_576
-        assert model["cost"] == %{"cache_read" => 0.3, "input" => 3, "output" => 15}
+
+        assert model["cost"] == %{
+                 "cache_read" => 0.3,
+                 "cache_write" => 3,
+                 "input" => 3,
+                 "output" => 15
+               }
 
         assert model["modalities"] == %{
                  "input" => ["text", "image", "video"],

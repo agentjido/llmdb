@@ -47,7 +47,8 @@ defmodule LLMDB.OpenAIMetadataTest do
         Pricing.components_for(model,
           input_tokens: input_tokens,
           api: "responses",
-          service_tier: "default"
+          service_tier: "default",
+          regional_processing: false
         )
 
       assert selection.unresolved == []
@@ -67,7 +68,7 @@ defmodule LLMDB.OpenAIMetadataTest do
     end
   end
 
-  test "Astra extra metadata preserves mode multipliers without rate-less components" do
+  test "Astra preserves legacy extra multipliers alongside canonical modifier components" do
     model = astra_model()
 
     assert model.extra.pricing.mode_multipliers ==
@@ -75,7 +76,9 @@ defmodule LLMDB.OpenAIMetadataTest do
 
     assert model.extra.pricing.mode_multiplier_scope =~ "both short and long context"
     assert model.extra.pricing.fast_mode_unavailable_data_residency == ["eu"]
-    assert Enum.all?(model.pricing.components, &is_number(&1.rate))
+    modifiers = Enum.filter(model.pricing.components, &(&1.kind == "other"))
+    assert length(modifiers) == 5
+    assert Enum.all?(modifiers, &(&1.applies_to == ["token.*"]))
   end
 
   test "packaged Astra metadata preserves limited access and the Responses contract" do
@@ -85,7 +88,7 @@ defmodule LLMDB.OpenAIMetadataTest do
     assert model["extra"]["availability"] == "limited"
     assert model["limits"] == %{"context" => 1_050_000, "input" => 922_000, "output" => 128_000}
     assert model["aliases"] == []
-    assert length(model["pricing"]["components"]) == 8
+    assert length(model["pricing"]["components"]) == 13
     assert model["extra"]["pricing"]["mode_multipliers"]["fast"] == 2.0
 
     for operation <- ["text", "object"] do
