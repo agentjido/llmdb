@@ -1,0 +1,12 @@
+id = "requesty"
+
+[runtime]
+base_url = "https://router.requesty.ai/v1"
+doc_url = "https://docs.requesty.ai"
+
+[runtime.auth]
+type = "bearer"
+env = ["REQUESTY_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
