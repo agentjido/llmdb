@@ -168,6 +168,9 @@ applies_when = { regional_processing = true }
 source = "provider_docs"
 notes = "Regional processing endpoint uplift. Eligibility is separate from pricing; see extra.pricing."
 
+[extra.wire]
+protocol = "openai_responses"
+
 [extra.pricing]
 sources_checked_at = "2026-09-22"
 source_urls = ["https://developers.openai.com/api/docs/models/gpt-6-sol", "https://developers.openai.com/api/docs/pricing"]

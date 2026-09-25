@@ -231,7 +231,7 @@ defmodule LLMDB.PackagedTest do
       end
     end
 
-    test "snapshot maps recent OpenAI GPT-5 text and tool models to Responses API" do
+    test "snapshot maps recent OpenAI text and tool models to Responses API" do
       snapshot = Packaged.snapshot()
 
       if snapshot do
@@ -252,11 +252,15 @@ defmodule LLMDB.PackagedTest do
               "gpt-5.5",
               "gpt-5.5-2026-04-23",
               "gpt-5.5-pro",
-              "gpt-5.5-pro-2026-04-23"
+              "gpt-5.5-pro-2026-04-23",
+              "gpt-6-astra",
+              "gpt-6-luna",
+              "gpt-6-sol"
             ] do
           model = openai_models[model_id]
 
           assert is_map(model), "expected #{model_id} in packaged OpenAI snapshot"
+          assert model["extra"]["wire"]["protocol"] == "openai_responses"
           assert model["execution"]["text"]["family"] == "openai_responses_compatible"
           assert model["execution"]["text"]["wire_protocol"] == "openai_responses"
           assert model["execution"]["text"]["path"] == "/responses"
