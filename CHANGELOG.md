@@ -7,6 +7,15 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.7](https://github.com/agentjido/llmdb/compare/2026.9.6...2026.9.7) (2026-09-25)
+
+
+
+
+### Bug Fixes:
+
+* use Responses API for GPT-6 Luna and Sol (#338) by mikehostetler
+
 ## [2026.9.6](https://github.com/agentjido/llmdb/compare/2026.9.5...2026.9.6) (2026-09-25)
 
 
