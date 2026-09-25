@@ -38,6 +38,13 @@ defmodule LLMDB.Pricing do
 
   @comparison_operators ~w(gt gte lt lte)
   @rate_group_policies ~w(at_most_one exactly_one)
+  @canonical_token_groups %{
+    "input" => "input_tokens",
+    "output" => "output_tokens",
+    "cache_read" => "cache_read_tokens",
+    "cache_write" => "cache_write_tokens",
+    "reasoning" => "reasoning_tokens"
+  }
 
   @type component_role :: :rate | :derived_rate | :modifier
   @type validation_error :: %{
@@ -230,10 +237,16 @@ defmodule LLMDB.Pricing do
       end
 
     errors =
-      validation_errors ++
-        missing_pricing_errors(candidates) ++
-        unresolved_selection_errors(selection.unresolved) ++
-        rate_selection_errors(candidates, selection.components)
+      case validation_errors do
+        [] ->
+          missing_pricing_errors(candidates) ++
+            unresolved_selection_errors(selection.unresolved) ++
+            selected_dependency_errors(selection.components) ++
+            rate_selection_errors(candidates, selection.components)
+
+        errors ->
+          errors
+      end
 
     result = Map.put(selection, :errors, errors)
 
@@ -626,7 +639,10 @@ defmodule LLMDB.Pricing do
         []
 
       conditions when is_map(conditions) ->
-        comparison_errors(component, field_name, [], conditions)
+        Enum.flat_map(
+          conditions,
+          &nested_comparison_errors(component, field_name, [], &1)
+        )
 
       _other ->
         [
@@ -915,6 +931,36 @@ defmodule LLMDB.Pricing do
     ]
   end
 
+  defp selected_dependency_errors(components) do
+    selected_by_id =
+      components
+      |> Enum.filter(&non_empty_string?(field(&1, :id)))
+      |> Map.new(&{field(&1, :id), &1})
+
+    Enum.flat_map(components, fn component ->
+      case component_role(component) do
+        {:ok, :derived_rate} ->
+          target_id = field(component, :derives_from)
+
+          if Map.has_key?(selected_by_id, target_id) do
+            []
+          else
+            [
+              component_error(
+                :unselected_derived_rate_target,
+                component,
+                "selected derived rate requires selected target #{inspect(target_id)}",
+                %{target_id: target_id}
+              )
+            ]
+          end
+
+        _other ->
+          []
+      end
+    end)
+  end
+
   defp rate_selection_errors(candidates, selected) do
     candidate_groups = rate_groups(candidates)
     selected_groups = rate_groups(selected)
@@ -965,7 +1011,7 @@ defmodule LLMDB.Pricing do
 
   defp canonical_token_group("token." <> rest) do
     case String.split(rest, ".", parts: 2) do
-      [meter | _rest] -> "token.#{meter}"
+      [meter | _rest] -> Map.get(@canonical_token_groups, meter, "token.#{meter}")
       _other -> nil
     end
   end

@@ -18,6 +18,7 @@ export interface ConfigField {
 
 export interface PricingComponent {
   readonly id: string;
+  readonly role?: "rate" | "derived_rate" | "modifier" | null;
   readonly kind:
     | "token"
     | "tool"
@@ -44,6 +45,8 @@ export interface PricingComponent {
   readonly multiplier?: number | null;
   readonly derives_from?: string | null;
   readonly applies_to?: readonly string[] | null;
+  readonly rate_group?: string | null;
+  readonly rate_group_policy?: "at_most_one" | "exactly_one" | null;
   readonly applies_when?: Readonly<Record<string, JsonValue>> | null;
   readonly excludes_when?: Readonly<Record<string, JsonValue>> | null;
   readonly mode?: string | null;

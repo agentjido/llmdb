@@ -28,6 +28,23 @@ const pricingModifier: PricingComponent = {
   multiplier: 1.5,
   applies_to: ["token.*"],
 };
+const groupedPricingComponent: PricingComponent = {
+  id: "token.input.long",
+  role: "rate",
+  kind: "token",
+  unit: "token",
+  per: 1_000_000,
+  rate: 2,
+  rate_group: "input_tokens",
+  rate_group_policy: "exactly_one",
+};
+({
+  id: "token.invalid",
+  kind: "token",
+  unit: "token",
+  // @ts-expect-error Pricing roles are a closed set.
+  role: "discount",
+} satisfies PricingComponent);
 const creditPricing: Pricing = {
   currency: "credits",
   components: [minimalPricingComponent],
@@ -44,3 +61,6 @@ minimalPricingComponent.notes;
 minimalEmbeddingCapability.min_dimensions;
 excludedComponents?.at(0);
 pricingModifier.multiplier;
+groupedPricingComponent.role;
+groupedPricingComponent.rate_group;
+groupedPricingComponent.rate_group_policy;

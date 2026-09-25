@@ -433,6 +433,98 @@ defmodule LLMDB.PricingTest do
     assert Enum.any?(conflict.errors, &(&1.code == :multiple_rates_for_group))
   end
 
+  test "strict selection groups legacy token rates with their canonical usage meter" do
+    model = %{
+      cost: %{input: 1.0},
+      pricing: %{
+        components: [
+          %{
+            id: "token.input.long",
+            rate: 2.0,
+            unit: "token",
+            per: 1_000_000,
+            meter: "input_tokens",
+            applies_when: %{context_tier: "long"}
+          }
+        ]
+      }
+    }
+
+    [model] = Pricing.apply_cost_components([model])
+
+    assert {:error, selection} =
+             Pricing.select_components(model, context_tier: "long")
+
+    assert Enum.any?(selection.errors, fn error ->
+             error.code == :multiple_rates_for_group and
+               error.rate_group == "input_tokens" and
+               error.component_ids == ["token.input", "token.input.long"]
+           end)
+  end
+
+  test "strict selection rejects a derived rate when its selected base is absent" do
+    model = %{
+      pricing: %{
+        components: [
+          %{
+            id: "token.input.short",
+            rate: 1.0,
+            unit: "token",
+            per: 1,
+            applies_when: %{context_tier: "short"}
+          },
+          %{
+            id: "token.cache_write",
+            derives_from: "token.input.short",
+            multiplier: 2.0,
+            unit: "token",
+            per: 1
+          }
+        ]
+      }
+    }
+
+    assert {:error, selection} =
+             Pricing.select_components(model, context_tier: "long")
+
+    assert Enum.any?(selection.errors, fn error ->
+             error.code == :unselected_derived_rate_target and
+               error.component_id == "token.cache_write" and
+               error.target_id == "token.input.short"
+           end)
+  end
+
+  test "strict selection stops dependent checks after structural errors" do
+    model = %{
+      pricing: %{
+        components: [
+          %{id: "token.a", rate: 1.0, unit: "token", per: 1, rate_group: %{bad: 1}},
+          %{id: "token.b", rate: 2.0, unit: "token", per: 1, rate_group: %{bad: 1}}
+        ]
+      }
+    }
+
+    assert {:error, selection} = Pricing.select_components(model)
+    assert Enum.all?(selection.errors, &(&1.code == :invalid_rate_group))
+  end
+
+  test "strict validation permits comparison operator names as context fields" do
+    component = %{
+      id: "token.radio",
+      rate: 1.0,
+      unit: "token",
+      per: 1,
+      applies_when: %{lte: "LTE"}
+    }
+
+    assert :ok = Pricing.validate_components([component])
+
+    assert {:ok, selection} =
+             Pricing.select_components(%{pricing: %{components: [component]}}, lte: "LTE")
+
+    assert selection.components == [component]
+  end
+
   defp strict_selection_model do
     %{
       pricing: %{

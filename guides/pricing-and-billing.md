@@ -81,7 +81,8 @@ Use `rate_group` to identify rates that price the same usage meter. Strict
 selection allows at most one selected rate in a group. Set
 `rate_group_policy: "exactly_one"` when a complete context must select one rate.
 The policy requires an explicit group. Components without a group use `meter`,
-then the canonical `token.*` ID, as a compatibility fallback for conflict checks.
+then the canonical usage meter for standard `token.*` IDs, as a compatibility
+fallback for conflict checks. Other component IDs form their own fallback group.
 
 ### Standard Component IDs
 
