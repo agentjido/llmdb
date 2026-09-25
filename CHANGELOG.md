@@ -7,6 +7,17 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.6](https://github.com/agentjido/llmdb/compare/2026.9.5...2026.9.6) (2026-09-25)
+
+
+
+
+### Features:
+
+* providers: add Requesty OpenAI-compatible runtime metadata (#335) by Thibaultjaigu
+
+* pricing: add context, cache, and time-dependent tariffs (#334) by houllette
+
 ## [2026.9.5](https://github.com/agentjido/llmdb/compare/2026.9.4...2026.9.5) (2026-09-22)
 
 
