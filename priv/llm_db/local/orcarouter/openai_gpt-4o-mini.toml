@@ -1,0 +1,38 @@
+# Verified 2026-09-26. These OrcaRouter examples use this exact model ID.
+# https://docs.orcarouter.ai/native-formats/openai-compat
+id = "openai/gpt-4o-mini"
+catalog_only = false
+doc_url = "https://docs.orcarouter.ai/native-formats/openai-compat"
+
+[execution.text]
+supported = true
+family = "openai_chat_compatible"
+wire_protocol = "openai_chat"
+transport = "http_request"
+path = "/chat/completions"
+
+# https://docs.orcarouter.ai/advanced/structured-outputs
+[execution.object]
+supported = true
+family = "openai_chat_compatible"
+wire_protocol = "openai_chat"
+transport = "http_request"
+path = "/chat/completions"
+
+[capabilities.json]
+native = true
+schema = true
+strict = true
+
+# https://docs.orcarouter.ai/advanced/tool-calling
+[capabilities.tools]
+enabled = true
+streaming = false
+strict = false
+parallel = false
+
+# https://docs.orcarouter.ai/advanced/streaming
+# The text example does not establish streamed tool-call support.
+[capabilities.streaming]
+text = true
+tool_calls = false
