@@ -1,0 +1,19 @@
+# Verified 2026-09-26 against OrcaRouter's official HTTP documentation.
+# https://docs.orcarouter.ai/native-formats/openai-compat
+id = "orcarouter"
+name = "OrcaRouter"
+base_url = "https://api.orcarouter.ai/v1"
+doc = "https://docs.orcarouter.ai"
+env = ["ORCAROUTER_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.orcarouter.ai/v1"
+doc_url = "https://docs.orcarouter.ai/native-formats/openai-compat"
+
+[runtime.auth]
+type = "bearer"
+env = ["ORCAROUTER_API_KEY"]
+
+# Keep execution on verified model entries. A provider-wide default would
+# enable imported chat models without model-specific review.
