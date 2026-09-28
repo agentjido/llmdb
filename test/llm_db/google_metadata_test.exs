@@ -95,6 +95,23 @@ defmodule LLMDB.GoogleMetadataTest do
     assert embedding.capabilities.embeddings.max_dimensions == 3072
   end
 
+  test "local Google Vertex metadata captures Gemini Embedding 2" do
+    {_provider, models} = local_provider_and_models(:google_vertex)
+    embedding = Map.fetch!(models, "gemini-embedding-2")
+
+    assert embedding.name == "Gemini Embedding 2"
+    assert embedding.limits.context == 8192
+    assert embedding.cost.input == 0.20
+    assert embedding.cost.image == 0.45
+    assert embedding.cost.audio == 6.50
+    assert embedding.cost.input_video == 12.00
+    assert embedding.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert embedding.modalities.output == [:embedding]
+    refute embedding.capabilities.chat
+    assert embedding.capabilities.embeddings.min_dimensions == 128
+    assert embedding.capabilities.embeddings.max_dimensions == 3072
+  end
+
   test "local Google overrides capture Gemini 3.8 Flash metadata" do
     {_provider, models} = google_provider_and_models()
     model = Map.fetch!(models, "gemini-3.8-flash")
@@ -126,13 +143,15 @@ defmodule LLMDB.GoogleMetadataTest do
     assert model.extra.availability == "general"
   end
 
-  defp google_provider_and_models do
+  defp google_provider_and_models, do: local_provider_and_models(:google)
+
+  defp local_provider_and_models(provider_id) do
     {:ok, data} = Local.load(%{dir: @local_dir})
-    google = Map.fetch!(data, "google")
-    provider = google |> Map.delete(:models) |> Map.put(:id, :google) |> Provider.new!()
+    local = Map.fetch!(data, Atom.to_string(provider_id))
+    provider = local |> Map.delete(:models) |> Map.put(:id, provider_id) |> Provider.new!()
 
     models =
-      google.models
+      local.models
       |> Normalize.normalize_models()
       |> Enum.map(&Model.new!/1)
       |> Map.new(&{&1.id, &1})
