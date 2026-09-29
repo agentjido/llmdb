@@ -11,6 +11,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
     "gpt-5.6-luna" => [0.2, 1.2, 0.02, 0.25],
     "gpt-6-astra" => [10.0, 50.0, 1.0, 12.5],
     "gpt-6-sol" => [2.0, 10.0, 0.2, 2.5],
+    "gpt-6.1-sol" => [2.0, 10.0, 0.1, 2.5],
     "gpt-6-luna" => [0.1, 0.5, 0.01, 0.125]
   }
   @anthropic %{
@@ -91,13 +92,14 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
 
   test "incomplete context cannot silently select a short-context or standard-only price", ctx do
     for id <- Map.keys(@openai) do
+      expected_count = if id == "gpt-6-astra", do: 14, else: 13
       selection = Pricing.components_for(ctx.models[id])
       assert selection.components == []
-      assert length(selection.unresolved) == 13
+      assert length(selection.unresolved) == expected_count
 
       selection = Pricing.components_for(ctx.models[id], input_tokens: nil)
       assert selection.components == []
-      assert length(selection.unresolved) == 13
+      assert length(selection.unresolved) == expected_count
     end
   end
 
