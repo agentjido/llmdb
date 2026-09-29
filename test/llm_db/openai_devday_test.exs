@@ -85,6 +85,27 @@ defmodule LLMDB.OpenAIDevDayTest do
     end
   end
 
+  test "Image 2.5 records use the image contract and modality-specific token prices" do
+    for variant <- ["flare", "sunburst"], suffix <- ["", "-2026-09-08"] do
+      id = "gpt-image-2.5-#{variant}#{suffix}"
+      record = model(id)
+      assert record.modalities == %{input: [:text, :image], output: [:image]}
+
+      assert Map.new(record.pricing.components, &{&1.meter, &1.rate}) == %{
+               "text_input_tokens" => 5.0,
+               "text_cache_read_tokens" => 1.25,
+               "image_input_tokens" => 8.0,
+               "image_cache_read_tokens" => 2.0,
+               "image_output_tokens" => 30.0
+             }
+
+      packaged = Packaged.snapshot()["providers"]["openai"]["models"][id]
+      assert packaged["execution"]["image"]["supported"] == true
+      assert packaged["execution"]["image"]["path"] == "/images/generations"
+      refute packaged["execution"]["text"]["supported"]
+    end
+  end
+
   defp model(id) do
     {:ok, data} = Local.load(%{dir: "priv/llm_db/local"})
 
