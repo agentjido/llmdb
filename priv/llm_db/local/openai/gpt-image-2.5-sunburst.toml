@@ -1,0 +1,82 @@
+id = "gpt-image-2.5-sunburst"
+name = "GPT Image 2.5 Sunburst"
+provider = "openai"
+provider_model_id = "gpt-image-2.5-sunburst"
+release_date = "2026-09-08"
+family = "gpt-image"
+
+[modalities]
+input = ["text", "image"]
+output = ["image"]
+
+[capabilities]
+chat = false
+embeddings = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[capabilities.json]
+native = false
+schema = false
+strict = false
+
+[capabilities.tools]
+enabled = false
+
+[capabilities.reasoning]
+enabled = false
+
+[pricing]
+currency = "USD"
+merge = "replace"
+
+[[pricing.components]]
+id = "token.text_input_tokens"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "text_input_tokens"
+rate = 5.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.text_cache_read_tokens"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "text_cache_read_tokens"
+rate = 1.25
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.image_input_tokens"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "image_input_tokens"
+rate = 8.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.image_cache_read_tokens"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "image_cache_read_tokens"
+rate = 2.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.image_output_tokens"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "image_output_tokens"
+rate = 30.0
+source = "provider_docs"
+
+[extra]
+api = "images"
+quality = ["auto", "low", "medium", "high", "xhigh", "max"]

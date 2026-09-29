@@ -6,7 +6,7 @@ defmodule LLMDB.OpenAIMetadataTest do
 
   @local_dir "priv/llm_db/local"
 
-  test "Astra metadata records documented limits and limited access" do
+  test "Astra metadata records documented limits and general access" do
     model = astra_model()
 
     assert model.provider_model_id == "gpt-6-astra"
@@ -16,9 +16,9 @@ defmodule LLMDB.OpenAIMetadataTest do
     assert model.aliases == []
     assert model.limits == %{context: 1_050_000, input: 922_000, output: 128_000}
     assert model.modalities == %{input: [:text, :image], output: [:text]}
-    assert model.extra.availability == "limited"
-    assert model.extra.availability_updated == "2026-09-03"
-    assert model.extra.availability_note =~ "Trusted Access Program"
+    assert model.extra.availability == "general"
+    assert model.extra.availability_updated == "2026-09-29"
+    assert model.extra.availability_note =~ "all API users"
     assert model.extra.wire.protocol == "openai_responses"
     assert model.extra.tool_calling_endpoint == "/v1/responses"
 
@@ -72,23 +72,23 @@ defmodule LLMDB.OpenAIMetadataTest do
     model = astra_model()
 
     assert model.extra.pricing.mode_multipliers ==
-             %{batch: 0.5, flex: 0.5, fast: 2.0, priority: 2.0}
+             %{batch: 0.5, flex: 0.5, fast: 2.0, priority: 2.0, ultrafast: 6.0}
 
     assert model.extra.pricing.mode_multiplier_scope =~ "both short and long context"
     assert model.extra.pricing.fast_mode_unavailable_data_residency == ["eu"]
     modifiers = Enum.filter(model.pricing.components, &(&1.kind == "other"))
-    assert length(modifiers) == 5
+    assert length(modifiers) == 6
     assert Enum.all?(modifiers, &(&1.applies_to == ["token.*"]))
   end
 
-  test "packaged Astra metadata preserves limited access and the Responses contract" do
+  test "packaged Astra metadata preserves general access and the Responses contract" do
     model = Packaged.snapshot()["providers"]["openai"]["models"]["gpt-6-astra"]
 
     assert is_map(model)
-    assert model["extra"]["availability"] == "limited"
+    assert model["extra"]["availability"] == "general"
     assert model["limits"] == %{"context" => 1_050_000, "input" => 922_000, "output" => 128_000}
     assert model["aliases"] == []
-    assert length(model["pricing"]["components"]) == 13
+    assert length(model["pricing"]["components"]) == 14
     assert model["extra"]["pricing"]["mode_multipliers"]["fast"] == 2.0
 
     for operation <- ["text", "object"] do

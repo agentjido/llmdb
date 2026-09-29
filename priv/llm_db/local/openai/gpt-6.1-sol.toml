@@ -1,11 +1,11 @@
-id = "gpt-6-astra"
-provider_model_id = "gpt-6-astra"
-name = "GPT-6 Astra"
+id = "gpt-6.1-sol"
+provider_model_id = "gpt-6.1-sol"
+name = "GPT-6.1 Sol"
 family = "gpt-6"
-release_date = "2026-09-03"
-last_updated = "2026-09-03"
+release_date = "2026-09-29"
+last_updated = "2026-09-29"
 knowledge = "2026-04-30"
-doc_url = "https://developers.openai.com/api/docs/models/gpt-6-astra"
+doc_url = "https://developers.openai.com/api/docs/models/gpt-6.1-sol"
 aliases = []
 
 [limits]
@@ -15,12 +15,12 @@ output = 128000
 
 # Standard rates for requests with at most 272K input tokens.
 [cost]
-input = 10.0
-output = 50.0
-cache_read = 1.0
-cache_write = 12.5
+input = 2.0
+output = 10.0
+cache_read = 0.1
+cache_write = 2.5
 
-# Verified 2026-09-22 against the model page and pricing page below.
+# Verified 2026-09-29 against the model page and pricing page below.
 [pricing]
 currency = "USD"
 merge = "merge_by_id"
@@ -31,7 +31,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "input_tokens"
-rate = 10.0
+rate = 2.0
 applies_when = { input_tokens = { lte = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -43,7 +43,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "input_tokens"
-rate = 20.0
+rate = 4.0
 applies_when = { input_tokens = { gt = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -55,7 +55,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "output_tokens"
-rate = 50.0
+rate = 10.0
 applies_when = { input_tokens = { lte = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -67,7 +67,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "output_tokens"
-rate = 75.0
+rate = 15.0
 applies_when = { input_tokens = { gt = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -79,7 +79,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_read_tokens"
-rate = 1.0
+rate = 0.1
 applies_when = { input_tokens = { lte = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -91,7 +91,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_read_tokens"
-rate = 2.0
+rate = 0.2
 applies_when = { input_tokens = { gt = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -103,7 +103,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_write_tokens"
-rate = 12.5
+rate = 2.5
 applies_when = { input_tokens = { lte = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -115,7 +115,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_write_tokens"
-rate = 25.0
+rate = 5.0
 applies_when = { input_tokens = { gt = 272000 } }
 mode = "standard"
 charge_scope = "full_request"
@@ -167,17 +167,6 @@ excludes_when = { api = "batch" }
 mode = "priority"
 
 [[pricing.components]]
-id = "pricing.ultrafast"
-kind = "other"
-unit = "other"
-multiplier = 6.0
-applies_to = ["token.*"]
-applies_when = { service_tier = "ultrafast" }
-source = "provider_docs"
-excludes_when = { api = "batch" }
-mode = "ultrafast"
-
-[[pricing.components]]
 id = "pricing.data_residency"
 kind = "other"
 unit = "other"
@@ -197,6 +186,7 @@ enabled = true
 [capabilities.reasoning.effort]
 supported = true
 values = ["low", "medium", "high", "xhigh", "max"]
+default = "medium"
 
 [capabilities.tools]
 enabled = true
@@ -224,16 +214,16 @@ status = "active"
 [extra]
 availability = "general"
 availability_updated = "2026-09-29"
-availability_note = "Ultrafast mode is available to all API users at low rate limits."
+availability_note = "Available to all API users."
 description = "Model for complex reasoning, coding, computer use, research, and document creation."
 temperature = false
 tool_calling_endpoint = "/v1/responses"
 supported_endpoints = ["/v1/responses", "/v1/chat/completions", "/v1/batch"]
 source_urls = [
-  "https://developers.openai.com/api/docs/models/gpt-6-astra",
-  "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra",
+  "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+  "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6.1-sol",
   "https://developers.openai.com/api/docs/pricing",
-  "https://developers.openai.com/api/docs/guides/ultrafast-mode"
+  "https://openai.com/index/introducing-gpt-6-1-sol/"
 ]
 
 [extra.wire]
@@ -242,10 +232,12 @@ protocol = "openai_responses"
 # Legacy mode multipliers retained for compatibility; canonical modifiers are above.
 [extra.pricing]
 sources_checked_at = "2026-09-29"
-source_urls = ["https://developers.openai.com/api/docs/models/gpt-6-astra", "https://developers.openai.com/api/docs/pricing"]
-mode_multipliers = { batch = 0.5, flex = 0.5, fast = 2.0, priority = 2.0, ultrafast = 6.0 }
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-6.1-sol", "https://developers.openai.com/api/docs/pricing"]
+mode_multipliers = { batch = 0.5, flex = 0.5, fast = 2.0, priority = 2.0 }
 mode_multiplier_scope = "Apply to the selected Standard token rates, for both short and long context."
 fast_mode_unavailable_data_residency = ["eu"]
 
-ultrafast_data_residency_processing = ["us"]
-ultrafast_global_processing = true
+[extra.multi_agent]
+supported = true
+status = "beta"
+required_header = "responses_multi_agent=v1"

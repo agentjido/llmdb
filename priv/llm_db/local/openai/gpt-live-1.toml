@@ -1,0 +1,63 @@
+id = "gpt-live-1"
+provider_model_id = "gpt-live-1"
+name = "GPT Live 1"
+provider = "openai"
+family = "gpt-live"
+catalog_only = true
+release_date = "2026-09-10"
+knowledge = "2025-07-31"
+doc_url = "https://developers.openai.com/api/docs/models/gpt-live-1"
+
+[modalities]
+input = ["audio", "text"]
+output = ["audio", "text"]
+
+[capabilities]
+chat = false
+embeddings = false
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[capabilities.json]
+native = false
+schema = false
+strict = false
+
+[capabilities.tools]
+enabled = true
+
+[pricing]
+currency = "USD"
+merge = "replace"
+
+[[pricing.components]]
+id = "live.session_duration"
+kind = "other"
+unit = "other"
+per = 60
+meter = "session_duration_seconds"
+rate = 0.05
+source = "provider_docs"
+notes = "Billed per second. Backend model and tool usage is billed separately."
+
+[execution.text]
+supported = false
+
+[execution.object]
+supported = false
+
+[execution.speech]
+supported = false
+
+[execution.transcription]
+supported = false
+
+[execution.realtime]
+supported = false
+
+[extra.live]
+path = "/live/sessions"
+billing_unit = "second"
+backend_usage_billed_separately = true
