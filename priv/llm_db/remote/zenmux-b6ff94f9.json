@@ -55,6 +55,70 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1000000,
+      "created": 1790623234,
+      "display_name": "Anthropic: Claude Sonnet 5.5",
+      "id": "anthropic/claude-sonnet-5.5",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "anthropic",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 10
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          }
+        ],
+        "input_cache_write_1_h": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 4
+          }
+        ],
+        "input_cache_write_5_min": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-09-28"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1050000,
       "created": 1790127532,
       "display_name": "OpenAI: GPT-6 Luna",
@@ -1864,21 +1928,21 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.18
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.012
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0
+            "value": 0.06
           }
         ]
       },
@@ -11801,40 +11865,6 @@
             "currency": "USD",
             "unit": "perCount",
             "value": 0.01
-          }
-        ]
-      },
-      "publish_time": "2025-09-29"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 163840,
-      "created": 1764137601,
-      "display_name": "DeepSeek: DeepSeek-V3.2-Exp",
-      "id": "deepseek/deepseek-v3.2-exp",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.328
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.216
           }
         ]
       },
