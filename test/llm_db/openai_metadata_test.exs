@@ -72,12 +72,12 @@ defmodule LLMDB.OpenAIMetadataTest do
     model = astra_model()
 
     assert model.extra.pricing.mode_multipliers ==
-             %{batch: 0.5, flex: 0.5, fast: 2.0, priority: 2.0}
+             %{batch: 0.5, flex: 0.5, fast: 2.0, priority: 2.0, ultrafast: 6.0}
 
     assert model.extra.pricing.mode_multiplier_scope =~ "both short and long context"
     assert model.extra.pricing.fast_mode_unavailable_data_residency == ["eu"]
     modifiers = Enum.filter(model.pricing.components, &(&1.kind == "other"))
-    assert length(modifiers) == 5
+    assert length(modifiers) == 6
     assert Enum.all?(modifiers, &(&1.applies_to == ["token.*"]))
   end
 
@@ -88,7 +88,7 @@ defmodule LLMDB.OpenAIMetadataTest do
     assert model["extra"]["availability"] == "limited"
     assert model["limits"] == %{"context" => 1_050_000, "input" => 922_000, "output" => 128_000}
     assert model["aliases"] == []
-    assert length(model["pricing"]["components"]) == 13
+    assert length(model["pricing"]["components"]) == 14
     assert model["extra"]["pricing"]["mode_multipliers"]["fast"] == 2.0
 
     for operation <- ["text", "object"] do
