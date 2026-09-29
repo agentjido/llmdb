@@ -18,8 +18,8 @@ This rollout requires user review before shipment. Do not publish a snapshot or 
 - [x] Add Astra Ultrafast pricing and residency metadata.
 - [x] Test the context boundary and cache rates.
 - [x] Build the local packaged snapshot. Only Astra and Sol 6.1 model records changed.
-- [ ] Check the generated execution contracts and cross-repository behavior.
-- [ ] Run required quality checks.
+- [x] Check the generated execution contracts and GPT-6.1 Sol routing in req_llm.
+- [x] Run required quality checks. `mix quality` passed.
 - [ ] Complete OpenAI Decisions execution metadata.
 - [ ] Review the September image, voice, and cache changes.
 - [ ] Prepare commits or a draft pull request for user review.
