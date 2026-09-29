@@ -14,10 +14,13 @@ chat = false
 embeddings = false
 
 [capabilities.streaming]
-enabled = false
+text = false
+tool_calls = false
 
 [capabilities.json]
-enabled = false
+native = false
+schema = false
+strict = false
 
 [capabilities.tools]
 enabled = false

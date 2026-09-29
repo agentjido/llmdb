@@ -90,6 +90,8 @@ defmodule LLMDB.OpenAIDevDayTest do
       id = "gpt-image-2.5-#{variant}#{suffix}"
       record = model(id)
       assert record.modalities == %{input: [:text, :image], output: [:image]}
+      refute record.capabilities.streaming.text
+      refute record.capabilities.json.schema
 
       assert Map.new(record.pricing.components, &{&1.meter, &1.rate}) == %{
                "text_input_tokens" => 5.0,
@@ -103,6 +105,18 @@ defmodule LLMDB.OpenAIDevDayTest do
       assert packaged["execution"]["image"]["supported"] == true
       assert packaged["execution"]["image"]["path"] == "/images/generations"
       refute packaged["execution"]["text"]["supported"]
+    end
+  end
+
+  test "GPT Live is catalog-only and records time-based voice pricing" do
+    record = model("gpt-live-1")
+    assert record.modalities == %{input: [:audio, :text], output: [:audio, :text]}
+    assert [%{meter: "session_duration_seconds", per: 60, rate: 0.05}] = record.pricing.components
+    packaged = Packaged.snapshot()["providers"]["openai"]["models"]["gpt-live-1"]
+    assert packaged["catalog_only"] == true
+
+    for operation <- ~w(text object speech transcription realtime) do
+      refute packaged["execution"][operation]["supported"]
     end
   end
 

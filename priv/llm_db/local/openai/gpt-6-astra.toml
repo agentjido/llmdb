@@ -222,9 +222,9 @@ features = ["compact"]
 status = "active"
 
 [extra]
-availability = "limited"
-availability_updated = "2026-09-03"
-availability_note = "Initial access is limited to enterprises in the Trusted Access Program. Wider API and ChatGPT access will follow in the coming days."
+availability = "general"
+availability_updated = "2026-09-29"
+availability_note = "Ultrafast mode is available to all API users at low rate limits."
 description = "Model for complex reasoning, coding, computer use, research, and document creation."
 temperature = false
 tool_calling_endpoint = "/v1/responses"
@@ -233,7 +233,7 @@ source_urls = [
   "https://developers.openai.com/api/docs/models/gpt-6-astra",
   "https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra",
   "https://developers.openai.com/api/docs/pricing",
-  "https://x.com/thsottiaux/status/2095597168816226335"
+  "https://developers.openai.com/api/docs/guides/ultrafast-mode"
 ]
 
 [extra.wire]
