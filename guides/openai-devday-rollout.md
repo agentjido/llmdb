@@ -33,3 +33,7 @@ Obtain the official contract before adding execution metadata. Do not copy the O
 ## Separate proposed work
 
 Agents API computer use needs a session client and browser approval events. Bedrock Managed Agents needs an AWS-specific client. Prepare separate scope proposals for these integrations.
+
+## Validation record
+
+The full catalog test run passed 1,038 checks: 997 tests and 41 doctests. The local snapshot build check passed. The generated GPT-6.1 Sol text and object contracts use Responses. Cross-repository checks and the full quality command remain required.
