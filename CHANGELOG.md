@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.9.8](https://github.com/agentjido/llmdb/compare/2026.9.7...2026.9.8) (2026-09-29)
+
+
+
+
+### Features:
+
+* openai: add DevDay model metadata and pricing (#341) by mikehostetler
+
+* google_vertex: add Gemini Embedding 2 (#340) by Dekkon
+
+* add verified OrcaRouter runtime metadata (#339) by mikehostetler
+
 ## [2026.9.7](https://github.com/agentjido/llmdb/compare/2026.9.6...2026.9.7) (2026-09-25)
 
 
