@@ -1237,22 +1237,12 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.3
+            "value": 0.6
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.3
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.3
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.3
+            "value": 0.6
           },
           {
             "currency": "USD",
@@ -1263,28 +1253,28 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 0.6
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.2
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.2
           }
         ],
         "input_cache_read": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.0015
+            "value": 0.003
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.0015
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.0015
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.0015
+            "value": 0.003
           },
           {
             "currency": "USD",
@@ -1295,28 +1285,28 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 0.003
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.006
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.006
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.075
+            "value": 0.15
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.075
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.075
-          },
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.075
+            "value": 0.15
           },
           {
             "currency": "USD",
@@ -1327,6 +1317,16 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 0.15
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.3
+          },
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.3
           }
         ]
       },
@@ -12286,10 +12286,8 @@
       "publish_time": "2025-09-08"
     },
     {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 128000,
+      "capabilities": {},
+      "context_length": 163840,
       "created": 1755841312,
       "display_name": "DeepSeek: DeepSeek V3.1",
       "id": "deepseek/deepseek-chat-v3.1",
@@ -12301,29 +12299,6 @@
         "text"
       ],
       "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.11
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.056
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.28
-          }
-        ]
-      },
       "publish_time": "2025-08-21"
     },
     {
@@ -13189,129 +13164,6 @@
     },
     {
       "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 256000,
-      "created": 1755489358,
-      "display_name": "Qwen: Qwen3 235B A22B Instruct 2507",
-      "id": "qwen/qwen3-235b-a22b-2507",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "qwen",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.11
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.056
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.28
-          }
-        ]
-      },
-      "publish_time": "2025-07-21"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 256000,
-      "created": 1755505301,
-      "display_name": "Qwen: Qwen3 235B A22B Thinking 2507",
-      "id": "qwen/qwen3-235b-a22b-thinking-2507",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "qwen",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 2.78
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.056
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.28
-          }
-        ]
-      },
-      "publish_time": "2025-07-21"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 256000,
-      "created": 1755506104,
-      "display_name": "Qwen: Qwen3-Coder",
-      "id": "qwen/qwen3-coder",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "qwen",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 5.01
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.25
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.25
-          }
-        ]
-      },
-      "publish_time": "2025-07-21"
-    },
-    {
-      "capabilities": {
         "reasoning": true
       },
       "context_length": 1048576,
@@ -13497,10 +13349,8 @@
       "publish_time": "2025-06-17"
     },
     {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 64000,
+      "capabilities": {},
+      "context_length": 163840,
       "created": 1755162704,
       "display_name": "DeepSeek: DeepSeek R1 0528",
       "id": "deepseek/deepseek-r1-0528",
@@ -13512,71 +13362,7 @@
         "text"
       ],
       "owned_by": "deepseek",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 2.23
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.112
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.56
-          }
-        ]
-      },
       "publish_time": "2025-05-28"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 32000,
-      "created": 1762832198,
-      "display_name": "Qwen: Qwen3-14B",
-      "id": "qwen/qwen3-14b",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "qwen",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.4
-          }
-        ],
-        "input_cache_read": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.028
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.14
-          }
-        ]
-      },
-      "publish_time": "2025-04-28"
     },
     {
       "capabilities": {
