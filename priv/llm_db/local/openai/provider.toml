@@ -108,6 +108,7 @@ env = ["OPENAI_API_KEY"]
 [runtime.execution]
 text = "openai_chat_compatible"
 object = "openai_chat_compatible"
+evaluate = "openai_decisions"
 embed = "openai_embeddings"
 image = "openai_images"
 transcription = "openai_transcription"

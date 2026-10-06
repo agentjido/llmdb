@@ -7,6 +7,9 @@ output = 0.5
 cache_read = 0.01
 cache_write = 0.125
 
+[capabilities]
+evaluate = true
+
 [capabilities.reasoning.effort]
 supported = true
 values = ["none", "low", "medium", "high", "xhigh", "max"]

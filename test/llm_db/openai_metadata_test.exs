@@ -98,12 +98,36 @@ defmodule LLMDB.OpenAIMetadataTest do
     end
   end
 
+  test "Luna metadata enables Decisions evaluation" do
+    model = openai_model("gpt-6-luna")
+
+    assert model.capabilities.evaluate
+  end
+
+  test "packaged Luna metadata preserves the Decisions execution contract" do
+    model = Packaged.snapshot()["providers"]["openai"]["models"]["gpt-6-luna"]
+
+    assert model["capabilities"]["evaluate"]
+    assert model["execution"]["evaluate"]["family"] == "openai_decisions"
+    assert model["execution"]["evaluate"]["wire_protocol"] == "openai_decisions"
+    assert model["execution"]["evaluate"]["path"] == "/decisions"
+    assert model["execution"]["evaluate"]["provider_model_id"] == "gpt-6-luna"
+
+    for operation <- ["text", "object"] do
+      assert model["execution"][operation]["family"] == "openai_responses_compatible"
+    end
+  end
+
   defp astra_model do
+    openai_model("gpt-6-astra")
+  end
+
+  defp openai_model(id) do
     {:ok, data} = Local.load(%{dir: @local_dir})
 
     data["openai"].models
     |> Normalize.normalize_models()
-    |> Enum.find(&(&1.id == "gpt-6-astra"))
+    |> Enum.find(&(&1.id == id))
     |> Model.new!()
   end
 end
