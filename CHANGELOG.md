@@ -7,6 +7,15 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.10.0](https://github.com/agentjido/llmdb/compare/2026.9.8...2026.10.0) (2026-10-06)
+
+
+
+
+### Features:
+
+* add OpenAI Decisions model contract (#343) by mikehostetler
+
 ## [2026.9.8](https://github.com/agentjido/llmdb/compare/2026.9.7...2026.9.8) (2026-09-29)
 
 
