@@ -26,6 +26,7 @@ defmodule LLMDB.ExecutionContract do
   @family_wire_protocol %{
     "openai_chat_compatible" => "openai_chat",
     "openai_responses_compatible" => "openai_responses",
+    "openai_decisions" => "openai_decisions",
     "openai_embeddings" => "openai_embeddings",
     "openai_images" => "openai_images",
     "minimax_images" => "minimax_images",
@@ -45,6 +46,7 @@ defmodule LLMDB.ExecutionContract do
   @family_paths %{
     "openai_chat_compatible" => "/chat/completions",
     "openai_responses_compatible" => "/responses",
+    "openai_decisions" => "/decisions",
     "openai_embeddings" => "/embeddings",
     "openai_images" => "/images/generations",
     "minimax_images" => "/image_generation",
