@@ -402,6 +402,24 @@
       "version": "3.0"
     },
     {
+      "description": "Gemini Nano Banana 2.1.",
+      "displayName": "Nano Banana 2.1",
+      "inputTokenLimit": 65536,
+      "maxTemperature": 1,
+      "name": "models/gemini-nano-banana-2.1",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.0"
+    },
+    {
       "description": "Gemini 3.5 Flash",
       "displayName": "Gemini 3.5 Flash",
       "inputTokenLimit": 1048576,
@@ -608,7 +626,6 @@
         "batchGenerateContent"
       ],
       "temperature": 1,
-      "thinking": true,
       "topK": 64,
       "topP": 0.95,
       "version": "3.1-flash-tts-preview"
