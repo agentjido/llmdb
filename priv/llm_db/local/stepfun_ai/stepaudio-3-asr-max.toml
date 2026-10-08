@@ -1,0 +1,30 @@
+id = "stepaudio-3-asr-max"
+name = "StepAudio 3 ASR Max"
+family = "stepaudio"
+doc_url = "https://platform.stepfun.ai/docs/en/guides/models/stepaudio-3-asr"
+last_updated = "2026-10-08"
+catalog_only = false
+
+[modalities]
+input = ["audio"]
+output = ["text"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[pricing]
+currency = "USD"
+
+[[pricing.components]]
+id = "transcription.audio"
+kind = "other"
+unit = "other"
+per = 3600
+rate = 0.4
+meter = "input.audio_seconds"
+source = "https://platform.stepfun.ai/docs/en/guides/pricing/details"
+notes = "Per hour of input audio; the meter is measured in seconds."

@@ -1,0 +1,20 @@
+id = "stepfun_ai"
+name = "StepFun (Global)"
+base_url = "https://api.stepfun.ai/v1"
+doc = "https://platform.stepfun.ai/docs/en/welcome"
+env = ["STEPFUN_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.stepfun.ai/v1"
+doc_url = "https://platform.stepfun.ai/docs/en/welcome"
+
+[runtime.auth]
+type = "bearer"
+env = ["STEPFUN_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
+object = "openai_chat_compatible"
+speech = "openai_speech"
+transcription = "stepfun_transcription"

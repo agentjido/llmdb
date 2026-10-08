@@ -1,0 +1,30 @@
+id = "stepaudio-2.5-tts"
+name = "StepAudio 2.5 TTS"
+family = "stepaudio"
+doc_url = "https://platform.stepfun.ai/docs/en/guides/models/stepaudio-3-tts"
+last_updated = "2026-10-08"
+catalog_only = false
+
+[modalities]
+input = ["text"]
+output = ["audio"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[pricing]
+currency = "USD"
+
+[[pricing.components]]
+id = "speech.characters"
+kind = "other"
+unit = "other"
+per = 10000
+rate = 0.85
+meter = "input.billable_characters"
+source = "https://platform.stepfun.ai/docs/en/guides/pricing/details"
+notes = "Per 10,000 billable characters. Two English letters or punctuation marks count as one character; one Chinese character counts as one."

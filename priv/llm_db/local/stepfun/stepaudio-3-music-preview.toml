@@ -1,0 +1,25 @@
+id = "stepaudio-3-music-preview"
+name = "StepAudio 3 Music Preview"
+family = "stepaudio"
+doc_url = "https://platform.stepfun.com/docs/zh/guides/models/stepaudio-3-music"
+last_updated = "2026-10-08"
+catalog_only = true
+
+[modalities]
+input = ["text","audio"]
+output = ["audio"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[execution.speech]
+supported = false
+
+[extra]
+api_path = "/audio/music"
+transport = "http"
+preview = true
