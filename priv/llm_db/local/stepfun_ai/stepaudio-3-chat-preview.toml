@@ -1,0 +1,32 @@
+id = "stepaudio-3-chat-preview"
+name = "StepAudio 3 Chat Preview"
+family = "stepaudio"
+doc_url = "https://platform.stepfun.ai/docs/en/guides/models/stepaudio-3-realtime"
+last_updated = "2026-10-08"
+catalog_only = false
+
+[modalities]
+input = ["text","audio"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[capabilities.tools]
+enabled = true
+streaming = true
+strict = false
+
+[extra]
+preview = true
+
+[cost]
+input = 0.0
+output = 0.0

@@ -1,0 +1,12 @@
+id = "step-tts-2"
+catalog_only = true
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[execution.speech]
+supported = false

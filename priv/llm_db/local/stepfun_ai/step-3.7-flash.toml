@@ -1,0 +1,9 @@
+id = "step-3.7-flash"
+
+[cost]
+input = 0.20
+cache_read = 0.04
+output = 1.15
+
+[capabilities.streaming]
+text = true

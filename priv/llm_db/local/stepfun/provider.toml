@@ -1,0 +1,20 @@
+id = "stepfun"
+name = "StepFun (China)"
+base_url = "https://api.stepfun.com/v1"
+doc = "https://platform.stepfun.com/docs/zh/welcome"
+env = ["STEPFUN_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.stepfun.com/v1"
+doc_url = "https://platform.stepfun.com/docs/zh/welcome"
+
+[runtime.auth]
+type = "bearer"
+env = ["STEPFUN_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
+object = "openai_chat_compatible"
+speech = "openai_speech"
+transcription = "stepfun_transcription"
