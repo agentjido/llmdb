@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.10.1](https://github.com/agentjido/llmdb/compare/2026.10.0...2026.10.1) (2026-10-08)
+
+
+
+
+### Features:
+
+* add StepFun runtime and audio model support (#345) by mikehostetler
+
+### Bug Fixes:
+
+* deps: update Zoi to 0.18.11 by dependabot[bot]
+
 ## [2026.10.0](https://github.com/agentjido/llmdb/compare/2026.9.8...2026.10.0) (2026-10-06)
 
 
