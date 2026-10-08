@@ -4,6 +4,155 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1000000,
+      "created": 1791414656,
+      "display_name": "Anthropic: Claude Haiku 5.5",
+      "id": "anthropic/claude-haiku-5.5",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "anthropic",
+      "pricings": {
+        "completion": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "100",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.5
+          }
+        ],
+        "input_cache_read": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.01
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "100",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.05
+          }
+        ],
+        "input_cache_write_1_h": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.2
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "100",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1
+          }
+        ],
+        "input_cache_write_5_min": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.125
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "100",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.625
+          }
+        ],
+        "prompt": [
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "0",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.1
+          },
+          {
+            "conditions": {
+              "prompt_tokens": {
+                "gte": "100",
+                "unit": "kTokens"
+              }
+            },
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.5
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-10-07"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1050000,
       "created": 1790731088,
       "display_name": "OpenAI: GPT-6.1 Sol",
