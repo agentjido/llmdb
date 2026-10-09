@@ -1,12 +1,88 @@
 defmodule LLMDB.Sources.LLMAPITest do
   use ExUnit.Case, async: true
 
-  alias LLMDB.{Model, Source}
+  alias LLMDB.{Model, Pricing, Source}
   alias LLMDB.Sources.{LLMAPI, Remote}
 
   @url "https://api.llmapi.ai/v1/models"
 
   describe "transform/1" do
+    test "different input modality prices do not become one flat input tariff" do
+      source =
+        chat("audio-price")
+        |> Map.put("architecture", %{
+          "input_modalities" => ["text", "audio"],
+          "output_modalities" => ["text"]
+        })
+        |> Map.put("providers", [Map.put(route(), "audio_input", true)])
+        |> Map.put("pricing", %{
+          "prompt" => "0.0000003",
+          "completion" => "0.0000025",
+          "audio_input" => "0.000001"
+        })
+
+      [data] = transform(source)
+      assert data.extra.pricing_input_split_required
+      assert data.cost.input == 0.3
+      [model] = data |> Model.new!() |> List.wrap() |> Pricing.apply_cost_components()
+      refute Enum.any?(model.pricing.components, &(&1.id == "token.input"))
+      assert model.modalities.input == [:text, :audio]
+
+      source = put_in(source, ["pricing", "audio_input"], "0.0000003")
+      [equal] = transform(source)
+      refute Map.has_key?(equal, :pricing)
+      refute Map.has_key?(equal.extra, :pricing_input_split_required)
+    end
+
+    test "published one-hour cache prices replace the unconditional legacy write rate" do
+      source =
+        Map.put(chat("ttl-prices"), "pricing", %{
+          "prompt" => "0.000003",
+          "completion" => "0.000015",
+          "input_cache_write" => "0.00000375",
+          "input_cache_write_1h" => "0.000006"
+        })
+
+      [data] = transform(source)
+      [model] = data |> Model.new!() |> List.wrap() |> Pricing.apply_cost_components()
+
+      for {ttl, expected} <- [{"5m", 3.75}, {"1h", 6.0}] do
+        selection = Pricing.components_for(model, cache_ttl: ttl)
+
+        assert [%{rate: ^expected, per: 1_000_000}] =
+                 Enum.filter(
+                   selection.components,
+                   &String.starts_with?(&1.id, "token.cache_write")
+                 )
+      end
+
+      missing = Pricing.components_for(model)
+      assert Enum.count(missing.unresolved, &String.starts_with?(&1.id, "token.cache_write")) == 2
+    end
+
+    test "an invalid published one-hour price cannot fall back to the five-minute price" do
+      source =
+        Map.put(chat("bad-hour"), "pricing", %{
+          "input_cache_write" => "0.00000375",
+          "input_cache_write_1h" => "unknown"
+        })
+
+      [data] = transform(source)
+      assert data.extra.unmapped_pricing["input_cache_write_1h"] == "unknown"
+      [model] = data |> Model.new!() |> List.wrap() |> Pricing.apply_cost_components()
+      selection = Pricing.components_for(model, cache_ttl: "1h")
+      refute Enum.any?(selection.components, &String.starts_with?(&1.id, "token.cache_write"))
+    end
+
+    test "zero and hour-only prices remain explicit rather than becoming default-duration prices" do
+      source = Map.put(chat("hour-only"), "pricing", %{"input_cache_write_1h" => "0"})
+      [data] = transform(source)
+      [model] = data |> Model.new!() |> List.wrap() |> Pricing.apply_cost_components()
+      assert [%{rate: rate}] = Pricing.components_for(model, cache_ttl: "1h").components
+      assert rate == 0.0
+      assert [] == Pricing.components_for(model, cache_ttl: "5m").components
+    end
+
     test "keeps exact gateway IDs, public token rates and documented Chat operations" do
       source =
         chat("vendor/MixedCase:version")

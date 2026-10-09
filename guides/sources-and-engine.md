@@ -65,6 +65,12 @@ across fallback routes, and unpublished output limits remain absent. Object
 contracts require tools, tool choice, and the `max_tokens` parameter used by
 the shared adapter's default object request.
 
+Published one-hour cache-write prices have separate duration-scoped components.
+When supported input modalities have different token rates, the source retains
+the base `cost` summary and raw fees but excludes the flat `token.input`
+component. Complete input pricing then requires a token split by modality;
+`extra.pricing_input_split_required` identifies these models.
+
 ### Local TOML
 
 ```elixir

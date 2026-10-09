@@ -28,6 +28,17 @@ defmodule LLMDB.LLMAPICatalogTest do
     refute Map.has_key?(local["llmapi"].runtime, :execution)
   end
 
+  test "distinct audio and image prices cannot use the legacy flat input rate" do
+    for id <-
+          ~w(gemini-2.5-flash gemini-2.5-flash-lite gemini-3-flash-preview gemini-3.1-flash-lite qwen/qwen3.8-omni-flash) do
+      assert {:ok, model} = LLMDB.model({:llmapi, id})
+      assert model.extra["pricing_input_split_required"]
+      assert model.pricing.excluded_cost_components == ["token.input"]
+      refute Enum.any?(model.pricing.components, &(&1.id == "token.input"))
+      assert model.cost.input > 0
+    end
+  end
+
   test "retains every cached public model ID under the LLM API namespace" do
     {:ok, source} = LLMAPI.load(%{})
     models = Packaged.snapshot()["providers"]["llmapi"]["models"]
@@ -37,6 +48,37 @@ defmodule LLMDB.LLMAPICatalogTest do
     assert Enum.all?(models, fn {id, model} ->
              model["id"] == id and model["provider"] == "llmapi"
            end)
+  end
+
+  test "every cached one-hour tariff survives packaged loading with the correct duration" do
+    raw = File.read!("priv/llm_db/remote/llmapi-5df41fd3.json") |> Jason.decode!()
+
+    models =
+      Enum.filter(
+        raw["data"],
+        &(&1["kind"] == "chat" and get_in(&1, ["pricing", "input_cache_write_1h"]) != nil)
+      )
+
+    assert length(models) == 11
+
+    for source <- models do
+      assert {:ok, model} = LLMDB.model({:llmapi, source["id"]})
+
+      for {ttl, field} <- [{"5m", "input_cache_write"}, {"1h", "input_cache_write_1h"}] do
+        selection = LLMDB.Pricing.components_for(model, cache_ttl: ttl)
+
+        writes =
+          Enum.filter(selection.components, &String.starts_with?(&1.id, "token.cache_write"))
+
+        if price = source["pricing"][field] do
+          {expected, ""} = Float.parse(price)
+          assert [component] = writes
+          assert_in_delta component.rate, expected * 1_000_000, 1.0e-9
+        else
+          assert writes == []
+        end
+      end
+    end
   end
 
   test "reviewed chat models resolve exact wire IDs with text and tool-based object contracts" do

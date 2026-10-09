@@ -34,7 +34,7 @@ defmodule LLMDB.Sources.LLMAPI do
   @default_url "https://api.llmapi.ai/v1/models"
   @default_cache_dir "priv/llm_db/remote"
   @docs_url "https://docs.llmapi.ai/api/v1/models"
-  @mapped_prices ~w(prompt completion input_cache_read input_cache_write)
+  @mapped_prices ~w(prompt completion input_cache_read input_cache_write input_cache_write_1h)
   @modalities %{
     "text" => :text,
     "image" => :image,
@@ -111,6 +111,7 @@ defmodule LLMDB.Sources.LLMAPI do
       |> put(:aliases, aliases(source["aliases"]))
       |> put(:lifecycle, lifecycle.metadata)
       |> put(:cost, cost(source))
+      |> put(:pricing, cache_pricing(source))
 
     if executable? do
       capabilities = capabilities(routes, params)
@@ -135,6 +136,7 @@ defmodule LLMDB.Sources.LLMAPI do
       |> Map.put(:capabilities, capabilities)
       |> Map.put(:modalities, modalities)
       |> Map.put(:extra, extra)
+      |> exclude_flat_multimodal_input(source, modalities)
       |> put(:limits, empty_to_nil(limits))
     else
       extra =
@@ -165,6 +167,7 @@ defmodule LLMDB.Sources.LLMAPI do
         |> Map.put(:modalities, modalities)
         |> put(:limits, empty_to_nil(limits))
         |> Map.put(:extra, extra)
+        |> exclude_flat_multimodal_input(source, modalities)
       else
         model
         |> Map.put(:capabilities, descriptive_capabilities(source))
@@ -303,6 +306,59 @@ defmodule LLMDB.Sources.LLMAPI do
   end
 
   defp cost(_source), do: nil
+
+  defp cache_pricing(%{"kind" => "chat"} = source) do
+    pricing = map(source["pricing"])
+
+    if Map.has_key?(pricing, "input_cache_write_1h") do
+      components =
+        [
+          {"token.cache_write", "5m", token_price(pricing["input_cache_write"])},
+          {"token.cache_write.1h", "1h", token_price(pricing["input_cache_write_1h"])}
+        ]
+        |> Enum.reject(fn {_id, _ttl, rate} -> is_nil(rate) end)
+        |> Enum.map(fn {id, ttl, rate} ->
+          %{
+            id: id,
+            kind: "token",
+            unit: "token",
+            meter: "cache_write_tokens",
+            per: 1_000_000,
+            rate: rate,
+            applies_when: %{"cache_ttl" => ttl},
+            source: "provider_catalog"
+          }
+        end)
+
+      %{currency: "USD", merge: "merge_by_id", components: components}
+    end
+  end
+
+  defp cache_pricing(_source), do: nil
+
+  defp exclude_flat_multimodal_input(model, source, modalities) do
+    published = map(source["pricing"])
+    text_rate = token_price(published["prompt"])
+
+    split_required? =
+      Enum.any?([{:audio, "audio_input"}, {:image, "image"}], fn {modality, field} ->
+        rate = token_price(published[field])
+        modality in modalities.input and not is_nil(rate) and rate != text_rate
+      end)
+
+    if split_required? do
+      pricing =
+        model
+        |> Map.get(:pricing, %{currency: "USD", components: []})
+        |> Map.put(:excluded_cost_components, ["token.input"])
+
+      model
+      |> Map.put(:pricing, pricing)
+      |> Map.update!(:extra, &Map.put(&1, :pricing_input_split_required, true))
+    else
+      model
+    end
+  end
 
   defp token_price(value) when is_binary(value) do
     case Float.parse(value) do
