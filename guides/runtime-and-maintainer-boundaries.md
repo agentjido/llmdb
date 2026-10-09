@@ -77,7 +77,7 @@ No module or task is removed in this minor release.
 | `LLMDB.History.Migrator`, `LLMDB.History.Rebuilder`, `LLMDB.History.Bundle`, `LLMDB.History.Diff`, `LLMDB.History.Lineage` | Corresponding `mix llm_db.history.*` task | Documentation-deprecated maintainer orchestration with internal shared diff/lineage logic |
 | `LLMDB.Snapshot.ReleaseStore` mutation/publishing calls | `mix llm_db.snapshot.publish` or `mix llm_db.history.rebuild --publish` | Internal shared transport; runtime fetch behavior remains supported through configuration |
 | `LLMDB.Enrich`, `LLMDB.Validate`, `LLMDB.Enrich.AzureWireProtocol`, `LLMDB.Enrich.RuntimeContract` | `mix llm_db.build` | Internal ETL stages |
-| LLMDB.Sources.Anthropic, LLMDB.Sources.Google, LLMDB.Sources.Llmfit, LLMDB.Sources.Local, LLMDB.Sources.ModelsDev, LLMDB.Sources.OpenAI, LLMDB.Sources.OpenRouter, LLMDB.Sources.Remote, LLMDB.Sources.XAI, LLMDB.Sources.Zenmux | `LLMDB.Source` for extensions; `mix llm_db.pull`/`build` for workflows | Internal bundled adapters and shared remote transport |
+| LLMDB.Sources.Anthropic, LLMDB.Sources.Google, LLMDB.Sources.LLMAPI, LLMDB.Sources.Llmfit, LLMDB.Sources.Local, LLMDB.Sources.ModelsDev, LLMDB.Sources.OpenAI, LLMDB.Sources.OpenRouter, LLMDB.Sources.Remote, LLMDB.Sources.XAI, LLMDB.Sources.Zenmux | `LLMDB.Source` for extensions; `mix llm_db.pull`/`build` for workflows | Internal bundled adapters and shared remote transport |
 
 Documentation-only deprecation avoids warnings inside the still-supported task
 wrappers during the extraction window. It does not grant these modules a new
