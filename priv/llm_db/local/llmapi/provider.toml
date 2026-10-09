@@ -1,0 +1,16 @@
+# https://docs.llmapi.ai/api/introduction
+# https://docs.llmapi.ai/api/v1/chat/completions
+id = "llmapi"
+name = "LLM API"
+base_url = "https://api.llmapi.ai/v1"
+doc = "https://docs.llmapi.ai"
+env = ["LLM_API_KEY", "LLMAPI_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.llmapi.ai/v1"
+doc_url = "https://docs.llmapi.ai/api/v1/chat/completions"
+
+[runtime.auth]
+type = "bearer"
+env = ["LLM_API_KEY", "LLMAPI_API_KEY"]

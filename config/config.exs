@@ -11,6 +11,7 @@ config :llm_db,
     {LLMDB.Sources.Google, %{}},
     {LLMDB.Sources.XAI, %{}},
     {LLMDB.Sources.Zenmux, %{}},
+    {LLMDB.Sources.LLMAPI, %{}},
     {LLMDB.Sources.Local, %{dir: "priv/llm_db/local"}}
   ],
 
@@ -24,6 +25,7 @@ config :llm_db,
   google_cache_dir: "priv/llm_db/remote",
   xai_cache_dir: "priv/llm_db/remote",
   zenmux_cache_dir: "priv/llm_db/remote",
+  llmapi_cache_dir: "priv/llm_db/remote",
   llmfit_enrichment: true,
   azure_foundry_cache_dir: "priv/llm_db/remote"
 
