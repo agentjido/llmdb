@@ -3,6 +3,7 @@ defmodule LLMDB.Test.GitHistoryFixture do
 
   @provider_path "priv/llm_db/providers/openai.json"
   @manifest_path "priv/llm_db/manifest.json"
+  @git_environment ~w(GIT_ALTERNATE_OBJECT_DIRECTORIES GIT_CONFIG GIT_CONFIG_PARAMETERS GIT_CONFIG_COUNT GIT_OBJECT_DIRECTORY GIT_DIR GIT_WORK_TREE GIT_IMPLICIT_WORK_TREE GIT_GRAFT_FILE GIT_INDEX_FILE GIT_NO_REPLACE_OBJECTS GIT_REPLACE_REF_BASE GIT_PREFIX GIT_SHALLOW_FILE GIT_COMMON_DIR)
 
   def create! do
     repo =
@@ -30,7 +31,26 @@ defmodule LLMDB.Test.GitHistoryFixture do
   end
 
   def in_repo(repo, fun) when is_binary(repo) and is_function(fun, 0) do
-    File.cd!(repo, fun)
+    previous = clear_environment()
+
+    try do
+      File.cd!(repo, fun)
+    after
+      restore_environment(previous)
+    end
+  end
+
+  def clear_environment do
+    previous = Map.new(@git_environment, &{&1, System.get_env(&1)})
+    Enum.each(@git_environment, &System.delete_env/1)
+    previous
+  end
+
+  def restore_environment(previous) do
+    Enum.each(previous, fn
+      {key, nil} -> System.delete_env(key)
+      {key, value} -> System.put_env(key, value)
+    end)
   end
 
   def cleanup(%{repo: repo}), do: File.rm_rf!(repo)
@@ -119,7 +139,8 @@ defmodule LLMDB.Test.GitHistoryFixture do
   end
 
   defp git!(repo, args, opts \\ []) do
-    opts = Keyword.merge([cd: repo, stderr_to_stdout: true], opts)
+    env = Enum.map(@git_environment, &{&1, nil}) ++ Keyword.get(opts, :env, [])
+    opts = Keyword.merge([cd: repo, stderr_to_stdout: true], Keyword.put(opts, :env, env))
 
     case System.cmd("git", args, opts) do
       {output, 0} -> output

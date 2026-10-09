@@ -6,7 +6,7 @@ aliases = [
 ]
 
 [lifecycle]
-status = "deprecated"
+status = "retired"
 deprecated_at = "2026-04-14"
 retires_at = "2026-06-15"
 replacement = "claude-opus-4-8"
@@ -16,3 +16,71 @@ input = 15.0
 output = 75.0
 cache_read = 1.5
 cache_write = 18.75
+
+# Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 15.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 75.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 1.5
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 18.75
+applies_when = { cache_ttl = "5m" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.1h"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+derives_from = "token.input"
+multiplier = 2.0
+applies_when = { cache_ttl = "1h" }
+notes = "Derive before applying token-wide modifiers; do not apply a modifier twice through the input dependency."
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[extra.pricing]
+sources_checked_at = "2026-10-09"
+source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]

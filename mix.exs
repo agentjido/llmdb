@@ -39,6 +39,7 @@ defmodule LLMDB.MixProject do
           "guides/package-footprint.md",
           "guides/snapshot-formats.md",
           "guides/pricing-and-billing.md",
+          "guides/anthropic-pricing-audit.md",
           "guides/runtime-and-maintainer-boundaries.md",
           "guides/schema-system.md",
           "guides/sources-and-engine.md",
