@@ -4603,7 +4603,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:36:25.4959451Z",
+      "modifiedTime": "2026-10-08T17:49:51.9042774Z",
       "name": "text-embedding-ada-002",
       "orginAssetId": null,
       "parentModelId": null,
@@ -4630,7 +4630,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 106,
+    "updateSequence": 110,
     "usage": {
       "popularity": 1.0,
       "totalCount": 4
@@ -9057,7 +9057,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:35:00.9940536Z",
+      "modifiedTime": "2026-10-08T17:49:42.377084Z",
       "name": "text-embedding-3-large",
       "orginAssetId": null,
       "parentModelId": null,
@@ -9081,7 +9081,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 116,
+    "updateSequence": 120,
     "usage": {
       "popularity": 1.0,
       "totalCount": 1
@@ -9422,7 +9422,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:34:58.2239348Z",
+      "modifiedTime": "2026-10-08T17:49:40.7979684Z",
       "name": "text-embedding-3-small",
       "orginAssetId": null,
       "parentModelId": null,
@@ -9446,7 +9446,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 116,
+    "updateSequence": 120,
     "usage": {
       "popularity": 1.0,
       "totalCount": 7
@@ -12846,7 +12846,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:11:03.9131979Z",
+      "modifiedTime": "2026-10-08T17:49:15.7402041Z",
       "name": "gpt-4o-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -12872,7 +12872,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 173,
+    "updateSequence": 177,
     "usage": {
       "popularity": 67.81,
       "totalCount": 65
@@ -15468,7 +15468,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": "2026-10-09T00:00:00Z",
+        "inferenceDeprecationDate": null,
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "ServerlessMaaS",
@@ -15568,7 +15568,7 @@
         "maxInputTokens": null,
         "domain": null,
         "toolRegisterEnd": null,
-        "finetuneDeprecationDate": "2026-10-09T00:00:00Z",
+        "finetuneDeprecationDate": null,
         "outputModalities": [
           "text"
         ],
@@ -15594,9 +15594,7 @@
       },
       "tags": {
         "Featured": "",
-        "FinetuneDeprecationDate": "10/09/2026 00:00:00 +00:00",
         "FinetuneRetirementDate": "12/09/2026 00:00:00 +00:00",
-        "InferenceDeprecationDate": "10/09/2026 00:00:00 +00:00",
         "InferenceRetirementDate": "12/09/2026 00:00:00 +00:00",
         "Preview": "",
         "author": "Mistral AI",
@@ -15664,7 +15662,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-06T22:00:36.2152427Z",
+      "modifiedTime": "2026-10-06T22:01:37.5146251Z",
       "name": "Ministral-3B",
       "orginAssetId": null,
       "parentModelId": null,
@@ -15690,7 +15688,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 88,
+    "updateSequence": 90,
     "usage": {
       "popularity": 2.02,
       "totalCount": 9926
@@ -18606,7 +18604,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:57.958629Z",
+      "modifiedTime": "2026-10-08T17:49:09.4065559Z",
       "name": "gpt-4o",
       "orginAssetId": null,
       "parentModelId": null,
@@ -18632,7 +18630,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 163,
+    "updateSequence": 167,
     "usage": {
       "popularity": 67.84,
       "totalCount": 1
@@ -19040,7 +19038,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:53.9435762Z",
+      "modifiedTime": "2026-10-08T17:49:07.564827Z",
       "name": "o1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -19065,7 +19063,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 155,
+    "updateSequence": 159,
     "usage": {
       "popularity": 67.9,
       "totalCount": 4
@@ -22618,7 +22616,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:50.7296036Z",
+      "modifiedTime": "2026-10-08T17:49:05.271201Z",
       "name": "o3-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -22644,7 +22642,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 156,
+    "updateSequence": 160,
     "usage": {
       "popularity": 69.01,
       "totalCount": 0
@@ -26105,7 +26103,7 @@
         "featureFlags": [
           "OpenAI.computer-use-preview"
         ],
-        "lifecycle": "Preview",
+        "lifecycle": "Deprecated",
         "evaluationMinSkuSpec": null,
         "preview": true,
         "isDirectFromAzure": null,
@@ -26259,7 +26257,7 @@
         "languages": "en,it,af,es,de,fr,id,ru,pl,uk,el,lv,zh,ar,tr,ja,sw,cy,ko,is,bn,ur,ne,th,pa,mr,te",
         "license": "custom",
         "licenseDescription": "Use of this Azure Direct Model is subject to applicable [Microsoft Product Terms](https://www.microsoft.com/licensing/terms/welcome/welcomepage) including the Universal License Terms for Microsoft Generative AI Services and the service-specific terms for Azure AI Foundry Models. If this Azure Direct Model is designated as Preview, its use is also subject to the [Supplemental Terms for Azure Previews](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/).",
-        "lifecycle": "Preview",
+        "lifecycle": "Deprecated",
         "maxOutputTokens": "16384",
         "notes": "# Responsible AI considerations\n\n## Safety techniques\n\nSafety is built into our models from the beginning, and reinforced at every step of our development process. In pre-training, we filter out information that we do not want our models to learn from or output, such as hate speech, adult content, sites that primarily aggregate personal information, and spam. In post-training, we align the model's behavior to our policies using techniques such as reinforcement learning with human feedback (RLHF) to improve the accuracy and reliability of the models' responses.\n\ncomputer-use-preview or CUA implements additional safeguards across several dimensions. CUA refuses many harmful tasks and illegal or regulated activities, is trained to ask users for confirmation before finalizing tasks with external side effects, and is designed to identify and ignore prompt injections on websites. Details on CUA model are covered in the Operator System card.\n\nPrompts and completions are passed through a default configuration of Azure AI Content Safety classification models to detect and prevent the output of harmful content. Learn more about [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview). Additional classification models and configuration options are available when you deploy an Azure OpenAI model in production; [learn more](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter?tabs=warning%2Cuser-prompt%2Cpython-new).\n\n## Safety evaluations\n\nCUA has been extensively tested for safety, and implements safeguards across several dimensions.\n\n## Known limitations\n\nWhile CUA is still early and has limitations, it sets new state-of-the-art benchmark results, achieving a 38.1% success rate on OSWorld for full computer use tasks, and 58.1% on WebArena and 87% on WebVoyager for web-based tasks.\n\nCUA cannot reliably ensure human-in-the-loop intervention. Developers will need to be systematically aware of, and defend against, situations where the model can be fooled into executing commands that are harmful to the user or the system, such as downloading malware, leaking credentials, or issuing fraudulent financial transactions. Particular attention should be paid to the fact that screenshot inputs are untrusted by nature and may include malicious instructions aimed at the model.\n\nWe'll continue to monitor how computer-use-preview is being used and improve the model's safety as we identify new risks.\n\n# Acceptable use\n\n## Acceptable use policy\n\nThe provider has not supplied this information.",
         "outputModalities": "text",
@@ -26307,7 +26305,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:49.0684712Z",
+      "modifiedTime": "2026-10-08T17:49:01.4495426Z",
       "name": "computer-use-preview",
       "orginAssetId": null,
       "parentModelId": null,
@@ -26332,7 +26330,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 99,
+    "updateSequence": 103,
     "usage": {
       "popularity": 68.14,
       "totalCount": 0
@@ -26566,7 +26564,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:31:38.3902188Z",
+      "modifiedTime": "2026-10-08T17:48:59.229803Z",
       "name": "whisper",
       "orginAssetId": null,
       "parentModelId": null,
@@ -26590,7 +26588,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 1.0,
       "totalCount": 8
@@ -26890,7 +26888,7 @@
         "toolResponseStart": null,
         "benchmark": "quality",
         "maapSurcharge": null,
-        "inferenceDeprecationDate": "2026-10-09T00:00:00Z",
+        "inferenceDeprecationDate": null,
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "ServerlessMaaS",
@@ -27031,7 +27029,6 @@
       },
       "tags": {
         "Featured": "",
-        "InferenceDeprecationDate": "10/09/2026 00:00:00 +00:00",
         "InferenceRetirementDate": "12/09/2026 00:00:00 +00:00",
         "author": "Mistral AI",
         "benchmark": "quality",
@@ -27096,7 +27093,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-06T22:02:51.3278353Z",
+      "modifiedTime": "2026-10-06T22:03:52.6482684Z",
       "name": "mistral-small-2503",
       "orginAssetId": null,
       "parentModelId": null,
@@ -27119,7 +27116,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 82,
+    "updateSequence": 84,
     "usage": {
       "popularity": 67.99,
       "totalCount": 5
@@ -47204,7 +47201,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:19.6289136Z",
+      "modifiedTime": "2026-10-08T17:48:57.9184668Z",
       "name": "gpt-4.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -47230,7 +47227,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 170,
+    "updateSequence": 174,
     "usage": {
       "popularity": 69.58,
       "totalCount": 4
@@ -48075,7 +48072,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:45.5629616Z",
+      "modifiedTime": "2026-10-08T17:48:56.0042885Z",
       "name": "gpt-4.1-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -48101,7 +48098,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 164,
+    "updateSequence": 168,
     "usage": {
       "popularity": 69.1,
       "totalCount": 0
@@ -48631,7 +48628,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:21.83068Z",
+      "modifiedTime": "2026-10-08T17:48:53.83613Z",
       "name": "gpt-4.1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -48657,7 +48654,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 156,
+    "updateSequence": 160,
     "usage": {
       "popularity": 69.55,
       "totalCount": 0
@@ -49252,7 +49249,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:43.171707Z",
+      "modifiedTime": "2026-10-08T17:48:47.3274876Z",
       "name": "gpt-4o-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -49277,7 +49274,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 98,
+    "updateSequence": 102,
     "usage": {
       "popularity": 68.23,
       "totalCount": 0
@@ -49703,7 +49700,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:32.2160183Z",
+      "modifiedTime": "2026-10-08T17:48:45.2586765Z",
       "name": "o3",
       "orginAssetId": null,
       "parentModelId": null,
@@ -49728,7 +49725,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 168,
+    "updateSequence": 172,
     "usage": {
       "popularity": 69.37,
       "totalCount": 2
@@ -50208,7 +50205,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:42.7734539Z",
+      "modifiedTime": "2026-10-08T17:48:43.4795238Z",
       "name": "o4-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -50234,7 +50231,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 166,
+    "updateSequence": 170,
     "usage": {
       "popularity": 69.13,
       "totalCount": 0
@@ -50781,7 +50778,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:31:04.3667263Z",
+      "modifiedTime": "2026-10-08T17:48:40.7872763Z",
       "name": "tts",
       "orginAssetId": null,
       "parentModelId": null,
@@ -50805,7 +50802,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -51082,7 +51079,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:31:02.2362692Z",
+      "modifiedTime": "2026-10-08T17:48:38.7694539Z",
       "name": "tts-hd",
       "orginAssetId": null,
       "parentModelId": null,
@@ -51106,7 +51103,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -55832,7 +55829,7 @@
         "toolResponseStart": null,
         "benchmark": "quality",
         "maapSurcharge": null,
-        "inferenceDeprecationDate": "2026-10-09T00:00:00Z",
+        "inferenceDeprecationDate": null,
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "ServerlessMaaS",
@@ -55966,7 +55963,6 @@
       },
       "tags": {
         "Featured": "",
-        "InferenceDeprecationDate": "10/09/2026 00:00:00 +00:00",
         "InferenceRetirementDate": "12/09/2026 00:00:00 +00:00",
         "author": "Mistral AI",
         "azureOffers": "standard-paygo",
@@ -56031,7 +56027,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-06T22:01:43.6108212Z",
+      "modifiedTime": "2026-10-06T22:02:45.4023311Z",
       "name": "mistral-medium-2505",
       "orginAssetId": null,
       "parentModelId": null,
@@ -56054,7 +56050,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 76,
+    "updateSequence": 78,
     "usage": {
       "popularity": 68.77,
       "totalCount": 0
@@ -60775,7 +60771,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:21.1167136Z",
+      "modifiedTime": "2026-10-08T17:48:37.408003Z",
       "name": "o3-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -60800,7 +60796,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 116,
+    "updateSequence": 120,
     "usage": {
       "popularity": 68.56,
       "totalCount": 0
@@ -61057,7 +61053,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:09:18.6163898Z",
+      "modifiedTime": "2026-10-08T17:48:35.5661699Z",
       "name": "codex-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -61082,7 +61078,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 121,
+    "updateSequence": 125,
     "usage": {
       "popularity": 68.71,
       "totalCount": 0
@@ -62257,7 +62253,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:09:16.5627719Z",
+      "modifiedTime": "2026-10-08T17:48:34.0253205Z",
       "name": "o3-deep-research",
       "orginAssetId": null,
       "parentModelId": null,
@@ -62282,7 +62278,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 140,
+    "updateSequence": 144,
     "usage": {
       "popularity": 68.74,
       "totalCount": 0
@@ -63677,7 +63673,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:15.7449725Z",
+      "modifiedTime": "2026-10-08T17:48:32.4006514Z",
       "name": "gpt-5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -63702,7 +63698,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 173,
+    "updateSequence": 177,
     "usage": {
       "popularity": 69.7,
       "totalCount": 0
@@ -64072,7 +64068,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:40.2669055Z",
+      "modifiedTime": "2026-10-08T17:48:27.2689637Z",
       "name": "gpt-5-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -64096,7 +64092,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 155,
+    "updateSequence": 159,
     "usage": {
       "popularity": 69.28,
       "totalCount": 0
@@ -64427,7 +64423,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:38.4541295Z",
+      "modifiedTime": "2026-10-08T17:48:24.7231956Z",
       "name": "gpt-5-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -64451,7 +64447,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 146,
+    "updateSequence": 150,
     "usage": {
       "popularity": 69.31,
       "totalCount": 0
@@ -66139,7 +66135,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:09:11.9947717Z",
+      "modifiedTime": "2026-10-08T17:48:23.0690235Z",
       "name": "gpt-audio",
       "orginAssetId": null,
       "parentModelId": null,
@@ -66163,7 +66159,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 100,
+    "updateSequence": 104,
     "usage": {
       "popularity": 68.83,
       "totalCount": 1
@@ -66448,7 +66444,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:09:10.313646Z",
+      "modifiedTime": "2026-10-08T17:48:21.5045156Z",
       "name": "gpt-realtime",
       "orginAssetId": null,
       "parentModelId": null,
@@ -66472,7 +66468,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 104,
+    "updateSequence": 108,
     "usage": {
       "popularity": 68.86,
       "totalCount": 0
@@ -67161,7 +67157,8 @@
           "UKSOUTH",
           "WESTCENTRALUS",
           "WESTEUROPE",
-          "WESTUS"
+          "WESTUS",
+          "WESTUS3"
         ],
         "modelArchitecture": null,
         "sharedComputeCapacityEnabled": null,
@@ -67201,7 +67198,8 @@
               "UKSOUTH",
               "WESTCENTRALUS",
               "WESTEUROPE",
-              "WESTUS"
+              "WESTUS",
+              "WESTUS3"
             ],
             "name": "GlobalStandard",
             "prices": null
@@ -67416,7 +67414,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:28.2987808Z",
+      "modifiedTime": "2026-10-08T17:48:19.8915254Z",
       "name": "gpt-5-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -67440,7 +67438,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 182,
+    "updateSequence": 186,
     "usage": {
       "popularity": 69.43,
       "totalCount": 0
@@ -68980,7 +68978,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:29:44.7081093Z",
+      "modifiedTime": "2026-10-08T17:48:18.2087409Z",
       "name": "gpt-image-1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -69005,7 +69003,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 100,
+    "updateSequence": 104,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -69270,7 +69268,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:52.3040653Z",
+      "modifiedTime": "2026-10-08T17:48:15.9145457Z",
       "name": "gpt-audio-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -69294,7 +69292,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 68.98,
       "totalCount": 0
@@ -69875,7 +69873,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:06.610057Z",
+      "modifiedTime": "2026-10-08T17:48:10.8371675Z",
       "name": "gpt-5-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -69900,7 +69898,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 128,
+    "updateSequence": 132,
     "usage": {
       "popularity": 69.9,
       "totalCount": 0
@@ -70151,7 +70149,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:55.1906486Z",
+      "modifiedTime": "2026-10-08T17:48:09.3230038Z",
       "name": "sora-2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -70175,7 +70173,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 111,
+    "updateSequence": 115,
     "usage": {
       "popularity": 70.25,
       "totalCount": 0
@@ -70916,7 +70914,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:23.1806321Z",
+      "modifiedTime": "2026-10-08T17:48:07.9853738Z",
       "name": "gpt-4o-transcribe-diarize",
       "orginAssetId": null,
       "parentModelId": null,
@@ -70940,7 +70938,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 69.49,
       "totalCount": 0
@@ -90178,7 +90176,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:38.2176433Z",
+      "modifiedTime": "2026-10-08T17:48:04.908405Z",
       "name": "gpt-5.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -90202,7 +90200,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 130,
+    "updateSequence": 134,
     "usage": {
       "popularity": 70.7,
       "totalCount": 0
@@ -90835,7 +90833,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:40.47303Z",
+      "modifiedTime": "2026-10-08T17:48:02.1260941Z",
       "name": "gpt-5.1-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -90859,7 +90857,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 139,
+    "updateSequence": 143,
     "usage": {
       "popularity": 70.65,
       "totalCount": 0
@@ -91168,7 +91166,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:05.0669217Z",
+      "modifiedTime": "2026-10-08T17:48:00.294602Z",
       "name": "gpt-5.1-codex-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -91192,7 +91190,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 104,
+    "updateSequence": 108,
     "usage": {
       "popularity": 70.15,
       "totalCount": 0
@@ -92959,7 +92957,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:32.0262731Z",
+      "modifiedTime": "2026-10-08T17:47:57.0202405Z",
       "name": "gpt-5.1-codex-max",
       "orginAssetId": null,
       "parentModelId": null,
@@ -92983,7 +92981,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 112,
+    "updateSequence": 116,
     "usage": {
       "popularity": 70.83,
       "totalCount": 0
@@ -94781,7 +94779,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:22.6607929Z",
+      "modifiedTime": "2026-10-08T17:47:55.2658053Z",
       "name": "gpt-5.2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -94805,7 +94803,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 138,
+    "updateSequence": 142,
     "usage": {
       "popularity": 70.95,
       "totalCount": 0
@@ -95427,7 +95425,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:44.9338606Z",
+      "modifiedTime": "2026-10-08T17:47:53.4990253Z",
       "name": "gpt-4o-mini-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -95452,7 +95450,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 80,
+    "updateSequence": 84,
     "usage": {
       "popularity": 68.2,
       "totalCount": 0
@@ -95745,7 +95743,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:10:40.1208152Z",
+      "modifiedTime": "2026-10-08T17:47:51.5818017Z",
       "name": "gpt-4o-mini-tts",
       "orginAssetId": null,
       "parentModelId": null,
@@ -95769,7 +95767,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 82,
+    "updateSequence": 86,
     "usage": {
       "popularity": 68.26,
       "totalCount": 0
@@ -96038,7 +96036,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:08:34.5692439Z",
+      "modifiedTime": "2026-10-08T17:47:48.4800379Z",
       "name": "gpt-realtime-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -96062,7 +96060,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 88,
+    "updateSequence": 92,
     "usage": {
       "popularity": 69.34,
       "totalCount": 0
@@ -96319,7 +96317,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:28:52.8609375Z",
+      "modifiedTime": "2026-10-08T17:47:44.7270691Z",
       "name": "gpt-image-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -96343,7 +96341,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 92,
+    "updateSequence": 96,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -96659,7 +96657,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-01T13:13:05.3274154Z",
+      "modifiedTime": "2026-10-02T13:07:12.8850295Z",
       "name": "gpt-5.2-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -96683,7 +96681,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 135,
+    "updateSequence": 137,
     "usage": {
       "popularity": 71.04,
       "totalCount": 0
@@ -100505,7 +100503,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:01.1935244Z",
+      "modifiedTime": "2026-10-08T17:47:40.6217206Z",
       "name": "gpt-audio-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -100529,7 +100527,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 88,
+    "updateSequence": 92,
     "usage": {
       "popularity": 71.25,
       "totalCount": 0
@@ -100812,7 +100810,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:07:02.7876317Z",
+      "modifiedTime": "2026-10-08T17:47:38.6598961Z",
       "name": "gpt-realtime-1.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -100836,7 +100834,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 94,
+    "updateSequence": 98,
     "usage": {
       "popularity": 71.22,
       "totalCount": 0
@@ -101190,7 +101188,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:06:36.1171502Z",
+      "modifiedTime": "2026-10-08T17:47:35.5268916Z",
       "name": "gpt-5.3-codex",
       "orginAssetId": null,
       "parentModelId": null,
@@ -101214,7 +101212,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 138,
+    "updateSequence": 142,
     "usage": {
       "popularity": 71.52,
       "totalCount": 0
@@ -103379,7 +103377,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:06:22.6405705Z",
+      "modifiedTime": "2026-10-08T17:47:33.6786834Z",
       "name": "gpt-5.4",
       "orginAssetId": null,
       "parentModelId": null,
@@ -103403,7 +103401,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 122,
+    "updateSequence": 126,
     "usage": {
       "popularity": 71.8,
       "totalCount": 0
@@ -103726,7 +103724,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-01T13:12:17.8371173Z",
+      "modifiedTime": "2026-10-02T13:06:20.8654709Z",
       "name": "gpt-5.4-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -103750,7 +103748,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 118,
+    "updateSequence": 120,
     "usage": {
       "popularity": 71.9,
       "totalCount": 0
@@ -105484,7 +105482,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:06:18.3820462Z",
+      "modifiedTime": "2026-10-08T17:47:28.8536697Z",
       "name": "gpt-5.4-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -105509,7 +105507,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 115,
+    "updateSequence": 119,
     "usage": {
       "popularity": 71.91,
       "totalCount": 0
@@ -105847,7 +105845,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:06:15.3765366Z",
+      "modifiedTime": "2026-10-08T17:47:25.7989162Z",
       "name": "gpt-5.4-nano",
       "orginAssetId": null,
       "parentModelId": null,
@@ -105871,7 +105869,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 110,
+    "updateSequence": 114,
     "usage": {
       "popularity": 71.92,
       "totalCount": 0
@@ -128721,7 +128719,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:05:50.0124282Z",
+      "modifiedTime": "2026-10-08T17:47:23.6479194Z",
       "name": "gpt-image-2",
       "orginAssetId": null,
       "parentModelId": null,
@@ -128745,7 +128743,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 96,
+    "updateSequence": 100,
     "usage": {
       "popularity": 72.01,
       "totalCount": 0
@@ -131415,7 +131413,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:26:36.2580523Z",
+      "modifiedTime": "2026-10-08T17:47:21.5786421Z",
       "name": "gpt-5.5",
       "orginAssetId": null,
       "parentModelId": null,
@@ -131439,7 +131437,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 104,
+    "updateSequence": 108,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -160805,7 +160803,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:04:01.4767918Z",
+      "modifiedTime": "2026-10-08T17:47:06.2719401Z",
       "name": "gpt-realtime-2.1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -160829,7 +160827,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 60,
+    "updateSequence": 64,
     "usage": {
       "popularity": 72.29,
       "totalCount": 0
@@ -161104,7 +161102,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:04:03.1267361Z",
+      "modifiedTime": "2026-10-08T17:47:04.6492789Z",
       "name": "gpt-realtime-2.1-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -161128,7 +161126,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 60,
+    "updateSequence": 64,
     "usage": {
       "popularity": 72.28,
       "totalCount": 0
@@ -161495,7 +161493,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:55.9365328Z",
+      "modifiedTime": "2026-10-08T17:47:03.1996119Z",
       "name": "gpt-5.6-luna",
       "orginAssetId": null,
       "parentModelId": null,
@@ -161519,7 +161517,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 64,
+    "updateSequence": 68,
     "usage": {
       "popularity": 72.31,
       "totalCount": 0
@@ -161909,7 +161907,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:54.170741Z",
+      "modifiedTime": "2026-10-08T17:46:59.640248Z",
       "name": "gpt-5.6-sol",
       "orginAssetId": null,
       "parentModelId": null,
@@ -161933,7 +161931,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 64,
+    "updateSequence": 68,
     "usage": {
       "popularity": 72.32,
       "totalCount": 0
@@ -162308,7 +162306,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:59.8009079Z",
+      "modifiedTime": "2026-10-08T17:46:56.2885457Z",
       "name": "gpt-5.6-terra",
       "orginAssetId": null,
       "parentModelId": null,
@@ -162332,7 +162330,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 66,
+    "updateSequence": 70,
     "usage": {
       "popularity": 72.3,
       "totalCount": 0
@@ -163729,7 +163727,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:19:28.9439088Z",
+      "modifiedTime": "2026-10-08T17:46:46.8546364Z",
       "name": "gpt-live-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -163753,7 +163751,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 42,
+    "updateSequence": 46,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -164024,7 +164022,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:19:26.762828Z",
+      "modifiedTime": "2026-10-08T17:46:43.6048791Z",
       "name": "gpt-transcribe",
       "orginAssetId": null,
       "parentModelId": null,
@@ -164048,7 +164046,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 44,
+    "updateSequence": 48,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -168585,7 +168583,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-01T13:10:12.487481Z",
+      "modifiedTime": "2026-10-02T13:04:12.9420927Z",
       "name": "gpt-chat-latest",
       "orginAssetId": null,
       "parentModelId": null,
@@ -168609,7 +168607,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 40,
+    "updateSequence": 42,
     "usage": {
       "popularity": 72.26,
       "totalCount": 0
@@ -174134,7 +174132,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:40.0481474Z",
+      "modifiedTime": "2026-10-08T17:46:38.0508804Z",
       "name": "gpt-6-astra",
       "orginAssetId": null,
       "parentModelId": null,
@@ -174158,7 +174156,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 34,
+    "updateSequence": 38,
     "usage": {
       "popularity": 72.43,
       "totalCount": 0
@@ -176208,7 +176206,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:12:45.5697269Z",
+      "modifiedTime": "2026-10-08T17:46:36.2650987Z",
       "name": "gpt-image-2.5-sunburst",
       "orginAssetId": null,
       "parentModelId": null,
@@ -176232,7 +176230,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 24,
+    "updateSequence": 28,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -176477,7 +176475,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:12:44.2374087Z",
+      "modifiedTime": "2026-10-08T17:46:33.3999716Z",
       "name": "gpt-image-2.5-flare",
       "orginAssetId": null,
       "parentModelId": null,
@@ -176501,7 +176499,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 24,
+    "updateSequence": 28,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -178135,7 +178133,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:12:09.7657397Z",
+      "modifiedTime": "2026-10-08T17:46:31.9854501Z",
       "name": "gpt-live-1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -178159,7 +178157,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 22,
+    "updateSequence": 26,
     "usage": {
       "popularity": 1.0,
       "totalCount": 0
@@ -178824,7 +178822,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:30.2164118Z",
+      "modifiedTime": "2026-10-08T17:46:28.4503853Z",
       "name": "gpt-6-luna",
       "orginAssetId": null,
       "parentModelId": null,
@@ -178848,7 +178846,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 34,
+    "updateSequence": 38,
     "usage": {
       "popularity": 72.47,
       "totalCount": 0
@@ -179213,7 +179211,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-02T13:03:27.0469772Z",
+      "modifiedTime": "2026-10-08T17:46:25.4160712Z",
       "name": "gpt-6-sol",
       "orginAssetId": null,
       "parentModelId": null,
@@ -179237,7 +179235,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 32,
+    "updateSequence": 36,
     "usage": {
       "popularity": 72.47,
       "totalCount": 0
@@ -180300,7 +180298,7 @@
         "azureOffers": null,
         "maasFinetuningAvailableRegions": null,
         "terms": null,
-        "minQuotaTier": null,
+        "minQuotaTier": 1,
         "deploymentSkuNames": [
           "GlobalStandard",
           "DataZoneStandard",
@@ -180454,7 +180452,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-06T03:36:51.4246121Z",
+      "modifiedTime": "2026-10-08T17:46:22.1260941Z",
       "name": "gpt-6.1-sol",
       "orginAssetId": null,
       "parentModelId": null,
@@ -180478,7 +180476,7 @@
     "resourceType": "Registry",
     "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
     "type": "models",
-    "updateSequence": 22,
+    "updateSequence": 26,
     "usage": {
       "popularity": 72.49,
       "totalCount": 0

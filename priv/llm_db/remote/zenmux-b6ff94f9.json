@@ -2,6 +2,49 @@
   "data": [
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 256000,
+      "created": 1791447476,
+      "display_name": "Mistral: Mistral Large 4",
+      "id": "mistralai/mistral-large-4",
+      "input_modalities": [
+        "text",
+        "image",
+        "file"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "mistralai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.09
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.07
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.68
+          }
+        ]
+      },
+      "publish_time": "2026-10-08"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1000000,
@@ -148,6 +191,47 @@
         ]
       },
       "publish_time": "2026-10-07"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 262144,
+      "created": 1791439974,
+      "display_name": "inclusionAI: Ling-3.1-flash",
+      "id": "inclusionai/ling-3.1-flash",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "inclusionai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0
+          }
+        ]
+      },
+      "publish_time": "2026-10-02"
     },
     {
       "capabilities": {
@@ -393,6 +477,48 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 1048576,
+      "created": 1791463580,
+      "display_name": "Meituan: LongCat-2.5-Preview",
+      "id": "meituan/longcat-2.5-preview",
+      "input_modalities": [
+        "image",
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "meituan",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.18
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.006
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.3
+          }
+        ]
+      },
+      "publish_time": "2026-09-25"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1050000,
       "created": 1790127532,
       "display_name": "OpenAI: GPT-6 Luna",
@@ -627,6 +753,54 @@
             "currency": "USD",
             "unit": "perMTokens",
             "value": 4
+          }
+        ],
+        "web_search": [
+          {
+            "currency": "USD",
+            "unit": "perCount",
+            "value": 0.01
+          }
+        ]
+      },
+      "publish_time": "2026-09-23"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 1000000,
+      "created": 1791461839,
+      "display_name": "Z.AI: GLM 5.3 Prime",
+      "id": "z-ai/glm-5.3-prime",
+      "input_modalities": [
+        "text"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "z-ai",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 8.8
+          }
+        ],
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.56
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 2.8
           }
         ],
         "web_search": [
@@ -1503,14 +1677,14 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 0.875
+            "value": 1.25
           }
         ],
         "prompt": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 3.5
+            "value": 5
           }
         ]
       },
