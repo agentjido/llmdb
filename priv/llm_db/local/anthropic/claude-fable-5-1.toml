@@ -18,7 +18,7 @@ output = 50.0
 cache_read = 0.25
 cache_write = 12.5
 
-# Verified 2026-09-22 against Anthropic pricing and prompt-caching docs.
+# Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
 [pricing]
 currency = "USD"
 merge = "merge_by_id"
@@ -167,6 +167,6 @@ microsoft_foundry = "claude-fable-5-1"
 claude_platform_on_aws = "claude-fable-5-1"
 
 [extra.pricing]
-sources_checked_at = "2026-09-22"
+sources_checked_at = "2026-10-09"
 source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
 long_context_premium = false

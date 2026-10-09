@@ -8,3 +8,82 @@ input = 5.0
 output = 25.0
 cache_read = 0.5
 cache_write = 6.25
+
+# Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 5.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 25.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.5
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 6.25
+applies_when = { cache_ttl = "5m" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.1h"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+derives_from = "token.input"
+multiplier = 2.0
+applies_when = { cache_ttl = "1h" }
+notes = "Derive before applying token-wide modifiers; do not apply a modifier twice through the input dependency."
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[[pricing.components]]
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { inference_geo = "us" }
+source = "provider_docs"
+notes = "US-only inference; global routing uses standard pricing. Cloud partner pricing is independent."
+
+[extra.pricing]
+sources_checked_at = "2026-10-09"
+source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
+long_context_premium = false

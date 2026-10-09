@@ -1,13 +1,10 @@
-id = "claude-opus-4-8"
-
-[lifecycle]
-status = "active"
+id = "claude-sonnet-5-5"
 
 [cost]
-input = 5.0
-output = 25.0
-cache_read = 0.5
-cache_write = 6.25
+input = 2.0
+output = 10.0
+cache_read = 0.1
+cache_write = 2.5
 
 # Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
 [pricing]
@@ -20,7 +17,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "input_tokens"
-rate = 5.0
+rate = 2.0
 source = "provider_docs"
 
 [[pricing.components]]
@@ -29,7 +26,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "output_tokens"
-rate = 25.0
+rate = 10.0
 source = "provider_docs"
 
 [[pricing.components]]
@@ -38,7 +35,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_read_tokens"
-rate = 0.5
+rate = 0.1
 source = "provider_docs"
 
 [[pricing.components]]
@@ -47,7 +44,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_write_tokens"
-rate = 6.25
+rate = 2.5
 applies_when = { cache_ttl = "5m" }
 source = "provider_docs"
 
@@ -72,18 +69,6 @@ applies_to = ["token.*"]
 applies_when = { api = "batch" }
 source = "provider_docs"
 mode = "batch"
-
-[[pricing.components]]
-id = "pricing.fast"
-kind = "other"
-unit = "other"
-multiplier = 2.0
-applies_to = ["token.*"]
-applies_when = { request_body = { speed = "fast" } }
-source = "provider_docs"
-excludes_when = { api = "batch" }
-mode = "fast"
-notes = "First-party Claude API only; fast mode is unavailable with Batch."
 
 [[pricing.components]]
 id = "pricing.data_residency"

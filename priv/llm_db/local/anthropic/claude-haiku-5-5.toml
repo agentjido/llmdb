@@ -1,13 +1,10 @@
-id = "claude-opus-4-8"
-
-[lifecycle]
-status = "active"
+id = "claude-haiku-5-5"
 
 [cost]
-input = 5.0
-output = 25.0
-cache_read = 0.5
-cache_write = 6.25
+input = 0.1
+output = 0.5
+cache_read = 0.01
+cache_write = 0.125
 
 # Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
 [pricing]
@@ -20,7 +17,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "input_tokens"
-rate = 5.0
+rate = 0.1
 source = "provider_docs"
 
 [[pricing.components]]
@@ -29,7 +26,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "output_tokens"
-rate = 25.0
+rate = 0.5
 source = "provider_docs"
 
 [[pricing.components]]
@@ -38,7 +35,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_read_tokens"
-rate = 0.5
+rate = 0.01
 source = "provider_docs"
 
 [[pricing.components]]
@@ -47,7 +44,7 @@ kind = "token"
 unit = "token"
 per = 1000000
 meter = "cache_write_tokens"
-rate = 6.25
+rate = 0.125
 applies_when = { cache_ttl = "5m" }
 source = "provider_docs"
 
@@ -74,18 +71,6 @@ source = "provider_docs"
 mode = "batch"
 
 [[pricing.components]]
-id = "pricing.fast"
-kind = "other"
-unit = "other"
-multiplier = 2.0
-applies_to = ["token.*"]
-applies_when = { request_body = { speed = "fast" } }
-source = "provider_docs"
-excludes_when = { api = "batch" }
-mode = "fast"
-notes = "First-party Claude API only; fast mode is unavailable with Batch."
-
-[[pricing.components]]
 id = "pricing.data_residency"
 kind = "other"
 unit = "other"
@@ -95,7 +80,20 @@ applies_when = { inference_geo = "us" }
 source = "provider_docs"
 notes = "US-only inference; global routing uses standard pricing. Cloud partner pricing is independent."
 
+[[pricing.components]]
+id = "pricing.long_context"
+kind = "other"
+unit = "other"
+multiplier = 5.0
+applies_to = ["token.*"]
+applies_when = { input_tokens = { gt = 100000 } }
+source = "provider_docs"
+charge_scope = "full_request"
+notes = "Prompt length includes uncached input, cache reads, and cache writes. Apply to the full request above 100000 input tokens."
+
 [extra.pricing]
 sources_checked_at = "2026-10-09"
 source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
-long_context_premium = false
+long_context_premium = true
+long_context_threshold = 100000
+long_context_basis = "full_prompt_including_cache"

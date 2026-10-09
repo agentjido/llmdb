@@ -14,7 +14,7 @@ output = 5.0
 cache_read = 0.1
 cache_write = 1.25
 
-# Verified 2026-09-22 against Anthropic pricing and prompt-caching docs.
+# Verified 2026-10-09 against Anthropic pricing and prompt-caching docs.
 [pricing]
 currency = "USD"
 merge = "merge_by_id"
@@ -79,5 +79,5 @@ source = "provider_docs"
 mode = "batch"
 
 [extra.pricing]
-sources_checked_at = "2026-09-22"
+sources_checked_at = "2026-10-09"
 source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
