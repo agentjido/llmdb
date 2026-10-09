@@ -49,9 +49,21 @@ validation happens in the Engine.
 
 ### Remote cached sources
 
-Models.dev, OpenRouter, OpenAI, Anthropic, Google, xAI, ZenMux, and Llmfit have
+Models.dev, OpenRouter, OpenAI, Anthropic, Google, xAI, ZenMux, LLM API, and Llmfit have
 source adapters. Run `mix llm_db.pull` to refresh their repository-local cache;
 the Engine subsequently reads that cache through each source's `load/1`.
+
+The LLM API source reads the public `https://api.llmapi.ai/v1/models` catalog.
+Run `mix llm_db.pull --source llmapi` to refresh it without credentials, then
+`mix llm_db.build --install` to rebuild the packaged snapshot. Runtime loading
+does not make network requests.
+
+LLM API model contracts use the shared OpenAI Chat Completions adapter only
+when every advertised fallback route supports Chat. Media models and models
+with Responses-only routes remain catalog-only. Capabilities are intersected
+across fallback routes, and unpublished output limits remain absent. Object
+contracts require tools, tool choice, and the `max_tokens` parameter used by
+the shared adapter's default object request.
 
 ### Local TOML
 
