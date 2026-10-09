@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.10.2](https://github.com/agentjido/llmdb/compare/2026.10.1...2026.10.2) (2026-10-09)
+
+
+
+
+### Features:
+
+* providers: add LLM API metadata and shared chat contracts (#347) by denys-rekun
+
+### Bug Fixes:
+
+* anthropic: complete cache TTL and token pricing metadata (#348) by mikehostetler
+
 ## [2026.10.1](https://github.com/agentjido/llmdb/compare/2026.10.0...2026.10.1) (2026-10-08)
 
 
