@@ -1,0 +1,42 @@
+id = "microsoft-decision-1"
+provider_model_id = "Microsoft-Decision-1"
+name = "Microsoft-Decision-1"
+family = "microsoft-decision"
+doc_url = "https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/use-foundry-models-microsoft-decision"
+# Release date and context limit from the Foundry model catalog.
+# https://ai.azure.com/catalog/models/Microsoft-Decision-1
+release_date = "2026-10-08"
+last_updated = "2026-10-09"
+aliases = ["Microsoft-Decision-1"]
+
+[limits]
+context = 32768
+
+[cost]
+input = 0.042
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["decisions"]
+
+[capabilities]
+chat = false
+evaluate = true
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+# SystemOne request/response format, served from the Foundry resource root.
+# The request's model value must be the user's Azure deployment name.
+[execution.evaluate]
+supported = true
+family = "typesafe_systemone"
+wire_protocol = "typesafe_systemone"
+provider_model_id = "Microsoft-Decision-1"
+path = "/providers/microsoft/v1/systemone"
+
+[extra.pricing]
+sources_checked_at = "2026-10-09"
+source_urls = ["https://commandline.microsoft.com/microsoft-decision-1-model-foundry/"]
