@@ -86,5 +86,56 @@ defmodule LLMDB.Sources.AnthropicTest do
       assert validated.limits == model.limits
       assert validated.capabilities == model.capabilities
     end
+
+    test "between_tools supports turning off up-front thinking without enabling disabled" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "claude-sonnet-5-5",
+            "capabilities" => %{
+              "thinking" => %{
+                "supported" => true,
+                "types" => %{
+                  "adaptive" => %{"supported" => true},
+                  "between_tools" => %{"supported" => true},
+                  "disabled" => %{"supported" => false}
+                }
+              }
+            }
+          }
+        ]
+      }
+
+      assert %{"anthropic" => %{models: [model]}} = Anthropic.transform(input)
+      assert model.capabilities.reasoning.thinking.types == ["adaptive", "between_tools"]
+      assert model.capabilities.reasoning.thinking.default_type == "adaptive"
+      assert model.capabilities.reasoning.thinking.disable_supported
+      refute model.extra.provider_capabilities["thinking"]["types"]["disabled"]["supported"]
+      assert {:ok, _} = Validate.validate_model_overlay(model)
+    end
+
+    test "supplements the documented Sonnet mode when the Models API omits it" do
+      input = %{
+        "data" => [
+          %{
+            "id" => "claude-sonnet-5-5",
+            "capabilities" => %{
+              "thinking" => %{
+                "supported" => true,
+                "types" => %{
+                  "adaptive" => %{"supported" => true},
+                  "disabled" => %{"supported" => false}
+                }
+              }
+            }
+          }
+        ]
+      }
+
+      assert %{"anthropic" => %{models: [model]}} = Anthropic.transform(input)
+      assert model.capabilities.reasoning.thinking.types == ["adaptive", "between_tools"]
+      assert model.capabilities.reasoning.thinking.disable_supported
+      assert model.extra.provider_capabilities["thinking"]["types"]["between_tools"]["supported"]
+    end
   end
 end

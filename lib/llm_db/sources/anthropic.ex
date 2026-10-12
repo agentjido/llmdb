@@ -146,6 +146,8 @@ defmodule LLMDB.Sources.Anthropic do
   ]
 
   defp transform_model(model) do
+    model = supplement_thinking_types(model)
+
     %{
       id: model["id"],
       provider: :anthropic
@@ -157,6 +159,21 @@ defmodule LLMDB.Sources.Anthropic do
     |> map_capabilities(model["capabilities"])
     |> map_extra(model)
   end
+
+  # The Models API currently omits this documented Sonnet 5.5 thinking mode.
+  # https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5
+  defp supplement_thinking_types(
+         %{"id" => "claude-sonnet-5-5", "capabilities" => capabilities} = model
+       )
+       when is_map(capabilities) do
+    thinking = Map.get(capabilities, "thinking") || %{}
+    types = Map.get(thinking, "types") || %{}
+    types = Map.put(types, "between_tools", %{"supported" => true})
+    thinking = thinking |> Map.put("types", types) |> Map.put("supported", true)
+    Map.put(model, "capabilities", Map.put(capabilities, "thinking", thinking))
+  end
+
+  defp supplement_thinking_types(model), do: model
 
   defp parse_date(nil), do: nil
 
@@ -301,7 +318,7 @@ defmodule LLMDB.Sources.Anthropic do
         supported: true,
         types: types,
         default_type: default_thinking_type(types),
-        disable_supported: "disabled" in types,
+        disable_supported: Enum.any?(types, &(&1 in ["disabled", "between_tools"])),
         raw_output_supported: supported?(thinking, "raw_output"),
         summary_supported: supported?(thinking, "summary"),
         encrypted_supported: supported?(thinking, "encrypted")

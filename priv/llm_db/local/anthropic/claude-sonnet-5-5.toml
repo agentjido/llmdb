@@ -84,3 +84,17 @@ notes = "US-only inference; global routing uses standard pricing. Cloud partner 
 sources_checked_at = "2026-10-09"
 source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"]
 long_context_premium = false
+
+# Verified 2026-10-12 against Anthropic's Sonnet 5.5 model notes.
+# between_tools turns off up-front thinking; tool progress updates remain thinking blocks.
+[capabilities.reasoning.thinking]
+supported = true
+types = ["adaptive", "between_tools"]
+default_type = "adaptive"
+disable_supported = true
+
+[extra.thinking_constraints.between_tools]
+effort_values = ["low", "medium", "high"]
+additional_fields_supported = false
+per_message_effort_changes_supported = false
+source_url = "https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5"
