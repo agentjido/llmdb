@@ -1,0 +1,7 @@
+# Source: https://api.deepinfra.com/models/list (checked 2026-10-12)
+id = "nvidia/Nemotron-3-Nano-Omni-30B-A3B-Reasoning"
+
+[lifecycle]
+status = "deprecated"
+deprecated_at = "2026-07-16T23:09:53Z"
+replacement = "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B"

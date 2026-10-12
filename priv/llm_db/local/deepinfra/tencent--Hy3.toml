@@ -1,0 +1,7 @@
+# Source: https://api.deepinfra.com/models/list (checked 2026-10-12)
+id = "tencent/Hy3"
+
+[lifecycle]
+status = "deprecated"
+deprecated_at = "2026-10-08T23:09:54Z"
+replacement = "tencent/Hy4-preview"

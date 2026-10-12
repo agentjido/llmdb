@@ -1,0 +1,7 @@
+# Source: https://api.deepinfra.com/models/list (checked 2026-10-12)
+id = "nvidia/Llama-3.3-Nemotron-Super-49B-v1.5"
+
+[lifecycle]
+status = "deprecated"
+deprecated_at = "2026-07-17T22:38:23Z"
+replacement = "nvidia/NVIDIA-Nemotron-3-Ultra-550B-A55B"

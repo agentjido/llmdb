@@ -1,0 +1,7 @@
+# Source: https://api.deepinfra.com/models/list (checked 2026-10-12)
+id = "nvidia/Nemotron-3-Nano-30B-A3B"
+
+[lifecycle]
+status = "deprecated"
+deprecated_at = "2026-10-08T23:09:54Z"
+replacement = "nvidia/NVIDIA-Nemotron-3.5-Lightning"
