@@ -1,0 +1,7 @@
+# Source: https://api.deepinfra.com/models/list (checked 2026-10-12)
+id = "Qwen/Qwen3.5-122B-A10B"
+
+[lifecycle]
+status = "deprecated"
+deprecated_at = "2026-10-01T23:32:43Z"
+replacement = "Qwen/Qwen3.5-397B-A17B"
