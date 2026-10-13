@@ -306,7 +306,7 @@ backward compatibility.
 
 ### Curated conditional pricing
 
-The curated pricing overlays checked on September 22, 2026 cover:
+The curated pricing overlays checked through October 13, 2026 cover:
 
 | Provider | Models | Conditional pricing |
 | --- | --- | --- |
@@ -314,6 +314,7 @@ The curated pricing overlays checked on September 22, 2026 cover:
 | Anthropic | Claude Fable 5.1, Opus 5.5, Opus 5, Sonnet 5 | 5m/1h cache writes, Batch, US-only inference |
 | Anthropic | Claude Opus 5.5, Opus 5 | Fast mode in addition to the conditions above |
 | Anthropic | Claude Haiku 4.5 | 5m/1h cache writes and Batch |
+| Google | Gemini 4 Argon | Introductory Standard pricing through November 30, 2026, Batch/Flex, Priority, implicit caching only |
 | Google | Gemini 3.1 Pro Preview, including Customtools | Above 200,000 prompt tokens, Batch/Flex, Priority, explicit cache storage |
 | xAI | API models with a published long-context threshold, including Grok 4.3, 4.6, 4.7 | At or above 200,000 prompt tokens; selected models have Priority, Batch, US endpoint modifiers |
 | Alibaba | Qwen3.7-Plus, Qwen3.6-Plus | Above 256,000 input tokens; Singapore International list prices, explicit/implicit cache distinctions |
