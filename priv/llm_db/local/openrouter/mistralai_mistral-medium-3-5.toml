@@ -1,0 +1,11 @@
+id = "mistralai/mistral-medium-3-5"
+
+[cost]
+cache_read = 1.5
+
+[extra]
+cache_read_pricing_basis = "Observed billed prompt cost in ReqLLM issue #1096; cached tokens receive no discount at the standard Mistral endpoint rate."
+source_urls = [
+  "https://github.com/agentjido/req_llm/issues/1096",
+  "https://openrouter.ai/api/v1/models/mistralai/mistral-medium-3-5/endpoints"
+]
