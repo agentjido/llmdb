@@ -411,6 +411,25 @@ TTL separately and apply its rate only to that duration's reported token count.
 Count input, output, and cache reads once. An omitted or `nil` TTL leaves both
 cache-write variants unresolved; it does not assume the cheaper duration.
 
+#### Gemini 4 Argon price periods
+
+For Gemini 4 Argon, supply `pricing_period: "introductory"` for the published
+rates through November 30, 2026, or `pricing_period: "standard"` for rates from
+December 1, 2026. Confirm the billed period with the provider. The selector does
+not infer a period from the system clock or a request timestamp. Missing periods
+remain unresolved; unsupported periods fail strict selection.
+
+Also supply `api: "generate_content"` (or `"batch"`) and
+`service_tier: "standard"` (or `"flex"`/`"priority"`). Batch and Flex halve all
+three token rates, including implicit cache reads. Priority multiplies them by
+1.8. Thinking tokens count as output. The legacy `cost` fields summarize the
+introductory rates at this snapshot's verification date.
+
+Argon overrides the older provider search rate with $14 per 1,000 search
+**queries**, after the shared monthly allowance. Count each query, not each
+generation request. Track the free allowance separately across Gemini 3 and
+newer models; the selector does not track account usage.
+
 #### Other provider contexts
 
 For Gemini 3.1 Pro, supply `api: "generate_content"` (or `"batch"`),

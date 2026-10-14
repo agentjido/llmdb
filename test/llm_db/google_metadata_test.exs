@@ -1,7 +1,7 @@
 defmodule LLMDB.GoogleMetadataTest do
   use ExUnit.Case, async: true
 
-  alias LLMDB.{Model, Normalize, Pricing, Provider}
+  alias LLMDB.{ExecutionContract, Model, Normalize, Pricing, Provider}
   alias LLMDB.Sources.Local
 
   @local_dir "priv/llm_db/local"
@@ -189,7 +189,10 @@ defmodule LLMDB.GoogleMetadataTest do
           {[api: "generate_content", service_tier: "priority"], "pricing.priority"}
         ] do
       assert {:ok, %{components: components, unresolved: [], errors: []}} =
-               Pricing.select_components(priced_model, context)
+               Pricing.select_components(
+                 priced_model,
+                 Keyword.put(context, :pricing_period, "introductory")
+               )
 
       modifier_ids =
         components
@@ -199,6 +202,68 @@ defmodule LLMDB.GoogleMetadataTest do
       assert modifier_ids == List.wrap(expected_modifier)
       assert Enum.count(components, &(&1.kind == "token")) == 3
     end
+  end
+
+  test "Argon has executable text and object contracts without a remote cache" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-argon")
+    enriched = ExecutionContract.enrich_model(model, ExecutionContract.enrich_provider(provider))
+
+    refute enriched.catalog_only
+    assert enriched.execution.text.family == "google_generate_content"
+    assert enriched.execution.object.family == "google_generate_content"
+    refute enriched.extra.long_decode_requires_background
+    assert enriched.extra.long_decode_interactions_requires_background
+    assert enriched.extra.long_decode_generate_content_continuation
+  end
+
+  test "Argon selects both price periods and overrides provider search pricing" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-argon")
+    [model] = Pricing.apply_cost_components([model])
+    [model] = Pricing.apply_provider_defaults([provider], [model])
+
+    for {period, rates} <- [{"introductory", [2.0, 10.0, 0.1]}, {"standard", [4.0, 20.0, 0.2]}],
+        {context, factor} <- [
+          {[api: "generate_content", service_tier: "standard"], 1.0},
+          {[api: "batch", service_tier: "priority"], 0.5},
+          {[api: "generate_content", service_tier: "flex"], 0.5},
+          {[api: "generate_content", service_tier: "priority"], 1.8}
+        ] do
+      assert {:ok, selection} =
+               Pricing.select_components(model, Keyword.put(context, :pricing_period, period))
+
+      tokens = Enum.filter(selection.components, &(&1.kind == "token"))
+      assert length(tokens) == 3
+      modifiers = Enum.filter(selection.components, &(&1.kind == "other"))
+      actual_factor = Enum.reduce(modifiers, 1.0, &(&1.multiplier * &2))
+      assert_in_delta actual_factor, factor, 1.0e-9
+
+      for {meter, rate} <- Enum.zip(~w(input_tokens output_tokens cache_read_tokens), rates) do
+        component = Enum.find(tokens, &(&1.meter == meter))
+        assert_in_delta component.rate * actual_factor, rate * factor, 1.0e-9
+      end
+
+      [search] = Enum.filter(selection.components, &(&1.id == "tool.web_search"))
+      assert search.rate == 14.0
+      assert search.unit == "query"
+      assert search.meter == "web_search_queries"
+      assert search.per == 1000
+    end
+
+    assert {:error, %{unresolved: unresolved}} =
+             Pricing.select_components(model, api: "generate_content", service_tier: "standard")
+
+    assert length(unresolved) == 6
+
+    assert {:error, %{errors: errors}} =
+             Pricing.select_components(model,
+               api: "generate_content",
+               service_tier: "standard",
+               pricing_period: "unknown"
+             )
+
+    assert Enum.any?(errors, &(&1.code == :missing_rate_for_group))
   end
 
   defp google_provider_and_models, do: local_provider_and_models(:google)

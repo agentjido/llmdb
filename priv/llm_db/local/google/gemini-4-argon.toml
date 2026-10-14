@@ -13,7 +13,8 @@ input = 1048576
 output = 1048576
 
 # Introductory Standard rates through November 30, 2026. The rates double on
-# December 1, 2026; the future rates and effective date remain in extra.pricing.
+# December 1, 2026. Select pricing.components with pricing_period set to
+# introductory or standard; cost remains the current snapshot summary.
 [cost]
 input = 2.0
 output = 10.0
@@ -22,6 +23,96 @@ cache_read = 0.1
 [pricing]
 currency = "USD"
 merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 2.0
+meter = "input_tokens"
+rate_group = "input_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "introductory" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 10.0
+meter = "output_tokens"
+rate_group = "output_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "introductory" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.1
+meter = "cache_read_tokens"
+rate_group = "cache_read_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "introductory" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 4.0
+meter = "input_tokens"
+rate_group = "input_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "standard" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 20.0
+meter = "output_tokens"
+rate_group = "output_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "standard" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.2
+meter = "cache_read_tokens"
+rate_group = "cache_read_tokens"
+rate_group_policy = "exactly_one"
+applies_when = { pricing_period = "standard" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "tool.web_search"
+role = "rate"
+kind = "tool"
+tool = "web_search"
+unit = "query"
+per = 1000
+rate = 14.0
+meter = "web_search_queries"
+source = "provider_docs"
+notes = "Paid queries after the shared monthly allowance; count each search query, not each generation request."
 
 [[pricing.components]]
 id = "pricing.batch"
@@ -89,6 +180,7 @@ status = "active"
 
 [extra]
 availability = "general"
+supported_generation_methods = ["generateContent", "countTokens", "batchGenerateContent"]
 description = "Flagship reasoning model for complex software engineering, autonomous multi-step agents, deep mathematical and scientific problem solving, and long-decode generation"
 reasoning_options = [{ type = "effort", values = ["low", "medium", "high"] }]
 structured_output = true
@@ -102,7 +194,9 @@ google_search_grounding = true
 image_generation = false
 live_api = false
 long_decode = true
-long_decode_requires_background = true
+long_decode_requires_background = false
+long_decode_interactions_requires_background = true
+long_decode_generate_content_continuation = true
 default_synchronous_output_limit = 65536
 url_context = true
 source_urls = [
@@ -122,4 +216,6 @@ standard_output = 20.0
 standard_cache_read = 0.2
 free_tier = false
 cache_type = "implicit_only"
+search_free_monthly_allowance = 5000
+search_allowance_scope = "shared_across_gemini_3_and_newer"
 
