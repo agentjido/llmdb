@@ -170,7 +170,7 @@ type AssertAssignable<Expected, Actual extends Expected> = Actual;
 
 type CanonicalPricingComponent = ${observedObjectType(
     pricingComponents,
-    new Set(["kind", "unit"]),
+    new Set(["kind", "unit", "role", "rate_group_policy"]),
   )};
 
 type CanonicalEmbeddingCapability = ${observedObjectType(
