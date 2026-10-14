@@ -6,6 +6,20 @@ defmodule LLMDB.Engine.EnrichTest do
 
   doctest LLMDB.Enrich
 
+  test "reviewed unpublished limits cannot retain values from another source" do
+    model = %{
+      id: "unpublished-output",
+      provider: :meta,
+      limits: %{context: 1_048_576, input: 1_048_576, output: 131_072},
+      extra: %{unpublished_limits: ["output"]},
+      cost: %{input: 4.0}
+    }
+
+    [enriched] = Enrich.enrich_models([model])
+    assert enriched.limits == %{context: 1_048_576, input: 1_048_576}
+    assert enriched.cost == model.cost
+  end
+
   @llmfit_url "https://raw.githubusercontent.com/AlexsJones/llmfit/main/llmfit-core/data/hf_models.json"
 
   defp llmfit_cache_path(url) do

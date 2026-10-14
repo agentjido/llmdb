@@ -1,0 +1,14 @@
+id = "meta"
+name = "Meta"
+base_url = "https://api.meta.ai/v1"
+doc = "https://dev.meta.ai/docs/overview"
+env = ["MODEL_API_KEY"]
+exclude_models = ["muse-code", "muse-code-*", "muse-wonder-full*"]
+
+[runtime]
+base_url = "https://api.meta.ai/v1"
+doc_url = "https://dev.meta.ai/docs/overview"
+
+[runtime.auth]
+type = "bearer"
+env = ["MODEL_API_KEY"]

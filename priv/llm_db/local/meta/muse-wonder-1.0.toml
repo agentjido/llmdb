@@ -1,0 +1,96 @@
+id = "muse-wonder-1.0"
+name = "Muse Wonder 1.0"
+family = "muse"
+release_date = "2026-10-12"
+last_updated = "2026-10-13"
+doc_url = "https://dev.meta.ai/models/muse-wonder"
+catalog_only = false
+
+[execution.text]
+supported = true
+family = "openai_responses_compatible"
+wire_protocol = "openai_responses"
+path = "/responses"
+
+[execution.object]
+supported = true
+family = "openai_responses_compatible"
+wire_protocol = "openai_responses"
+path = "/responses"
+
+[limits]
+context = 1048576
+# The reviewed sources do not publish a maximum output limit.
+
+[cost]
+input = 4.0
+cache_read = 0.2
+output = 20.0
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "tool.web_search"
+role = "rate"
+kind = "tool"
+tool = "web_search"
+unit = "query"
+per = 1000
+rate = 2.5
+meter = "web_search_queries"
+source = "provider_docs"
+
+[modalities]
+input = ["text", "image", "video", "audio", "pdf"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["minimal", "low", "medium", "high", "xhigh", "max"]
+
+[capabilities.reasoning.thinking]
+disable_supported = false
+raw_output_supported = false
+
+[capabilities.tools]
+enabled = true
+parallel = true
+streaming = true
+
+[capabilities.json]
+native = true
+schema = true
+strict = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra]
+availability = "preview"
+pricing_mode = "standard"
+output_limit_status = "not_published"
+unpublished_limits = ["output"]
+reasoning_default = "model_determined"
+supported_api_surfaces = ["responses", "chat_completions", "messages"]
+source_urls = [
+  "https://dev.meta.ai/docs/models",
+  "https://dev.meta.ai/docs/overview",
+  "https://dev.meta.ai/docs/pricing-rate-limits",
+  "https://dev.meta.ai/docs/reasoning",
+  "https://dev.meta.ai/docs/structured-output",
+  "https://dev.meta.ai/docs/tool-calling",
+  "https://dev.meta.ai/models/muse-wonder",
+  "https://dev.meta.ai/resources/blog/build-with-muse-wonder"
+]
+
+[extra.pricing]
+sources_checked_at = "2026-10-13"
+mode = "standard"
+contributor_mode = false
+long_context_premium = false

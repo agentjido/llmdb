@@ -7,6 +7,7 @@ defmodule LLMDB.Enrich do
   - Setting provider_model_id to id if not present
   - Attaching optional llmfit sidecar metadata for matching Hugging Face models
   - Ensuring capability defaults are applied (handled by Zoi schemas)
+  - Removing limits that a reviewed overlay marks as unpublished
   """
 
   alias LLMDB.Sources.Llmfit
@@ -99,7 +100,27 @@ defmodule LLMDB.Enrich do
     |> inherit_canonical_costs()
     |> enrich_llmfit_metadata()
     |> LLMDB.Enrich.AzureWireProtocol.enrich_models()
+    |> Enum.map(&remove_unpublished_limits/1)
   end
+
+  defp remove_unpublished_limits(%{limits: limits, extra: extra} = model)
+       when is_map(limits) and is_map(extra) do
+    unpublished = Map.get(extra, :unpublished_limits, Map.get(extra, "unpublished_limits", []))
+
+    if is_list(unpublished) do
+      fields =
+        for {name, field} <- [{"context", :context}, {"input", :input}, {"output", :output}],
+            name in unpublished,
+            do: field
+
+      limits = Map.drop(limits, fields)
+      Map.put(model, :limits, if(map_size(limits) == 0, do: nil, else: limits))
+    else
+      model
+    end
+  end
+
+  defp remove_unpublished_limits(model), do: model
 
   @date_suffix ~r/-\d{4}-\d{2}-\d{2}$/
 

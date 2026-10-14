@@ -49,9 +49,51 @@ validation happens in the Engine.
 
 ### Remote cached sources
 
-Models.dev, OpenRouter, OpenAI, Anthropic, Google, xAI, ZenMux, LLM API, and Llmfit have
+Models.dev, OpenRouter, OpenAI, Anthropic, Google, Meta, xAI, ZenMux, LLM API, and Llmfit have
 source adapters. Run `mix llm_db.pull` to refresh their repository-local cache;
 the Engine subsequently reads that cache through each source's `load/1`.
+
+### Meta Model API discovery
+
+Set `MODEL_API_KEY` in your environment, then run:
+
+```sh
+mix llm_db.pull --source meta
+mix llm_db.build --install
+```
+
+The source requests `GET https://api.meta.ai/v1/models` with bearer authentication.
+It stores a cache and provenance manifest under `priv/llm_db/remote`. Configure
+`:meta_cache_dir` to change this directory. `Meta.load/1` reads the cache without
+a network request or credentials. Tests can pass `:api_key`, `:cache_dir`, `:url`,
+and `:req_opts`; no live key is required for tests.
+
+Add the repository Actions secret **`MODEL_API_KEY`** to enable Meta discovery in
+the scheduled `build-metadata.yml` workflow. The workflow already passes this
+secret to `mix llm_db.pull`. An absent or empty key skips the source. HTTP and
+transport failures preserve the last good cache and make the pull task report
+a failure. Returned errors do not contain credentials or response bodies.
+
+The registry list is specific to a team. A new response does not remove models
+from the previous cache or the reviewed catalog. Discovery records preserve
+`id`, `created`, and `owned_by`. `created` stays registry metadata; it is not a
+public release date. The source does not require optional client metadata and
+does not infer prices, limits, or capabilities from a sparse response.
+
+The local Meta overlay has higher precedence. It supplies the reviewed Muse
+Wonder prices and capabilities even without a cache. Unreviewed registry entries
+stay catalog-only. Muse Code and subscription-only Muse Wonder Full are excluded
+from direct API discovery. The reviewed sources do not publish a maximum output
+limit for Muse Wonder, so that field remains unset.
+
+The overlay sets `extra.unpublished_limits = ["output"]`. This build-time
+directive removes an unverified output limit inherited from another source.
+It can name `context`, `input`, or `output`. Other limits and reviewed prices
+remain available.
+
+References: [Meta model registry](https://dev.meta.ai/docs/models),
+[registry schema](https://dev.meta.ai/docs/api-reference/models/schemas), and
+[Meta prices](https://dev.meta.ai/docs/pricing-rate-limits).
 
 The LLM API source reads the public `https://api.llmapi.ai/v1/models` catalog.
 Run `mix llm_db.pull --source llmapi` to refresh it without credentials, then
