@@ -23,6 +23,7 @@ defmodule LLMDB.ProviderRuntimeDataTest do
     :alibaba,
     :venice,
     :cerebras,
+    :reflection,
     :zai,
     :stepfun,
     :stepfun_ai

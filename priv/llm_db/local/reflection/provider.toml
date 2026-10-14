@@ -1,0 +1,17 @@
+id = "reflection"
+name = "Reflection AI"
+base_url = "https://api.reflection.ai/openai/v1"
+doc = "https://developers.reflection.ai/introduction"
+env = ["REFLECTION_API_KEY"]
+
+[runtime]
+base_url = "https://api.reflection.ai/openai/v1"
+doc_url = "https://developers.reflection.ai/openai-compatibility"
+
+[runtime.auth]
+type = "bearer"
+env = ["REFLECTION_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
+object = "openai_chat_compatible"
