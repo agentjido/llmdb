@@ -306,7 +306,7 @@ backward compatibility.
 
 ### Curated conditional pricing
 
-The curated pricing overlays checked on September 22, 2026 cover:
+The curated pricing overlays checked through October 13, 2026 cover:
 
 | Provider | Models | Conditional pricing |
 | --- | --- | --- |
@@ -314,6 +314,7 @@ The curated pricing overlays checked on September 22, 2026 cover:
 | Anthropic | Claude Fable 5.1, Opus 5.5, Opus 5, Sonnet 5 | 5m/1h cache writes, Batch, US-only inference |
 | Anthropic | Claude Opus 5.5, Opus 5 | Fast mode in addition to the conditions above |
 | Anthropic | Claude Haiku 4.5 | 5m/1h cache writes and Batch |
+| Google | Gemini 4 Argon | Introductory Standard pricing through November 30, 2026, Batch/Flex, Priority, implicit caching only |
 | Google | Gemini 3.1 Pro Preview, including Customtools | Above 200,000 prompt tokens, Batch/Flex, Priority, explicit cache storage |
 | xAI | API models with a published long-context threshold, including Grok 4.3, 4.6, 4.7 | At or above 200,000 prompt tokens; selected models have Priority, Batch, US endpoint modifiers |
 | Alibaba | Qwen3.7-Plus, Qwen3.6-Plus | Above 256,000 input tokens; Singapore International list prices, explicit/implicit cache distinctions |
@@ -409,6 +410,25 @@ tokens in a request. When a response reports both 5m and 1h writes, select each
 TTL separately and apply its rate only to that duration's reported token count.
 Count input, output, and cache reads once. An omitted or `nil` TTL leaves both
 cache-write variants unresolved; it does not assume the cheaper duration.
+
+#### Gemini 4 Argon price periods
+
+For Gemini 4 Argon, supply `pricing_period: "introductory"` for the published
+rates through November 30, 2026, or `pricing_period: "standard"` for rates from
+December 1, 2026. Confirm the billed period with the provider. The selector does
+not infer a period from the system clock or a request timestamp. Missing periods
+remain unresolved; unsupported periods fail strict selection.
+
+Also supply `api: "generate_content"` (or `"batch"`) and
+`service_tier: "standard"` (or `"flex"`/`"priority"`). Batch and Flex halve all
+three token rates, including implicit cache reads. Priority multiplies them by
+1.8. Thinking tokens count as output. The legacy `cost` fields summarize the
+introductory rates at this snapshot's verification date.
+
+Argon overrides the older provider search rate with $14 per 1,000 search
+**queries**, after the shared monthly allowance. Count each query, not each
+generation request. Track the free allowance separately across Gemini 3 and
+newer models; the selector does not track account usage.
 
 #### Other provider contexts
 

@@ -5,6 +5,9 @@ defmodule LLMDB.MetaMetadataTest do
   alias LLMDB.Sources.Local
 
   test "the packaged catalog resolves Meta Muse Wonder" do
+    assert {:ok, provider} = LLMDB.provider(:meta)
+    assert provider.env == ["META_API_KEY"]
+    assert provider.runtime.auth.env == ["META_API_KEY"]
     assert {:ok, model} = LLMDB.model(:meta, "muse-wonder-1.0")
     refute model.catalog_only
     assert model.execution.text.path == "/responses"
@@ -22,7 +25,7 @@ defmodule LLMDB.MetaMetadataTest do
     model = ExecutionContract.enrich_model(model, ExecutionContract.enrich_provider(provider))
 
     assert provider.runtime.auth.type == "bearer"
-    assert provider.runtime.auth.env == ["MODEL_API_KEY"]
+    assert provider.runtime.auth.env == ["META_API_KEY"]
     assert provider.base_url == "https://api.meta.ai/v1"
     assert model.id == "muse-wonder-1.0"
     assert model.limits.context == 1_048_576

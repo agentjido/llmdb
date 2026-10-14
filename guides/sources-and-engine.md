@@ -55,7 +55,7 @@ the Engine subsequently reads that cache through each source's `load/1`.
 
 ### Meta Model API discovery
 
-Set `MODEL_API_KEY` in your environment, then run:
+Set `META_API_KEY` in your environment, then run:
 
 ```sh
 mix llm_db.pull --source meta
@@ -68,7 +68,7 @@ It stores a cache and provenance manifest under `priv/llm_db/remote`. Configure
 a network request or credentials. Tests can pass `:api_key`, `:cache_dir`, `:url`,
 and `:req_opts`; no live key is required for tests.
 
-Add the repository Actions secret **`MODEL_API_KEY`** to enable Meta discovery in
+Add the repository Actions secret **`META_API_KEY`** to enable Meta discovery in
 the scheduled `build-metadata.yml` workflow. The workflow already passes this
 secret to `mix llm_db.pull`. An absent or empty key skips the source. HTTP and
 transport failures preserve the last good cache and make the pull task report

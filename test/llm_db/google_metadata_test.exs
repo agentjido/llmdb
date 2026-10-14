@@ -1,7 +1,7 @@
 defmodule LLMDB.GoogleMetadataTest do
   use ExUnit.Case, async: true
 
-  alias LLMDB.{Model, Normalize, Provider}
+  alias LLMDB.{ExecutionContract, Model, Normalize, Pricing, Provider}
   alias LLMDB.Sources.Local
 
   @local_dir "priv/llm_db/local"
@@ -143,6 +143,129 @@ defmodule LLMDB.GoogleMetadataTest do
     assert model.extra.availability == "general"
   end
 
+  test "local Google overrides capture Gemini 4 Argon metadata" do
+    {_provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-argon")
+
+    assert model.name == "Gemini 4 Argon"
+    assert model.family == "gemini"
+    assert model.doc_url == "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon"
+    assert model.release_date == "2026-10-13"
+    assert model.last_updated == "2026-10-13"
+    assert model.knowledge == "2026-03"
+    assert model.limits.context == 1_048_576
+    assert model.limits.input == 1_048_576
+    assert model.limits.output == 1_048_576
+    assert model.cost.input == 2.0
+    assert model.cost.output == 10.0
+    assert model.cost.cache_read == 0.1
+    assert pricing_component(model, "pricing.batch").multiplier == 0.5
+    assert pricing_component(model, "pricing.flex").multiplier == 0.5
+    assert pricing_component(model, "pricing.priority").multiplier == 1.8
+    assert model.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert model.modalities.output == [:text]
+    assert model.capabilities.reasoning.enabled
+    assert model.capabilities.reasoning.effort.supported
+    assert model.capabilities.reasoning.effort.values == ["low", "medium", "high"]
+    assert model.capabilities.reasoning.effort.default == "medium"
+    assert model.capabilities.tools.enabled
+    assert model.capabilities.json.schema
+    assert model.capabilities.caching.type == "implicit"
+    assert model.capabilities.batch.supported
+    assert model.capabilities.code_execution.supported
+    assert model.lifecycle.status == "active"
+    assert model.extra.availability == "general"
+    assert model.extra.long_decode
+    assert model.extra.default_synchronous_output_limit == 65_536
+    refute model.extra.explicit_caching
+    refute model.extra.live_api
+
+    [priced_model] = Pricing.apply_cost_components([model])
+
+    for {context, expected_modifier} <- [
+          {[api: "generate_content", service_tier: "standard"], nil},
+          {[api: "batch", service_tier: "standard"], "pricing.batch"},
+          {[api: "generate_content", service_tier: "flex"], "pricing.flex"},
+          {[api: "generate_content", service_tier: "priority"], "pricing.priority"}
+        ] do
+      assert {:ok, %{components: components, unresolved: [], errors: []}} =
+               Pricing.select_components(
+                 priced_model,
+                 Keyword.put(context, :pricing_period, "introductory")
+               )
+
+      modifier_ids =
+        components
+        |> Enum.filter(&(&1.kind == "other"))
+        |> Enum.map(& &1.id)
+
+      assert modifier_ids == List.wrap(expected_modifier)
+      assert Enum.count(components, &(&1.kind == "token")) == 3
+    end
+  end
+
+  test "Argon has executable text and object contracts without a remote cache" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-argon")
+    enriched = ExecutionContract.enrich_model(model, ExecutionContract.enrich_provider(provider))
+
+    refute enriched.catalog_only
+    assert enriched.execution.text.family == "google_generate_content"
+    assert enriched.execution.object.family == "google_generate_content"
+    refute enriched.extra.long_decode_requires_background
+    assert enriched.extra.long_decode_interactions_requires_background
+    assert enriched.extra.long_decode_generate_content_continuation
+  end
+
+  test "Argon selects both price periods and overrides provider search pricing" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-argon")
+    [model] = Pricing.apply_cost_components([model])
+    [model] = Pricing.apply_provider_defaults([provider], [model])
+
+    for {period, rates} <- [{"introductory", [2.0, 10.0, 0.1]}, {"standard", [4.0, 20.0, 0.2]}],
+        {context, factor} <- [
+          {[api: "generate_content", service_tier: "standard"], 1.0},
+          {[api: "batch", service_tier: "priority"], 0.5},
+          {[api: "generate_content", service_tier: "flex"], 0.5},
+          {[api: "generate_content", service_tier: "priority"], 1.8}
+        ] do
+      assert {:ok, selection} =
+               Pricing.select_components(model, Keyword.put(context, :pricing_period, period))
+
+      tokens = Enum.filter(selection.components, &(&1.kind == "token"))
+      assert length(tokens) == 3
+      modifiers = Enum.filter(selection.components, &(&1.kind == "other"))
+      actual_factor = Enum.reduce(modifiers, 1.0, &(&1.multiplier * &2))
+      assert_in_delta actual_factor, factor, 1.0e-9
+
+      for {meter, rate} <- Enum.zip(~w(input_tokens output_tokens cache_read_tokens), rates) do
+        component = Enum.find(tokens, &(&1.meter == meter))
+        assert_in_delta component.rate * actual_factor, rate * factor, 1.0e-9
+      end
+
+      [search] = Enum.filter(selection.components, &(&1.id == "tool.web_search"))
+      assert search.rate == 14.0
+      assert search.unit == "query"
+      assert search.meter == "web_search_queries"
+      assert search.per == 1000
+    end
+
+    assert {:error, %{unresolved: unresolved}} =
+             Pricing.select_components(model, api: "generate_content", service_tier: "standard")
+
+    assert length(unresolved) == 6
+
+    assert {:error, %{errors: errors}} =
+             Pricing.select_components(model,
+               api: "generate_content",
+               service_tier: "standard",
+               pricing_period: "unknown"
+             )
+
+    assert Enum.any?(errors, &(&1.code == :missing_rate_for_group))
+  end
+
   defp google_provider_and_models, do: local_provider_and_models(:google)
 
   defp local_provider_and_models(provider_id) do
@@ -160,8 +283,12 @@ defmodule LLMDB.GoogleMetadataTest do
   end
 
   defp pricing_rate(model, component_id) do
-    model.pricing.components
-    |> Enum.find(&(&1.id == component_id))
+    model
+    |> pricing_component(component_id)
     |> Map.fetch!(:rate)
+  end
+
+  defp pricing_component(model, component_id) do
+    Enum.find(model.pricing.components, &(&1.id == component_id))
   end
 end

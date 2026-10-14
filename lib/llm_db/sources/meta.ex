@@ -3,7 +3,7 @@ defmodule LLMDB.Sources.Meta do
   Cached source for the Meta Model API registry.
 
   `pull/1` requests `GET https://api.meta.ai/v1/models` with a bearer token.
-  Set `MODEL_API_KEY` or pass `:api_key`. Tests can pass `:req_opts` and
+  Set `META_API_KEY` or pass `:api_key`. Tests can pass `:req_opts` and
   `:cache_dir`. `:url` overrides the registry URL.
 
   `load/1` reads the cache without a network request or an API key. The default
@@ -30,7 +30,7 @@ defmodule LLMDB.Sources.Meta do
 
   @impl true
   def pull(opts) do
-    case Map.get(opts, :api_key) || System.get_env("MODEL_API_KEY") do
+    case Map.get(opts, :api_key) || System.get_env("META_API_KEY") do
       key when is_binary(key) and key != "" -> pull_authenticated(opts, key)
       _missing -> {:error, :no_api_key}
     end

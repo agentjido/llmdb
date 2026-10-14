@@ -8,15 +8,15 @@ defmodule LLMDB.Sources.MetaTest do
 
   setup do
     cache_dir = Path.join(System.tmp_dir!(), "llmdb-meta-#{System.unique_integer([:positive])}")
-    original_key = System.get_env("MODEL_API_KEY")
-    System.delete_env("MODEL_API_KEY")
+    original_key = System.get_env("META_API_KEY")
+    System.delete_env("META_API_KEY")
 
     on_exit(fn ->
       File.rm_rf!(cache_dir)
 
       if original_key,
-        do: System.put_env("MODEL_API_KEY", original_key),
-        else: System.delete_env("MODEL_API_KEY")
+        do: System.put_env("META_API_KEY", original_key),
+        else: System.delete_env("META_API_KEY")
     end)
 
     %{opts: %{cache_dir: cache_dir}, remote_opts: [cache_dir: cache_dir, cache_key: "meta"]}
@@ -99,8 +99,8 @@ defmodule LLMDB.Sources.MetaTest do
     assert Jason.decode!(manifest)["source_url"] == @url
   end
 
-  test "reads MODEL_API_KEY and lets an explicit key take precedence", ctx do
-    System.put_env("MODEL_API_KEY", "environment-key")
+  test "reads META_API_KEY and lets an explicit key take precedence", ctx do
+    System.put_env("META_API_KEY", "environment-key")
 
     for {extra, expected} <- [
           {%{}, "environment-key"},

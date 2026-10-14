@@ -60,7 +60,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-          MODEL_API_KEY: ${{ secrets.MODEL_API_KEY }}
+          META_API_KEY: ${{ secrets.META_API_KEY }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           ZENMUX_API_KEY: ${{ secrets.ZENMUX_API_KEY }}
         run: |
