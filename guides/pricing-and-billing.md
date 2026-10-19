@@ -437,13 +437,10 @@ GLM-5.3-Flash contain effective standard rates verified on October 19, 2026.
 Input, output, and cached input already include the provider discount. Do not
 apply the discount a second time. Flex and Priority rates are separate tariffs.
 
-For `deepinfra:zai-org/GLM-5.3-Flash`, supply `timestamp` as Unix seconds to
-`Pricing.components_for/2`. The 50% discount applies through
-`2026-10-20T23:59:59Z`; later timestamps select the standard rates of
-$0.15 input, $0.50 output, and $0.03 cached input per million tokens. Without a
-timestamp, the six possible rate components remain unresolved. The legacy
-`cost` summary records the discounted prices at the verification date. It does
-not change with the system clock.
+The GLM-5.3-Flash discount ends at `2026-10-20T23:59:59Z`. The catalog records
+the effective prices at the verification date. Refresh the catalog when the
+provider changes its prices. The discount end date is source metadata; price
+selection requires no timestamp or other request context.
 
 The other three discounts have no published end date in the checked API
 response. This does not mean that they are permanent. Source URLs, verification

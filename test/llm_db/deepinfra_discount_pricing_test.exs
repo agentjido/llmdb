@@ -10,7 +10,6 @@ defmodule LLMDB.DeepinfraDiscountPricingTest do
     "deepseek-ai/DeepSeek-V4.1-Flash" => %{input: 0.14, output: 0.42, cache_read: 0.0042},
     "zai-org/GLM-5.3-Flash" => %{input: 0.075, output: 0.25, cache_read: 0.015}
   }
-  @discount_end 1_792_540_799
 
   setup_all do
     {:ok, upstream} =
@@ -38,7 +37,7 @@ defmodule LLMDB.DeepinfraDiscountPricingTest do
     for {id, cost} <- @expected do
       model = Map.fetch!(models, id)
       assert Map.take(model.cost, Map.keys(cost)) == cost
-      selected = Pricing.components_for(model, timestamp: @discount_end)
+      selected = Pricing.components_for(model)
       assert selected.unresolved == []
       assert length(selected.components) == 3
       assert rates(selected.components) == cost
@@ -50,29 +49,17 @@ defmodule LLMDB.DeepinfraDiscountPricingTest do
     end
   end
 
-  test "GLM Flash selects standard rates after the discount ends", %{models: models} do
+  test "GLM Flash prices do not depend on a request timestamp", %{models: models} do
     model = models["zai-org/GLM-5.3-Flash"]
 
-    for timestamp <- [@discount_end - 1, @discount_end, @discount_end + 1] do
-      selected = Pricing.components_for(model, timestamp: timestamp)
+    for context <- [%{}, %{timestamp: 1_792_540_798}, %{timestamp: 1_792_540_800}] do
+      selected = Pricing.components_for(model, context)
       assert selected.unresolved == []
       assert length(selected.components) == 3
-
-      expected =
-        if timestamp <= @discount_end,
-          do: @expected[model.id],
-          else: %{input: 0.15, output: 0.5, cache_read: 0.03}
-
-      assert rates(selected.components) == expected
+      assert rates(selected.components) == @expected[model.id]
     end
 
     assert model.extra.pricing.discount_ends_at == "2026-10-20T23:59:59Z"
-  end
-
-  test "GLM Flash requires a timestamp to select the discount period", %{models: models} do
-    selected = Pricing.components_for(models["zai-org/GLM-5.3-Flash"])
-    assert selected.components == []
-    assert length(selected.unresolved) == 6
   end
 
   test "packaged snapshot preserves effective prices and discount expiry" do
@@ -87,14 +74,15 @@ defmodule LLMDB.DeepinfraDiscountPricingTest do
 
     model = models["zai-org/GLM-5.3-Flash"]
     assert model["extra"]["pricing"]["discount_ends_at"] == "2026-10-20T23:59:59Z"
-    selected = Pricing.components_for(model, timestamp: @discount_end + 1)
+    [model] = Pricing.apply_cost_components([model])
+    selected = Pricing.components_for(model)
     assert selected.unresolved == []
     assert length(selected.components) == 3
 
-    assert Map.new(selected.components, &{&1["meter"], &1["rate"]}) == %{
-             "input_tokens" => 0.15,
-             "output_tokens" => 0.5,
-             "cache_read_tokens" => 0.03
+    assert Map.new(selected.components, &{&1.id, &1.rate}) == %{
+             "token.input" => 0.075,
+             "token.output" => 0.25,
+             "token.cache_read" => 0.015
            }
   end
 
