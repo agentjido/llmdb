@@ -1,0 +1,107 @@
+# Verified 2026-10-19 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
+id = "zai-org/GLM-5.3-Flash"
+
+# Effective standard rates, in USD per million tokens; discount already applied.
+[cost]
+input = 0.075
+output = 0.25
+cache_read = 0.015
+
+# The legacy cost summary is the price observed on sources_checked_at.
+# Select components with timestamp (Unix seconds) to account for discount expiry.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.075
+rate_group = "token.input"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { lte = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[[pricing.components]]
+id = "token.input.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.15
+rate_group = "token.input"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { gt = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[[pricing.components]]
+id = "token.output"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 0.25
+rate_group = "token.output"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { lte = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[[pricing.components]]
+id = "token.output.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 0.5
+rate_group = "token.output"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { gt = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[[pricing.components]]
+id = "token.cache_read"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.015
+rate_group = "token.cache_read"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { lte = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[[pricing.components]]
+id = "token.cache_read.standard"
+role = "rate"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.03
+rate_group = "token.cache_read"
+rate_group_policy = "exactly_one"
+applies_when = { timestamp = { gt = 1792540799 } }
+source = "provider_api"
+notes = "Standard service tier. timestamp is Unix seconds; discount ends 2026-10-20T23:59:59Z."
+
+[extra.pricing]
+sources_checked_at = "2026-10-19"
+source_urls = ["https://api.deepinfra.com/models/list", "https://deepinfra.com/zai-org/GLM-5.3-Flash", "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-flash/endpoints"]
+price_basis = "standard_effective"
+discount = 0.5
+discount_already_applied = true
+discount_ends_at = "2026-10-20T23:59:59Z"
+selection_context = "timestamp: Unix seconds; legacy cost is the observed discounted summary, not a clock-aware rate."

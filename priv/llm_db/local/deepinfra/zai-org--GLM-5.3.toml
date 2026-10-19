@@ -1,0 +1,16 @@
+# Verified 2026-10-19 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
+id = "zai-org/GLM-5.3"
+
+# Effective standard rates, in USD per million tokens; discount already applied.
+[cost]
+input = 0.5625
+output = 2.5
+cache_read = 0.125
+
+[extra.pricing]
+sources_checked_at = "2026-10-19"
+source_urls = ["https://api.deepinfra.com/models/list", "https://deepinfra.com/zai-org/GLM-5.3", "https://openrouter.ai/api/v1/models/z-ai/glm-5.3/endpoints"]
+price_basis = "standard_effective"
+discount = 0.375
+discount_already_applied = true
+discount_end_status = "not_published"

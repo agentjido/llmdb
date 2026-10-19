@@ -430,6 +430,25 @@ Argon overrides the older provider search rate with $14 per 1,000 search
 generation request. Track the free allowance separately across Gemini 3 and
 newer models; the selector does not track account usage.
 
+#### DeepInfra discounted standard rates
+
+The DeepInfra overrides for Qwen3.8-27B, GLM-5.3, DeepSeek-V4.1-Flash, and
+GLM-5.3-Flash contain effective standard rates verified on October 19, 2026.
+Input, output, and cached input already include the provider discount. Do not
+apply the discount a second time. Flex and Priority rates are separate tariffs.
+
+For `deepinfra:zai-org/GLM-5.3-Flash`, supply `timestamp` as Unix seconds to
+`Pricing.components_for/2`. The 50% discount applies through
+`2026-10-20T23:59:59Z`; later timestamps select the standard rates of
+$0.15 input, $0.50 output, and $0.03 cached input per million tokens. Without a
+timestamp, the six possible rate components remain unresolved. The legacy
+`cost` summary records the discounted prices at the verification date. It does
+not change with the system clock.
+
+The other three discounts have no published end date in the checked API
+response. This does not mean that they are permanent. Source URLs, verification
+dates, and discount details are in each model's `extra.pricing` metadata.
+
 #### Other provider contexts
 
 For Gemini 3.1 Pro, supply `api: "generate_content"` (or `"batch"`),

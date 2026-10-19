@@ -1,0 +1,16 @@
+# Verified 2026-10-19 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
+id = "deepseek-ai/DeepSeek-V4.1-Flash"
+
+# Effective standard rates, in USD per million tokens; discount already applied.
+[cost]
+input = 0.14
+output = 0.42
+cache_read = 0.0042
+
+[extra.pricing]
+sources_checked_at = "2026-10-19"
+source_urls = ["https://api.deepinfra.com/models/list", "https://deepinfra.com/deepseek-ai/DeepSeek-V4.1-Flash", "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash/endpoints"]
+price_basis = "standard_effective"
+discount = 0.3
+discount_already_applied = true
+discount_end_status = "not_published"

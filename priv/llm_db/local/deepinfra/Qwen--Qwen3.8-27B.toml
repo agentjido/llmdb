@@ -1,0 +1,16 @@
+# Verified 2026-10-19 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
+id = "Qwen/Qwen3.8-27B"
+
+# Effective standard rates, in USD per million tokens; discount already applied.
+[cost]
+input = 0.15
+output = 1.875
+cache_read = 0.0375
+
+[extra.pricing]
+sources_checked_at = "2026-10-19"
+source_urls = ["https://api.deepinfra.com/models/list", "https://deepinfra.com/Qwen/Qwen3.8-27B", "https://openrouter.ai/api/v1/models/qwen/qwen3.8-27b/endpoints"]
+price_basis = "standard_effective"
+discount = 0.25
+discount_already_applied = true
+discount_end_status = "not_published"
