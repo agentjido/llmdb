@@ -6,6 +6,8 @@ defmodule LLMDB.Enrich do
   - Deriving model family from model ID
   - Setting provider_model_id to id if not present
   - Attaching optional llmfit sidecar metadata for matching Hugging Face models
+  - Copying native Claude reasoning metadata to Claude models hosted on
+    Amazon Bedrock, Google Vertex AI and Azure
   - Ensuring capability defaults are applied (handled by Zoi schemas)
   - Removing limits that a reviewed overlay marks as unpublished
   """
@@ -100,6 +102,7 @@ defmodule LLMDB.Enrich do
     |> inherit_canonical_costs()
     |> enrich_llmfit_metadata()
     |> LLMDB.Enrich.AzureWireProtocol.enrich_models()
+    |> inherit_hosted_claude_reasoning()
     |> Enum.map(&remove_unpublished_limits/1)
   end
 
@@ -163,6 +166,128 @@ defmodule LLMDB.Enrich do
         model
       end
     end)
+  end
+
+  @anthropic_messages_hosts [:amazon_bedrock, :google_vertex, :google_vertex_anthropic]
+  @inherited_reasoning_keys [:thinking, :effort]
+
+  @doc """
+  Copies native Claude reasoning metadata to hosted Claude models that lack it.
+
+  Amazon Bedrock, Google Vertex AI and Azure serve Claude with the Anthropic
+  Messages request body, so a hosted entry accepts the same thinking types and
+  effort levels as the native model named by its `canonical_model_id`.
+  Upstream sources usually publish only `reasoning.enabled` for hosted entries.
+
+  For a model hosted on Bedrock or Vertex AI, or one whose `wire_protocol` is
+  `anthropic_messages`, that links to an `anthropic/` canonical model, this
+  fills `capabilities.reasoning.thinking`, `capabilities.reasoning.effort` and
+  `extra.thinking_constraints` from the native model when the hosted entry has
+  none. Values the hosted entry already sets are kept, and entries whose
+  reasoning is explicitly disabled are left alone.
+
+  Routers that translate Claude into another request format, such as
+  OpenRouter, are not changed.
+
+  ## Examples
+
+      iex> models = [
+      ...>   %{
+      ...>     id: "claude-sonnet-5-5",
+      ...>     provider: :anthropic,
+      ...>     capabilities: %{reasoning: %{enabled: true, thinking: %{types: ["adaptive", "between_tools"]}}}
+      ...>   },
+      ...>   %{
+      ...>     id: "global.anthropic.claude-sonnet-5-5",
+      ...>     provider: :amazon_bedrock,
+      ...>     capabilities: %{reasoning: %{enabled: true}},
+      ...>     extra: %{canonical_model_id: "anthropic/claude-sonnet-5-5"}
+      ...>   }
+      ...> ]
+      iex> [_native, hosted] = LLMDB.Enrich.inherit_hosted_claude_reasoning(models)
+      iex> hosted.capabilities.reasoning.thinking.types
+      ["adaptive", "between_tools"]
+  """
+  @spec inherit_hosted_claude_reasoning([map()]) :: [map()]
+  def inherit_hosted_claude_reasoning(models) when is_list(models) do
+    natives =
+      models
+      |> Enum.filter(&(Map.get(&1, :provider) == :anthropic))
+      |> Map.new(&{"anthropic/" <> &1.id, &1})
+
+    Enum.map(models, fn model ->
+      with true <- anthropic_messages_host?(model),
+           "anthropic/" <> _ = canonical_id <- extra_value(model, :canonical_model_id),
+           %{} = native <- Map.get(natives, canonical_id) do
+        inherit_reasoning(model, native)
+      else
+        _ -> model
+      end
+    end)
+  end
+
+  defp anthropic_messages_host?(model) do
+    Map.get(model, :provider) in @anthropic_messages_hosts or
+      extra_value(model, :wire_protocol) in ["anthropic_messages", :anthropic_messages]
+  end
+
+  defp inherit_reasoning(model, native) do
+    hosted_reasoning = reasoning_of(model)
+
+    if Map.get(hosted_reasoning, :enabled) == false do
+      model
+    else
+      inherited =
+        native
+        |> reasoning_of()
+        |> Map.take(@inherited_reasoning_keys)
+        |> Enum.reject(fn {_key, value} -> is_nil(value) end)
+        |> Map.new()
+
+      reasoning =
+        Map.merge(inherited, hosted_reasoning, fn _key, native_value, hosted_value ->
+          if is_nil(hosted_value), do: native_value, else: hosted_value
+        end)
+
+      capabilities =
+        model
+        |> Map.get(:capabilities)
+        |> normalize_extra_map()
+        |> Map.put(:reasoning, reasoning)
+
+      model
+      |> Map.put(:capabilities, capabilities)
+      |> inherit_thinking_constraints(native)
+    end
+  end
+
+  defp inherit_thinking_constraints(model, native) do
+    case {extra_value(model, :thinking_constraints), extra_value(native, :thinking_constraints)} do
+      {nil, constraints} when not is_nil(constraints) ->
+        extra =
+          model
+          |> Map.get(:extra)
+          |> normalize_extra_map()
+          |> Map.put(:thinking_constraints, constraints)
+
+        Map.put(model, :extra, extra)
+
+      _ ->
+        model
+    end
+  end
+
+  defp reasoning_of(model) do
+    model
+    |> Map.get(:capabilities)
+    |> normalize_extra_map()
+    |> Map.get(:reasoning)
+    |> normalize_extra_map()
+  end
+
+  defp extra_value(model, key) do
+    extra = normalize_extra_map(Map.get(model, :extra))
+    Map.get(extra, key, Map.get(extra, Atom.to_string(key)))
   end
 
   defp dated_model?(%{id: id}), do: Regex.match?(@date_suffix, id)

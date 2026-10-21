@@ -623,4 +623,102 @@ defmodule LLMDB.Engine.EnrichTest do
       assert Enrich.derive_family("text-embedding-ada-002") == "text-embedding-ada"
     end
   end
+
+  describe "inherit_hosted_claude_reasoning/1" do
+    defp native_sonnet do
+      %{
+        id: "claude-sonnet-5-5",
+        provider: :anthropic,
+        capabilities: %{
+          reasoning: %{
+            enabled: true,
+            effort: %{supported: true, values: ["low", "medium", "high", "xhigh", "max"]},
+            thinking: %{
+              supported: true,
+              types: ["adaptive", "between_tools"],
+              default_type: "adaptive",
+              disable_supported: true
+            }
+          }
+        },
+        extra: %{
+          thinking_constraints: %{
+            "between_tools" => %{"effort_values" => ["low", "medium", "high"]}
+          }
+        }
+      }
+    end
+
+    defp hosted(provider, id, extra \\ %{}) do
+      %{
+        id: id,
+        provider: provider,
+        capabilities: %{reasoning: %{enabled: true}},
+        extra: Map.merge(%{canonical_model_id: "anthropic/claude-sonnet-5-5"}, extra)
+      }
+    end
+
+    test "Bedrock, Vertex AI and Azure entries inherit native thinking, effort and constraints" do
+      for model <- [
+            hosted(:amazon_bedrock, "global.anthropic.claude-sonnet-5-5"),
+            hosted(:google_vertex, "claude-sonnet-5-5@default"),
+            hosted(:google_vertex_anthropic, "claude-sonnet-5-5@default"),
+            hosted(:azure, "claude-sonnet-5-5", %{wire_protocol: "anthropic_messages"})
+          ] do
+        [_native, enriched] = Enrich.inherit_hosted_claude_reasoning([native_sonnet(), model])
+        reasoning = enriched.capabilities.reasoning
+
+        assert reasoning.enabled
+        assert reasoning.thinking.types == ["adaptive", "between_tools"]
+        assert reasoning.effort.values == ["low", "medium", "high", "xhigh", "max"]
+
+        assert enriched.extra.thinking_constraints ==
+                 native_sonnet().extra.thinking_constraints
+
+        assert enriched.extra.canonical_model_id == "anthropic/claude-sonnet-5-5"
+      end
+    end
+
+    test "values the hosted entry already sets are kept" do
+      model =
+        :amazon_bedrock
+        |> hosted("us.anthropic.claude-sonnet-5-5")
+        |> put_in(
+          [:capabilities, :reasoning, :effort],
+          %{supported: true, values: ["low", "medium", "high"]}
+        )
+
+      [_native, enriched] = Enrich.inherit_hosted_claude_reasoning([native_sonnet(), model])
+
+      assert enriched.capabilities.reasoning.effort.values == ["low", "medium", "high"]
+      assert enriched.capabilities.reasoning.thinking.types == ["adaptive", "between_tools"]
+    end
+
+    test "routers with their own request format are not changed" do
+      model = hosted(:openrouter, "anthropic/claude-sonnet-5.5")
+      azure_openai = hosted(:azure, "claude-sonnet-5-5", %{wire_protocol: "openai_responses"})
+
+      assert [_native, ^model, ^azure_openai] =
+               Enrich.inherit_hosted_claude_reasoning([native_sonnet(), model, azure_openai])
+    end
+
+    test "entries with reasoning disabled, no canonical link or a non-Anthropic link are not changed" do
+      disabled =
+        :amazon_bedrock
+        |> hosted("us.anthropic.claude-sonnet-5-5")
+        |> put_in([:capabilities, :reasoning, :enabled], false)
+
+      unlinked = %{
+        id: "anthropic.claude-sonnet-5-5",
+        provider: :amazon_bedrock,
+        capabilities: %{reasoning: %{enabled: true}}
+      }
+
+      other_link =
+        hosted(:amazon_bedrock, "deepseek.v4", %{canonical_model_id: "deepseek/deepseek-v4"})
+
+      models = [native_sonnet(), disabled, unlinked, other_link]
+      assert Enrich.inherit_hosted_claude_reasoning(models) == models
+    end
+  end
 end
