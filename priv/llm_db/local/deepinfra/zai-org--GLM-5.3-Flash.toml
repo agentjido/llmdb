@@ -1,17 +1,14 @@
-# Verified 2026-10-19 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
+# Verified 2026-10-22 against DeepInfra and OpenRouter's standard DeepInfra endpoint.
 id = "zai-org/GLM-5.3-Flash"
 
-# Effective standard rates, in USD per million tokens; discount already applied.
+# Standard rates in USD per million tokens after the announced discount expired.
 [cost]
-input = 0.075
-output = 0.25
-cache_read = 0.015
+input = 0.15
+output = 0.50
+cache_read = 0.03
 
 [extra.pricing]
-sources_checked_at = "2026-10-19"
+sources_checked_at = "2026-10-22"
 source_urls = ["https://api.deepinfra.com/models/list", "https://deepinfra.com/zai-org/GLM-5.3-Flash", "https://openrouter.ai/api/v1/models/z-ai/glm-5.3-flash/endpoints"]
 price_basis = "standard_effective"
-discount = 0.5
-discount_already_applied = true
-discount_ends_at = "2026-10-20T23:59:59Z"
-notes = "Rates record the effective standard prices on sources_checked_at. Refresh the catalog after the discount ends."
+notes = "Rates record the standard prices confirmed after the announced discount expired."
