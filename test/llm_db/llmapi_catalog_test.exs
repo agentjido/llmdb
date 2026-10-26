@@ -6,7 +6,7 @@ defmodule LLMDB.LLMAPICatalogTest do
 
   @initial_models ~w(
     gpt-4o-mini gpt-4.1-mini claude-haiku-4-5 claude-sonnet-4-6
-    gemini-2.5-flash deepseek-v4-flash grok-4.3 qwen3-coder-plus
+    gemini-2.5-flash deepseek-v4-flash grok-4.3
     llama-3.3-70b-instruct ministral-8b-2512
   )
 
@@ -59,7 +59,7 @@ defmodule LLMDB.LLMAPICatalogTest do
         &(&1["kind"] == "chat" and get_in(&1, ["pricing", "input_cache_write_1h"]) != nil)
       )
 
-    assert length(models) == 11
+    assert length(models) == 13
 
     for source <- models do
       assert {:ok, model} = LLMDB.model({:llmapi, source["id"]})

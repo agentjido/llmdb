@@ -87,7 +87,7 @@ defmodule LLMDB.ReflectionMetadataTest do
     end
   end
 
-  test "packaged catalog includes Reflection without prices or a global reasoning default" do
+  test "packaged catalog includes Reflection with free beta prices and no global reasoning default" do
     provider = Packaged.snapshot()["providers"]["reflection"]
     assert is_map(provider)
     assert provider["runtime"]["auth"]["env"] == ["REFLECTION_API_KEY"]
@@ -99,7 +99,7 @@ defmodule LLMDB.ReflectionMetadataTest do
     assert model["provider_model_id"] == @model_id
     assert model["extra"]["reasoning"]["mandatory"]
     assert is_nil(model["capabilities"]["reasoning"]["effort"]["default"])
-    assert is_nil(model["cost"])
+    assert model["cost"] == %{"input" => 0, "output" => 0, "cache_read" => 0}
     assert is_nil(model["pricing"])
     assert Enum.sort(Map.keys(model["execution"])) == ["object", "text"]
 
