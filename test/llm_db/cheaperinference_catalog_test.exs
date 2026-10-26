@@ -17,12 +17,19 @@ defmodule LLMDB.CheaperInferenceCatalogTest do
 
   test "packages the documented starter models" do
     expected = %{
-      "gpt-5.4-mini" => %{context: 400_000, output: 128_000, input: 0.49, output_cost: 2.92},
+      "gpt-5.4-mini" => %{
+        context: 400_000,
+        output: 128_000,
+        input: 0.4875,
+        output_cost: 2.925,
+        cache_read: 0.04875
+      },
       "claude-sonnet-5" => %{
         context: 1_000_000,
-        output: 64_000,
-        input: 1.34,
-        output_cost: 6.69
+        output: 128_000,
+        input: 1.337238,
+        output_cost: 6.686191,
+        cache_read: 0.133724
       }
     }
 
@@ -33,10 +40,15 @@ defmodule LLMDB.CheaperInferenceCatalogTest do
       assert model.limits == %{context: metadata.context, output: metadata.output}
       assert model.cost.input == metadata.input
       assert model.cost.output == metadata.output_cost
+      assert model.cost.cache_read == metadata.cache_read
+      assert model.modalities == %{input: [:text, :image], output: [:text]}
       assert model.capabilities.reasoning.enabled
       assert model.capabilities.streaming.text
-      assert model.extra["pricing_dynamic"]
-      assert model.extra["pricing_checked_at"] == "2026-10-26"
+      pricing = model.extra["pricing"]
+      assert pricing["dynamic"]
+      assert pricing["price_basis"] == "current_market_rate"
+      assert pricing["sources_checked_at"] == "2026-10-26"
+      assert length(pricing["source_urls"]) == 2
 
       for operation <- [:text, :object] do
         execution = model.execution[operation]
