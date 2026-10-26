@@ -1,0 +1,17 @@
+id = "cheaperinference"
+name = "Cheaper Inference"
+base_url = "https://api.cheaperinference.com/v1"
+doc = "https://api.cheaperinference.com/docs"
+env = ["CHEAPERINFERENCE_API_KEY"]
+
+[runtime]
+base_url = "https://api.cheaperinference.com/v1"
+doc_url = "https://api.cheaperinference.com/docs"
+
+[runtime.auth]
+type = "bearer"
+env = ["CHEAPERINFERENCE_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
+object = "openai_chat_compatible"

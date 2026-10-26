@@ -1,0 +1,41 @@
+id = "gpt-5.4-mini"
+provider_model_id = "gpt-5.4-mini"
+name = "GPT-5.4 mini"
+family = "gpt-mini"
+release_date = "2026-03-17"
+last_updated = "2026-10-26"
+knowledge = "2025-08-31"
+
+[limits]
+context = 400000
+output = 128000
+
+[cost]
+input = 0.49
+output = 2.92
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra]
+pricing_dynamic = true
+pricing_checked_at = "2026-10-26"
+source_urls = ["https://api.cheaperinference.com/models/gpt-5.4-mini", "https://api.cheaperinference.com/docs"]
+
+[extra.wire]
+protocol = "openai_chat"
