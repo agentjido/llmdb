@@ -49,9 +49,10 @@ validation happens in the Engine.
 
 ### Remote cached sources
 
-Models.dev, OpenRouter, OpenAI, Anthropic, Google, Meta, xAI, ZenMux, LLM API, and Llmfit have
-source adapters. Run `mix llm_db.pull` to refresh their repository-local cache;
-the Engine subsequently reads that cache through each source's `load/1`.
+Models.dev, OpenRouter, OpenAI, Anthropic, Google, Meta, xAI, ZenMux, LLM API,
+Inference.net, and Llmfit have source adapters. Run `mix llm_db.pull` to refresh
+their repository-local cache. The Engine then reads that cache through each
+source's `load/1`.
 
 ### Meta Model API discovery
 
@@ -112,6 +113,15 @@ When supported input modalities have different token rates, the source retains
 the base `cost` summary and raw fees but excludes the flat `token.input`
 component. Complete input pricing then requires a token split by modality;
 `extra.pricing_input_split_required` identifies these models.
+
+The Inference.net source reads the public
+`https://api.inference.net/v1/models` catalog without credentials. Run
+`mix llm_db.pull --source inference` to refresh it, then run
+`mix llm_db.build --install`. The source records model limits, token prices,
+modalities, reasoning effort values, endpoint support, and privileged-access
+flags. It also adds the reviewed OpenAI Chat Completions execution contract.
+Runtime requests use `INFERENCE_API_KEY` and
+`https://api.inference.net/v1`.
 
 ### Local TOML
 

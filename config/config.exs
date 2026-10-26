@@ -13,6 +13,7 @@ config :llm_db,
     {LLMDB.Sources.XAI, %{}},
     {LLMDB.Sources.Zenmux, %{}},
     {LLMDB.Sources.LLMAPI, %{}},
+    {LLMDB.Sources.InferenceNet, %{}},
     {LLMDB.Sources.Local, %{dir: "priv/llm_db/local"}}
   ],
 
@@ -28,6 +29,7 @@ config :llm_db,
   xai_cache_dir: "priv/llm_db/remote",
   zenmux_cache_dir: "priv/llm_db/remote",
   llmapi_cache_dir: "priv/llm_db/remote",
+  inference_net_cache_dir: "priv/llm_db/remote",
   llmfit_enrichment: true,
   azure_foundry_cache_dir: "priv/llm_db/remote"
 

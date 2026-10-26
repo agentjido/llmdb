@@ -1,0 +1,1868 @@
+{
+  "data": [
+    {
+      "context_length": 1000000,
+      "id": "claude-fable-5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000050000000",
+        "input_cache_read": "0.000001000000",
+        "prompt": "0.000010000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 200000,
+      "id": "claude-haiku-4-5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 64000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000005000000",
+        "input_cache_read": "0.000000100000",
+        "prompt": "0.000001000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-opus-4-6",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000025000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-opus-4-7",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000025000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-opus-4-8",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000025000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-opus-5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000025000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-opus-5-5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000020000000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000004000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "claude-sonnet-4-6",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000015000000",
+        "input_cache_read": "0.000000300000",
+        "prompt": "0.000003000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 163840,
+      "id": "deepseek-v3.2",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002000000",
+        "input_cache_read": "0.000000350000",
+        "prompt": "0.000000700000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "deepseek-v4-flash",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 384000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000620000",
+        "input_cache_read": "0.000000002800",
+        "prompt": "0.000000230000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048575,
+      "id": "deepseek-v4-flash-0731",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 1048575,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001580000",
+        "input_cache_read": "0.000000017000",
+        "prompt": "0.000000530000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "deepseek-v4-pro",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 384000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000004200000",
+        "input_cache_read": "0.000000003625",
+        "prompt": "0.000002100000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "deepseek-v4-pro-0813",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 131072,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000003960000",
+        "input_cache_read": "0.000000044000",
+        "prompt": "0.000001320000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1040000,
+      "id": "deepseek-v4.1-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 393216,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001000000",
+        "input_cache_read": "0.000000007000",
+        "prompt": "0.000000300000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1040000,
+      "id": "deepseek-v4.1-flash-1017",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 393216,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001000000",
+        "input_cache_read": "0.000000007000",
+        "prompt": "0.000000300000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "access_status": "none",
+      "context_length": 1040000,
+      "id": "deepseek-v4.1-flash-1017-cyber",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 393216,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001000000",
+        "input_cache_read": "0.000000007000",
+        "prompt": "0.000000300000"
+      },
+      "requires_approved_access": true,
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-2.5-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002500000",
+        "input_cache_read": "0.000000030000",
+        "prompt": "0.000000300000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-2.5-flash-lite",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000400000",
+        "input_cache_read": "0.000000010000",
+        "prompt": "0.000000100000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-2.5-pro",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000010000000",
+        "input_cache_read": "0.000000125000",
+        "prompt": "0.000001250000"
+      },
+      "reasoning_efforts": [
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3-flash-preview",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000003000000",
+        "input_cache_read": "0.000000050000",
+        "prompt": "0.000000500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.1-flash-lite",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001500000",
+        "input_cache_read": "0.000000025000",
+        "prompt": "0.000000250000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.1-pro-preview",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000012000000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.5-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000009000000",
+        "input_cache_read": "0.000000150000",
+        "prompt": "0.000001500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.5-flash-lite",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002500000",
+        "input_cache_read": "0.000000030000",
+        "prompt": "0.000000300000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.6-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000007500000",
+        "input_cache_read": "0.000000150000",
+        "prompt": "0.000001500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gemini-3.7-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "max_completion_tokens": 65536,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000007500000",
+        "input_cache_read": "0.000000150000",
+        "prompt": "0.000001500000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 131072,
+      "id": "gemma-3-27b-it",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 8192,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000250000",
+        "prompt": "0.000000090000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 131072,
+      "id": "gemma-3-4b-it",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 8192,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000100000",
+        "prompt": "0.000000050000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 204800,
+      "id": "glm-5",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 131072,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002550000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000000950000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "glm-5.2",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 943718,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000004400000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000001300000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "glm-5.2-fast",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000008800000",
+        "input_cache_read": "0.000000400000",
+        "prompt": "0.000002600000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "glm-5.3",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 943718,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000003000000",
+        "input_cache_read": "0.000000150000",
+        "prompt": "0.000000900000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "glm-5.3-flash",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "max_completion_tokens": 262144,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000450000",
+        "input_cache_read": "0.000000030000",
+        "prompt": "0.000000100000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1047576,
+      "id": "gpt-4.1",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 32768,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000008000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000002000000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1047576,
+      "id": "gpt-4.1-mini",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 32768,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001600000",
+        "input_cache_read": "0.000000100000",
+        "prompt": "0.000000400000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1047576,
+      "id": "gpt-4.1-nano",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 32768,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000400000",
+        "input_cache_read": "0.000000025000",
+        "prompt": "0.000000100000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 128000,
+      "id": "gpt-4o",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 16384,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000010000000",
+        "input_cache_read": "0.000001250000",
+        "prompt": "0.000002500000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 128000,
+      "id": "gpt-4o-mini",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 16384,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000600000",
+        "input_cache_read": "0.000000075000",
+        "prompt": "0.000000150000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 400000,
+      "id": "gpt-5-mini",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002000000",
+        "input_cache_read": "0.000000025000",
+        "prompt": "0.000000250000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 400000,
+      "id": "gpt-5-nano",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000400000",
+        "input_cache_read": "0.000000005000",
+        "prompt": "0.000000050000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1050000,
+      "id": "gpt-5.4",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000015000000",
+        "input_cache_read": "0.000000250000",
+        "prompt": "0.000002500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1050000,
+      "id": "gpt-5.5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000030000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1050000,
+      "id": "gpt-5.6-luna",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001200000",
+        "input_cache_read": "0.000000020000",
+        "prompt": "0.000000200000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1050000,
+      "id": "gpt-5.6-sol",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000030000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000005000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1050000,
+      "id": "gpt-5.6-terra",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000012000000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 922000,
+      "id": "gpt-6-astra",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000050000000",
+        "input_cache_read": "0.000001000000",
+        "prompt": "0.000010000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 922000,
+      "id": "gpt-6-luna",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000500000",
+        "input_cache_read": "0.000000010000",
+        "prompt": "0.000000100000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 922000,
+      "id": "gpt-6-sol",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000010000000",
+        "input_cache_read": "0.000000200000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "gpt-6.1-sol",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000010000000",
+        "input_cache_read": "0.000000100000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "medium",
+        "high",
+        "xhigh"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 500000,
+      "id": "grok-4.5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 500000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000006000000",
+        "input_cache_read": "0.000000300000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 500000,
+      "id": "grok-4.6",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 500000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000006000000",
+        "input_cache_read": "0.000000500000",
+        "prompt": "0.000002000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 262144,
+      "id": "kimi-k2.5",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 262144,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000003950000",
+        "input_cache_read": "0.000000130000",
+        "prompt": "0.000000800000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 262144,
+      "id": "kimi-k2.6",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 262144,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000005300000",
+        "input_cache_read": "0.000000210000",
+        "prompt": "0.000001250000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "moonshotai/kimi-k3",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000015000000",
+        "input_cache_read": "0.000000300000",
+        "prompt": "0.000003000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "moonshotai/kimi-k3-fast",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000022500000",
+        "input_cache_read": "0.000000450000",
+        "prompt": "0.000004500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "kimi-k3-fast",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000022500000",
+        "input_cache_read": "0.000000450000",
+        "prompt": "0.000004500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 60000,
+      "id": "llama-3.2-1b-instruct",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 60000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000201000",
+        "prompt": "0.000000027000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 131072,
+      "id": "llama-3.2-3b-instruct",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 131072,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000330000",
+        "prompt": "0.000000050000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 131072,
+      "id": "llama-3.3-70b-instruct",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000400000",
+        "prompt": "0.000000130000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "minimax-m3.1-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 524288,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000500000",
+        "input_cache_read": "0.000000005000",
+        "prompt": "0.000000100000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 262144,
+      "id": "nemotron-3-super",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 262144,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000480000",
+        "prompt": "0.000000102000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 131072,
+      "id": "qwen3-14b",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 8192,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000910000",
+        "prompt": "0.000000227500"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 40960,
+      "id": "qwen3-30b-a3b",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 16384,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000500000",
+        "prompt": "0.000000120000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1000000,
+      "id": "qwen3.7-plus",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "max_completion_tokens": 128000,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000001600000",
+        "input_cache_read": "0.000000080000",
+        "prompt": "0.000000400000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 128000,
+      "id": "inference-net/schematron-v2-small",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 4096,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000230000",
+        "input_cache_read": "0.000000050000",
+        "prompt": "0.000000050000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 128000,
+      "id": "inference-net/schematron-v2-turbo",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 8192,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000150000",
+        "input_cache_read": "0.000000030000",
+        "prompt": "0.000000030000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "stepfun/step-5-preview",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 131072,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002700000",
+        "input_cache_read": "0.000000050000",
+        "prompt": "0.000001000000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    }
+  ],
+  "object": "list"
+}
