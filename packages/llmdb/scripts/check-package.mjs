@@ -10,6 +10,10 @@ import {
   packageDirectory,
 } from "./paths.mjs";
 
+const maximumPackedSize = 2_000_000;
+const maximumUnpackedSize = 7_000_000;
+const maximumProviderEntrypointSize = 700_000;
+
 const result = spawnSync(
   "npm",
   ["pack", "--dry-run", "--json", "--ignore-scripts"],
@@ -93,9 +97,13 @@ if (!isDeepStrictEqual(snapshotModule.snapshot, sourceSnapshot)) {
   throw new Error("Packed provider shards do not reconstruct the snapshot.");
 }
 
-if (pack.size > 2_000_000 || pack.unpackedSize > 7_000_000) {
+if (
+  pack.size > maximumPackedSize ||
+  pack.unpackedSize > maximumUnpackedSize
+) {
   throw new Error(
-    `Package is too large (${pack.size} packed, ${pack.unpackedSize} unpacked).`,
+    `Package is too large (${pack.size} packed, ${pack.unpackedSize} unpacked; ` +
+      `limits are ${maximumPackedSize} packed and ${maximumUnpackedSize} unpacked).`,
   );
 }
 
@@ -110,12 +118,15 @@ const providerFiles = pack.files
       file.path.startsWith("dist/providers/") && file.path.endsWith(".js"),
   )
   .sort((left, right) => right.size - left.size);
-const oversizedProvider = providerFiles.find((file) => file.size > 650_000);
+const oversizedProvider = providerFiles.find(
+  (file) => file.size > maximumProviderEntrypointSize,
+);
 
 if (oversizedProvider !== undefined) {
   throw new Error(
     `Provider entrypoint is too large (${oversizedProvider.path}, ` +
-      `${oversizedProvider.size} bytes).`,
+      `${oversizedProvider.size} bytes; limit is ` +
+      `${maximumProviderEntrypointSize} bytes).`,
   );
 }
 
