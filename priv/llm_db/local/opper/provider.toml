@@ -1,0 +1,15 @@
+# Opper is already in the catalog through models.dev. This adds the runtime
+# contract so its chat models can run through the OpenAI chat lane.
+# https://docs.opper.ai/build/gateway/drop-in-sdks
+id = "opper"
+
+[runtime]
+base_url = "https://api.opper.ai/v3/compat"
+doc_url = "https://docs.opper.ai/build/gateway/drop-in-sdks"
+
+[runtime.auth]
+type = "bearer"
+env = ["OPPER_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
