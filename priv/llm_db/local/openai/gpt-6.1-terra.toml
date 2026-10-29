@@ -1,0 +1,232 @@
+id = "gpt-6.1-terra"
+provider_model_id = "gpt-6.1-terra"
+name = "GPT-6.1 Terra"
+family = "gpt-6"
+release_date = "2026-10-26"
+last_updated = "2026-10-29"
+knowledge = "2026-06-01"
+doc_url = "https://developers.openai.com/api/docs/models/gpt-6.1-terra"
+aliases = []
+
+[limits]
+context = 1050000
+input = 922000
+output = 128000
+
+# Standard rates for requests with at most 272K input tokens.
+[cost]
+input = 1.0
+output = 5.0
+cache_read = 0.05
+cache_write = 1.25
+
+# Verified 2026-10-29 against the model page and pricing page below.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 1.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 2.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 5.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 7.5
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.05
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.1
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 1.25
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "30-minute cache retention; 12-hour retention costs twice this rate."
+
+[[pricing.components]]
+id = "token.cache_write.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 2.5
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+notes = "30-minute cache retention; 12-hour retention costs twice this rate."
+
+# Apply one processing modifier to the selected context tier, then residency.
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[[pricing.components]]
+id = "pricing.flex"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { service_tier = "flex" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "flex"
+
+[[pricing.components]]
+id = "pricing.fast"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "fast" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "fast"
+
+[[pricing.components]]
+id = "pricing.priority"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "priority" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "priority"
+
+[[pricing.components]]
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { regional_processing = true }
+source = "provider_docs"
+notes = "Regional processing endpoint uplift."
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["none", "low", "medium", "high", "xhigh", "max"]
+default = "medium"
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.json]
+schema = true
+strict = true
+
+[capabilities.streaming]
+text = true
+
+[capabilities.batch]
+supported = true
+
+[capabilities.code_execution]
+supported = true
+
+[capabilities.context_management]
+supported = true
+features = ["compact"]
+
+[lifecycle]
+status = "active"
+
+[extra]
+description = "A fast, efficient model for visual reasoning, precise computer use, and clear, natural writing."
+tool_calling_endpoint = "/v1/responses"
+supported_endpoints = ["/v1/responses", "/v1/chat/completions", "/v1/batch"]
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-6.1-terra",
+  "https://developers.openai.com/api/docs/pricing",
+  "https://developers.openai.com/api/docs/changelog"
+]
+
+[extra.wire]
+protocol = "openai_responses"
+
+[extra.pricing]
+sources_checked_at = "2026-10-29"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-6.1-terra", "https://developers.openai.com/api/docs/pricing"]
+cache_write_retention = "30m"
+cache_write_12h_multiplier = 2.0

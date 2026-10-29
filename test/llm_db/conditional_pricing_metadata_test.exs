@@ -12,6 +12,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
     "gpt-6-astra" => [10.0, 50.0, 1.0, 12.5],
     "gpt-6-sol" => [2.0, 10.0, 0.2, 2.5],
     "gpt-6.1-sol" => [2.0, 10.0, 0.1, 2.5],
+    "gpt-6.1-terra" => [1.0, 5.0, 0.05, 1.25],
     "gpt-6-luna" => [0.1, 0.5, 0.01, 0.125]
   }
   @anthropic %{
@@ -80,7 +81,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
   end
 
   test "GPT-6 records documented effort choices without inventing per-effort prices", ctx do
-    for id <- ~w(gpt-6-sol gpt-6-luna) do
+    for id <- ~w(gpt-6-sol gpt-6-luna gpt-6.1-terra) do
       model = ctx.models[id]
       assert model.capabilities.reasoning.effort.values == ~w(none low medium high xhigh max)
       assert model.capabilities.reasoning.effort.default == "medium"
