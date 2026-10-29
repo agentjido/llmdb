@@ -6,6 +6,55 @@ defmodule LLMDB.OpenAIMetadataTest do
 
   @local_dir "priv/llm_db/local"
 
+  test "Terra 6.1 records documented limits, modalities, and Responses tool calling" do
+    model = openai_model("gpt-6.1-terra")
+
+    assert model.provider_model_id == "gpt-6.1-terra"
+    assert model.name == "GPT-6.1 Terra"
+    assert model.release_date == "2026-10-26"
+    assert model.knowledge == "2026-06-01"
+    assert model.limits == %{context: 1_050_000, input: 922_000, output: 128_000}
+    assert model.modalities == %{input: [:text, :image], output: [:text]}
+    assert model.capabilities.reasoning.effort.values == ~w(none low medium high xhigh max)
+    assert model.capabilities.reasoning.effort.default == "medium"
+    assert model.capabilities.tools.enabled
+    assert model.capabilities.json.schema
+    assert model.capabilities.json.strict
+    assert model.capabilities.streaming.text
+    assert model.capabilities.batch.supported
+    assert model.capabilities.code_execution.supported
+    assert model.extra.tool_calling_endpoint == "/v1/responses"
+    assert model.extra.wire.protocol == "openai_responses"
+  end
+
+  test "packaged Terra 6.1 supports structured output over Responses" do
+    model = Packaged.snapshot()["providers"]["openai"]["models"]["gpt-6.1-terra"]
+
+    assert model["provider_model_id"] == "gpt-6.1-terra"
+    assert model["limits"]["input"] == 922_000
+    assert "text" in model["modalities"]["input"]
+    assert "image" in model["modalities"]["input"]
+    assert model["modalities"]["output"] == ["text"]
+    assert model["capabilities"]["json"]["schema"]
+    assert model["capabilities"]["json"]["strict"]
+
+    assert model["cost"] == %{
+             "input" => 1.0,
+             "output" => 5.0,
+             "cache_read" => 0.05,
+             "cache_write" => 1.25
+           }
+
+    for operation <- ["text", "object"] do
+      assert model["execution"][operation] == %{
+               "family" => "openai_responses_compatible",
+               "path" => "/responses",
+               "supported" => true,
+               "wire_protocol" => "openai_responses"
+             }
+    end
+  end
+
   test "Astra metadata records documented limits and general access" do
     model = astra_model()
 
