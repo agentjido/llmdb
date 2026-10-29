@@ -183716,7 +183716,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": "2027-10-26T00:00:00Z",
+        "inferenceDeprecationDate": null,
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "AOAI",
@@ -183851,7 +183851,6 @@
         ]
       },
       "tags": {
-        "InferenceDeprecationDate": "10/26/2027 00:00:00 +00:00",
         "author": "OpenAI",
         "deploymentOptions": "UnifiedEndpointMaaS,AOAI,Serverless API,Instant",
         "disable-maap": "true",
@@ -183911,7 +183910,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-26T18:10:54.0231531Z",
+      "modifiedTime": "2026-10-28T01:57:21.6172815Z",
       "name": "gpt-6.1-terra",
       "orginAssetId": null,
       "parentModelId": null,
@@ -183935,7 +183934,7 @@
     "resourceType": "Registry",
     "schemaId": "fc8dc5ee-fc18-54e6-adc6-645eec1df01d",
     "type": "models",
-    "updateSequence": 6,
+    "updateSequence": 8,
     "usage": {
       "popularity": 72.66,
       "totalCount": 0

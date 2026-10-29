@@ -151,6 +151,11 @@
             "currency": "USD",
             "unit": "perSecond",
             "value": 0.03
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.03
           }
         ]
       },
@@ -695,6 +700,36 @@
     },
     {
       "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 64000,
+      "created": 1792143681,
+      "display_name": "Cloudflare: Clef Omni",
+      "id": "cloudflare/clef-omni",
+      "input_modalities": [
+        "text",
+        "image",
+        "audio",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "decisions"
+      ],
+      "owned_by": "cloudflare",
+      "pricings": {
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.15
+          }
+        ]
+      },
+      "publish_time": "2026-10-09"
+    },
+    {
+      "capabilities": {
         "reasoning": false
       },
       "context_length": 256000,
@@ -933,6 +968,62 @@
       "capabilities": {
         "reasoning": true
       },
+      "context_length": 24576,
+      "created": 1792035333,
+      "display_name": "Cloudflare: Clef Flash",
+      "id": "cloudflare/clef-flash",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "decisions"
+      ],
+      "owned_by": "cloudflare",
+      "pricings": {
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.038
+          }
+        ]
+      },
+      "publish_time": "2026-10-01"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
+      "context_length": 64000,
+      "created": 1792143751,
+      "display_name": "Cloudflare: Clef",
+      "id": "cloudflare/clef",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "decisions"
+      ],
+      "owned_by": "cloudflare",
+      "pricings": {
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.24
+          }
+        ]
+      },
+      "publish_time": "2026-10-01"
+    },
+    {
+      "capabilities": {
+        "reasoning": true
+      },
       "context_length": 1050000,
       "created": 1790731088,
       "display_name": "OpenAI: GPT-6.1 Sol",
@@ -964,7 +1055,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -988,7 +1079,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1012,7 +1103,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1036,7 +1127,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1480,7 +1571,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1504,7 +1595,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1528,7 +1619,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -1552,7 +1643,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": "272",
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5207,8 +5298,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5219,7 +5309,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5232,8 +5322,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5244,7 +5333,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5257,8 +5346,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5269,7 +5357,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5282,8 +5370,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5294,7 +5381,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5337,8 +5424,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5349,7 +5435,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5362,8 +5448,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5374,7 +5459,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5387,8 +5472,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5399,7 +5483,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5412,8 +5496,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5424,7 +5507,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5467,8 +5550,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5479,7 +5561,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5492,8 +5574,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5504,7 +5585,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5517,8 +5598,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5529,7 +5609,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -5542,8 +5622,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 0,
-                "lt": 272,
+                "gte": "0",
                 "unit": "kTokens"
               }
             },
@@ -5554,7 +5633,7 @@
           {
             "conditions": {
               "prompt_tokens": {
-                "gte": 272,
+                "gt": "272",
                 "unit": "kTokens"
               }
             },
@@ -10570,86 +10649,6 @@
         ]
       },
       "publish_time": "2026-01-23"
-    },
-    {
-      "capabilities": {
-        "reasoning": true
-      },
-      "context_length": 128000,
-      "created": 1763014410,
-      "display_name": "Baidu: ERNIE 5.0",
-      "id": "baidu/ernie-5.0-thinking-preview",
-      "input_modalities": [
-        "text",
-        "image",
-        "video"
-      ],
-      "max_tokens": 64000,
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "baidu",
-      "pricings": {
-        "completion": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 3.37
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 5.62
-          }
-        ],
-        "prompt": [
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 0,
-                "lt": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.84
-          },
-          {
-            "conditions": {
-              "prompt_tokens": {
-                "gte": 32,
-                "unit": "kTokens"
-              }
-            },
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.41
-          }
-        ],
-        "web_search": [
-          {
-            "currency": "USD",
-            "unit": "perCount",
-            "value": 0.0006
-          }
-        ]
-      },
-      "publish_time": "2026-01-22"
     },
     {
       "capabilities": {
