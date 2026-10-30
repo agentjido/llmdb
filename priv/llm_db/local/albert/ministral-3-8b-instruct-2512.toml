@@ -1,0 +1,30 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "ministral-3-8b-instruct-2512"
+name = "Ministral 3 8B Instruct 2512"
+family = "ministral"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#ministral-3-8b-instruct-2512"
+aliases = ["mistralai/Ministral-3-8B-Instruct-2512", "openweight-small"]
+
+[limits]
+context = 262144
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"

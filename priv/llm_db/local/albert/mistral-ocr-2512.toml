@@ -1,0 +1,29 @@
+# Official Albert model catalog checked 2026-10-30; partner pricing is not listed.
+id = "mistral-ocr-2512"
+name = "Mistral OCR 2512"
+family = "mistral-ocr"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#mistral-ocr-2512"
+tags = ["partner", "ocr"]
+# No document OCR operation exists in the current execution schema.
+catalog_only = true
+
+[limits]
+context = 16384
+
+[modalities]
+input = ["image", "pdf"]
+output = ["text", "image"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+
+[extra]
+type = "image-to-text"
+license = "proprietary"
+partner = true
+endpoint = "/v1/ocr"
+endpoint_doc = "https://guides.ia.numerique.gouv.fr/albert-api/api-reference/liste-des-endpoint/ocr"
+notes = "Restricted-access Mistral Document AI pipeline hosted by Albert, not a chat-completions model."

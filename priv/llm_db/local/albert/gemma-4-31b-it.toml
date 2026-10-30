@@ -1,0 +1,34 @@
+# Official Albert model catalog checked 2026-10-30; pricing is not listed.
+id = "gemma-4-31b-it"
+name = "Gemma 4 31B IT"
+family = "gemma"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#gemma-4-31b-it"
+aliases = ["google/gemma-4-31B-it"]
+tags = ["experimental"]
+
+[limits]
+context = 131072
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"
+experimental = true
+experiment_start = "2026-08-31"
+experiment_end = "2026-12-01"
+notes = "Experimental candidate to replace openweight-medium; continued availability is not guaranteed."

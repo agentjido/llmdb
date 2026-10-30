@@ -5,6 +5,7 @@ defmodule LLMDB.ProviderRuntimeDataTest do
   alias LLMDB.Sources.Local
 
   @openai_compatible [
+    :albert,
     :openai,
     :openrouter,
     :groq,

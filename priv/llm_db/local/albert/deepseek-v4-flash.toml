@@ -1,0 +1,38 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "deepseek-v4-flash"
+name = "DeepSeek V4 Flash"
+family = "deepseek"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#deepseek-v4-flash"
+aliases = ["deepseek-ai/DeepSeek-V4-Flash-0731"]
+tags = ["experimental", "code"]
+
+[limits]
+context = 131072
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "MIT"
+experimental = true
+experiment_start = "2026-07-26"
+experiment_end = "2026-10-31"
+notes = "Experimental candidate to replace openweight-code. Albert recommends code generation rather than general conversation due to potential censorship."
