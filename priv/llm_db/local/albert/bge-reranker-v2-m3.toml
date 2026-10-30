@@ -1,0 +1,34 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "bge-reranker-v2-m3"
+name = "BGE Reranker v2 M3"
+family = "bge"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#bge-reranker-v2-m3"
+aliases = ["BAAI/bge-reranker-v2-m3", "openweight-rerank"]
+# No reranking operation exists in the current execution schema.
+catalog_only = true
+
+[limits]
+context = 8192
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text"]
+
+[capabilities]
+chat = false
+rerank = true
+
+[capabilities.streaming]
+text = false
+
+[extra]
+type = "text-classification"
+license = "MIT"
+max_batch_size = 64
+recommended_max_input_tokens = 1024
+# The endpoint reference takes precedence over the catalog's stale /reranking label.
+endpoint = "/v1/rerank"
+endpoint_doc = "https://guides.ia.numerique.gouv.fr/albert-api/api-reference/liste-des-endpoint/rerank"

@@ -1,0 +1,32 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "bge-m3"
+name = "BGE-M3"
+family = "bge"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#bge-m3"
+aliases = ["BAAI/bge-m3", "openweight-embeddings"]
+
+[limits]
+context = 8192
+
+# Free access for authorized government accounts; prices are not upstream vendor rates.
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["embedding"]
+
+[capabilities]
+chat = false
+
+[capabilities.embeddings]
+max_dimensions = 1024
+
+[capabilities.streaming]
+text = false
+
+[extra]
+type = "text-embeddings-inference"
+license = "MIT"
+max_batch_size = 64

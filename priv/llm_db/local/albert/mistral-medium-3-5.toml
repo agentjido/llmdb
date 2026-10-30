@@ -1,0 +1,32 @@
+# Official Albert model catalog checked 2026-10-30; partner pricing is not listed.
+id = "mistral-medium-3-5"
+name = "Mistral Medium 3.5"
+family = "mistral-medium"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#mistral-medium-3-5"
+aliases = ["mistral-medium-2508", "mistralai/Mistral-Medium-3.5-128", "mistral-medium-latest"]
+tags = ["partner"]
+
+[limits]
+context = 262144
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "image-text-to-text"
+license = "Modified MIT"
+partner = true
+notes = "Partner model; access depends on account authorization."

@@ -1,0 +1,27 @@
+id = "albert"
+name = "Albert API"
+base_url = "https://albert.api.etalab.gouv.fr/v1"
+doc = "https://guides.ia.numerique.gouv.fr/albert-api"
+env = ["ALBERT_API_KEY"]
+# Describe the private service without advertising built-in client execution support.
+catalog_only = true
+
+[runtime]
+base_url = "https://albert.api.etalab.gouv.fr/v1"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api"
+
+[runtime.auth]
+type = "bearer"
+env = ["ALBERT_API_KEY"]
+
+[runtime.execution]
+text = "openai_chat_compatible"
+object = "openai_chat_compatible"
+embed = "openai_embeddings"
+transcription = "openai_transcription"
+
+[extra]
+description = "Private provider for French government bodies, operated by DINUM; access requires authorization."
+models_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models"
+pricing_url = "https://ia.numerique.gouv.fr/outils-ia/albert-api/tarifs-et-limites/"
+access_note = "Available models and quotas depend on the authorized account. Partner models require restricted access."
