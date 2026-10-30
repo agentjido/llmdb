@@ -459,6 +459,30 @@
     },
     {
       "context_length": 1048576,
+      "id": "deepseek-v4.1-pro",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 393216,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000003960000",
+        "input_cache_read": "0.000000132000",
+        "prompt": "0.000001320000"
+      },
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
       "id": "gemini-2.5-flash",
       "input_modalities": [
         "text",
