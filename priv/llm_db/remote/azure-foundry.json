@@ -18204,7 +18204,38 @@
               "SWITZERLANDNORTH"
             ],
             "name": "Standard",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "629a80a4-a287-526b-8994-99a699287069",
+                "name": "CachedContextToken",
+                "offerId": "6a5c1e14-3b84-56fd-8b13-17846c757190",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.001375,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "b313f622-c7f4-5f60-9136-96b5b59cd751",
+                "name": "GeneratedToken",
+                "offerId": "bf9d1504-4a5a-5d56-b91d-3ad297501099",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.011,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "e616998e-40f4-54d2-b36b-196138150bc7",
+                "name": "NoCachedContextToken",
+                "offerId": "a9b96755-2d0f-5c17-8275-a8d85b65e1dc",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.00275,
+                "unit": "1K"
+              }
+            ]
           },
           {
             "locations": [
@@ -18230,7 +18261,18 @@
               "KOREACENTRAL"
             ],
             "name": "ProvisionedManaged",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "1984ddb3-b3d6-5532-84a3-2d8d92a2ac0b",
+                "name": null,
+                "offerId": "dbad17fa-3e49-5871-9cda-81a534d012c7",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 2.0,
+                "unit": "1/Hour"
+              }
+            ]
           },
           {
             "locations": [
@@ -18250,7 +18292,38 @@
               "ITALYNORTH"
             ],
             "name": "DataZoneStandard",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "b3a93f8d-7466-5757-8c1a-6dc845c22503",
+                "name": "CachedContextToken",
+                "offerId": "77a695a3-fc22-5082-a0f2-7a40fc972ec7",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.001375,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "b894f056-ff70-50e2-b09d-0631879811e9",
+                "name": "GeneratedToken",
+                "offerId": "4f73cb08-d832-57fe-9850-746f379958a4",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.011,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "5fba082f-37a6-51f4-a177-ef6404575cdb",
+                "name": "NoCachedContextToken",
+                "offerId": "d4112d72-bcb2-59aa-a566-0f0f8279e3e9",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.00275,
+                "unit": "1K"
+              }
+            ]
           },
           {
             "locations": [
@@ -18282,7 +18355,38 @@
               "CENTRALUS"
             ],
             "name": "GlobalStandard",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "f9688f9b-1d5c-52fc-8cb4-c319b8693777",
+                "name": "CachedContextToken",
+                "offerId": "3657217a-ca43-5ab3-bcb3-7ff298c7da41",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.00125,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "3336fed2-e64d-5639-951a-806ead2ede4b",
+                "name": "GeneratedToken",
+                "offerId": "0f6488cd-d3db-5b6e-8bb2-4837a27ad41e",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.01,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "3ba7b4f7-d853-55b2-ab71-dcbee21a6277",
+                "name": "NoCachedContextToken",
+                "offerId": "e618d768-8d2d-5c53-822e-07d6cd7aca22",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.0025,
+                "unit": "1K"
+              }
+            ]
           },
           {
             "locations": [
@@ -18300,7 +18404,28 @@
               "WESTEUROPE"
             ],
             "name": "DataZoneBatch",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "1771d1ec-42fc-57da-82a2-464e7307e2b1",
+                "name": "ContextToken",
+                "offerId": "865466be-6934-5e2c-bd26-4479814de197",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.001375,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "86773f9d-8776-58dc-904a-cf2f3b3728b0",
+                "name": "GeneratedToken",
+                "offerId": "1c3ebe8c-735e-5854-a7a1-c237c0ceb4c3",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.0055,
+                "unit": "1K"
+              }
+            ]
           },
           {
             "locations": [
@@ -18328,7 +18453,28 @@
               "SOUTHINDIA"
             ],
             "name": "GlobalBatch",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "d2c386eb-1515-5ac6-9722-b73961057678",
+                "name": "ContextToken",
+                "offerId": "da5e0144-1d6a-5c74-b971-e2b7343896d1",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.00125,
+                "unit": "1K"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "730149f6-800f-5b48-afa9-d9674b56de28",
+                "name": "GeneratedToken",
+                "offerId": "20f38f3c-4e49-5d20-86ea-90afeef90bfd",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.005,
+                "unit": "1K"
+              }
+            ]
           },
           {
             "locations": [
@@ -18346,7 +18492,18 @@
               "SOUTHCENTRALUS"
             ],
             "name": "DataZoneProvisionedManaged",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "a057d58a-e9af-576c-b3d0-4fcf424ae9cf",
+                "name": null,
+                "offerId": "a3a3e931-a913-54e9-9976-c782e8b9c1e0",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 1.1,
+                "unit": "1/Hour"
+              }
+            ]
           }
         ],
         "supportedRegionsLink": null,
@@ -18394,6 +18551,7 @@
         "maasFineTuning": null,
         "trainingApproach": null,
         "huggingFaceModelId": null,
+        "rootModelId": null,
         "summary": "OpenAI's most advanced multimodal model in the gpt-4o family. Can handle both text and image inputs.",
         "reportingMechanisms": null,
         "componentVersion": null,
@@ -18534,10 +18692,12 @@
         ],
         "trademarkInformation": null,
         "parameterCount": null,
+        "githubCopilotLocal": null,
         "trainingCorpusSize": null,
         "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
+        "githubCopilotLocalRequirements": null,
         "inferenceRecommendedSkus": null,
         "maasFinetuningDeployRegions": null,
         "notes": "# Responsible AI considerations\n\n## Safety techniques\n\ngpt-4o has safety built-in by design across modalities, through techniques such as filtering training data and refining the model's behavior through post-training. We have also created new safety systems to provide guardrails on voice outputs.\n\nPrompts and completions are passed through a default configuration of Azure AI Content Safety classification models to detect and prevent the output of harmful content. Learn more about [Azure AI Content Safety](https://learn.microsoft.com/azure/ai-services/content-safety/overview). Additional classification models and configuration options are available when you deploy an Azure OpenAI model in production; [learn more](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter?tabs=warning%2Cuser-prompt%2Cpython-new).\n\n## Safety evaluations\n\nWe've evaluated gpt-4o according to our [Preparedness Framework](https://openai.com/preparedness) and in line with our [voluntary commitments](https://openai.com/index/moving-ai-governance-forward/). Our evaluations of cybersecurity, CBRN, persuasion, and model autonomy show that GPT-4o does not score above Medium risk in any of these categories. This assessment involved running a suite of automated and human evaluations throughout the model training process. We tested both pre-safety-mitigation and post-safety-mitigation versions of the model, using custom fine-tuning and prompts, to better elicit model capabilities.\n\ngpt-4o has also undergone extensive external red teaming with 70+ [external experts](https://openai.com/index/red-teaming-network) in domains such as social psychology, bias and fairness, and misinformation to identify risks that are introduced or amplified by the newly added modalities. We used these learnings to build out our safety interventions in order to improve the safety of interacting with GPT-4o. We will continue to mitigate new risks as they're discovered.\n\n## Known limitations\n\nWe recognize",
@@ -18614,7 +18774,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-08T17:49:09.4065559Z",
+      "modifiedTime": "2026-10-08T19:06:16.6923255Z",
       "name": "gpt-4o",
       "orginAssetId": null,
       "parentModelId": null,
@@ -18638,9 +18798,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
+    "schemaId": "9a1066e5-8a02-5a2d-bf9f-a027125a5967",
     "type": "models",
-    "updateSequence": 167,
+    "updateSequence": 169,
     "usage": {
       "popularity": 67.84,
       "totalCount": 1
@@ -63919,7 +64079,68 @@
               "WESTUS3"
             ],
             "name": "GlobalStandard",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "4b63ead2-cde6-5970-ae20-417a7dbbfc06",
+                "name": "CachedContextToken",
+                "offerId": "01f74d49-d78b-5726-800a-7fd1b3a39101",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.025,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "0b2699e0-f08d-5111-846d-85586e1b68b5",
+                "name": "CachedContextToken",
+                "offerId": "3c6a8757-15dc-5935-bb87-0cea838c3f31",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.045,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "2d33aaf7-838f-5765-8a56-d7a7537125f5",
+                "name": "GeneratedToken",
+                "offerId": "a334f2c4-2b6d-5358-9f43-ea0c9fb87e07",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 2.0,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "01c1b941-5e3a-576b-960d-16412c775490",
+                "name": "GeneratedToken",
+                "offerId": "a59c0e57-f51f-582f-998b-935a5a803416",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 3.6,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "6d4c4956-4f18-535d-a63a-d56d74b1327b",
+                "name": "NoCachedContextToken",
+                "offerId": "04277534-376f-5ce0-8ac0-33325bf0ff98",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.25,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "f34616b1-9680-5047-85ca-ed17e1d4da2e",
+                "name": "NoCachedContextToken",
+                "offerId": "3dbaa460-afd3-55d2-9862-7a4f70c46cfa",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.45,
+                "unit": "1M"
+              }
+            ]
           },
           {
             "locations": [
@@ -63935,7 +64156,18 @@
               "SWEDENCENTRAL"
             ],
             "name": "ProvisionedManaged",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "1984ddb3-b3d6-5532-84a3-2d8d92a2ac0b",
+                "name": null,
+                "offerId": "dbad17fa-3e49-5871-9cda-81a534d012c7",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 2.0,
+                "unit": "1/Hour"
+              }
+            ]
           },
           {
             "locations": [
@@ -63954,7 +64186,18 @@
               "ITALYNORTH"
             ],
             "name": "DataZoneProvisionedManaged",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "a057d58a-e9af-576c-b3d0-4fcf424ae9cf",
+                "name": null,
+                "offerId": "a3a3e931-a913-54e9-9976-c782e8b9c1e0",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 1.1,
+                "unit": "1/Hour"
+              }
+            ]
           },
           {
             "locations": [
@@ -63974,7 +64217,68 @@
               "NORTHCENTRALUS"
             ],
             "name": "DataZoneStandard",
-            "prices": null
+            "prices": [
+              {
+                "currencyCode": "USD",
+                "meterId": "e3208430-4696-5c17-825d-62850c2a0da4",
+                "name": "CachedContextToken",
+                "offerId": "943613cc-fbe3-57cd-835e-4054fd1b06dc",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.0275,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "cd847297-7767-57dd-a257-bb2f88bb1d3f",
+                "name": "CachedContextToken",
+                "offerId": "cf743cb7-f094-5b97-903c-4742350b9878",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.0495,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "cec087c2-58f0-508f-8d84-f03a57a296fd",
+                "name": "GeneratedToken",
+                "offerId": "be544494-76ed-59d9-813f-04edd3f2b11f",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 2.2,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "64c24fcc-f2cf-5d38-bd08-e6d3592f9055",
+                "name": "GeneratedToken",
+                "offerId": "eb96eec3-0be5-5f7b-b7b8-091d9521c841",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 3.96,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "1636a473-fd82-5772-b254-97d3bf842126",
+                "name": "NoCachedContextToken",
+                "offerId": "80055797-1775-5c23-8f17-12f498308966",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.495,
+                "unit": "1M"
+              },
+              {
+                "currencyCode": "USD",
+                "meterId": "ea4b208a-5d96-5cbf-a84e-5e3d6d7bb7ee",
+                "name": "NoCachedContextToken",
+                "offerId": "a9f46e78-bce4-59c8-8958-a6d8f3ab4e7c",
+                "region": "eastus",
+                "reservationTerm": null,
+                "retailPrice": 0.275,
+                "unit": "1M"
+              }
+            ]
           }
         ],
         "supportedRegionsLink": null,
@@ -64021,6 +64325,7 @@
         "maasFineTuning": null,
         "trainingApproach": null,
         "huggingFaceModelId": null,
+        "rootModelId": null,
         "summary": "gpt-5-mini is a lightweight version for cost-sensitive applications.",
         "reportingMechanisms": null,
         "componentVersion": null,
@@ -64115,10 +64420,12 @@
         ],
         "trademarkInformation": null,
         "parameterCount": null,
+        "githubCopilotLocal": null,
         "trainingCorpusSize": null,
         "previewType": null,
         "aotManifest": null,
         "inferenceSupportedEnvs": null,
+        "githubCopilotLocalRequirements": null,
         "inferenceRecommendedSkus": null,
         "maasFinetuningDeployRegions": null,
         "notes": "# Responsible AI considerations\n\n## Safety techniques\nOpenAI has incorporated additional safety measures including new techniques to help the models refuse unsafe requests. These advancements make the o1 series some of the most robust models available.\n\n## Safety evaluations\nOpenAI measures safety by testing how well models continue to follow its safety rules if a user tries to bypass them (known as \"jailbreaking\"). In OpenAI's internal tests, GPT-4o scored 22 (on a scale of 0-100) while o1-preview model scored 84. You can read more about this in the OpenAI's [system card](https://openai.com/index/openai-o1-system-card/) and [research post](https://openai.com/index/learning-to-reason-with-llms/).\n\n## Known limitations\nThe provider has not supplied this information.\n\n# Acceptable use\n\n## Acceptable use policy\nThe provider has not supplied this information.",
@@ -64192,7 +64499,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-10-08T17:48:27.2689637Z",
+      "modifiedTime": "2026-10-08T19:06:24.3574485Z",
       "name": "gpt-5-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -64214,9 +64521,9 @@
     "relationships": [],
     "relevancyScore": 1.0,
     "resourceType": "Registry",
-    "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
+    "schemaId": "9a1066e5-8a02-5a2d-bf9f-a027125a5967",
     "type": "models",
-    "updateSequence": 159,
+    "updateSequence": 161,
     "usage": {
       "popularity": 69.28,
       "totalCount": 0
@@ -177506,6 +177813,330 @@
       "totalCount": 0
     },
     "version": "4"
+  },
+  {
+    "annotations": {
+      "archived": false,
+      "datasets": [],
+      "description": "# Muse-Spark-1.3\n\n## About this model\n\nMuse-Spark-1.3 is a placeholder name for a Meta text-generation model. This model card will be updated when the final model name and verified model details are available.\n\n## Key capabilities\n\nMuse-Spark-1.3 accepts text prompts and generates text responses. Model-specific capabilities, architecture details, context length, and training information are pending verification.\n\n# Use cases\n\n## Intended use cases\n\nThe model is intended for general text-generation scenarios such as drafting, summarization, and question answering. Evaluate the model for quality, safety, and suitability before using it in a production application.\n\n## Out-of-scope use cases\n\nDo not use the model in ways that violate applicable laws, regulations, license terms, or usage policies. The model should not be treated as a source of authoritative medical, legal, financial, or safety-critical advice.\n\n# Technical specifications\n\n| Property | Value |\n| --- | --- |\n| Publisher | Meta |\n| Task | Text generation |\n| Input modality | Text |\n| Output modality | Text |\n| Model architecture | To be confirmed |\n| Context length | To be confirmed |\n| Knowledge cutoff | To be confirmed |\n\n## Input format\n\nThe model accepts text prompts.\n\n## Output format\n\nThe model returns generated text.\n\n## Supported languages\n\nEnglish is currently listed as the supported language. Additional language support is to be confirmed.\n\n## Sample request\n\n```json\n{\n  \"input_data\": {\n    \"input_string\": [\"Write a short welcome message.\"],\n    \"parameters\": {\n      \"max_new_tokens\": 100,\n      \"temperature\": 0.8,\n      \"top_p\": 0.7,\n      \"do_sample\": true\n    }\n  }\n}\n```",
+      "invisibleUntil": "2026-10-31T00:00:00+00:00",
+      "labels": [
+        "invisibleLatest",
+        "default",
+        "latest"
+      ],
+      "name": "muse-spark-1.3",
+      "resourceRequirements": null,
+      "sampleInputData": null,
+      "sampleOutputData": null,
+      "stage": "Development",
+      "systemCatalogData": {
+        "evaluation": "# Quality and performance evaluations\n\nModel-specific benchmark and evaluation results are not yet available. Add verified results and evaluation methodology before promoting this model beyond preview.",
+        "azureOpenAIModelName": null,
+        "directoryPath": null,
+        "promptTemplate": null,
+        "fineTuningMethods": null,
+        "toolCallStart": null,
+        "isCustomerInfoRequired": null,
+        "deploymentSkuLocations": [
+          "AUSTRALIAEAST",
+          "BRAZILSOUTH",
+          "CANADACENTRAL",
+          "CANADAEAST",
+          "CENTRALUS",
+          "EASTUS",
+          "EASTUS2",
+          "FRANCECENTRAL",
+          "GERMANYWESTCENTRAL",
+          "ITALYNORTH",
+          "JAPANEAST",
+          "JAPANWEST",
+          "KOREACENTRAL",
+          "NORTHCENTRALUS",
+          "NORWAYEAST",
+          "POLANDCENTRAL",
+          "SOUTHAFRICANORTH",
+          "SOUTHCENTRALUS",
+          "SOUTHINDIA",
+          "SPAINCENTRAL",
+          "SWEDENCENTRAL",
+          "SWITZERLANDNORTH",
+          "SWITZERLANDWEST",
+          "UAENORTH",
+          "UKSOUTH",
+          "WESTCENTRALUS",
+          "WESTEUROPE",
+          "WESTUS",
+          "WESTUS3"
+        ],
+        "modelArchitecture": null,
+        "sharedComputeCapacityEnabled": null,
+        "supportsToolCalling": null,
+        "inferenceRetirementDate": null,
+        "trainingDataSummary": null,
+        "enableMaap": false,
+        "textContextWindow": null,
+        "deploymentSku": [
+          {
+            "locations": [
+              "AUSTRALIAEAST",
+              "BRAZILSOUTH",
+              "CANADACENTRAL",
+              "CANADAEAST",
+              "CENTRALUS",
+              "EASTUS",
+              "EASTUS2",
+              "FRANCECENTRAL",
+              "GERMANYWESTCENTRAL",
+              "ITALYNORTH",
+              "JAPANEAST",
+              "JAPANWEST",
+              "KOREACENTRAL",
+              "NORTHCENTRALUS",
+              "NORWAYEAST",
+              "POLANDCENTRAL",
+              "SOUTHAFRICANORTH",
+              "SOUTHCENTRALUS",
+              "SOUTHINDIA",
+              "SPAINCENTRAL",
+              "SWEDENCENTRAL",
+              "SWITZERLANDNORTH",
+              "SWITZERLANDWEST",
+              "UAENORTH",
+              "UKSOUTH",
+              "WESTCENTRALUS",
+              "WESTEUROPE",
+              "WESTUS",
+              "WESTUS3"
+            ],
+            "name": "GlobalStandard",
+            "prices": null
+          }
+        ],
+        "supportedRegionsLink": null,
+        "rateLimitLink": null,
+        "pricingLink": "https://aka.ms/meta-pricing",
+        "foundryLocal": null,
+        "toolCallEnd": null,
+        "industry": null,
+        "playgroundRateLimitTier": "high",
+        "inferenceLegacyDate": null,
+        "featured": true,
+        "hasDeltaWeights": null,
+        "finetuneMinSkuSpec": null,
+        "modelFlavor": null,
+        "inferenceMinSkuSpec": null,
+        "datasets": null,
+        "alias": null,
+        "deploymentOptionDetails": null,
+        "featureFlags": null,
+        "lifecycle": "Preview",
+        "evaluationMinSkuSpec": null,
+        "preview": true,
+        "isDirectFromAzure": true,
+        "displayName": "Muse-Spark-1.3",
+        "trainingDataDate": null,
+        "toolResponseStart": null,
+        "benchmark": null,
+        "maapSurcharge": null,
+        "inferenceDeprecationDate": null,
+        "deploymentOptions": [
+          "ServerlessMaaS",
+          "UnifiedEndpointMaaS",
+          "Serverless API"
+        ],
+        "toolResponseEnd": null,
+        "maapSurchargeType": null,
+        "architecture": null,
+        "modalitiesSupported": null,
+        "maasInference": true,
+        "reasoningStart": null,
+        "openmmlabModelId": null,
+        "enableBatch": false,
+        "maasFineTuning": null,
+        "trainingApproach": null,
+        "huggingFaceModelId": null,
+        "summary": "Muse-Spark-1.3 is a Meta text-generation model for conversational experiences, drafting, summarization, and question answering.",
+        "reportingMechanisms": null,
+        "componentVersion": null,
+        "featuresSupported": [
+          "streaming"
+        ],
+        "skuToNumReplicasMap": null,
+        "fineTuningTasks": null,
+        "inferenceTasks": [
+          "chat-completion"
+        ],
+        "maasFinetuningOffer": null,
+        "evaluationComputeAllowed": null,
+        "evaluationRecommendedSkus": null,
+        "finetuneRetirementDate": null,
+        "azureOffers": [
+          "standard-paygo"
+        ],
+        "maasFinetuningAvailableRegions": null,
+        "terms": null,
+        "minQuotaTier": null,
+        "deploymentSkuNames": [
+          "GlobalStandard"
+        ],
+        "toolsSupported": null,
+        "keywords": [
+          "Conversation"
+        ],
+        "mlflowFlavor": null,
+        "inferenceEnvironmentAssetId": null,
+        "freePlayground": true,
+        "reasoningEnd": null,
+        "maxOutputTokens": null,
+        "softwareRequirements": null,
+        "author": null,
+        "minFLVersion": null,
+        "trainingCompute": null,
+        "parameterSchema": null,
+        "toolRegisterStart": null,
+        "languages": [
+          "en"
+        ],
+        "azureOpenAIVersion": null,
+        "deploymentTypes": [
+          "maas-inference"
+        ],
+        "languagesSupportedLink": null,
+        "endpointsSupported": null,
+        "baseModelWeightsVer": null,
+        "modelCapabilities": [
+          "streaming",
+          "tool-calling",
+          "agentsV2"
+        ],
+        "maasFinetuningTest": null,
+        "trainingTime": null,
+        "hostedOn": null,
+        "publisher": "Meta",
+        "license": "custom",
+        "fineTuneComputeAllowed": null,
+        "hiddenLayerScanned": null,
+        "modelPath": null,
+        "inferenceComputeAllowed": null,
+        "licenseDescription": null,
+        "fineTuneOnlyModel": null,
+        "longContextRetirementDate": null,
+        "contactInformation": null,
+        "finetuneRecommendedSkus": null,
+        "trainingDates": null,
+        "maxInputTokens": null,
+        "domain": null,
+        "toolRegisterEnd": null,
+        "finetuneDeprecationDate": null,
+        "outputModalities": [
+          "text"
+        ],
+        "trademarkInformation": null,
+        "parameterCount": null,
+        "trainingCorpusSize": null,
+        "previewType": null,
+        "aotManifest": null,
+        "inferenceSupportedEnvs": null,
+        "inferenceRecommendedSkus": null,
+        "maasFinetuningDeployRegions": null,
+        "notes": "# Responsible AI considerations\n\n## Safety\n\nModel-specific safety evaluations are pending. Applications should use safeguards appropriate to their use case and should test for inaccurate, biased, harmful, or otherwise unsuitable outputs before deployment.\n\n## Known limitations\n\nThe model's architecture, training data, knowledge cutoff, benchmark results, and detailed limitations have not yet been confirmed. Generated responses may be inaccurate or incomplete and should be reviewed when used in consequential scenarios.\n\n## Acceptable use\n\nUse must comply with applicable laws, regulations, license terms, and usage policies.",
+        "inputModalities": [
+          "text"
+        ]
+      },
+      "tags": {
+        "Featured": "",
+        "Preview": "",
+        "author": "Meta",
+        "deploymentOptions": "ServerlessMaaS,UnifiedEndpointMaaS,Serverless API",
+        "disable-batch": "true",
+        "disable-maap": "true",
+        "displayName": "Muse-Spark-1.3",
+        "evaluation": "# Quality and performance evaluations\n\nModel-specific benchmark and evaluation results are not yet available. Add verified results and evaluation methodology before promoting this model beyond preview.",
+        "freePlayground": "true",
+        "inputModalities": "text",
+        "isDirectFromAzure": "true",
+        "keywords": "Conversation",
+        "languages": "en",
+        "license": "custom",
+        "lifecycle": "Preview",
+        "maas-inference": "true",
+        "modelCapabilities": "streaming,tool-calling,agentsV2",
+        "notes": "# Responsible AI considerations\n\n## Safety\n\nModel-specific safety evaluations are pending. Applications should use safeguards appropriate to their use case and should test for inaccurate, biased, harmful, or otherwise unsuitable outputs before deployment.\n\n## Known limitations\n\nThe model's architecture, training data, knowledge cutoff, benchmark results, and detailed limitations have not yet been confirmed. Generated responses may be inaccurate or incomplete and should be reviewed when used in consequential scenarios.\n\n## Acceptable use\n\nUse must comply with applicable laws, regulations, license terms, and usage policies.",
+        "outputModalities": "text",
+        "playgroundRateLimitTier": "high",
+        "pricingLink": "https://aka.ms/meta-pricing",
+        "summary": "Muse-Spark-1.3 is a Meta text-generation model for conversational experiences, drafting, summarization, and question answering.",
+        "task": "chat-completion"
+      }
+    },
+    "assetId": "azureml://registries/azureml-meta/models/muse-spark-1.3/versions/1",
+    "entityContainerId": "7a8477e7-97f9-4c75-911f-adfaeeb58689",
+    "entityId": "azureml://registries/7a8477e7-97f9-4c75-911f-adfaeeb58689/type/models/objectId/muse-spark-1.3/version/1",
+    "entityObjectId": "muse-spark-1.3",
+    "entityResourceName": "azureml-meta",
+    "fragmentId": null,
+    "highlights": {},
+    "internal": {},
+    "isAFragment": false,
+    "kind": "Versioned",
+    "properties": {
+      "allowedDeploymentTemplates": [],
+      "alphanumericVersion": "1",
+      "artifactProfile": null,
+      "creationContext": {
+        "createdBy": {
+          "userName": "azureml-meta",
+          "userObjectId": "00000000-0000-0000-0000-000000000000",
+          "userPrincipalName": null,
+          "userTenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "createdTime": "2026-09-12T01:37:08.27186+00:00",
+        "creationSource": null
+      },
+      "derivedModelIds": null,
+      "experimentName": null,
+      "id": "muse-spark-1.3:1",
+      "intellectualProperty": {
+        "publisher": null
+      },
+      "isAnonymous": false,
+      "loraConfig": null,
+      "managedBy": null,
+      "mimeType": "application/json",
+      "modelFormat": "CUSTOM",
+      "modelFramework": "Custom",
+      "modelFrameworkVersion": null,
+      "modifiedTime": "2026-10-02T13:12:43.0066892Z",
+      "name": "muse-spark-1.3",
+      "orginAssetId": null,
+      "parentModelId": null,
+      "provisioningState": "Succeeded",
+      "runId": null,
+      "sourceData": null,
+      "systemManaged": false,
+      "unpack": false,
+      "updatedTime": "0001-01-01T00:00:00+00:00",
+      "url": null,
+      "userProperties": {
+        "azureml.copyRegistryFilesToWorkspace": "True"
+      },
+      "variantInfo": null,
+      "version": 1,
+      "weightType": null
+    },
+    "relationships": [],
+    "relevancyScore": 1.0,
+    "resourceType": "Registry",
+    "schemaId": "0f20e8e4-eef3-5bea-b037-3e19a97d4fa3",
+    "type": "models",
+    "updateSequence": 29,
+    "usage": {
+      "popularity": 1.0,
+      "totalCount": 0
+    },
+    "version": "1"
   },
   {
     "annotations": {

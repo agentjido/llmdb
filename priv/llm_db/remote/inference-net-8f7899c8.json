@@ -475,6 +475,12 @@
         "input_cache_read": "0.000000132000",
         "prompt": "0.000001320000"
       },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
       "supported_endpoints": [
         "chat",
         "responses",
@@ -1603,6 +1609,36 @@
         "completion": "0.000022500000",
         "input_cache_read": "0.000000450000",
         "prompt": "0.000004500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "kimi-k3.1-pro",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000009000000",
+        "input_cache_read": "0.000000180000",
+        "prompt": "0.000001800000"
       },
       "reasoning_efforts": [
         "none",
