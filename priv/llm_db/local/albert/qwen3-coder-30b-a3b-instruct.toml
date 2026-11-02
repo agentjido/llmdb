@@ -1,0 +1,31 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "qwen3-coder-30b-a3b-instruct"
+name = "Qwen3 Coder 30B A3B Instruct"
+family = "qwen3-coder"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#qwen3-coder-30b-a3b-instruct"
+aliases = ["Qwen/Qwen3-Coder-30B-A3B-Instruct", "openweight-code"]
+tags = ["code"]
+
+[limits]
+context = 262144
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"

@@ -1,0 +1,34 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "gpt-oss-120b"
+name = "GPT OSS 120B"
+family = "gpt-oss"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#gpt-oss-120b"
+aliases = ["openai/gpt-oss-120b", "openweight-large"]
+
+[limits]
+context = 131072
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"
+notes = "Reasoning tokens consume the max_tokens budget; Albert recommends allowing more than 1024 tokens even for short replies."

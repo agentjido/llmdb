@@ -1,0 +1,30 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "lightonocr-2-1b"
+name = "LightOnOCR 2 1B"
+family = "lightonocr"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#lightonocr-2-1b"
+aliases = ["lighton/LightOn-OCR-2-1B", "openweight-ocr"]
+tags = ["ocr"]
+
+[limits]
+context = 16384
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"
+endpoint = "/v1/chat/completions"
+notes = "OCR via chat completions accepts images only; convert PDF pages to images before sending."

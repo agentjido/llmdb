@@ -1,0 +1,30 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "mistral-small-3-2-24b-instruct-2506"
+name = "Mistral Small 3.2 24B Instruct 2506"
+family = "mistral-small"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#mistral-small-3-2-24b-instruct-2506"
+aliases = ["mistralai/Mistral-Small-3.2-24B-Instruct-2506", "openweight-medium"]
+
+[limits]
+context = 131072
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+
+[extra]
+type = "text-generation"
+license = "Apache-2.0"

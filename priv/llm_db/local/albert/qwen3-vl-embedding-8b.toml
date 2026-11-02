@@ -1,0 +1,37 @@
+# Official Albert model catalog and pricing checked 2026-10-30.
+id = "qwen3-vl-embedding-8b"
+name = "Qwen3 VL Embedding 8B"
+family = "qwen3-vl"
+doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#qwen3-vl-embedding-8b"
+aliases = ["Qwen/Qwen3-VL-Embedding-8B"]
+tags = ["experimental"]
+
+[limits]
+context = 32768
+
+[cost]
+input = 0.0
+output = 0.0
+
+[modalities]
+input = ["text", "image", "video"]
+output = ["embedding"]
+
+[capabilities]
+chat = false
+
+[capabilities.embeddings]
+min_dimensions = 4096
+max_dimensions = 4096
+default_dimensions = 4096
+
+[capabilities.streaming]
+text = false
+
+[extra]
+type = "text-embeddings-inference"
+license = "Apache-2.0"
+experimental = true
+experiment_start = "2026-07-26"
+experiment_end = "2026-10-01"
+notes = "Still listed as experimental after the published experiment end date. Image input uses the model-specific vLLM messages extension (one image per request); the catalog also describes video embeddings, but the gateway guide only details text and image requests. Dimensions are fixed; do not mix vectors from different embedding models."
