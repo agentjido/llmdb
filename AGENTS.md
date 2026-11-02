@@ -11,6 +11,7 @@
 - **Compile**: `mix compile`
 - **Quality check**: `mix quality` (format, compile warnings, dialyzer, credo)
 - **Build local snapshot artifact**: `mix llm_db.build --install`
+- **Verify catalog inputs**: `mix catalog.verify` (does not modify the tracked snapshot)
 - **Pull upstream metadata**: `mix llm_db.pull`
 - **Publish snapshot to GitHub Releases**: `mix llm_db.snapshot.publish`
 - **Fetch published snapshot locally**: `mix llm_db.snapshot.fetch --ref latest --install`
@@ -28,7 +29,7 @@ Hooks auto-install via `git_hooks` on `mix compile` in dev:
 | Hook | Action |
 |------|--------|
 | **commit-msg** | Validates conventional commit format via `git_ops.check_message` |
-| **pre-commit** | `mix format --check-formatted` |
+| **pre-commit** | `mix format --check-formatted` and `mix catalog.verify` |
 | **pre-push** | `mix quality` |
 
 Conventional commit types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
@@ -67,6 +68,7 @@ config :llm_db,
 - **Core modules**: `LLMDB` (main API), `LLMDB.Engine` (ETL pipeline), `LLMDB.Store` (persistent_term storage)
 - **Data structures**: `LLMDB.Provider`, `LLMDB.Model` with Zoi validation schemas in `lib/llm_db/schema/`
 - **Storage**: O(1) lock-free queries via `:persistent_term`, packaged catalog snapshot in `priv/llm_db/snapshot.json`
+- **Generated snapshot ownership**: catalog PRs change mergeable inputs/tests; serialized `main` automation owns `priv/llm_db/snapshot.json`
 - **ETL Pipeline**: Ingest → Normalize → Validate → Merge → Enrich → Filter → Index + Publish (7 stages)
 - **Startup**: Catalog automatically loads on application start via `LLMDB.Application` (no manual `load()` needed in IEx or runtime)
 

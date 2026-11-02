@@ -1,0 +1,129 @@
+name: Integrate Catalog Snapshot
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "config/**"
+      - "lib/**"
+      - "mix.exs"
+      - "mix.lock"
+      - "priv/llm_db/local/**"
+      - "priv/llm_db/remote/**"
+      - "priv/llm_db/upstream/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: llm-metadata
+  cancel-in-progress: false
+
+jobs:
+  integrate:
+    name: Build, commit, and publish the integrated catalog
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Disable hooks and configure automation identity
+        run: |
+          set -euo pipefail
+          git config core.hooksPath /dev/null
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@54075bcc5e249e4758d363f27d099f55d843f124 # v1
+        with:
+          elixir-version: "1.18"
+          otp-version: "27"
+
+      - name: Restore dependencies cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: |
+            deps
+            _build
+          key: mix-${{ runner.os }}-elixir-1.18-otp-27-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            mix-${{ runner.os }}-elixir-1.18-otp-27-
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Integrate the latest main inputs without dropping concurrent changes
+        id: integrate
+        run: |
+          set -euo pipefail
+
+          snapshot_commit=""
+          for attempt in 1 2 3; do
+            git fetch origin main --no-tags
+            git rebase origin/main
+
+            if ! mix llm_db.build --check --install; then
+              mix llm_db.build --install
+            fi
+
+            mix llm_db.build --check --install
+            mix catalog.verify
+            mix test
+            mix quality
+
+            git add priv/llm_db/snapshot.json
+            if git diff --cached --quiet; then
+              if [[ -z "$snapshot_commit" ]]; then
+                echo "The integrated snapshot is already current."
+                echo "committed=false" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+
+              if git push origin HEAD:main; then
+                echo "committed=true" >> "$GITHUB_OUTPUT"
+                exit 0
+              fi
+
+              echo "main advanced again during attempt $attempt"
+              continue
+            fi
+
+            if [[ -z "$snapshot_commit" ]]; then
+              git commit -m "chore: integrate catalog snapshot"
+            else
+              git commit --amend --no-edit
+            fi
+            snapshot_commit=$(git rev-parse HEAD)
+
+            if git push origin HEAD:main; then
+              echo "committed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+
+            echo "main advanced during attempt $attempt; rebuilding from the new integrated state"
+          done
+
+          echo "::error::main kept advancing; the snapshot was not committed"
+          exit 1
+
+      - name: Publish the committed immutable snapshot
+        if: steps.integrate.outputs.committed == 'true'
+        run: mix llm_db.snapshot.publish
+
+      - name: Rebuild and publish history
+        if: steps.integrate.outputs.committed == 'true'
+        run: mix llm_db.history.rebuild --publish
+
+      - name: Validate published history
+        if: steps.integrate.outputs.committed == 'true'
+        run: mix llm_db.history.check --allow-missing

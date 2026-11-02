@@ -41,6 +41,7 @@ defmodule LLMDB.MixProject do
           "guides/pricing-and-billing.md",
           "guides/anthropic-pricing-audit.md",
           "guides/runtime-and-maintainer-boundaries.md",
+          "guides/snapshot-ownership.md",
           "guides/schema-system.md",
           "guides/sources-and-engine.md",
           "guides/runtime-filters.md",
@@ -135,6 +136,9 @@ defmodule LLMDB.MixProject do
   defp aliases do
     [
       setup: ["deps.get"],
+      "catalog.verify": [
+        "llm_db.build --verify --output-dir _build/llm_db/catalog-verification"
+      ],
       quality: [
         "format --check-formatted",
         "compile --warnings-as-errors",

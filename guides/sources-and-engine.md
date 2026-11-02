@@ -167,10 +167,16 @@ indexes are `LLMDB.load/1` concerns, not Engine stages.
 
 - `mix llm_db.pull` — fetch and cache upstream source data.
 - `mix llm_db.build` — run ETL and build canonical snapshot artifacts.
+- `mix catalog.verify` — build and recheck the effective semantic snapshot
+  without modifying the tracked distribution baseline.
 - `mix llm_db.snapshot.publish` — publish an immutable snapshot release.
 
 These tasks are maintainer tooling. Downstream applications consume the
 snapshot shipped with the package.
+
+Catalog pull requests commit source inputs and tests. The serialized `main`
+integration workflow owns `priv/llm_db/snapshot.json`; see
+[Snapshot Ownership and Integration](snapshot-ownership.md).
 
 ## Custom Source Example
 

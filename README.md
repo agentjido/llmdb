@@ -383,9 +383,17 @@ mix llm_db.pull
 # Build canonical snapshot artifacts
 mix llm_db.build
 
+# Verify semantic reproducibility without changing the tracked snapshot
+mix catalog.verify
+
 # Install the packaged snapshot for local runtime/package validation
 mix llm_db.build --install
 ```
+
+Catalog pull requests commit mergeable inputs and tests, not
+`priv/llm_db/snapshot.json`. The serialized `main` integration workflow owns
+that compact distribution artifact. See
+[Snapshot Ownership and Integration](guides/snapshot-ownership.md).
 
 Snapshot schema v1 remains the packaged and published default. To evaluate the
 versioned sparse v2 representation side by side without installing it:
@@ -517,7 +525,7 @@ This project uses [git_hooks](https://hex.pm/packages/git_hooks) to enforce code
 | Hook | Action |
 |------|--------|
 | **commit-msg** | Validates [conventional commit](https://www.conventionalcommits.org/) format |
-| **pre-commit** | Runs `mix format --check-formatted` |
+| **pre-commit** | Runs formatting and `mix catalog.verify` without modifying the tracked snapshot |
 | **pre-push** | Runs `mix quality` (format, compile warnings, dialyzer, credo) |
 
 ### Conventional Commits
@@ -543,6 +551,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 - [Consumer Integration](guides/consumer-integration.md) — Best practices for libraries using llm_db
 - [Runtime Filters](guides/runtime-filters.md) — Load-time and runtime filtering
 - [Sources & Engine](guides/sources-and-engine.md) — ETL pipeline, data sources, precedence
+- [Snapshot Ownership and Integration](guides/snapshot-ownership.md) — Generated-file ownership, bootstrap, packages, and migration
 - [Schema System](guides/schema-system.md) — Zoi validation and data structures
 - [Model Struct Evolution Proposal](guides/model-struct-evolution-proposal.md) — Proposed conditional pricing and richer capability metadata
 - [Release Process](guides/release-process.md) — Snapshot-based releases

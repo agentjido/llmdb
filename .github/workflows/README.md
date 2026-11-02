@@ -18,13 +18,26 @@ Runs on every push and pull request to ensure code quality.
 - Lint job: format check, compile with warnings as errors, Credo, Dialyzer, unused dependency check, Hex audit
 - Test job: compile and run the test suite across the supported Elixir/OTP matrix
 - Build check job: verify the packaged snapshot is up to date and check history drift
+- Consumer-build job: compile fresh Git, path, and unpacked Hex consumers with
+  compile-time embedding and cold string lookup
 
 **Matrix Testing:**
 - Node.js versions: 22.14, 24
 - Elixir versions: 1.18, 1.19
 - OTP versions: 27, 28
 
-### 2. Publish Snapshot Catalog (`build-metadata.yml`)
+### 2. Integrate Catalog Snapshot (`integrate-snapshot.yml`)
+
+Runs when mergeable catalog inputs or build code reach `main`. It builds the
+effective catalog from the exact checked-out inputs, validates tests and
+quality, commits only `priv/llm_db/snapshot.json`, then publishes the immutable
+snapshot and history checkpoint. It shares the `llm-metadata` concurrency group
+with scheduled refreshes and rebases/rebuilds if `main` advances before push.
+
+Catalog pull requests never edit the assembled snapshot, so independent
+provider changes integrate without a shared generated-file conflict.
+
+### 3. Publish Snapshot Catalog (`build-metadata.yml`)
 
 Automatically pulls latest upstream metadata, publishes a content-addressed
 snapshot release, and rebuilds the published history bundle from the snapshot
@@ -37,7 +50,8 @@ store.
 **Jobs:**
 1. Pull latest metadata using `mix llm_db.pull`
 2. Build the packaged snapshot from refreshed metadata
-3. Validate the packaged snapshot with `mix llm_db.build --check --install`, `mix test`, and `mix quality`
+3. Validate the packaged snapshot with `mix llm_db.build --check --install`,
+   `mix catalog.verify`, `mix test`, and `mix quality`
 4. Commit refreshed metadata inputs back to `main` when they changed
 5. Publish the current canonical snapshot using `mix llm_db.snapshot.publish`
 6. Incrementally update and publish `history.tar.gz` using `mix llm_db.history.rebuild --publish`
@@ -48,7 +62,7 @@ store.
 - A new immutable `catalog-index-<generation>` release when the index changed
 - A new immutable `history-latest-<generation>` checkpoint release when history changed
 
-### 3. Release to Hex and NPM (`release.yml`)
+### 4. Release to Hex and NPM (`release.yml`)
 
 Prepares one release from the committed snapshot on `main`. It pushes the
 release commit and tag atomically. It then starts a second run at the exact
