@@ -7,6 +7,25 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.0](https://github.com/agentjido/llmdb/compare/2026.10.7...2026.11.0) (2026-11-03)
+
+
+
+
+### Features:
+
+* providers: add Albert API model metadata (#379) by Julien
+
+* providers: add Opper OpenAI-compatible runtime metadata (#372) by Felixkw12
+
+### Bug Fixes:
+
+* openai: add GPT-6.1 Terra metadata (#375) by mikehostetler
+
+* minimax: codify M2 retirement and M2.5/M2.7 retirement schedule (#374) by Gilbert
+
+* correct OpenAI GPT-6.1 Terra metadata and routing by Julien
+
 ## [2026.10.7](https://github.com/agentjido/llmdb/compare/2026.10.6...2026.10.7) (2026-10-26)
 
 
