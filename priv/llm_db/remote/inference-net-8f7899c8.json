@@ -458,6 +458,36 @@
       ]
     },
     {
+      "context_length": 1040000,
+      "id": "deepseek-v4.1-flash-with-ads",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 393216,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000000950000",
+        "input_cache_read": "0.000000006650",
+        "prompt": "0.000000285000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
       "context_length": 1048576,
       "id": "deepseek-v4.1-pro",
       "input_modalities": [
@@ -952,6 +982,34 @@
         "completion": "0.000000450000",
         "input_cache_read": "0.000000030000",
         "prompt": "0.000000100000"
+      },
+      "reasoning_efforts": [
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "glm-5.3-with-ads",
+      "input_modalities": [
+        "text"
+      ],
+      "max_completion_tokens": 943718,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000002850000",
+        "input_cache_read": "0.000000142500",
+        "prompt": "0.000000855000"
       },
       "reasoning_efforts": [
         "low",
@@ -1609,6 +1667,36 @@
         "completion": "0.000022500000",
         "input_cache_read": "0.000000450000",
         "prompt": "0.000004500000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "moonshotai/kimi-k3-with-ads",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000012000000",
+        "input_cache_read": "0.000000240000",
+        "prompt": "0.000002400000"
       },
       "reasoning_efforts": [
         "none",
