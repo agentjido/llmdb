@@ -101,17 +101,17 @@ defmodule LLMDB.MixProject do
       {:zoi, "~> 0.19.0"},
       {:jason, "~> 1.4"},
       {:toml, "~> 0.7"},
-      {:req, "~> 0.5"},
-      {:dotenvy, "~> 1.1"},
-      {:plug, "~> 1.16", only: :test},
+      {:req, "~> 0.7"},
+      {:dotenvy, "~> 1.2"},
+      {:plug, "~> 1.20", only: :test},
       {:meck, "~> 1.0", only: :test},
-      {:ex_doc, "~> 0.31", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.40", only: :dev, runtime: false},
       {:git_ops, "~> 2.12", only: :dev, runtime: false},
-      {:git_hooks, "~> 0.8", only: :dev, runtime: false},
+      {:git_hooks, "~> 0.9", only: :dev, runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:usage_rules, "~> 1.0", only: :dev, runtime: false},
-      {:igniter, "~> 0.7", optional: true}
+      {:usage_rules, "~> 1.3", only: :dev, runtime: false},
+      {:igniter, "~> 0.8", optional: true}
     ]
   end
 
