@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   createLLMDB,
+  createProviderCatalog,
   formatModelSpec,
   InvalidModelSpecError,
   llmdb,
@@ -103,14 +104,26 @@ test("does not read model or provider IDs from object prototypes", async () => {
   }
 });
 
-test("gives model aliases precedence over deprecated canonical stubs", async () => {
-  const { default: xai } = await import("@agentjido/llmdb/providers/xai");
+test("gives model aliases precedence over deprecated canonical stubs", () => {
+  const provider = createProviderCatalog({
+    id: "test_provider",
+    models: {
+      "legacy-model": {
+        aliases: [],
+        deprecated: true,
+        id: "legacy-model",
+        provider: "test_provider",
+      },
+      "current-model": {
+        aliases: ["legacy-model"],
+        deprecated: false,
+        id: "current-model",
+        provider: "test_provider",
+      },
+    },
+  });
 
-  assert.equal(xai.get("grok-code-fast-1").id, "grok-build-0.1");
-  assert.equal(
-    xai.get("grok-imagine-image-pro").id,
-    "grok-imagine-image-quality",
-  );
+  assert.equal(provider.get("legacy-model").id, "current-model");
 });
 
 test("provides an explicit synchronous full catalog", async () => {

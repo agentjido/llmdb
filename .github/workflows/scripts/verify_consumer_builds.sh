@@ -67,8 +67,18 @@ write_consumer "$path_consumer" "llmdb_path_consumer" "{:llm_db, path: \"$projec
 verify_consumer "$path_consumer"
 
 git_consumer="$qa_root/git-consumer"
+git_source="$qa_root/git-source"
+mkdir -p "$git_source"
+git archive "$source_commit" | tar -x -C "$git_source"
+git -C "$git_source" init --quiet --initial-branch=main
+git -C "$git_source" config user.email "ci@llmdb.local"
+git -C "$git_source" config user.name "LLMDB CI"
+git -C "$git_source" add --all
+git -C "$git_source" commit --quiet -m "test: materialize checked-out source"
+git_source_commit=$(git -C "$git_source" rev-parse HEAD)
+
 write_consumer "$git_consumer" "llmdb_git_consumer" \
-  "{:llm_db, git: \"file://$project_root\", ref: \"$source_commit\"}"
+  "{:llm_db, git: \"file://$git_source\", ref: \"$git_source_commit\"}"
 verify_consumer "$git_consumer"
 
 hex_archive="$qa_root/llm_db.tar"
