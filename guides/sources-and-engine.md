@@ -123,6 +123,16 @@ flags. It also adds the reviewed OpenAI Chat Completions execution contract.
 Runtime requests use `INFERENCE_API_KEY` and
 `https://api.inference.net/v1`.
 
+The Superlinked source reads the account-visible Superlinked Inference Engine
+catalog from `https://api.superlinked.com/v1/models`. Set `SIE_API_KEY` or
+`SUPERLINKED_API_KEY`, run
+`mix llm_db.pull --source superlinked`, and then run
+`mix llm_db.build --install`. The source keeps earlier models when an
+account-specific reply omits them. Token-output models get the OpenAI Chat
+Completions contract. Dense-output models get the OpenAI Embeddings contract.
+Score output records rerank capability. Native sparse, multivector, extraction,
+and OCR operations remain catalog metadata only.
+
 ### Local TOML
 
 ```elixir
