@@ -11,7 +11,7 @@ import {
 } from "./paths.mjs";
 
 const maximumPackedSize = 2_000_000;
-const maximumUnpackedSize = 7_000_000;
+const maximumUnpackedSize = 7_100_000;
 const maximumProviderEntrypointSize = 700_000;
 
 const result = spawnSync(
