@@ -110,8 +110,11 @@ jobs:
           MIX_ENV=dev mix deps.compile git_ops
           npm ci
 
-      - name: Validate committed snapshot
-        run: mix llm_db.build --check --install
+      - name: Validate reproducible committed snapshot
+        run: |
+          set -euo pipefail
+          mix catalog.verify
+          mix llm_db.build --check --install
 
       - name: Run tests
         if: ${{ inputs.skip_tests != true }}
@@ -411,6 +414,7 @@ jobs:
             echo "Tag: $RELEASE_VERSION; Hex: $MIX_VERSION; NPM: $NPM_VERSION"
             exit 1
           fi
+          mix llm_db.build --check --install
 
       - name: Check NPM package
         run: npm run npm:check

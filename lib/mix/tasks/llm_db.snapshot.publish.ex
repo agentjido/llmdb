@@ -4,6 +4,7 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
   alias LLMDB.{Snapshot, Snapshot.Builder, Snapshot.ReleaseStore}
 
   @shortdoc "Publish a canonical snapshot to GitHub Releases"
+  @source_paths ~w(config lib mix.exs mix.lock priv/llm_db/local priv/llm_db/remote priv/llm_db/upstream priv/llm_db/snapshot.json)
 
   @moduledoc """
   Builds and publishes a canonical snapshot to GitHub Releases.
@@ -55,6 +56,7 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
       |> maybe_put(:parent_snapshot_id, latest_snapshot_id)
 
     with {:ok, artifact} <- Builder.build(build_opts) do
+      artifact = put_in(artifact, [:metadata, "source_commit"], source_commit!())
       artifact = Builder.write!(artifact)
 
       known_snapshot? =
@@ -125,6 +127,27 @@ defmodule Mix.Tasks.LlmDb.Snapshot.Publish do
 
   defp maybe_put(opts, _key, nil), do: opts
   defp maybe_put(opts, key, value), do: Keyword.put(opts, key, value)
+
+  defp source_commit! do
+    case System.cmd("git", ["status", "--porcelain", "--" | @source_paths],
+           stderr_to_stdout: true
+         ) do
+      {"", 0} ->
+        case System.cmd("git", ["rev-parse", "HEAD"], stderr_to_stdout: true) do
+          {commit, 0} ->
+            String.trim(commit)
+
+          {output, status} ->
+            Mix.raise("Could not resolve snapshot source commit (#{status}): #{output}")
+        end
+
+      {changes, 0} ->
+        Mix.raise("Snapshot publication requires committed source inputs:\n#{changes}")
+
+      {output, status} ->
+        Mix.raise("Could not inspect snapshot source inputs (#{status}): #{output}")
+    end
+  end
 
   defp ensure_llm_db_project! do
     app = Mix.Project.config()[:app]

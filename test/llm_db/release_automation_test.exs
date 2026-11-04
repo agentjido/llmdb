@@ -2,6 +2,8 @@ defmodule LLMDB.ReleaseAutomationTest do
   use ExUnit.Case, async: true
 
   @workflow_path ".github/workflows/release.yml"
+  @integration_workflow_path ".github/workflows/integrate-snapshot.yml"
+  @ci_workflow_path ".github/workflows/ci.yml"
   @config_path "config/config.exs"
   @changelog_path "CHANGELOG.md"
 
@@ -62,6 +64,32 @@ defmodule LLMDB.ReleaseAutomationTest do
     ci = File.read!(".github/workflows/ci.yml")
     assert ci =~ "actionlint/cmd/actionlint@v1.7.12"
     assert ci =~ "zizmor==1.29.0"
+  end
+
+  test "serialized main automation owns generated snapshot integration" do
+    integration = File.read!(@integration_workflow_path)
+    ci = File.read!(@ci_workflow_path)
+
+    assert integration =~ "group: llm-metadata"
+    assert integration =~ "cancel-in-progress: false"
+    assert integration =~ "git rebase origin/main"
+    assert integration =~ "mix llm_db.build --check --install"
+    assert integration =~ "mix catalog.verify"
+    assert integration =~ "git add priv/llm_db/snapshot.json"
+    assert integration =~ "mix llm_db.snapshot.publish"
+    assert integration =~ "mix llm_db.history.rebuild --publish"
+
+    assert ci =~ "snapshot.json is owned by serialized main integration automation"
+    assert ci =~ "mix catalog.verify"
+    assert ci =~ "verify_consumer_builds.sh"
+  end
+
+  test "snapshot publication records the exact source commit" do
+    task = File.read!("lib/mix/tasks/llm_db.snapshot.publish.ex")
+
+    assert task =~ ~S|put_in(artifact, [:metadata, "source_commit"], source_commit!())|
+    assert task =~ ~S|System.cmd("git", ["status", "--porcelain"|
+    assert task =~ ~S|System.cmd("git", ["rev-parse", "HEAD"]|
   end
 
   test "git_ops reads the previous version from the changelog" do

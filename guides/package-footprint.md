@@ -4,6 +4,11 @@ The packaged catalog uses deterministic compact schema-v1 JSON. This changes
 only JSON whitespace: decoded keys, values, array order, schema version, and
 snapshot ID remain unchanged.
 
+Catalog pull requests do not regenerate this shared file. A serialized `main`
+workflow assembles it from the integrated versioned inputs, preserving the
+compact Hex artifact and the canonical source used for NPM provider shards.
+See [Snapshot Ownership and Integration](snapshot-ownership.md).
+
 ## Size comparison
 
 Measured from the same 2026-07 packaged snapshot and package source tree with:

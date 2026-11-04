@@ -18,6 +18,7 @@ defmodule Mix.Tasks.LlmDb.Build do
       mix llm_db.build
       mix llm_db.build --install
       mix llm_db.build --check
+      mix llm_db.build --verify
       mix llm_db.build --output-dir tmp/llm_db/build
       mix llm_db.build --schema-version 2
 
@@ -27,6 +28,8 @@ defmodule Mix.Tasks.LlmDb.Build do
       expected output.
     * `--install` - Also install the built snapshot into
       `priv/llm_db/snapshot.json`.
+    * `--verify` - Write a local build artifact, read it with strict integrity,
+      rebuild from the same inputs, and require the same semantic snapshot ID.
     * `--output-dir` - Directory for local snapshot build artifacts.
     * `--schema-version` - Snapshot wire schema to build (`1` by default; `2`
       opts into a side-by-side sparse artifact). Sparse v2 cannot be installed as
@@ -42,6 +45,7 @@ defmodule Mix.Tasks.LlmDb.Build do
         strict: [
           check: :boolean,
           install: :boolean,
+          verify: :boolean,
           output_dir: :string,
           schema_version: :integer
         ]
@@ -53,6 +57,7 @@ defmodule Mix.Tasks.LlmDb.Build do
 
     schema_version = opts[:schema_version] || LLMDB.Snapshot.schema_version()
     validate_schema_version!(schema_version, opts)
+    validate_mode!(opts)
 
     Mix.Task.run("app.start")
 
@@ -65,7 +70,11 @@ defmodule Mix.Tasks.LlmDb.Build do
 
     case Builder.build(build_opts) do
       {:ok, artifact} ->
-        maybe_check_or_write(artifact, opts)
+        if opts[:verify] do
+          verify!(artifact, build_opts)
+        else
+          maybe_check_or_write(artifact, opts)
+        end
 
       {:error, reason} ->
         Mix.raise("Snapshot build failed: #{inspect(reason)}")
@@ -123,6 +132,28 @@ defmodule Mix.Tasks.LlmDb.Build do
 
   defp maybe_put(opts, _key, nil), do: opts
   defp maybe_put(opts, key, value), do: Keyword.put(opts, key, value)
+
+  defp verify!(artifact, build_opts) do
+    artifact = Builder.write!(artifact)
+
+    with {:ok, strict_snapshot} <-
+           LLMDB.Snapshot.read(artifact.snapshot_path, integrity_policy: :strict),
+         true <- strict_snapshot["snapshot_id"] == artifact.snapshot_id,
+         {:ok, rebuilt} <- Builder.build(build_opts),
+         true <- rebuilt.snapshot_id == artifact.snapshot_id do
+      Mix.shell().info("✓ Catalog is strict and semantically reproducible.")
+      Mix.shell().info("  Snapshot ID: #{artifact.snapshot_id}")
+    else
+      false -> Mix.raise("Catalog verification produced a different semantic snapshot ID")
+      {:error, reason} -> Mix.raise("Catalog verification failed: #{inspect(reason)}")
+    end
+  end
+
+  defp validate_mode!(opts) do
+    if opts[:verify] == true and (opts[:check] == true or opts[:install] == true) do
+      Mix.raise("--verify cannot be combined with --check or --install")
+    end
+  end
 
   defp validate_schema_version!(schema_version, opts) do
     unless schema_version in LLMDB.Snapshot.supported_schema_versions() do
