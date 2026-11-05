@@ -1,11 +1,10 @@
 # Official Albert model catalog and pricing checked 2026-10-30.
 id = "bge-reranker-v2-m3"
+provider_model_id = "openweight-rerank"
 name = "BGE Reranker v2 M3"
 family = "bge"
 doc_url = "https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#bge-reranker-v2-m3"
 aliases = ["BAAI/bge-reranker-v2-m3", "openweight-rerank"]
-# No reranking operation exists in the current execution schema.
-catalog_only = true
 
 [limits]
 context = 8192
@@ -20,6 +19,13 @@ input = ["text"]
 [capabilities]
 chat = false
 rerank = true
+
+[execution.rerank]
+supported = true
+family = "cohere_rerank_compatible"
+wire_protocol = "cohere_rerank"
+base_url = "https://api.albert.etalab.gouv.fr"
+path = "/v1/rerank"
 
 [capabilities.streaming]
 text = false

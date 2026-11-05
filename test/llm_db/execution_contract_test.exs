@@ -6,6 +6,7 @@ defmodule LLMDB.ExecutionContractTest do
   @cases [
     {"text", %{modalities: %{input: [:text], output: [:text]}}, [:object, :text]},
     {"embeddings", %{modalities: %{input: [:text], output: [:embedding]}}, [:embed]},
+    {"rerank", %{capabilities: %{chat: false, rerank: true}}, [:rerank]},
     {"image", %{modalities: %{input: [:text], output: [:image]}}, [:image]},
     {"audio transcription", %{modalities: %{input: [:audio], output: [:text]}}, [:transcription]},
     {"audio speech", %{modalities: %{input: [:text], output: [:audio]}}, [:speech]},
@@ -185,6 +186,7 @@ defmodule LLMDB.ExecutionContractTest do
           text: "openai_chat_compatible",
           object: "openai_chat_compatible",
           embed: "openai_embeddings",
+          rerank: "cohere_rerank_compatible",
           image: "openai_images",
           transcription: "openai_transcription",
           speech: "openai_speech",

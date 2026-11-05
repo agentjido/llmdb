@@ -37,6 +37,7 @@ defmodule LLMDB.ExecutionContract do
     "anthropic_messages" => "anthropic_messages",
     "google_generate_content" => "google_generate_content",
     "cohere_chat" => "cohere_chat",
+    "cohere_rerank_compatible" => "cohere_rerank",
     "typesafe_systemone" => "typesafe_systemone",
     "openrouter_decisions" => "openrouter_decisions",
     "cloudflare_ai_run" => "cloudflare_ai_run",
@@ -58,6 +59,7 @@ defmodule LLMDB.ExecutionContract do
     "anthropic_messages" => "/v1/messages",
     "google_generate_content" => "/models/{provider_model_id}:generateContent",
     "cohere_chat" => "/v2/chat",
+    "cohere_rerank_compatible" => "/v2/rerank",
     "typesafe_systemone" => "/v1/systemone",
     "openrouter_decisions" => "/api/alpha/decisions",
     "cloudflare_ai_run" => "/ai/run",
@@ -69,6 +71,7 @@ defmodule LLMDB.ExecutionContract do
     :text,
     :object,
     :evaluate,
+    :rerank,
     :embed,
     :image,
     :transcription,
@@ -223,6 +226,7 @@ defmodule LLMDB.ExecutionContract do
     |> maybe_put_entry(:text, text_entry(model, provider))
     |> maybe_put_entry(:object, object_entry(model, provider))
     |> maybe_put_entry(:evaluate, evaluate_entry(model, provider))
+    |> maybe_put_entry(:rerank, media_entry(model, provider, :rerank, &rerank_model?/1))
     |> maybe_put_entry(:embed, media_entry(model, provider, :embed, &embedding_model?/1))
     |> maybe_put_entry(:image, media_entry(model, provider, :image, &image_generation_model?/1))
     |> maybe_put_entry(
@@ -616,8 +620,9 @@ defmodule LLMDB.ExecutionContract do
   end
 
   defp exclusive_media_model?(model) do
-    embedding_model?(model) or image_generation_model?(model) or realtime_model?(model) or
-      dedicated_transcription_model?(model) or dedicated_speech_model?(model)
+    rerank_model?(model) or embedding_model?(model) or image_generation_model?(model) or
+      realtime_model?(model) or dedicated_transcription_model?(model) or
+      dedicated_speech_model?(model)
   end
 
   defp dedicated_transcription_model?(model) do
