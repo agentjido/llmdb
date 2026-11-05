@@ -118,7 +118,7 @@ defmodule LLMDB.Schema.ModelTest do
             supported: true,
             family: :cohere_rerank_compatible,
             wire_protocol: :cohere_rerank,
-            base_url: "https://api.albert.etalab.gouv.fr",
+            base_url: "https://albert.api.etalab.gouv.fr",
             path: "/v1/rerank"
           }
         }
@@ -127,7 +127,7 @@ defmodule LLMDB.Schema.ModelTest do
       assert {:ok, result} = Model.new(input)
       assert result.execution.rerank.family == "cohere_rerank_compatible"
       assert result.execution.rerank.wire_protocol == "cohere_rerank"
-      assert result.execution.rerank.base_url == "https://api.albert.etalab.gouv.fr"
+      assert result.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr"
       assert result.execution.rerank.path == "/v1/rerank"
     end
 

@@ -1,11 +1,11 @@
 id = "albert"
 name = "Albert API"
-base_url = "https://api.albert.etalab.gouv.fr/v1"
+base_url = "https://albert.api.etalab.gouv.fr/v1"
 doc = "https://guides.ia.numerique.gouv.fr/albert-api"
 env = ["ALBERT_API_KEY"]
 
 [runtime]
-base_url = "https://api.albert.etalab.gouv.fr/v1"
+base_url = "https://albert.api.etalab.gouv.fr/v1"
 doc_url = "https://guides.ia.numerique.gouv.fr/albert-api"
 
 [runtime.auth]

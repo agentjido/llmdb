@@ -57,7 +57,7 @@ defmodule LLMDB.ProviderRuntimeDataTest do
     end
 
     albert = provider_runtime(providers, :albert)
-    assert albert.base_url == "https://api.albert.etalab.gouv.fr/v1"
+    assert albert.base_url == "https://albert.api.etalab.gouv.fr/v1"
     assert albert.auth.type == "bearer"
     assert albert.auth.env == ["ALBERT_API_KEY"]
     assert albert.execution.rerank == "cohere_rerank_compatible"

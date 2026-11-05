@@ -47,7 +47,7 @@ defmodule LLMDB.AlbertDataTest do
     assert provider.extra.description ==
              "Private provider for French government bodies, operated by DINUM; access requires authorization."
 
-    assert provider.runtime.base_url == "https://api.albert.etalab.gouv.fr/v1"
+    assert provider.runtime.base_url == "https://albert.api.etalab.gouv.fr/v1"
     assert provider.runtime.auth.type == "bearer"
     assert provider.runtime.auth.env == ["ALBERT_API_KEY"]
     refute provider.catalog_only
@@ -84,7 +84,7 @@ defmodule LLMDB.AlbertDataTest do
     assert reranker.execution.rerank.supported
     assert reranker.execution.rerank.family == "cohere_rerank_compatible"
     assert reranker.execution.rerank.wire_protocol == "cohere_rerank"
-    assert reranker.execution.rerank.base_url == "https://api.albert.etalab.gouv.fr"
+    assert reranker.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr"
     assert reranker.execution.rerank.path == "/v1/rerank"
     assert reranker.execution.rerank.provider_model_id == "openweight-rerank"
     assert reranker.provider_model_id == "openweight-rerank"
