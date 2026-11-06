@@ -2,6 +2,111 @@
   "data": [
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 10000,
+      "created": 1793877368,
+      "display_name": "OpenAI: GPT-Image-2.6-Flare",
+      "id": "openai/gpt-image-2.6-flare",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 5
+          }
+        ]
+      },
+      "publish_time": "2026-11-05"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 10000,
+      "created": 1793877855,
+      "display_name": "OpenAI: GPT-Image-2.6-Sunburst",
+      "id": "openai/gpt-image-2.6-sunburst",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "image"
+      ],
+      "owned_by": "openai",
+      "pricings": {
+        "input_cache_read": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.25
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 5
+          }
+        ]
+      },
+      "publish_time": "2026-11-05"
+    },
+    {
+      "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 0,
+      "created": 1793779265,
+      "display_name": "Qwen-Audio-3.1-TTS-Next",
+      "id": "qwen/qwen-audio-3.1-tts-next",
+      "input_modalities": [
+        "text",
+        "audio"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "speech"
+      ],
+      "owned_by": "qwen",
+      "pricings": {
+        "completion": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 1.87
+          }
+        ],
+        "prompt": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 0.93
+          }
+        ]
+      },
+      "publish_time": "2026-11-04"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1048576,
