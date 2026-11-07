@@ -1,0 +1,4905 @@
+{
+  "data": [
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:banking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:bge_m3_flag",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:candle",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:dense",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:medical-vn",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:multivector",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "BAAI/bge-m3:sparse",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "IDEA-Research/grounding-dino-base",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Ihor/gliner-biomed-large-v1.0",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "MoritzLaurer/deberta-v3-large-zeroshot-v2.0",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Embedding-4B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Embedding-4B:flash",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Reranker-0.6B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Reranker-0.6B:fast",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Reranker-4B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-Reranker-4B:fast",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3-VL-Reranker-2B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:a100-40gb",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:default-no-admission",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:h100",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:l4-smoke",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:long-context",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.5-4B:thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k-batch",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k-batch-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k-thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h100-256k-thinking-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h200-256k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:h200-256k-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:rtx-pro-6000-256k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:rtx-pro-6000-256k-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-27B-FP8:thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3.8-Max-VL-Thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3Guard-Gen-4B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Qwen/Qwen3Guard-Gen-4B:a100-40gb",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Snowflake/snowflake-arctic-embed-l-v2.0",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "Snowflake/snowflake-arctic-embed-l-v2.0:candle",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "TomoroAI/tomoro-colqwen3-embed-4b",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "TomoroAI/tomoro-colqwen3-embed-4b:compact",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "TomoroAI/tomoro-colqwen3-embed-4b:muvera",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "docling",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "docling:ocr",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "facebook/sam3",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "fastino/GLiNER2.5-Decide",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "fastino/gliguard-LLMGuardrails-300M",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "fastino/gliner2-base-v1",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "fastino/gliner2-large-v1",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires-out8k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires-out8k-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires-thinking-budget512-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-hires-thinking-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-96k-thinking-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h100-fp8",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h200-256k",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:h200-256k-thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:long-context",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:long-context-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:long-context-thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:long-context-thinking-no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:no-spec",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/gemma-4-31B-it:thinking",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/madlad400-3b-mt",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/owlv2-base-patch16-ensemble",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/siglip-so400m-patch14-384",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "google/siglip2-base-patch16-224",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "ibm-granite/granite-guardian-3.0-2b",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "ibm-granite/granite-guardian-3.0-2b:a100-40gb",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "knowledgator/gliclass-instruct-large-v1.0",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "knowledgator/gliclass-instruct-large-v1.0:multi-label",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "knowledgator/gliner-relex-large-v1.0",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/GTE-ModernColBERT-v1",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/GTE-ModernColBERT-v1:long_context",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/GTE-ModernColBERT-v1:muvera",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/LightOnOCR-2-1B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/LightOnOCR-2-1B:transformers",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/LightOnOCR-3-4B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/LightOnOCR-3-4B:markdown",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "lightonai/LightOnOCR-3-4B:transformers",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "numind/NuNER_Zero",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "numind/NuNER_Zero-span",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "nvidia/parakeet-tdt-0.6b-v3",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "openai/whisper-large-v3-turbo",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "opensearch-project/opensearch-neural-sparse-encoding-doc-v3-gte",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "prithivida/Splade_PP_en_v2",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "prithivida/Splade_PP_en_v2:candle",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "prithivida/Splade_PP_en_v2:sentence_transformer",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "superlinked/pii-redact",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "tencent/Hy-MT2-1.8B",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "tencent/R3-embedding-0.6b",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "tencent/R3-rerank-0.6b",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "urchade/gliner_multi-v2.1",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "urchade/gliner_multi_pii-v1",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "zai-org/GLM-5.3-Flash",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "zai-org/GLM-5.3-Flash:relay",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "zai-org/GLM-OCR",
+      "object": "model",
+      "owned_by": "sie"
+    },
+    {
+      "created": 0,
+      "id": "zai-org/GLM-OCR:transformers",
+      "object": "model",
+      "owned_by": "sie"
+    }
+  ],
+  "models": [
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "banking": {
+          "is_default": false
+        },
+        "bge_m3_flag": {
+          "is_default": false
+        },
+        "candle": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        },
+        "dense": {
+          "is_default": false
+        },
+        "medical-vn": {
+          "is_default": false
+        },
+        "multivector": {
+          "is_default": false
+        },
+        "sparse": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:banking",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:bge_m3_flag",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:candle",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:dense",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:medical-vn",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:multivector",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024,
+        "multivector": 1024,
+        "sparse": 250002
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "BAAI/bge-m3:sparse",
+      "outputs": [
+        "dense",
+        "sparse",
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": null,
+      "name": "IDEA-Research/grounding-dino-base",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "12bdfa3120f3e7ec7b434d90674b3396eccf88eb",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": null,
+      "name": "Ihor/gliner-biomed-large-v1.0",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "f79771210ab2111a2081ef31620fdb7342f602e9",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "MoritzLaurer/deberta-v3-large-zeroshot-v2.0",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "cf44676c28ba7312e5c5f8f8d2c22b3e0c9cdae2",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 2560
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Embedding-4B",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "flash": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 2560
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Embedding-4B:flash",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "5cf2132abc99cad020ac570b19d031efec650f2b",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Reranker-0.6B",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "fast": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Reranker-0.6B:fast",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Reranker-4B",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "fast": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-Reranker-4B:fast",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3-VL-Reranker-2B",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "4bd860ac4f15ad1897a214615cccc700f8f71818",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "a100-40gb": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        },
+        "default-no-admission": {
+          "is_default": false
+        },
+        "h100": {
+          "is_default": false
+        },
+        "l4-smoke": {
+          "is_default": false
+        },
+        "long-context": {
+          "is_default": false
+        },
+        "no-spec": {
+          "is_default": false
+        },
+        "thinking": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:a100-40gb",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:default-no-admission",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:h100",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:l4-smoke",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3.5-4B:long-context",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.5-4B:thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.8-27B-FP8",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "h100-256k": {
+          "is_default": false
+        },
+        "h100-256k-batch": {
+          "is_default": false
+        },
+        "h100-256k-batch-no-spec": {
+          "is_default": false
+        },
+        "h100-256k-no-spec": {
+          "is_default": false
+        },
+        "h100-256k-thinking": {
+          "is_default": false
+        },
+        "h100-256k-thinking-no-spec": {
+          "is_default": false
+        },
+        "h200-256k": {
+          "is_default": false
+        },
+        "h200-256k-no-spec": {
+          "is_default": false
+        },
+        "no-spec": {
+          "is_default": false
+        },
+        "rtx-pro-6000-256k": {
+          "is_default": false
+        },
+        "rtx-pro-6000-256k-no-spec": {
+          "is_default": false
+        },
+        "thinking": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k-batch",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k-batch-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k-thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h100-256k-thinking-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h200-256k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:h200-256k-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Qwen/Qwen3.8-27B-FP8:no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:rtx-pro-6000-256k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:rtx-pro-6000-256k-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 262144,
+      "name": "Qwen/Qwen3.8-27B-FP8:thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "017b9c7af6b5689d5dd426a76e0bc077eb5ca20a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 1000000,
+      "name": "Qwen/Qwen3.8-Max-VL-Thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true,
+          "partner": {
+            "declaration_url": "https://sie.dev/models",
+            "declared": {
+              "context_length": 1000000,
+              "max_output_tokens": 32768,
+              "quantization": "nvfp4"
+            },
+            "regions": [
+              "us"
+            ],
+            "vendor": "sie-relay",
+            "vendor_model": "Qwen/Qwen3.8-Max-VL-Thinking",
+            "vendor_name": "SIE Relay"
+          }
+        }
+      },
+      "release_date": "",
+      "revision": null,
+      "routing": {
+        "policy": "remote_only",
+        "upstream_kind": "openai"
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": true,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3Guard-Gen-4B",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "a100-40gb": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "6ec42827da0c1ff11e7a49dc269d2e810d27e108",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": true,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 32768,
+      "name": "Qwen/Qwen3Guard-Gen-4B:a100-40gb",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "6ec42827da0c1ff11e7a49dc269d2e810d27e108",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Snowflake/snowflake-arctic-embed-l-v2.0",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "candle": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "ac6544c8a46e00af67e330e85a9028c66b8cfd9a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "Snowflake/snowflake-arctic-embed-l-v2.0:candle",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "ac6544c8a46e00af67e330e85a9028c66b8cfd9a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 320
+      },
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "TomoroAI/tomoro-colqwen3-embed-4b",
+      "outputs": [
+        "multivector"
+      ],
+      "profiles": {
+        "compact": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        },
+        "muvera": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "bf790bd8780b098b86453444632a184bb770be1a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 320
+      },
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "TomoroAI/tomoro-colqwen3-embed-4b:compact",
+      "outputs": [
+        "multivector"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "bf790bd8780b098b86453444632a184bb770be1a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 320
+      },
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "TomoroAI/tomoro-colqwen3-embed-4b:muvera",
+      "outputs": [
+        "multivector"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "bf790bd8780b098b86453444632a184bb770be1a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 1000000,
+      "name": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true,
+          "partner": {
+            "declaration_url": "https://sie.dev/models",
+            "declared": {
+              "context_length": 1000000,
+              "max_output_tokens": 32768,
+              "quantization": "fp8-fp4-experts"
+            },
+            "regions": [
+              "us"
+            ],
+            "vendor": "sie-relay",
+            "vendor_model": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+            "vendor_name": "SIE Relay"
+          }
+        }
+      },
+      "release_date": "",
+      "revision": null,
+      "routing": {
+        "policy": "remote_only",
+        "upstream_kind": "openai"
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "document",
+        "image"
+      ],
+      "max_sequence_length": null,
+      "name": "docling",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "ocr": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "310479be56f3a99a0fea75d930e11eea38bf5ef7",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "document",
+        "image"
+      ],
+      "max_sequence_length": null,
+      "name": "docling:ocr",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "310479be56f3a99a0fea75d930e11eea38bf5ef7",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": null,
+      "name": "facebook/sam3",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "3c879f39826c281e95690f02c7821c4de09afae7",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "English typed-decision classifier (GLiNER2.5, DeBERTa-v3-large): answers noul, choice and score questions about a text in one pass. 512-token window.",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "fastino/GLiNER2.5-Decide",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "2026-09-24",
+      "revision": "7ee5da4c2415e32259bcdc0b1a7367c32ce8d6f6",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "fastino/gliguard-LLMGuardrails-300M",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "4c03acfe6fcef7bb806d0ae721742d593ddba387",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "fastino/gliner2-base-v1",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "f5b2ecedebe4381b088c1cf276f5bf72a52cac54",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "fastino/gliner2-large-v1",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "b122b11eeaee4dabd32bed80412f3234c0d0e943",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "google/gemma-4-31B-it",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "h100-96k": {
+          "is_default": false
+        },
+        "h100-96k-hires": {
+          "is_default": false
+        },
+        "h100-96k-hires-no-spec": {
+          "is_default": false
+        },
+        "h100-96k-hires-out8k": {
+          "is_default": false
+        },
+        "h100-96k-hires-out8k-no-spec": {
+          "is_default": false
+        },
+        "h100-96k-hires-thinking-budget512-no-spec": {
+          "is_default": false
+        },
+        "h100-96k-hires-thinking-no-spec": {
+          "is_default": false
+        },
+        "h100-96k-no-spec": {
+          "is_default": false
+        },
+        "h100-96k-thinking": {
+          "is_default": false
+        },
+        "h100-96k-thinking-no-spec": {
+          "is_default": false
+        },
+        "h100-fp8": {
+          "is_default": false
+        },
+        "h200-256k": {
+          "is_default": false
+        },
+        "h200-256k-thinking": {
+          "is_default": false
+        },
+        "long-context": {
+          "is_default": false
+        },
+        "long-context-no-spec": {
+          "is_default": false
+        },
+        "long-context-thinking": {
+          "is_default": false
+        },
+        "long-context-thinking-no-spec": {
+          "is_default": false
+        },
+        "no-spec": {
+          "is_default": false
+        },
+        "thinking": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires-out8k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires-out8k-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires-thinking-budget512-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-hires-thinking-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:h100-96k-thinking-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "google/gemma-4-31B-it:h100-fp8",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:h200-256k",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:h200-256k-thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:long-context",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:long-context-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:long-context-thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 262144,
+      "name": "google/gemma-4-31B-it:long-context-thinking-no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 8192,
+      "name": "google/gemma-4-31B-it:no-spec",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [
+          "json_schema",
+          "regex"
+        ],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text",
+        "image"
+      ],
+      "max_sequence_length": 98304,
+      "name": "google/gemma-4-31B-it:thinking",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "google/madlad400-3b-mt",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "fa184c675da0b5c9e1c8694fccd4e12e2d422094",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": null,
+      "name": "google/owlv2-base-patch16-ensemble",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "cfd3195ba4ea9592eec887ded089f4c08eff231d",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1152
+      },
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 64,
+      "name": "google/siglip-so400m-patch14-384",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "9fdffc58afc957d1a03a25b10dba0329ab15c2a3",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 768
+      },
+      "inputs": [
+        "image",
+        "text"
+      ],
+      "max_sequence_length": 64,
+      "name": "google/siglip2-base-patch16-224",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": true,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "ibm-granite/granite-guardian-3.0-2b",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "a100-40gb": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "e48b7b8acf438d24daa2271ada6df945b5b8895e",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": true,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "ibm-granite/granite-guardian-3.0-2b:a100-40gb",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "e48b7b8acf438d24daa2271ada6df945b5b8895e",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 1024,
+      "name": "knowledgator/gliclass-instruct-large-v1.0",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "multi-label": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "825e5478c1bf4bffbf297690517097ccbdb2e006",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 1024,
+      "name": "knowledgator/gliclass-instruct-large-v1.0:multi-label",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "825e5478c1bf4bffbf297690517097ccbdb2e006",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 2048,
+      "name": "knowledgator/gliner-relex-large-v1.0",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "4aedc9226a5ac9e2f6b5ea3e91c1ee577c88a290",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 128
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "lightonai/GTE-ModernColBERT-v1",
+      "outputs": [
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "long_context": {
+          "is_default": false
+        },
+        "muvera": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "cbbe53366e564450558f5e639dd499171f127538",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 128
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "lightonai/GTE-ModernColBERT-v1:long_context",
+      "outputs": [
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "cbbe53366e564450558f5e639dd499171f127538",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "multivector": 128
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 8192,
+      "name": "lightonai/GTE-ModernColBERT-v1:muvera",
+      "outputs": [
+        "multivector",
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "cbbe53366e564450558f5e639dd499171f127538",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 16384,
+      "name": "lightonai/LightOnOCR-2-1B",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "transformers": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "c97bd377f04481830395218fa8951df9deaba756",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 16384,
+      "name": "lightonai/LightOnOCR-2-1B:transformers",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "c97bd377f04481830395218fa8951df9deaba756",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 24576,
+      "name": "lightonai/LightOnOCR-3-4B",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "markdown": {
+          "is_default": false
+        },
+        "transformers": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "b71010f095dc3735de7ee6b9969bff8f8f50b39a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 24576,
+      "name": "lightonai/LightOnOCR-3-4B:markdown",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "b71010f095dc3735de7ee6b9969bff8f8f50b39a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 24576,
+      "name": "lightonai/LightOnOCR-3-4B:transformers",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "b71010f095dc3735de7ee6b9969bff8f8f50b39a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 384,
+      "name": "numind/NuNER_Zero",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "c90187673f464518dca09f41689184ed6976242c",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 384,
+      "name": "numind/NuNER_Zero-span",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "063b4dec1aaf626058e7c071657b15d52abffca0",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "audio"
+      ],
+      "max_sequence_length": null,
+      "name": "nvidia/parakeet-tdt-0.6b-v3",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "541d1f99c6b0c3cd0b11a95167540bb8edefd82b",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "audio"
+      ],
+      "max_sequence_length": 448,
+      "name": "openai/whisper-large-v3-turbo",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "sparse": 30522
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "opensearch-project/opensearch-neural-sparse-encoding-doc-v3-gte",
+      "outputs": [
+        "sparse"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "1646fef40807937e8e130c66d327a26421c408d5",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "sparse": 30522
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 512,
+      "name": "prithivida/Splade_PP_en_v2",
+      "outputs": [
+        "sparse"
+      ],
+      "profiles": {
+        "candle": {
+          "is_default": false
+        },
+        "default": {
+          "is_default": true
+        },
+        "sentence_transformer": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "f0d4aa214dcb60c274052a52c0497535e3aec64c",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "sparse": 30522
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 128,
+      "name": "prithivida/Splade_PP_en_v2:candle",
+      "outputs": [
+        "sparse"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "f0d4aa214dcb60c274052a52c0497535e3aec64c",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "sparse": 30522
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 128,
+      "name": "prithivida/Splade_PP_en_v2:sentence_transformer",
+      "outputs": [
+        "sparse"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "f0d4aa214dcb60c274052a52c0497535e3aec64c",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 384,
+      "name": "superlinked/pii-redact",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "1fcf13e85f4eef5394e1fcd406cf2ca9ea82351d",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": false
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 4096,
+      "name": "tencent/Hy-MT2-1.8B",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "9a341cd1b679d3efd23b46e847b01745a71ed792",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {
+        "dense": 1024
+      },
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 4096,
+      "name": "tencent/R3-embedding-0.6b",
+      "outputs": [
+        "dense"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "9df7e112330d858f4fd0a9d1aa5e1def15d5d25a",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 4096,
+      "name": "tencent/R3-rerank-0.6b",
+      "outputs": [
+        "score"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "6d0c3e486b8653578fd3f0e3c8e7871a0ce01953",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 384,
+      "name": "urchade/gliner_multi-v2.1",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "443d26d654e0324125a96bebd8e796c14ff2efe6",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 384,
+      "name": "urchade/gliner_multi_pii-v1",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "1fcf13e85f4eef5394e1fcd406cf2ca9ea82351d",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 16384,
+      "name": "zai-org/GLM-5.3-Flash",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "relay": {
+          "is_default": false,
+          "partner": {
+            "declaration_url": "https://sie.dev/models",
+            "declared": {
+              "context_length": 131072,
+              "max_output_tokens": 32768,
+              "quantization": "undisclosed"
+            },
+            "regions": [
+              "us"
+            ],
+            "vendor": "sie-relay",
+            "vendor_model": "zai-org/GLM-5.3-Flash",
+            "vendor_name": "SIE Relay"
+          }
+        }
+      },
+      "release_date": "",
+      "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+      "routing": {
+        "policy": "fallback",
+        "upstream_kind": "openai"
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": [],
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": true,
+        "tools": true
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "text"
+      ],
+      "max_sequence_length": 131072,
+      "name": "zai-org/GLM-5.3-Flash:relay",
+      "outputs": [
+        "tokens"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "eb9eb208eb0d988989d07a6a12d0fdeb5f52574a",
+      "routing": {
+        "policy": "remote_only",
+        "upstream_kind": "openai"
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 16384,
+      "name": "zai-org/GLM-OCR",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        },
+        "transformers": {
+          "is_default": false
+        }
+      },
+      "release_date": "",
+      "revision": "ca5d8b3e287e52589e37c28385d9655ee4372f9d",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    },
+    {
+      "aliases": [],
+      "capabilities": {
+        "code": false,
+        "grammar": null,
+        "guard": false,
+        "lora_adapters": null,
+        "profile_lora_adapters": null,
+        "sql": false,
+        "streaming": null,
+        "tools": null
+      },
+      "description": "",
+      "dims": {},
+      "inputs": [
+        "image"
+      ],
+      "max_sequence_length": 16384,
+      "name": "zai-org/GLM-OCR:transformers",
+      "outputs": [
+        "json"
+      ],
+      "profiles": {
+        "default": {
+          "is_default": true
+        }
+      },
+      "release_date": "",
+      "revision": "ca5d8b3e287e52589e37c28385d9655ee4372f9d",
+      "routing": {
+        "policy": null,
+        "upstream_kind": null
+      }
+    }
+  ],
+  "object": "list"
+}
