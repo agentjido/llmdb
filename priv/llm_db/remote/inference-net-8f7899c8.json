@@ -1652,36 +1652,6 @@
     },
     {
       "context_length": 1048576,
-      "id": "moonshotai/kimi-k3-with-ads",
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "max_completion_tokens": 1048576,
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "system",
-      "pricing": {
-        "completion": "0.000012000000",
-        "input_cache_read": "0.000000240000",
-        "prompt": "0.000002400000"
-      },
-      "reasoning_efforts": [
-        "none",
-        "low",
-        "high",
-        "max"
-      ],
-      "supported_endpoints": [
-        "chat",
-        "responses",
-        "messages"
-      ]
-    },
-    {
-      "context_length": 1048576,
       "id": "moonshotai/kimi-k3.1-pro",
       "input_modalities": [
         "text",
@@ -1727,6 +1697,36 @@
         "completion": "0.000015000000",
         "input_cache_read": "0.000000300000",
         "prompt": "0.000003000000"
+      },
+      "reasoning_efforts": [
+        "none",
+        "low",
+        "high",
+        "max"
+      ],
+      "supported_endpoints": [
+        "chat",
+        "responses",
+        "messages"
+      ]
+    },
+    {
+      "context_length": 1048576,
+      "id": "moonshotai/kimi-k3.1-pro-with-ads",
+      "input_modalities": [
+        "text",
+        "image"
+      ],
+      "max_completion_tokens": 1048576,
+      "object": "model",
+      "output_modalities": [
+        "text"
+      ],
+      "owned_by": "system",
+      "pricing": {
+        "completion": "0.000008000000",
+        "input_cache_read": "0.000000160000",
+        "prompt": "0.000001600000"
       },
       "reasoning_efforts": [
         "none",
