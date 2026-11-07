@@ -72,11 +72,11 @@ jobs:
             git fetch origin main --no-tags
             git rebase origin/main
 
-            if ! mix llm_db.build --check --install; then
-              mix llm_db.build --install
+            if ! mix llm_db.build --check --install-source; then
+              mix llm_db.build --install-source
             fi
 
-            mix llm_db.build --check --install
+            mix llm_db.build --check --install-source
             mix catalog.verify
             mix test
             mix quality

@@ -386,8 +386,6 @@ mix llm_db.build
 # Verify semantic reproducibility without changing the tracked snapshot
 mix catalog.verify
 
-# Install the packaged snapshot for local runtime/package validation
-mix llm_db.build --install
 ```
 
 Catalog pull requests commit mergeable inputs and tests, not

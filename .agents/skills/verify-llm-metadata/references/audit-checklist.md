@@ -46,7 +46,7 @@ Every finding must recommend where to capture the learning:
 | Provider API omits the fact but official docs publish it | `local-override` | Add the smallest TOML overlay under `priv/llm_db/local/<provider>/`; do not duplicate API-returned fields unnecessarily. |
 | Official docs identify a model alias, lifecycle state, pricing table, or deprecation schedule absent from the API | `local-override` | Capture the durable curated fact in TOML, with sparse fields only. |
 | A rule applies across many models or providers | `enrichment` | Update enrichment/runtime code instead of copying overrides into many TOMLs. |
-| A generated file is stale after source changes | `generated-artifact` | Run `mix llm_db.build --install`; commit regenerated `snapshot.json` and `providers/*.json`. |
+| A generated file is stale after source changes | `generated-artifact` | Run `mix catalog.verify`; commit the source inputs and tests. |
 | Evidence is contradictory or unavailable | `unverified` | Do not edit. Report the ambiguity and exact sources checked. |
 
 For endpoint-backed sources, separate "endpoint truth" from "docs-only truth." A model endpoint often supplies inventory, display names, creation timestamps, limits, and capabilities, while separate docs may be the only source for lifecycle, aliases, pricing, migration guidance, and feature caveats.
@@ -91,8 +91,8 @@ Unverified:
 
 ## PR Readiness
 
-- Rebuild with `mix llm_db.build --install` after source-layer edits.
+- Verify with `mix catalog.verify` after source-layer edits.
 - Run `mix test` for source transform, merge, enrichment, or generated artifact changes. Use targeted tests only when the change is tightly scoped and call out why broader tests were skipped.
-- Include regenerated `priv/llm_db/providers/*.json` and `priv/llm_db/snapshot.json` only after the build produces them.
+- Do not include generated provider JSON or `priv/llm_db/snapshot.json` in a catalog pull request.
 - Commit with a Conventional Commit message, for example `fix: update anthropic model lifecycle metadata`.
 - Open a PR that lists official evidence, changed capture layers, tests run, and remaining unverified fields.

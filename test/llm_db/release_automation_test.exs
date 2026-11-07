@@ -73,7 +73,7 @@ defmodule LLMDB.ReleaseAutomationTest do
     assert integration =~ "group: llm-metadata"
     assert integration =~ "cancel-in-progress: false"
     assert integration =~ "git rebase origin/main"
-    assert integration =~ "mix llm_db.build --check --install"
+    assert integration =~ "mix llm_db.build --check --install-source"
     assert integration =~ "mix catalog.verify"
     assert integration =~ "git add priv/llm_db/snapshot.json"
     assert integration =~ "mix llm_db.snapshot.publish"

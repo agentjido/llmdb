@@ -65,7 +65,7 @@ jobs:
         run: mix deps.get
 
       - name: Build the effective catalog from checked-out inputs
-        run: MIX_ENV=dev mix llm_db.build --install
+        run: MIX_ENV=dev mix llm_db.build --install-source
 
       - name: Install NPM workspace
         run: npm ci
@@ -99,6 +99,7 @@ jobs:
           fi
           if echo "$files" | grep -qE '^priv/llm_db/snapshot\.json$'; then
             echo "::error::priv/llm_db/snapshot.json is owned by serialized main integration automation. Commit catalog inputs and tests instead."
+            echo "Restore it with: git restore --source=origin/main --staged --worktree -- priv/llm_db/snapshot.json"
             exit 1
           fi
           echo "No generated-file ownership violations detected."
@@ -151,7 +152,7 @@ jobs:
         run: mix deps.compile
 
       - name: Build the effective catalog from checked-out inputs
-        run: mix llm_db.build --install
+        run: mix llm_db.build --install-source
 
       - name: Create PLT directory
         run: mkdir -p priv/plts
@@ -243,7 +244,7 @@ jobs:
         run: mix deps.compile
 
       - name: Build the effective catalog from checked-out inputs
-        run: MIX_ENV=dev mix llm_db.build --install
+        run: MIX_ENV=dev mix llm_db.build --install-source
 
       - name: Compile project
         run: mix compile --warnings-as-errors
@@ -269,8 +270,8 @@ jobs:
       - name: Install and strictly verify the effective catalog
         run: |
           set -euo pipefail
-          mix llm_db.build --install
-          mix llm_db.build --check --install
+          mix llm_db.build --install-source
+          mix llm_db.build --check --install-source
           mix run --no-start -e '
             path = LLMDB.Snapshot.source_packaged_path()
             {:ok, _snapshot} = LLMDB.Snapshot.read(path, integrity_policy: :strict)
@@ -298,7 +299,7 @@ jobs:
         run: mix deps.get
 
       - name: Build the exact checked-out catalog
-        run: mix llm_db.build --install
+        run: mix llm_db.build --install-source
 
       - name: Verify fresh offline consumer compilation and cold lookup
         run: .github/workflows/scripts/verify_consumer_builds.sh

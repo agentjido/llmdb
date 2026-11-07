@@ -114,7 +114,7 @@ jobs:
         run: |
           set -euo pipefail
           mix catalog.verify
-          mix llm_db.build --check --install
+          mix llm_db.build --check --install-source
 
       - name: Run tests
         if: ${{ inputs.skip_tests != true }}
@@ -343,7 +343,7 @@ jobs:
             echo "::error::Hex version $MIX_VERSION does not match tag $RELEASE_VERSION."
             exit 1
           fi
-          mix llm_db.build --check --install
+          mix llm_db.build --check --install-source
 
       - name: Publish package and documentation to Hex.pm
         env:
@@ -414,7 +414,7 @@ jobs:
             echo "Tag: $RELEASE_VERSION; Hex: $MIX_VERSION; NPM: $NPM_VERSION"
             exit 1
           fi
-          mix llm_db.build --check --install
+          mix llm_db.build --check --install-source
 
       - name: Check NPM package
         run: npm run npm:check

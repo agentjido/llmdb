@@ -50,7 +50,7 @@ store.
 **Jobs:**
 1. Pull latest metadata using `mix llm_db.pull`
 2. Build the packaged snapshot from refreshed metadata
-3. Validate the packaged snapshot with `mix llm_db.build --check --install`,
+3. Validate the packaged snapshot with `mix llm_db.build --check --install-source`,
    `mix catalog.verify`, `mix test`, and `mix quality`
 4. Commit refreshed metadata inputs back to `main` when they changed
 5. Publish the current canonical snapshot using `mix llm_db.snapshot.publish`
@@ -75,7 +75,7 @@ version to Hex.pm and NPM.
 - Manual recovery dispatch at an existing release tag
 
 **Jobs:**
-1. Validate the committed snapshot with `mix llm_db.build --check --install`
+1. Validate the committed snapshot with `mix llm_db.build --check --install-source`
 2. Run tests and quality checks
 3. Synchronize the Elixir and NPM package versions to the current CalVer release
 4. Generate the changelog and tag using `git_ops`

@@ -86,7 +86,7 @@ Use `--mode audit-only` for reports without edits or PRs. Use `--provider-set po
 12. Rebuild and verify:
 
     ```bash
-    mix llm_db.build --install
+    mix catalog.verify
     mix test
     ```
 
@@ -101,7 +101,7 @@ Each finding must include a `capture layer`:
 - `source-transform`: Edit `lib/llm_db/sources/<provider>.ex` when the official API returns a field but the repo drops, misnames, or mis-maps it.
 - `local-override`: Edit sparse TOML under `priv/llm_db/local/<provider>/` for curated facts absent from the API but present in official docs, such as lifecycle/deprecation, aliases, pricing pages, and documented provider exclusions.
 - `enrichment`: Edit enrichment/runtime code when the same derived rule applies across many models/providers.
-- `generated-artifact`: Regenerate with `mix llm_db.build --install`; commit generated artifacts only as build outputs.
+- `generated-artifact`: Verify with `mix catalog.verify`; commit the source inputs and tests.
 - `unverified`: Do not edit; document what evidence is missing.
 
 For providers backed by a model endpoint, remember that the endpoint may not include docs-only fields. For example, Anthropic's Models API exposes IDs, display names, creation dates, capabilities, and token limits, but lifecycle/deprecation, pricing, aliases, and some docs context can require separate public documentation.

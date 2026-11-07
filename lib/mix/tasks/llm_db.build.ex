@@ -10,13 +10,15 @@ defmodule Mix.Tasks.LlmDb.Build do
   Builds a canonical `snapshot.json` from configured sources.
 
   The snapshot is always written to a local build output directory. Use
-  `--install` to also copy it into `priv/llm_db/snapshot.json` for local runtime
-  loading or packaging.
+  `--install` is a safe local-install alias that keeps all output under
+  `_build`. The serialized integration and release workflows use
+  `--install-source` to also update the tracked source snapshot.
 
   ## Usage
 
       mix llm_db.build
       mix llm_db.build --install
+      mix llm_db.build --install-source
       mix llm_db.build --check
       mix llm_db.build --verify
       mix llm_db.build --output-dir tmp/llm_db/build
@@ -26,8 +28,11 @@ defmodule Mix.Tasks.LlmDb.Build do
 
     * `--check` - Verify the generated snapshot artifacts already match the
       expected output.
-    * `--install` - Also install the built snapshot into
-      `priv/llm_db/snapshot.json`.
+    * `--install` - Keep the built snapshot under `_build`. This safe local
+      option does not change the tracked source snapshot.
+    * `--install-source` - Also install the built snapshot into the tracked
+      source snapshot. This option is for serialized integration and release
+      automation.
     * `--verify` - Write a local build artifact, read it with strict integrity,
       rebuild from the same inputs, and require the same semantic snapshot ID.
     * `--output-dir` - Directory for local snapshot build artifacts.
@@ -45,6 +50,7 @@ defmodule Mix.Tasks.LlmDb.Build do
         strict: [
           check: :boolean,
           install: :boolean,
+          install_source: :boolean,
           verify: :boolean,
           output_dir: :string,
           schema_version: :integer
@@ -83,18 +89,11 @@ defmodule Mix.Tasks.LlmDb.Build do
 
   defp maybe_check_or_write(artifact, opts) do
     if opts[:check] do
-      if Builder.up_to_date?(artifact, install: opts[:install] == true) do
+      if Builder.up_to_date?(artifact, install_opts(opts)) do
         Mix.shell().info("✓ Snapshot artifacts are up to date.")
       else
         expected_paths =
-          if opts[:install] do
-            [LLMDB.Snapshot.source_packaged_path()]
-          else
-            [
-              artifact.snapshot_path,
-              artifact.metadata_path
-            ]
-          end
+          expected_paths(artifact, opts)
 
         Mix.raise("""
         Snapshot artifacts are out of date.
@@ -103,11 +102,11 @@ defmodule Mix.Tasks.LlmDb.Build do
         #{Enum.map_join(expected_paths, "\n", &"  - #{&1}")}
 
         To fix this:
-          mix llm_db.build#{if opts[:install], do: " --install", else: ""}
+          mix llm_db.build#{install_suffix(opts)}
         """)
       end
     else
-      artifact = Builder.write!(artifact, install: opts[:install] == true)
+      artifact = Builder.write!(artifact, install_opts(opts))
       print_summary(artifact, opts)
     end
   end
@@ -119,7 +118,11 @@ defmodule Mix.Tasks.LlmDb.Build do
     Mix.shell().info("✓ Metadata written to #{artifact.metadata_path}")
 
     if opts[:install] do
-      Mix.shell().info("✓ Packaged snapshot installed to #{LLMDB.Snapshot.packaged_path()}")
+      Mix.shell().info("✓ Local snapshot kept under #{artifact.output_dir}")
+    end
+
+    if opts[:install_source] do
+      Mix.shell().info("✓ Source snapshot installed to #{LLMDB.Snapshot.source_packaged_path()}")
     end
 
     Mix.shell().info("")
@@ -132,6 +135,26 @@ defmodule Mix.Tasks.LlmDb.Build do
 
   defp maybe_put(opts, _key, nil), do: opts
   defp maybe_put(opts, key, value), do: Keyword.put(opts, key, value)
+
+  defp install_opts(opts) do
+    [install_source: opts[:install_source] == true]
+  end
+
+  defp install_suffix(opts) do
+    cond do
+      opts[:install_source] -> " --install-source"
+      opts[:install] -> " --install"
+      true -> ""
+    end
+  end
+
+  defp expected_paths(artifact, opts) do
+    if opts[:install_source] do
+      [LLMDB.Snapshot.source_packaged_path()]
+    else
+      [artifact.snapshot_path, artifact.metadata_path]
+    end
+  end
 
   defp verify!(artifact, build_opts) do
     artifact = Builder.write!(artifact)
@@ -150,8 +173,13 @@ defmodule Mix.Tasks.LlmDb.Build do
   end
 
   defp validate_mode!(opts) do
-    if opts[:verify] == true and (opts[:check] == true or opts[:install] == true) do
-      Mix.raise("--verify cannot be combined with --check or --install")
+    if opts[:install] == true and opts[:install_source] == true do
+      Mix.raise("--install cannot be combined with --install-source")
+    end
+
+    if opts[:verify] == true and
+         (opts[:check] == true or opts[:install] == true or opts[:install_source] == true) do
+      Mix.raise("--verify cannot be combined with --check, --install, or --install-source")
     end
   end
 
@@ -162,7 +190,8 @@ defmodule Mix.Tasks.LlmDb.Build do
       )
     end
 
-    if schema_version == LLMDB.Snapshot.sparse_schema_version() and opts[:install] do
+    if schema_version == LLMDB.Snapshot.sparse_schema_version() and
+         opts[:install_source] == true do
       Mix.raise(
         "Sparse snapshot schema v#{schema_version} is opt-in and cannot be installed as the packaged default in this minor release"
       )
