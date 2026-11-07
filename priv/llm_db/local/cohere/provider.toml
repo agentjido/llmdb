@@ -11,3 +11,4 @@ env = ["COHERE_API_KEY"]
 [runtime.execution]
 text = "cohere_chat"
 object = "cohere_chat"
+rerank = "cohere_rerank_compatible"

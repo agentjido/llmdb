@@ -74,7 +74,8 @@ defmodule LLMDB.Schema.ProviderTest do
         runtime: %{
           execution: %{
             text: "openai_chat_compatible",
-            object: "openai_responses_compatible"
+            object: "openai_responses_compatible",
+            rerank: "cohere_rerank_compatible"
           }
         }
       }
@@ -82,6 +83,7 @@ defmodule LLMDB.Schema.ProviderTest do
       assert {:ok, result} = Provider.new(input)
       assert result.runtime.execution.text == "openai_chat_compatible"
       assert result.runtime.execution.object == "openai_responses_compatible"
+      assert result.runtime.execution.rerank == "cohere_rerank_compatible"
       assert Map.get(result.runtime.execution, :embed) == nil
     end
 

@@ -473,7 +473,16 @@ defmodule LLMDB.PackagedTest do
           assert model["capabilities"]["chat"] == false
           assert model["capabilities"]["embeddings"] == false
           assert model["capabilities"]["streaming"]["text"] == false
-          assert model["execution"] == nil
+
+          case model["execution"] do
+            nil ->
+              :ok
+
+            %{"rerank" => execution} ->
+              assert execution["family"] == "cohere_rerank_compatible"
+              assert execution["wire_protocol"] == "cohere_rerank"
+              assert execution["path"] == "/v2/rerank"
+          end
         end
       end
     end

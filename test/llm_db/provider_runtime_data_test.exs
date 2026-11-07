@@ -5,7 +5,6 @@ defmodule LLMDB.ProviderRuntimeDataTest do
   alias LLMDB.Sources.Local
 
   @openai_compatible [
-    :albert,
     :openai,
     :openrouter,
     :groq,
@@ -56,6 +55,14 @@ defmodule LLMDB.ProviderRuntimeDataTest do
       assert runtime.execution.text == family
       assert is_list(runtime.auth.env) and runtime.auth.env != []
     end
+
+    albert = provider_runtime(providers, :albert)
+    assert albert.base_url == "https://albert.api.etalab.gouv.fr/v1"
+    assert albert.auth.type == "bearer"
+    assert albert.auth.env == ["ALBERT_API_KEY"]
+    assert albert.execution.rerank == "cohere_rerank_compatible"
+    assert Map.get(albert.execution, :text) == nil
+    assert Map.get(albert.execution, :object) == nil
 
     elevenlabs = provider_runtime(providers, :elevenlabs)
     assert elevenlabs.auth.env == ["ELEVENLABS_API_KEY"]

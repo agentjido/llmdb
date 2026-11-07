@@ -179,6 +179,7 @@ defmodule LLMDB.Model do
                       text: @execution_operation_schema |> Zoi.nullish(),
                       object: @execution_operation_schema |> Zoi.nullish(),
                       evaluate: @execution_operation_schema |> Zoi.nullish(),
+                      rerank: @execution_operation_schema |> Zoi.nullish(),
                       embed: @execution_operation_schema |> Zoi.nullish(),
                       image: @execution_operation_schema |> Zoi.nullish(),
                       transcription: @execution_operation_schema |> Zoi.nullish(),
@@ -359,7 +360,17 @@ defmodule LLMDB.Model do
   defp normalize_execution_attrs(attrs) do
     update_in_nested_map(attrs, :execution, fn execution ->
       Enum.reduce(
-        [:text, :object, :evaluate, :embed, :image, :transcription, :speech, :realtime],
+        [
+          :text,
+          :object,
+          :evaluate,
+          :rerank,
+          :embed,
+          :image,
+          :transcription,
+          :speech,
+          :realtime
+        ],
         execution,
         fn key, acc ->
           update_in_nested_map(acc, key, fn operation ->

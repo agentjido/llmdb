@@ -77,6 +77,7 @@ defmodule LLMDB.Provider do
                               text: Zoi.string() |> Zoi.nullish(),
                               object: Zoi.string() |> Zoi.nullish(),
                               evaluate: Zoi.string() |> Zoi.nullish(),
+                              rerank: Zoi.string() |> Zoi.nullish(),
                               embed: Zoi.string() |> Zoi.nullish(),
                               image: Zoi.string() |> Zoi.nullish(),
                               transcription: Zoi.string() |> Zoi.nullish(),
