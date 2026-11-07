@@ -71,12 +71,12 @@ jobs:
       - name: Build packaged snapshot from refreshed metadata
         run: |
           set -euo pipefail
-          mix llm_db.build --install
+          mix llm_db.build --install-source
 
       - name: Validate refreshed catalog before publishing
         run: |
           set -euo pipefail
-          mix llm_db.build --check --install
+          mix llm_db.build --check --install-source
           mix catalog.verify
           mix test
           mix quality

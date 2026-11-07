@@ -60,7 +60,7 @@ Set `META_API_KEY` in your environment, then run:
 
 ```sh
 mix llm_db.pull --source meta
-mix llm_db.build --install
+mix catalog.verify
 ```
 
 The source requests `GET https://api.meta.ai/v1/models` with bearer authentication.
@@ -98,7 +98,7 @@ References: [Meta model registry](https://dev.meta.ai/docs/models),
 
 The LLM API source reads the public `https://api.llmapi.ai/v1/models` catalog.
 Run `mix llm_db.pull --source llmapi` to refresh it without credentials, then
-`mix llm_db.build --install` to rebuild the packaged snapshot. Runtime loading
+`mix catalog.verify` to verify the effective snapshot. Runtime loading
 does not make network requests.
 
 LLM API model contracts use the shared OpenAI Chat Completions adapter only
@@ -117,7 +117,7 @@ component. Complete input pricing then requires a token split by modality;
 The Inference.net source reads the public
 `https://api.inference.net/v1/models` catalog without credentials. Run
 `mix llm_db.pull --source inference` to refresh it, then run
-`mix llm_db.build --install`. The source records model limits, token prices,
+`mix catalog.verify`. The source records model limits, token prices,
 modalities, reasoning effort values, endpoint support, and privileged-access
 flags. It also adds the reviewed OpenAI Chat Completions execution contract.
 Runtime requests use `INFERENCE_API_KEY` and

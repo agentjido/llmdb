@@ -62,14 +62,14 @@ Pulling from configured sources...
 
 ```bash
 $ mix llm_db.build
-$ mix llm_db.build --install
+$ mix llm_db.build --install-source
 ```
 
 **Outputs**:
 
 1. `_build/llm_db/snapshot/snapshot.json` - Canonical snapshot artifact
 2. `_build/llm_db/snapshot/snapshot-meta.json` - Snapshot metadata
-3. `priv/llm_db/snapshot.json` - Installed packaged snapshot when `--install` is used
+3. `priv/llm_db/snapshot.json` - Installed packaged snapshot when `--install-source` is used
 
 ### 3. Publish Snapshot Catalog Assets
 
@@ -177,7 +177,7 @@ creates the GitHub release.
 - [ ] `mix llm_db.pull`
 - [ ] `mix llm_db.build`
 - [ ] `mix test`
-- [ ] Verify `mix llm_db.build --check --install`
+- [ ] Verify `mix llm_db.build --check --install-source`
 - [ ] Commit snapshot and generated files
 - [ ] `mix llm_db.version`
 - [ ] `mix git_ops.release`

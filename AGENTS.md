@@ -10,7 +10,7 @@
 - **Format code**: `mix format`
 - **Compile**: `mix compile`
 - **Quality check**: `mix quality` (format, compile warnings, dialyzer, credo)
-- **Build local snapshot artifact**: `mix llm_db.build --install`
+- **Build local snapshot artifact**: `mix llm_db.build`
 - **Verify catalog inputs**: `mix catalog.verify` (does not modify the tracked snapshot)
 - **Pull upstream metadata**: `mix llm_db.pull`
 - **Publish snapshot to GitHub Releases**: `mix llm_db.snapshot.publish`

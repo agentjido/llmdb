@@ -38,14 +38,16 @@ mix llm_db.pull
 ### Building the Snapshot
 
 ```bash
-# Run ETL pipeline to process sources into snapshot.json
+# Run the ETL pipeline and write local build artifacts
 mix llm_db.build
 ```
 
 **What it does:**
 - Loads configured sources from application config
 - Runs 7-stage ETL pipeline: Ingest → Normalize → Validate → Merge → Enrich → Filter → Index
-- Writes output to `priv/llm_db/snapshot.json`
+- Writes output under `_build/llm_db/snapshot/`
+- Does not change the tracked `priv/llm_db/snapshot.json`
+- Use `mix catalog.verify` after source changes
 
 **When to use:**
 - After pulling new upstream data

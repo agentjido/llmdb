@@ -126,13 +126,13 @@ defmodule LLMDB.SnapshotSparseTest do
     assert decoded["schema_version"] == Snapshot.sparse_schema_version()
 
     assert_raise ArgumentError, ~r/cannot replace the packaged v1 snapshot/, fn ->
-      Builder.write!(artifact, install: true)
+      Builder.write!(artifact, install_source: true)
     end
   end
 
   test "build task rejects installing sparse v2 as the packaged default" do
     assert_raise Mix.Error, ~r/cannot be installed as the packaged default/, fn ->
-      Mix.Tasks.LlmDb.Build.run(["--schema-version", "2", "--install"])
+      Mix.Tasks.LlmDb.Build.run(["--schema-version", "2", "--install-source"])
     end
   end
 

@@ -33,9 +33,8 @@ The versioned inputs are the source of truth for the next catalog:
 
 `priv/llm_db/snapshot.json` is a generated, reviewed distribution baseline.
 Only the `Integrate Catalog Snapshot` workflow and the scheduled metadata
-publisher commit it to `main`. Contributor pull requests must not edit it,
-whether manually or by running `mix llm_db.build --install` and staging the
-result.
+publisher use `mix llm_db.build --install-source` and commit the result to
+`main`. Contributor pull requests must not edit it.
 
 The integration workflow is serialized with scheduled metadata publication.
 It checks out the latest `main`, builds from that exact tree, strictly verifies
@@ -106,8 +105,8 @@ For a catalog change:
 5. After merge, watch `Integrate Catalog Snapshot`; it commits and publishes the
    integrated compact snapshot.
 
-Maintainers can still run `mix llm_db.build --install` for local runtime or
-package inspection, but the resulting snapshot is intentionally unstaged.
+Maintainers can still run `mix llm_db.build` for local inspection. The result
+stays under `_build`.
 Scheduled refreshes still commit changed upstream/remote inputs together with
 the snapshot because that serialized workflow owns both.
 

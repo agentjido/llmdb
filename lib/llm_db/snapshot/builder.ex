@@ -63,12 +63,8 @@ defmodule LLMDB.Snapshot.Builder do
     Snapshot.write!(artifact.snapshot_path, artifact.snapshot)
     Snapshot.write!(artifact.metadata_path, artifact.metadata)
 
-    if Keyword.get(opts, :install, false) do
-      Snapshot.write!(Snapshot.packaged_path(), artifact.snapshot)
-
-      if Snapshot.source_packaged_path() != Snapshot.packaged_path() do
-        Snapshot.write!(Snapshot.source_packaged_path(), artifact.snapshot)
-      end
+    if Keyword.get(opts, :install_source, false) do
+      Snapshot.write!(Snapshot.source_packaged_path(), artifact.snapshot)
     end
 
     artifact
@@ -76,7 +72,7 @@ defmodule LLMDB.Snapshot.Builder do
 
   @spec up_to_date?(artifact(), keyword()) :: boolean()
   def up_to_date?(artifact, opts \\ []) do
-    if Keyword.get(opts, :install, false) do
+    if Keyword.get(opts, :install_source, false) do
       compare_file(Snapshot.source_packaged_path(), artifact.snapshot)
     else
       compare_file(artifact.snapshot_path, artifact.snapshot) and
@@ -131,7 +127,7 @@ defmodule LLMDB.Snapshot.Builder do
   end
 
   defp ensure_installable!(artifact, opts) do
-    if Keyword.get(opts, :install, false) and
+    if Keyword.get(opts, :install_source, false) and
          artifact.schema_version != Snapshot.schema_version() do
       raise ArgumentError,
             "sparse schema v#{artifact.schema_version} is opt-in and cannot replace the packaged v1 snapshot in this minor release"
