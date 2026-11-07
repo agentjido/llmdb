@@ -1,5 +1,21 @@
 # Albert rerank acceptance before snapshot integration
 
+## Bundled acceptance fork
+
+At the ZAQ consumer's request, this fork's acceptance revision also includes the
+generated `priv/llm_db/snapshot.json`, built from the committed inputs with
+`mix llm_db.build --install` and verified with `mix llm_db.build --verify`.
+Its semantic snapshot ID is
+`680924fa27524cc38a372a0f09d1d133649a909fd038eb309815c15ea8225ff7`.
+Consumers pinned to that complete revision use normal packaged-catalog loading;
+no consumer-side artifact build, environment variable or configuration is needed.
+
+Bundling is an explicit consumer-acceptance exception on this fork, not upstream
+approval or a change to the serialized `main` snapshot ownership policy. For an
+input-only upstream PR, retain the source/tests and let integration automation
+produce the release artifact. The separate-artifact instructions below apply to
+those input-only revisions, not the bundled acceptance revision.
+
 The Albert reranker uses `execution.rerank.base_url =
 "https://albert.api.etalab.gouv.fr/v1"` and `path = "/rerank"`. Both the
 execution default and an explicitly configured Albert provider base URL must
