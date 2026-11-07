@@ -84,14 +84,26 @@ defmodule LLMDB.AlbertDataTest do
     assert reranker.execution.rerank.supported
     assert reranker.execution.rerank.family == "cohere_rerank_compatible"
     assert reranker.execution.rerank.wire_protocol == "cohere_rerank"
-    assert reranker.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr"
-    assert reranker.execution.rerank.path == "/v1/rerank"
+    assert reranker.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr/v1"
+    assert reranker.execution.rerank.path == "/rerank"
     assert reranker.execution.rerank.provider_model_id == "openweight-rerank"
     assert reranker.provider_model_id == "openweight-rerank"
 
     for {id, model} <- models, id != "bge-reranker-v2-m3" do
       assert model.catalog_only
       assert model.execution == nil
+    end
+  end
+
+  test "rerank path composes with the default and explicitly configured provider base URL", %{
+    provider: provider,
+    models: models
+  } do
+    rerank = models["bge-reranker-v2-m3"].execution.rerank
+
+    for base_url <- [rerank.base_url, provider.runtime.base_url] do
+      assert String.trim_trailing(base_url, "/") <> rerank.path ==
+               "https://albert.api.etalab.gouv.fr/v1/rerank"
     end
   end
 
@@ -119,8 +131,6 @@ defmodule LLMDB.AlbertDataTest do
       assert model.execution == nil
     end
 
-    assert models["bge-m3"].capabilities.embeddings.max_dimensions == 1024
-
     qwen = models["qwen3-vl-embedding-8b"]
     assert qwen.capabilities.embeddings.min_dimensions == 4096
     assert qwen.capabilities.embeddings.max_dimensions == 4096
@@ -131,6 +141,14 @@ defmodule LLMDB.AlbertDataTest do
     assert whisper.extra.diarization
     assert whisper.extra.max_audio_file_size_mb == 20
     assert whisper.limits == nil
+  end
+
+  test "Albert BGE-M3 retains the documented maximum vector dimension", %{models: models} do
+    # https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#bge-m3
+    bge = models["bge-m3"]
+    assert bge.provider == :albert
+    assert bge.capabilities.embeddings.max_dimensions == 1024
+    assert bge.limits.context == 8192
   end
 
   test "reranking is executable while document OCR remains descriptive", %{models: models} do
