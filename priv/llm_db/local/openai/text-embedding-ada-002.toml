@@ -9,7 +9,7 @@ last_updated = "2021-09-01"
 context = 8191
 
 [cost]
-input = 0.0001
+input = 0.1
 
 [modalities]
 input = ["text"]
@@ -27,3 +27,7 @@ open_weights = false
 reasoning = false
 temperature = false
 tool_call = false
+
+[extra.pricing]
+sources_checked_at = "2026-11-07"
+source_urls = ["https://developers.openai.com/api/docs/models/text-embedding-ada-002"]
