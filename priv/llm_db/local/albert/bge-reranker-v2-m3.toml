@@ -24,8 +24,9 @@ rerank = true
 supported = true
 family = "cohere_rerank_compatible"
 wire_protocol = "cohere_rerank"
-base_url = "https://albert.api.etalab.gouv.fr"
-path = "/v1/rerank"
+# Keep the version prefix in the base URL, including when the provider URL is overridden.
+base_url = "https://albert.api.etalab.gouv.fr/v1"
+path = "/rerank"
 
 [capabilities.streaming]
 text = false
