@@ -164,7 +164,7 @@ defmodule LLMDB.Enrich.RuntimeContractTest do
       assert enriched.execution == nil
     end
 
-    test "derives rerank capability metadata from explicit rerank source hints" do
+    test "derives Cohere-compatible rerank execution from explicit rerank source hints" do
       provider = local_provider(:cohere)
 
       model =
@@ -176,8 +176,11 @@ defmodule LLMDB.Enrich.RuntimeContractTest do
 
       enriched = RuntimeContract.enrich_model(model, provider)
 
-      assert enriched.catalog_only == true
-      assert enriched.execution == nil
+      assert enriched.catalog_only == false
+      assert enriched.execution.rerank.supported
+      assert enriched.execution.rerank.family == "cohere_rerank_compatible"
+      assert enriched.execution.rerank.wire_protocol == "cohere_rerank"
+      assert enriched.execution.rerank.path == "/v2/rerank"
       assert enriched.capabilities.chat == false
       assert enriched.capabilities.rerank == true
       assert enriched.capabilities.streaming.text == false

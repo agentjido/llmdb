@@ -50,7 +50,7 @@ defmodule LLMDB.AlbertDataTest do
     assert provider.runtime.base_url == "https://albert.api.etalab.gouv.fr/v1"
     assert provider.runtime.auth.type == "bearer"
     assert provider.runtime.auth.env == ["ALBERT_API_KEY"]
-    assert provider.catalog_only
+    refute provider.catalog_only
   end
 
   test "documented aliases stay on their concrete models", %{models: models} do
@@ -78,10 +78,32 @@ defmodule LLMDB.AlbertDataTest do
     assert length(all_aliases) == length(Enum.uniq(all_aliases))
   end
 
-  test "all models inherit catalog-only status without executable contracts", %{models: models} do
-    for {_id, model} <- models do
+  test "only the reviewed rerank model gains an executable contract", %{models: models} do
+    reranker = models["bge-reranker-v2-m3"]
+    refute reranker.catalog_only
+    assert reranker.execution.rerank.supported
+    assert reranker.execution.rerank.family == "cohere_rerank_compatible"
+    assert reranker.execution.rerank.wire_protocol == "cohere_rerank"
+    assert reranker.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr/v1"
+    assert reranker.execution.rerank.path == "/rerank"
+    assert reranker.execution.rerank.provider_model_id == "openweight-rerank"
+    assert reranker.provider_model_id == "openweight-rerank"
+
+    for {id, model} <- models, id != "bge-reranker-v2-m3" do
       assert model.catalog_only
       assert model.execution == nil
+    end
+  end
+
+  test "rerank path composes with the default and explicitly configured provider base URL", %{
+    provider: provider,
+    models: models
+  } do
+    rerank = models["bge-reranker-v2-m3"].execution.rerank
+
+    for base_url <- [rerank.base_url, provider.runtime.base_url] do
+      assert String.trim_trailing(base_url, "/") <> rerank.path ==
+               "https://albert.api.etalab.gouv.fr/v1/rerank"
     end
   end
 
@@ -109,8 +131,6 @@ defmodule LLMDB.AlbertDataTest do
       assert model.execution == nil
     end
 
-    assert models["bge-m3"].capabilities.embeddings.max_dimensions == 1024
-
     qwen = models["qwen3-vl-embedding-8b"]
     assert qwen.capabilities.embeddings.min_dimensions == 4096
     assert qwen.capabilities.embeddings.max_dimensions == 4096
@@ -123,19 +143,28 @@ defmodule LLMDB.AlbertDataTest do
     assert whisper.limits == nil
   end
 
-  test "reranking and document OCR remain descriptive rather than chat models", %{models: models} do
-    for id <- ["bge-reranker-v2-m3", "mistral-ocr-2512"] do
-      assert models[id].catalog_only
-      refute models[id].capabilities.chat
-      assert models[id].execution == nil
-    end
+  test "Albert BGE-M3 retains the documented maximum vector dimension", %{models: models} do
+    # https://guides.ia.numerique.gouv.fr/albert-api/modeles/available-models#bge-m3
+    bge = models["bge-m3"]
+    assert bge.provider == :albert
+    assert bge.capabilities.embeddings.max_dimensions == 1024
+    assert bge.limits.context == 8192
+  end
 
-    assert models["bge-reranker-v2-m3"].capabilities.rerank
-    assert models["bge-reranker-v2-m3"].limits.context == 8192
-    assert models["bge-reranker-v2-m3"].extra.recommended_max_input_tokens == 1024
-    assert models["bge-reranker-v2-m3"].extra.endpoint == "/v1/rerank"
-    assert models["mistral-ocr-2512"].extra.endpoint == "/v1/ocr"
-    assert :pdf in models["mistral-ocr-2512"].modalities.input
+  test "reranking is executable while document OCR remains descriptive", %{models: models} do
+    reranker = models["bge-reranker-v2-m3"]
+    refute reranker.capabilities.chat
+    assert reranker.capabilities.rerank
+    assert reranker.limits.context == 8192
+    assert reranker.extra.recommended_max_input_tokens == 1024
+    assert reranker.extra.endpoint == "/v1/rerank"
+
+    ocr = models["mistral-ocr-2512"]
+    assert ocr.catalog_only
+    refute ocr.capabilities.chat
+    assert ocr.execution == nil
+    assert ocr.extra.endpoint == "/v1/ocr"
+    assert :pdf in ocr.modalities.input
   end
 
   test "free prices are explicit only for models listed on the pricing page", %{models: models} do
@@ -175,13 +204,6 @@ defmodule LLMDB.AlbertDataTest do
 
     assert provider["extra"]["description"] =~ "Private provider for French government bodies"
     assert Enum.sort(Map.keys(provider["models"])) == @model_ids
-    assert provider["catalog_only"] == true
-    assert provider["runtime"]["base_url"] == "https://albert.api.etalab.gouv.fr/v1"
     assert provider["runtime"]["auth"]["env"] == ["ALBERT_API_KEY"]
-
-    for {_id, model} <- provider["models"] do
-      assert model["catalog_only"] == true
-      assert model["execution"] == nil
-    end
   end
 end

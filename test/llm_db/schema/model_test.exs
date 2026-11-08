@@ -108,6 +108,29 @@ defmodule LLMDB.Schema.ModelTest do
       assert result.execution.text.transport == "http_request"
     end
 
+    test "parses Cohere-compatible rerank execution metadata" do
+      input = %{
+        id: "openweight-rerank",
+        provider: :albert,
+        capabilities: %{chat: false, rerank: true},
+        execution: %{
+          rerank: %{
+            supported: true,
+            family: :cohere_rerank_compatible,
+            wire_protocol: :cohere_rerank,
+            base_url: "https://albert.api.etalab.gouv.fr/v1",
+            path: "/rerank"
+          }
+        }
+      }
+
+      assert {:ok, result} = Model.new(input)
+      assert result.execution.rerank.family == "cohere_rerank_compatible"
+      assert result.execution.rerank.wire_protocol == "cohere_rerank"
+      assert result.execution.rerank.base_url == "https://albert.api.etalab.gouv.fr/v1"
+      assert result.execution.rerank.path == "/rerank"
+    end
+
     test "keeps an omitted execution transport null" do
       input = %{
         id: "jev-1.13",
