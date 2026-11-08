@@ -27,3 +27,7 @@ open_weights = false
 reasoning = false
 temperature = false
 tool_call = false
+
+[extra.pricing]
+sources_checked_at = "2026-11-07"
+source_urls = ["https://developers.openai.com/api/docs/models/text-embedding-ada-002"]
