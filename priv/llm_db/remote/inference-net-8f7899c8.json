@@ -433,13 +433,13 @@
     },
     {
       "access_status": "rejected",
-      "context_length": 1040000,
+      "context_length": 262144,
       "id": "deepseek-v4.1-flash-1017-cyber",
       "input_modalities": [
         "text",
         "image"
       ],
-      "max_completion_tokens": 393216,
+      "max_completion_tokens": 262144,
       "object": "model",
       "output_modalities": [
         "text"

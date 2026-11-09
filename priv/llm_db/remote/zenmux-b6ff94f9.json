@@ -114,7 +114,8 @@
       "display_name": "Tencent: Hy4",
       "id": "tencent/hy4",
       "input_modalities": [
-        "text"
+        "text",
+        "image"
       ],
       "max_tokens": 64000,
       "object": "model",
@@ -688,46 +689,6 @@
         ]
       },
       "publish_time": "2026-10-16"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 12800,
-      "created": 1792061858,
-      "display_name": "MiniMax: MiniMax H3 Fast",
-      "id": "minimax/minimax-h3-fast",
-      "input_modalities": [
-        "text",
-        "image",
-        "audio",
-        "video"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "video"
-      ],
-      "owned_by": "minimax",
-      "pricings": {
-        "audio_and_video": [
-          {
-            "currency": "USD",
-            "unit": "perSecond",
-            "value": 0.02
-          },
-          {
-            "currency": "USD",
-            "unit": "perSecond",
-            "value": 0.03
-          },
-          {
-            "currency": "USD",
-            "unit": "perSecond",
-            "value": 0.03
-          }
-        ]
-      },
-      "publish_time": "2026-10-15"
     },
     {
       "capabilities": {
