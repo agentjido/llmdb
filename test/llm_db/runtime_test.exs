@@ -3,6 +3,29 @@ defmodule LLMDB.RuntimeTest do
 
   alias LLMDB.Runtime
 
+  test "custom provider normalization preserves explicit runtime and boolean metadata" do
+    metadata = %{base_url: "https://gateway.example/v1", auth: %{type: "bearer", env: []}}
+
+    for catalog_only <- [false, true] do
+      runtime =
+        Runtime.compile(
+          custom: %{
+            test: [runtime: metadata, catalog_only: catalog_only, unknown_field: "ignored"]
+          }
+        )
+
+      assert runtime.custom.providers == [
+               %{id: :test, runtime: metadata, catalog_only: catalog_only}
+             ]
+    end
+  end
+
+  test "custom provider normalization leaves absent and nil metadata sparse" do
+    for config <- [[], [runtime: nil, catalog_only: nil]] do
+      assert Runtime.compile(custom: %{test: config}).custom.providers == [%{id: :test}]
+    end
+  end
+
   test "custom providers include pricing_defaults" do
     runtime =
       Runtime.compile(
