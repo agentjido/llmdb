@@ -7,6 +7,27 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.1](https://github.com/agentjido/llmdb/compare/2026.11.0...2026.11.1) (2026-11-09)
+
+
+
+
+### Features:
+
+* add rerank execution metadata (#385) by mikehostetler
+
+* add Superlinked SIE catalog source (#384) by mikehostetler
+
+### Bug Fixes:
+
+* preserve runtime metadata in custom providers (#389) by Julien
+
+* openai: price text-embedding models per million tokens (#386) by Nicolas Fabbro
+
+* keep local snapshot builds out of pull requests (#388) by mikehostetler
+
+* automate conflict-free snapshot integration (#381) by mikehostetler
+
 ## [2026.11.0](https://github.com/agentjido/llmdb/compare/2026.10.7...2026.11.0) (2026-11-03)
 
 
