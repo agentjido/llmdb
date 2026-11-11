@@ -1,0 +1,189 @@
+id = "claude-fable-5-2"
+provider_model_id = "claude-fable-5-2"
+name = "Claude Fable 5.2"
+family = "claude-fable-5"
+release_date = "2026-11-09"
+knowledge = "2026-06"
+doc_url = "https://platform.claude.com/docs/en/models/fable-5-2/overview"
+aliases = []
+
+[limits]
+context = 1000000
+input = 1000000
+output = 128000
+
+[cost]
+input = 8.0
+output = 40.0
+cache_read = 0.2
+cache_write = 10.0
+
+# Verified 2026-11-10 against Anthropic pricing and fast mode docs.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 8.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 40.0
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.2
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 10.0
+applies_when = { cache_ttl = "5m" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.1h"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+derives_from = "token.input"
+multiplier = 2.0
+applies_when = { cache_ttl = "1h" }
+notes = "Derive before applying token-wide modifiers; do not apply a modifier twice through the input dependency."
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[[pricing.components]]
+id = "pricing.fast"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { request_body = { speed = "fast" } }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "fast"
+notes = "Messages API requests on the Claude API and Claude Models on Google Cloud (Anthropic managed); fast mode is unavailable with Batch. Microsoft Foundry serves fast mode as the separate model claude-fable-5-2-fast, and Google-managed Google Cloud sets its own fast mode prices."
+
+[[pricing.components]]
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { inference_geo = "us" }
+source = "provider_docs"
+notes = "US-only inference; global routing uses standard pricing. Cloud partner pricing is independent."
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["low", "medium", "high", "xhigh", "max"]
+default = "high"
+
+[capabilities.reasoning.thinking]
+supported = true
+types = ["adaptive"]
+default_type = "adaptive"
+disable_supported = false
+raw_output_supported = false
+summary_supported = true
+encrypted_supported = true
+
+[capabilities.tools]
+enabled = true
+streaming = true
+strict = true
+parallel = true
+forced_choice = false
+
+[capabilities.json]
+schema = true
+strict = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[capabilities.batch]
+supported = true
+
+[capabilities.citations]
+supported = true
+
+[capabilities.code_execution]
+supported = true
+
+[capabilities.context_management]
+supported = true
+features = ["clear_thinking", "clear_tool_uses", "compact"]
+
+[lifecycle]
+status = "active"
+
+[extra]
+availability = "general"
+training_data_cutoff = "2026-06"
+retirement_not_before = "2027-11-09"
+comparative_latency = "moderate"
+thinking_display_default = "omitted"
+data_retention_requirement = "30_days"
+fast_mode_model_ids = { microsoft_foundry = "claude-fable-5-2-fast" }
+fallback_models = ["claude-opus-4-8", "claude-opus-5"]
+description = "For demanding reasoning and long-horizon agentic work"
+source_urls = [
+  "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+  "https://platform.claude.com/docs/en/models/fable-5-2/whats-new-fable-5-2",
+  "https://platform.claude.com/docs/en/models/overview",
+  "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+  "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+  "https://platform.claude.com/docs/en/build-with-claude/fast-mode",
+  "https://platform.claude.com/docs/en/build-with-claude/thinking"
+]
+
+[extra.platform_model_ids]
+claude_api = "claude-fable-5-2"
+amazon_bedrock = "anthropic.claude-fable-5-2"
+google_cloud = "claude-fable-5-2"
+microsoft_foundry = "claude-fable-5-2"
+claude_platform_on_aws = "claude-fable-5-2"
+
+[extra.pricing]
+sources_checked_at = "2026-11-10"
+source_urls = ["https://platform.claude.com/docs/en/about-claude/pricing", "https://platform.claude.com/docs/en/build-with-claude/fast-mode"]
+long_context_premium = false

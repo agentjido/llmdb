@@ -17,6 +17,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
   }
   @anthropic %{
     "claude-fable-5-1" => [10.0, 50.0, 0.25, 12.5],
+    "claude-fable-5-2" => [8.0, 40.0, 0.2, 10.0],
     "claude-opus-5-5" => [4.0, 20.0, 0.2, 5.0],
     "claude-opus-5" => [5.0, 25.0, 0.5, 6.25],
     "claude-sonnet-5" => [2.0, 10.0, 0.2, 2.5],
@@ -119,6 +120,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
   test "Claude uses model-specific cache read ratios and US-only residency", ctx do
     for {id, expected} <- [
           {"claude-fable-5-1", [5.5, 27.5, 0.1375, 11.0]},
+          {"claude-fable-5-2", [4.4, 22.0, 0.11, 8.8]},
           {"claude-opus-5-5", [2.2, 11.0, 0.11, 4.4]},
           {"claude-opus-5", [2.75, 13.75, 0.275, 5.5]},
           {"claude-sonnet-5", [1.1, 5.5, 0.11, 2.2]}
@@ -137,8 +139,9 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
     refute Enum.any?(haiku.pricing.components, &(&1.id == "pricing.data_residency"))
   end
 
-  test "Opus fast mode stacks with cache and residency but is excluded for Batch", ctx do
+  test "fast mode stacks with cache and residency but is excluded for Batch", ctx do
     for {id, expected} <- [
+          {"claude-fable-5-2", [17.6, 88.0, 0.44, 35.2]},
           {"claude-opus-5-5", [8.8, 44.0, 0.44, 17.6]},
           {"claude-opus-5", [11.0, 55.0, 1.1, 22.0]}
         ] do
@@ -161,7 +164,7 @@ defmodule LLMDB.ConditionalPricingMetadataTest do
   end
 
   test "Claude does not acquire a long-context surcharge from unrelated provider rules", ctx do
-    for id <- ~w(claude-fable-5-1 claude-opus-5-5 claude-opus-5 claude-sonnet-5) do
+    for id <- ~w(claude-fable-5-1 claude-fable-5-2 claude-opus-5-5 claude-opus-5 claude-sonnet-5) do
       assert Pricing.components_for(ctx.models[id], anthropic_context(input_tokens: 9_000)) ==
                Pricing.components_for(ctx.models[id], anthropic_context(input_tokens: 900_000))
     end
