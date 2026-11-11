@@ -115,6 +115,18 @@ source = "provider_docs"
 notes = "Paid queries after the shared monthly allowance; count each search query, not each generation request."
 
 [[pricing.components]]
+id = "tool.google_maps"
+role = "rate"
+kind = "tool"
+tool = "google_maps"
+unit = "query"
+per = 1000
+rate = 14.0
+meter = "google_maps_queries"
+source = "provider_docs"
+notes = "Paid queries after the shared monthly allowance; one generation request can execute multiple Google Maps queries."
+
+[[pricing.components]]
 id = "pricing.batch"
 kind = "other"
 unit = "other"
@@ -202,6 +214,7 @@ url_context = true
 source_urls = [
   "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
   "https://ai.google.dev/gemini-api/docs/latest-model",
+  "https://aistudio.google.com/docs/maps-grounding",
   "https://ai.google.dev/gemini-api/docs/pricing",
   "https://deepmind.google/models/model-cards/gemini-4-argon/",
   "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-4-argon/"
@@ -218,4 +231,6 @@ free_tier = false
 cache_type = "implicit_only"
 search_free_monthly_allowance = 5000
 search_allowance_scope = "shared_across_gemini_3_and_newer"
+maps_free_monthly_allowance = 5000
+maps_allowance_scope = "shared_across_gemini_3_and_newer"
 
