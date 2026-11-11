@@ -6,6 +6,7 @@ defmodule LLMDB.AnthropicPricingCoverageTest do
   @rates %{
     "claude-fable-5" => [10.0, 50.0, 1.0, 12.5],
     "claude-fable-5-1" => [10.0, 50.0, 0.25, 12.5],
+    "claude-fable-5-2" => [8.0, 40.0, 0.2, 10.0],
     "claude-haiku-4-5-20251001" => [1.0, 5.0, 0.1, 1.25],
     "claude-haiku-5-5" => [0.1, 0.5, 0.01, 0.125],
     "claude-opus-4-20250514" => [15.0, 75.0, 1.5, 18.75],
@@ -22,8 +23,9 @@ defmodule LLMDB.AnthropicPricingCoverageTest do
     "claude-sonnet-5" => [2.0, 10.0, 0.2, 2.5],
     "claude-sonnet-5-5" => [2.0, 10.0, 0.1, 2.5]
   }
-  @residency ~w(claude-fable-5 claude-fable-5-1 claude-haiku-5-5 claude-opus-4-6 claude-opus-4-7 claude-opus-4-8 claude-opus-5 claude-opus-5-5 claude-sonnet-4-6 claude-sonnet-5 claude-sonnet-5-5)
-  @fast ~w(claude-opus-4-8 claude-opus-5 claude-opus-5-5)
+  @residency ~w(claude-fable-5 claude-fable-5-1 claude-fable-5-2 claude-haiku-5-5 claude-opus-4-6 claude-opus-4-7 claude-opus-4-8 claude-opus-5 claude-opus-5-5 claude-sonnet-4-6 claude-sonnet-5 claude-sonnet-5-5)
+  @fast ~w(claude-fable-5-2 claude-opus-4-8 claude-opus-5 claude-opus-5-5)
+  @sources_checked_at %{"claude-fable-5-2" => "2026-11-10"}
   @unpriced ~w(claude-3-haiku-20240307 claude-3-5-haiku-20241022 claude-3-7-sonnet-20250219)
   @meters ~w(input_tokens output_tokens cache_read_tokens cache_write_tokens)
 
@@ -44,7 +46,10 @@ defmodule LLMDB.AnthropicPricingCoverageTest do
 
     for id <- Map.keys(@rates) do
       model = ctx.models[id]
-      assert get_in(model.extra, ["pricing", "sources_checked_at"]) == "2026-10-09"
+
+      assert get_in(model.extra, ["pricing", "sources_checked_at"]) ==
+               Map.get(@sources_checked_at, id, "2026-10-09")
+
       assert :ok == Pricing.validate_components(model.pricing.components)
       [reapplied] = Pricing.apply_cost_components([model])
 
@@ -106,7 +111,7 @@ defmodule LLMDB.AnthropicPricingCoverageTest do
     end
   end
 
-  test "fast pricing exists only on supported Opus models and never stacks with Batch", ctx do
+  test "fast pricing exists only on supported models and never stacks with Batch", ctx do
     for {id, rates} <- @rates do
       fast =
         Pricing.components_for(
