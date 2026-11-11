@@ -246,6 +246,8 @@ defmodule LLMDB.GoogleMetadataTest do
     assert model.extra.pricing.sources_checked_at == "2026-11-10"
     assert model.extra.pricing.introductory_pricing_ends == "2026-11-30"
     assert model.extra.pricing.standard_pricing_starts == "2026-12-01"
+    assert model.extra.pricing.maps_free_monthly_allowance == 5_000
+    assert model.extra.pricing.maps_allowance_scope == "shared_across_gemini_3_and_newer"
     refute model.extra.pricing.free_tier
 
     assert "https://deepmind.google/models/model-cards/gemini-4-carbon/" in model.extra.source_urls
@@ -278,11 +280,11 @@ defmodule LLMDB.GoogleMetadataTest do
     assert enriched.extra.long_decode_generate_content_continuation
   end
 
-  test "Argon selects both price periods and overrides provider search pricing" do
+  test "Argon selects both price periods and models Search and Maps pricing" do
     assert_gemini_4_price_periods("gemini-4-argon")
   end
 
-  test "Carbon selects both price periods and overrides provider search pricing" do
+  test "Carbon selects both price periods and models Search and Maps pricing" do
     assert_gemini_4_price_periods("gemini-4-carbon")
   end
 
@@ -318,7 +320,17 @@ defmodule LLMDB.GoogleMetadataTest do
       assert search.unit == "query"
       assert search.meter == "web_search_queries"
       assert search.per == 1000
+
+      [maps] = Enum.filter(selection.components, &(&1.id == "tool.google_maps"))
+      assert maps.rate == 14.0
+      assert maps.unit == "query"
+      assert maps.tool == "google_maps"
+      assert maps.meter == "google_maps_queries"
+      assert maps.per == 1000
     end
+
+    assert model.extra.pricing.maps_free_monthly_allowance == 5_000
+    assert model.extra.pricing.maps_allowance_scope == "shared_across_gemini_3_and_newer"
 
     assert {:error, %{unresolved: unresolved}} =
              Pricing.select_components(model, api: "generate_content", service_tier: "standard")

@@ -426,9 +426,10 @@ three token rates, including implicit cache reads. Priority multiplies them by
 introductory rates at this snapshot's verification date.
 
 Both models override the older provider search rate with $14 per 1,000 search
-**queries**, after the shared monthly allowance. Count each query, not each
-generation request. Track the free allowance separately across Gemini 3 and
-newer models; the selector does not track account usage.
+**queries** and define Google Maps at $14 per 1,000 Maps queries. Search and
+Maps use separate meters because one generation request can execute multiple
+queries for either tool. Each tool has a 5,000-query monthly allowance shared
+across Gemini 3 and newer models. The selector does not track account usage.
 
 #### DeepInfra discounted standard rates
 
