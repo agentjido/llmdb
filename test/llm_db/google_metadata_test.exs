@@ -204,6 +204,53 @@ defmodule LLMDB.GoogleMetadataTest do
     end
   end
 
+  test "local Google overrides capture Gemini 4 Carbon metadata" do
+    {_provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-carbon")
+
+    assert model.name == "Gemini 4 Carbon"
+    assert model.family == "gemini"
+    assert model.aliases == []
+    assert model.doc_url == "https://aistudio.google.com/docs/models/gemini-4-carbon"
+    assert model.release_date == "2026-11-10"
+    assert model.last_updated == "2026-11-10"
+    assert model.knowledge == "2026-03"
+    assert model.limits.context == 1_048_576
+    assert model.limits.input == 1_048_576
+    assert model.limits.output == 1_048_576
+    assert model.cost.input == 2.0
+    assert model.cost.output == 10.0
+    assert model.cost.cache_read == 0.1
+    assert pricing_component(model, "pricing.batch").multiplier == 0.5
+    assert pricing_component(model, "pricing.flex").multiplier == 0.5
+    assert pricing_component(model, "pricing.priority").multiplier == 1.8
+    assert model.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert model.modalities.output == [:text]
+    assert model.capabilities.reasoning.enabled
+    assert model.capabilities.reasoning.effort.supported
+    assert model.capabilities.reasoning.effort.values == ["low", "medium", "high"]
+    assert model.capabilities.reasoning.effort.default == "medium"
+    assert model.capabilities.tools.enabled
+    assert model.capabilities.json.schema
+    assert model.capabilities.caching.type == "implicit"
+    assert model.capabilities.batch.supported
+    assert model.capabilities.code_execution.supported
+    assert model.lifecycle.status == "active"
+    assert model.extra.availability == "general"
+    assert model.extra.long_decode
+    assert model.extra.default_synchronous_output_limit == 65_536
+    assert model.extra.computer_use == "supported"
+    assert model.extra.sampling_parameters_ignored
+    refute model.extra.explicit_caching
+    refute model.extra.live_api
+    assert model.extra.pricing.sources_checked_at == "2026-11-10"
+    assert model.extra.pricing.introductory_pricing_ends == "2026-11-30"
+    assert model.extra.pricing.standard_pricing_starts == "2026-12-01"
+    refute model.extra.pricing.free_tier
+
+    assert "https://deepmind.google/models/model-cards/gemini-4-carbon/" in model.extra.source_urls
+  end
+
   test "Argon has executable text and object contracts without a remote cache" do
     {provider, models} = google_provider_and_models()
     model = Map.fetch!(models, "gemini-4-argon")
@@ -217,9 +264,31 @@ defmodule LLMDB.GoogleMetadataTest do
     assert enriched.extra.long_decode_generate_content_continuation
   end
 
-  test "Argon selects both price periods and overrides provider search pricing" do
+  test "Carbon has executable text and object contracts without a remote cache" do
     {provider, models} = google_provider_and_models()
-    model = Map.fetch!(models, "gemini-4-argon")
+    model = Map.fetch!(models, "gemini-4-carbon")
+    enriched = ExecutionContract.enrich_model(model, ExecutionContract.enrich_provider(provider))
+
+    refute enriched.catalog_only
+    assert enriched.execution.text.family == "google_generate_content"
+    assert enriched.execution.object.family == "google_generate_content"
+    assert "generateContent" in enriched.extra.supported_generation_methods
+    refute enriched.extra.long_decode_requires_background
+    refute enriched.extra.long_decode_interactions_requires_background
+    assert enriched.extra.long_decode_generate_content_continuation
+  end
+
+  test "Argon selects both price periods and overrides provider search pricing" do
+    assert_gemini_4_price_periods("gemini-4-argon")
+  end
+
+  test "Carbon selects both price periods and overrides provider search pricing" do
+    assert_gemini_4_price_periods("gemini-4-carbon")
+  end
+
+  defp assert_gemini_4_price_periods(model_id) do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, model_id)
     [model] = Pricing.apply_cost_components([model])
     [model] = Pricing.apply_provider_defaults([provider], [model])
 
