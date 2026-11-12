@@ -1,0 +1,42 @@
+id = "deepseek/deepseek-v4.1-flash"
+provider_model_id = "deepseek/deepseek-v4.1-flash"
+name = "DeepSeek V4.1 Flash"
+family = "deepseek"
+last_updated = "2026-11-12"
+
+[limits]
+context = 1048576
+output = 384000
+
+[cost]
+input = 0.00594
+output = 0.108
+cache_read = 0.00108
+cache_write = 0.00594
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra.pricing]
+dynamic = true
+sources_checked_at = "2026-11-12"
+price_basis = "current_market_rate"
+source_urls = ["https://api.uberllm.dev/v1/models/deepseek/deepseek-v4.1-flash", "https://uberllm.dev/models"]
+
+[extra.wire]
+protocol = "openai_chat"

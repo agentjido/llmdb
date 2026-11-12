@@ -1,0 +1,42 @@
+id = "anthropic/claude-sonnet-5"
+provider_model_id = "anthropic/claude-sonnet-5"
+name = "Claude Sonnet 5"
+family = "claude-sonnet"
+last_updated = "2026-11-12"
+
+[limits]
+context = 1000000
+output = 64000
+
+[cost]
+input = 0.82
+output = 4.1
+cache_read = 0.082
+cache_write = 1.025
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra.pricing]
+dynamic = true
+sources_checked_at = "2026-11-12"
+price_basis = "current_market_rate"
+source_urls = ["https://api.uberllm.dev/v1/models/anthropic/claude-sonnet-5", "https://uberllm.dev/models"]
+
+[extra.wire]
+protocol = "openai_chat"

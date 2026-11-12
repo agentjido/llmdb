@@ -27,7 +27,8 @@ defmodule LLMDB.ProviderRuntimeDataTest do
     :reflection,
     :zai,
     :stepfun,
-    :stepfun_ai
+    :stepfun_ai,
+    :uberllm
   ]
 
   test "provider TOML owns every executable provider runtime policy" do
