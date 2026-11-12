@@ -1,0 +1,98 @@
+id = "gemini-decision-1"
+provider_model_id = "gemini-decision-1"
+name = "Gemini Decision 1"
+family = "gemini-decision"
+release_date = "2026-11-11"
+last_updated = "2026-11-11"
+doc_url = "https://aistudio.google.com/docs/models/gemini-decision-1"
+
+[limits]
+context = 262144
+input = 262144
+
+[cost]
+input = 0.10
+output = 0.0
+
+[pricing]
+currency = "USD"
+merge = "replace"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.10
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+rate = 0.0
+source = "provider_docs"
+
+[modalities]
+input = ["text", "image", "video", "audio", "pdf"]
+output = ["decisions"]
+
+[capabilities]
+chat = false
+evaluate = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = false
+
+[capabilities.tools]
+enabled = false
+streaming = false
+strict = false
+parallel = false
+
+[capabilities.json]
+native = false
+schema = false
+strict = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[capabilities.batch]
+supported = false
+
+[capabilities.code_execution]
+supported = false
+
+[execution.evaluate]
+supported = true
+family = "google_decisions"
+wire_protocol = "google_decisions"
+transport = "http"
+base_url = "https://generativelanguage.googleapis.com/v1beta"
+path = "/decisions"
+provider_model_id = "gemini-decision-1"
+
+[lifecycle]
+status = "active"
+
+[extra.decisions]
+question_types = ["noul", "choice", "score"]
+max_questions = 1000
+min_choices = 2
+max_choices = 255
+min_score_levels = 2
+max_score_levels = 255
+output_tokens = 0
+
+[extra.pricing]
+sources_checked_at = "2026-11-11"
+source_urls = [
+  "https://aistudio.google.com/docs/pricing#gemini-decision",
+  "https://aistudio.google.com/docs/models/gemini-decision-1",
+  "https://aistudio.google.com/docs/decisions-api",
+  "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+]

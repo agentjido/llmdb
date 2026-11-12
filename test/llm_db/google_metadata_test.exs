@@ -1,7 +1,7 @@
 defmodule LLMDB.GoogleMetadataTest do
   use ExUnit.Case, async: true
 
-  alias LLMDB.{ExecutionContract, Model, Normalize, Pricing, Provider}
+  alias LLMDB.{ExecutionContract, Model, Normalize, Pricing, Provider, Validate}
   alias LLMDB.Sources.Local
 
   @local_dir "priv/llm_db/local"
@@ -35,6 +35,76 @@ defmodule LLMDB.GoogleMetadataTest do
 
     assert provider.doc == "https://ai.google.dev/gemini-api/docs"
     assert provider.env == ["GOOGLE_API_KEY", "GEMINI_API_KEY"]
+  end
+
+  test "Gemini Decision 1 describes multimodal evaluation without generation" do
+    {_provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-decision-1")
+
+    assert model.name == "Gemini Decision 1"
+    assert model.provider_model_id == "gemini-decision-1"
+    assert model.release_date == "2026-11-11"
+    assert model.doc_url == "https://aistudio.google.com/docs/models/gemini-decision-1"
+    assert model.limits.context == 262_144
+    assert model.limits.input == 262_144
+    assert model.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert model.modalities.output == [:decisions]
+    assert model.capabilities.evaluate
+    refute model.capabilities.chat
+    refute model.capabilities.embeddings
+    refute model.capabilities.reasoning.enabled
+    refute model.capabilities.tools.enabled
+    refute model.capabilities.streaming.text
+    refute model.capabilities.batch.supported
+    refute model.capabilities.code_execution.supported
+    assert model.extra.decisions.question_types == ["noul", "choice", "score"]
+    assert model.extra.decisions.max_questions == 1000
+    assert model.extra.decisions.min_choices == 2
+    assert model.extra.decisions.max_choices == 255
+    assert model.extra.decisions.min_score_levels == 2
+    assert model.extra.decisions.max_score_levels == 255
+    assert model.extra.decisions.output_tokens == 0
+    assert model.lifecycle.status == "active"
+  end
+
+  test "Gemini Decision 1 has a validated direct Google evaluation contract" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-decision-1")
+    {[provider], [model]} = ExecutionContract.enrich_for_validation([provider], [model])
+
+    refute model.catalog_only
+    assert Map.keys(model.execution) == [:evaluate]
+    assert model.execution.evaluate.supported
+    assert model.execution.evaluate.family == "google_decisions"
+    assert model.execution.evaluate.wire_protocol == "google_decisions"
+    assert model.execution.evaluate.transport == "http"
+
+    assert model.execution.evaluate.base_url ==
+             "https://generativelanguage.googleapis.com/v1beta"
+
+    assert model.execution.evaluate.path == "/decisions"
+    assert model.execution.evaluate.provider_model_id == "gemini-decision-1"
+    assert provider.runtime.auth.type == "header"
+    assert provider.runtime.auth.header_name == "x-goog-api-key"
+    assert :ok = Validate.validate_runtime_contract([provider], [model])
+  end
+
+  test "Gemini Decision 1 charges only input tokens after provider pricing enrichment" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-decision-1")
+    [model] = Pricing.apply_cost_components([model])
+    [model] = Pricing.apply_provider_defaults([provider], [model])
+
+    assert model.cost.input == 0.10
+    assert model.cost.output == 0.0
+
+    assert {:ok, %{components: components, unresolved: [], errors: []}} =
+             Pricing.select_components(model)
+
+    assert Enum.sort(Enum.map(components, & &1.id)) == ["token.input", "token.output"]
+    assert pricing_component(model, "token.input").per == 1_000_000
+    assert pricing_rate(model, "token.input") == 0.10
+    assert pricing_rate(model, "token.output") == 0.0
   end
 
   test "local Google overrides codify official Gemini deprecation schedules" do
