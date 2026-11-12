@@ -1,0 +1,42 @@
+id = "openai/gpt-5.4-mini"
+provider_model_id = "openai/gpt-5.4-mini"
+name = "GPT-5.4 Mini"
+family = "gpt-mini"
+last_updated = "2026-11-12"
+
+[limits]
+context = 400000
+output = 128000
+
+[cost]
+input = 0.135
+output = 0.81
+cache_read = 0.0135
+cache_write = 0.135
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra.pricing]
+dynamic = true
+sources_checked_at = "2026-11-12"
+price_basis = "current_market_rate"
+source_urls = ["https://api.uberllm.dev/v1/models/openai/gpt-5.4-mini", "https://uberllm.dev/models"]
+
+[extra.wire]
+protocol = "openai_chat"
