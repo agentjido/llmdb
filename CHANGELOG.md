@@ -7,6 +7,19 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.2](https://github.com/agentjido/llmdb/compare/2026.11.1...2026.11.2) (2026-11-12)
+
+
+
+
+### Features:
+
+* google: add Gemini Decision 1 (#392) by neilberkman
+
+* google: add Gemini 4 Carbon metadata (#391) by neilberkman
+
+* anthropic: add Claude Fable 5.2 metadata (#390) by neilberkman
+
 ## [2026.11.1](https://github.com/agentjido/llmdb/compare/2026.11.0...2026.11.1) (2026-11-09)
 
 
