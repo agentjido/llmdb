@@ -323,6 +323,49 @@ defmodule LLMDB.GoogleMetadataTest do
     assert "https://deepmind.google/models/model-cards/gemini-4-carbon/" in model.extra.source_urls
   end
 
+  test "local Google overrides capture Gemini 4 Hydrogen metadata" do
+    {_provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-hydrogen")
+
+    assert model.name == "Gemini 4 Hydrogen"
+    assert model.family == "gemini"
+    assert model.doc_url == "https://aistudio.google.com/docs/models/gemini-4-hydrogen"
+    assert model.release_date == "2026-11-12"
+    assert model.last_updated == "2026-11-13"
+    assert model.knowledge == "2026-03"
+    assert model.limits.context == 1_048_576
+    assert model.limits.input == 1_048_576
+    assert model.limits.output == 1_048_576
+    assert model.cost.input == 1.5
+    assert model.cost.output == 7.5
+    assert model.cost.cache_read == 0.075
+    assert pricing_component(model, "pricing.batch").multiplier == 0.5
+    assert pricing_component(model, "pricing.flex").multiplier == 0.5
+    assert pricing_component(model, "pricing.priority").multiplier == 1.8
+    assert model.modalities.input == [:text, :image, :video, :audio, :pdf]
+    assert model.modalities.output == [:text]
+    assert model.capabilities.reasoning.enabled
+    assert model.capabilities.reasoning.effort.values == ["low", "medium", "high", "xhigh"]
+    assert model.capabilities.reasoning.effort.default == "high"
+    assert model.capabilities.tools.enabled
+    assert model.capabilities.json.schema
+    assert model.capabilities.caching.type == "implicit"
+    assert model.capabilities.batch.supported
+    assert model.capabilities.code_execution.supported
+    assert model.lifecycle.status == "active"
+    assert model.extra.long_decode
+    assert model.extra.default_synchronous_output_limit == 65_536
+    assert model.extra.computer_use == "supported"
+    assert model.extra.sampling_parameters_ignored
+    refute model.extra.explicit_caching
+    refute model.extra.live_api
+    assert model.extra.pricing.cache_write_starts == "2027-01-12"
+    assert model.extra.pricing.cache_write == 1.875
+    assert model.extra.pricing.free_tier
+
+    assert "https://deepmind.google/models/model-cards/gemini-4-hydrogen/" in model.extra.source_urls
+  end
+
   test "Argon has executable text and object contracts without a remote cache" do
     {provider, models} = google_provider_and_models()
     model = Map.fetch!(models, "gemini-4-argon")
@@ -348,6 +391,48 @@ defmodule LLMDB.GoogleMetadataTest do
     refute enriched.extra.long_decode_requires_background
     refute enriched.extra.long_decode_interactions_requires_background
     assert enriched.extra.long_decode_generate_content_continuation
+  end
+
+  test "Hydrogen has executable text and object contracts without a remote cache" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-hydrogen")
+    enriched = ExecutionContract.enrich_model(model, ExecutionContract.enrich_provider(provider))
+
+    refute enriched.catalog_only
+    assert enriched.execution.text.family == "google_generate_content"
+    assert enriched.execution.object.family == "google_generate_content"
+    assert "generateContent" in enriched.extra.supported_generation_methods
+    refute enriched.extra.long_decode_requires_background
+    refute enriched.extra.long_decode_interactions_requires_background
+    assert enriched.extra.long_decode_generate_content_continuation
+  end
+
+  test "Hydrogen selects standard, Batch, Flex, and Priority pricing" do
+    {provider, models} = google_provider_and_models()
+    model = Map.fetch!(models, "gemini-4-hydrogen")
+    [model] = Pricing.apply_cost_components([model])
+    [model] = Pricing.apply_provider_defaults([provider], [model])
+
+    for {context, factor} <- [
+          {[api: "generate_content", service_tier: "standard"], 1.0},
+          {[api: "batch", service_tier: "priority"], 0.5},
+          {[api: "generate_content", service_tier: "flex"], 0.5},
+          {[api: "generate_content", service_tier: "priority"], 1.8}
+        ] do
+      assert {:ok, selection} = Pricing.select_components(model, context)
+
+      tokens = Enum.filter(selection.components, &(&1.kind == "token"))
+      assert length(tokens) == 3
+      modifiers = Enum.filter(selection.components, &(&1.kind == "other"))
+      actual_factor = Enum.reduce(modifiers, 1.0, &(&1.multiplier * &2))
+      assert_in_delta actual_factor, factor, 1.0e-9
+
+      for {meter, rate} <-
+            Enum.zip(~w(input_tokens output_tokens cache_read_tokens), [1.5, 7.5, 0.075]) do
+        component = Enum.find(tokens, &(&1.meter == meter))
+        assert_in_delta component.rate * actual_factor, rate * factor, 1.0e-9
+      end
+    end
   end
 
   test "Argon selects both price periods and models Search and Maps pricing" do
