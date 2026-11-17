@@ -1,0 +1,238 @@
+id = "gpt-6.2-astra"
+provider_model_id = "gpt-6.2-astra"
+name = "GPT-6.2 Astra"
+family = "gpt-6"
+release_date = "2026-11-17"
+last_updated = "2026-11-17"
+knowledge = "2026-05-18"
+doc_url = "https://developers.openai.com/api/docs/models/gpt-6.2-astra"
+aliases = []
+
+[limits]
+context = 1050000
+input = 922000
+output = 128000
+
+# Standard rates for requests with at most 272K input tokens.
+[cost]
+input = 8.0
+output = 40.0
+cache_read = 0.4
+cache_write = 10.0
+
+# Verified 2026-11-17 against the model and launch pages below.
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 8.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 16.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 40.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 60.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.4
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.8
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 10.0
+applies_when = { input_tokens = { lte = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_write.long_context"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_write_tokens"
+rate = 20.0
+applies_when = { input_tokens = { gt = 272000 } }
+mode = "standard"
+charge_scope = "full_request"
+source = "provider_docs"
+
+[[pricing.components]]
+id = "pricing.batch"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { api = "batch" }
+source = "provider_docs"
+mode = "batch"
+
+[[pricing.components]]
+id = "pricing.flex"
+kind = "other"
+unit = "other"
+multiplier = 0.5
+applies_to = ["token.*"]
+applies_when = { service_tier = "flex" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "flex"
+
+[[pricing.components]]
+id = "pricing.fast"
+kind = "other"
+unit = "other"
+multiplier = 2.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "fast" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "fast"
+
+[[pricing.components]]
+id = "pricing.ultrafast"
+kind = "other"
+unit = "other"
+multiplier = 3.0
+applies_to = ["token.*"]
+applies_when = { service_tier = "ultrafast" }
+source = "provider_docs"
+excludes_when = { api = "batch" }
+mode = "ultrafast"
+notes = "Introductory multiplier through 2027-02-28 Pacific time; the documented multiplier becomes 6.0 on 2027-03-01."
+
+[[pricing.components]]
+id = "pricing.data_residency"
+kind = "other"
+unit = "other"
+multiplier = 1.1
+applies_to = ["token.*"]
+applies_when = { regional_processing = true }
+source = "provider_docs"
+notes = "Regional processing endpoint uplift."
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.reasoning.effort]
+supported = true
+values = ["low", "medium", "high", "xhigh", "max"]
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.json]
+schema = true
+strict = true
+
+[capabilities.streaming]
+text = true
+
+[capabilities.batch]
+supported = true
+
+[capabilities.code_execution]
+supported = true
+
+[capabilities.context_management]
+supported = true
+features = ["compact"]
+
+[lifecycle]
+status = "active"
+
+[extra]
+availability = "general"
+availability_updated = "2026-11-17"
+description = "Frontier reasoning model for complex coding and professional work."
+temperature = false
+tool_calling_endpoint = "/v1/responses"
+supported_endpoints = ["/v1/responses", "/v1/chat/completions", "/v1/batch"]
+source_urls = [
+  "https://developers.openai.com/api/docs/models/gpt-6.2-astra",
+  "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
+]
+
+[extra.wire]
+protocol = "openai_responses"
+
+[extra.pricing]
+sources_checked_at = "2026-11-17"
+source_urls = ["https://developers.openai.com/api/docs/models/gpt-6.2-astra", "https://openai.com/index/introducing-gpt-6-2-astra-sol/"]
+mode_multipliers = { batch = 0.5, flex = 0.5, fast = 2.0, ultrafast = 3.0 }
+mode_multiplier_scope = "Apply to the selected Standard token rates, for both short and long context."
+ultrafast_introductory_ends = "2027-02-28T23:59:59-08:00"
+ultrafast_standard_multiplier = 6.0
+
+[extra.multi_agent]
+supported = true
+status = "beta"
+
