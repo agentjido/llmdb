@@ -7,6 +7,17 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.3](https://github.com/agentjido/llmdb/compare/2026.11.2...2026.11.3) (2026-11-17)
+
+
+
+
+### Features:
+
+* openai: add GPT-6.2 Astra and Sol (#397) by mikehostetler
+
+* google: add Gemini 4 Hydrogen metadata (#396) by mikehostetler
+
 ## [2026.11.2](https://github.com/agentjido/llmdb/compare/2026.11.1...2026.11.2) (2026-11-12)
 
 
