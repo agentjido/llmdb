@@ -2,8 +2,9 @@ defmodule LLMDB.UberLLMRuntimeTest do
   use ExUnit.Case, async: true
 
   alias LLMDB.Enrich.RuntimeContract
-  alias LLMDB.Sources.Local
+  alias LLMDB.Pricing
   alias LLMDB.Provider
+  alias LLMDB.Sources.Local
 
   setup_all do
     {:ok, providers} = Local.load(%{dir: "priv/llm_db/local"})
@@ -26,7 +27,7 @@ defmodule LLMDB.UberLLMRuntimeTest do
     assert provider.runtime.doc_url == "https://uberllm.dev/docs/quickstart"
   end
 
-  test "ships the starter models under their vendor/model API ids", %{source: source} do
+  test "ships the starter model IDs without fixed seller rates", %{source: source} do
     models = Map.new(source.models, &{&1.id, &1})
 
     assert Enum.sort(Map.keys(models)) == [
@@ -38,8 +39,8 @@ defmodule LLMDB.UberLLMRuntimeTest do
     for {id, model} <- models do
       assert model.provider == :uberllm
       assert model.provider_model_id == id
-      assert model.cost.input > 0 and model.cost.output > 0
-      assert model.extra.pricing.dynamic
+      assert Map.get(model, :cost) in [nil, %{}]
+      assert Pricing.components_for(model) == %{components: [], unresolved: []}
       assert model.extra.wire.protocol == "openai_chat"
     end
   end

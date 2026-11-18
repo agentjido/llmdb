@@ -1,5 +1,5 @@
 # UberLLM is not in models.dev. This adds the provider with its OpenAI chat
-# runtime contract and a few starter models; prices come from GET /v1/models.
+# runtime contract and three starter models. Seller rates are dynamic.
 # https://uberllm.dev/docs/quickstart
 id = "uberllm"
 name = "UberLLM"
