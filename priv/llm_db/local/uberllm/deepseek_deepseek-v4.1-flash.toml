@@ -1,0 +1,30 @@
+id = "deepseek/deepseek-v4.1-flash"
+provider_model_id = "deepseek/deepseek-v4.1-flash"
+name = "DeepSeek V4.1 Flash"
+family = "deepseek"
+last_updated = "2026-11-12"
+
+[limits]
+context = 1048576
+output = 384000
+
+[modalities]
+input = ["text", "image"]
+output = ["text"]
+
+[capabilities]
+chat = true
+embeddings = false
+
+[capabilities.reasoning]
+enabled = true
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.streaming]
+text = true
+tool_calls = true
+
+[extra.wire]
+protocol = "openai_chat"
