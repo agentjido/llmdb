@@ -7,6 +7,15 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.4](https://github.com/agentjido/llmdb/compare/2026.11.3...2026.11.4) (2026-11-18)
+
+
+
+
+### Features:
+
+* providers: add UberLLM OpenAI-compatible runtime metadata (#393) by PSA-Team-source
+
 ## [2026.11.3](https://github.com/agentjido/llmdb/compare/2026.11.2...2026.11.3) (2026-11-17)
 
 
