@@ -45,7 +45,7 @@ defmodule LLMDB.Enrich.Flex do
 
   # TOML uses atom keys. Cached upstream metadata can contain JSON string keys.
   defp put_default(map, [key], value) when is_map(map) do
-    Map.put_new(map, existing_key(map, key), value)
+    Map.update(map, existing_key(map, key), value, &merge_policy_defaults(&1, value))
   end
 
   defp put_default(map, [key | rest], value) when is_map(map) do
@@ -55,6 +55,19 @@ defmodule LLMDB.Enrich.Flex do
   end
 
   defp put_default(value, _path, _default), do: value
+
+  defp merge_policy_defaults(mode, defaults) when is_map(mode) do
+    # Cached rates can supply a Flex entry without declaring eligibility.
+    if Map.has_key?(mode, existing_key(mode, :supported)) do
+      mode
+    else
+      Enum.reduce(defaults, mode, fn {key, value}, mode ->
+        Map.put_new(mode, existing_key(mode, key), value)
+      end)
+    end
+  end
+
+  defp merge_policy_defaults(mode, _defaults), do: mode
 
   defp existing_key(map, key) do
     string_key = Atom.to_string(key)

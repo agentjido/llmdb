@@ -2,7 +2,45 @@ defmodule LLMDB.FlexMetadataTest do
   use ExUnit.Case, async: false
 
   alias LLMDB.{Catalog, Loader, Pricing}
+  alias LLMDB.Enrich.Flex
   alias LLMDB.Snapshot.Builder
+
+  test "cached Flex prices retain provider eligibility and model overrides" do
+    route = %{"body" => %{"service_tier" => "flex"}}
+    cost = %{"input" => 5, "output" => 25, "cache_read" => 0.5, "cache_write" => 6.25}
+    cached_flex = %{"cost" => cost, "provider" => route}
+    disabled_flex = %{supported: false}
+
+    policy = %{
+      models: ["priced", "disabled"],
+      supported: true,
+      apis: ["responses", "chat_completions"],
+      provider: %{body: %{service_tier: "flex"}}
+    }
+
+    provider = %{id: :openai, extra: %{experimental: %{modes: %{flex: policy}}}}
+    cached_extra = %{experimental: %{"modes" => %{"flex" => cached_flex}}}
+    disabled_extra = %{experimental: %{modes: %{flex: disabled_flex}}}
+
+    models = [
+      %{id: "priced", provider: :openai, extra: cached_extra},
+      %{id: "disabled", provider: :openai, extra: disabled_extra},
+      %{id: "unlisted", provider: :openai, extra: cached_extra}
+    ]
+
+    assert [
+             %{extra: %{experimental: %{"modes" => %{"flex" => priced_flex}}}},
+             %{extra: ^disabled_extra},
+             %{extra: ^cached_extra}
+           ] = Flex.enrich_models([provider], models)
+
+    assert %{
+             "cost" => ^cost,
+             "provider" => ^route,
+             supported: true,
+             apis: ["responses", "chat_completions"]
+           } = priced_flex
+  end
 
   @tag :tmp_dir
   test "Flex mappings and batch prices survive catalog build and lookup", %{tmp_dir: tmp_dir} do
