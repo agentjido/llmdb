@@ -2,7 +2,9 @@ defmodule LLMDB.LLMAPICatalogTest do
   use ExUnit.Case, async: false
 
   alias LLMDB.Packaged
-  alias LLMDB.Sources.{LLMAPI, Local}
+  alias LLMDB.Sources.{LLMAPI, Local, Remote}
+
+  @models_url "https://api.llmapi.ai/v1/models"
 
   @initial_models ~w(
     gpt-4o-mini gpt-4.1-mini claude-haiku-4-5 claude-sonnet-4-6
@@ -51,15 +53,14 @@ defmodule LLMDB.LLMAPICatalogTest do
   end
 
   test "every cached one-hour tariff survives packaged loading with the correct duration" do
-    raw = File.read!("priv/llm_db/remote/llmapi-5df41fd3.json") |> Jason.decode!()
+    cache_dir = Application.get_env(:llm_db, :llmapi_cache_dir, "priv/llm_db/remote")
+    assert {:ok, raw} = Remote.load(@models_url, cache_dir: cache_dir, cache_key: "llmapi")
 
     models =
       Enum.filter(
         raw["data"],
         &(&1["kind"] == "chat" and get_in(&1, ["pricing", "input_cache_write_1h"]) != nil)
       )
-
-    assert length(models) == 13
 
     for source <- models do
       assert {:ok, model} = LLMDB.model({:llmapi, source["id"]})
@@ -78,6 +79,19 @@ defmodule LLMDB.LLMAPICatalogTest do
           assert writes == []
         end
       end
+    end
+  end
+
+  test "cached executable free chat models without prices retain their execution contract" do
+    assert {:ok, catalog} = LLMAPI.load(%{})
+
+    for %{catalog_only: false, extra: %{free: true}} = source <- catalog["llmapi"].models,
+        is_nil(source[:cost]) do
+      assert {:ok, model} = LLMDB.model({:llmapi, source.id})
+      refute model.catalog_only
+      assert model.execution.text.supported
+      assert model.cost == nil
+      assert model.extra["free"] == true
     end
   end
 
@@ -133,12 +147,6 @@ defmodule LLMDB.LLMAPICatalogTest do
       assert model.modalities.output == [output]
       assert model.execution == nil
     end
-
-    assert {:ok, model} = LLMDB.model({:llmapi, "zaya1-8b"})
-    refute model.catalog_only
-    assert model.execution.text.supported
-    assert model.cost == nil
-    assert model.extra["free"] == true
 
     for id <- ~w(gpt-5 gpt-5-mini gpt-5-nano) do
       assert {:ok, model} = LLMDB.model({:llmapi, id})

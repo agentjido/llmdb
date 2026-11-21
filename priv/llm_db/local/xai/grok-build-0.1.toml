@@ -1,0 +1,95 @@
+id = "grok-build-0.1"
+name = "Grok Build 0.1"
+doc_url = "https://docs.x.ai/developers/models/grok-build-0.1"
+catalog_only = true
+
+[lifecycle]
+status = "retired"
+retires_at = "2026-11-19"
+
+[execution.text]
+supported = false
+
+[execution.object]
+supported = false
+
+[pricing]
+currency = "USD"
+merge = "merge_by_id"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+meter = "input_tokens"
+rate = 1.0
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { lt = 200000 } }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.long_context"
+kind = "token"
+unit = "token"
+meter = "input_tokens"
+rate = 2.0
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { gte = 200000 } }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+meter = "cache_read_tokens"
+rate = 0.2
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { lt = 200000 } }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.long_context"
+kind = "token"
+unit = "token"
+meter = "cache_read_tokens"
+rate = 0.4
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { gte = 200000 } }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+meter = "output_tokens"
+rate = 2.0
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { lt = 200000 } }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.long_context"
+kind = "token"
+unit = "token"
+meter = "output_tokens"
+rate = 4.0
+per = 1000000
+mode = "standard"
+charge_scope = "full_request"
+applies_when = { input_tokens = { gte = 200000 } }
+source = "provider_docs"
+
+[extra.pricing]
+sources_checked_at = "2026-11-21"
+source_urls = ["https://docs.x.ai/developers/pricing", "https://docs.x.ai/developers/release-notes"]
+context_basis = "Historical USD rates for the standard global endpoint before retirement. At 200,000 prompt tokens, the long-context rate applies to the entire request."

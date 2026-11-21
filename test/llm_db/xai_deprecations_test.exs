@@ -1,7 +1,8 @@
 defmodule LLMDB.XAIDeprecationsTest do
   use ExUnit.Case, async: false
 
-  alias LLMDB.{Model, Normalize, Provider}
+  alias LLMDB.{Loader, Model, Normalize, Pricing, Provider}
+  alias LLMDB.Snapshot.Builder
   alias LLMDB.Sources.Local
 
   @local_dir "priv/llm_db/local"
@@ -64,6 +65,56 @@ defmodule LLMDB.XAIDeprecationsTest do
 
     assert pricing_rate(image, "image.output.1k") == 0.05
     assert pricing_rate(image, "image.output.2k") == 0.07
+  end
+
+  @tag :tmp_dir
+  test "the historical Grok coding replacement retains its two price bands after retirement", %{
+    tmp_dir: tmp_dir
+  } do
+    assert {:ok, artifact} = Builder.build(output_dir: tmp_dir)
+    %{snapshot_path: path} = Builder.write!(artifact)
+
+    assert {:ok, catalog} =
+             Loader.load(
+               snapshot_source: {:file, path},
+               allow: %{xai: ~w(grok-code-fast-1 grok-build-0.1)},
+               deny: %{},
+               prefer: [],
+               custom: %{}
+             )
+
+    models = Map.new(catalog.models.xai, &{&1.id, &1})
+    original = Map.fetch!(models, "grok-code-fast-1")
+    historical = Map.fetch!(models, original.lifecycle.replacement)
+
+    assert historical.id == "grok-build-0.1"
+    assert historical.catalog_only
+    refute historical.execution.text.supported
+    refute historical.execution.object.supported
+    assert historical.lifecycle.retires_at == "2026-11-19"
+    assert Model.retired?(historical)
+    assert historical.pricing.currency == "USD"
+
+    for {input_tokens, expected} <- [
+          {199_999, %{"input_tokens" => 1.0, "cache_read_tokens" => 0.2, "output_tokens" => 2.0}},
+          {200_000, %{"input_tokens" => 2.0, "cache_read_tokens" => 0.4, "output_tokens" => 4.0}}
+        ] do
+      selection =
+        Pricing.components_for(historical,
+          api: "responses",
+          service_tier: "default",
+          base_url: "https://api.x.ai/v1",
+          input_tokens: input_tokens
+        )
+
+      rates =
+        for rate <- selection.components,
+            rate.kind == "token",
+            into: %{},
+            do: {rate.meter, rate.rate}
+
+      assert rates == expected
+    end
   end
 
   test "local xAI provider defaults capture documented tool pricing aliases" do
