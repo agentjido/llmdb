@@ -1,0 +1,22 @@
+id = "amazon.nova-2-sonic-v1:0"
+name = "Nova 2 Sonic"
+doc_url = "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-sonic.html"
+# The Bedrock bidirectional speech API has no execution family in LLMDB.
+catalog_only = true
+
+[modalities]
+input = ["audio", "text"]
+output = ["audio", "text"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+[lifecycle]
+status = "active"
+
+[extra.bedrock]
+operation = "InvokeModelWithBidirectionalStream"

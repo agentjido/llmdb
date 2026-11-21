@@ -1,0 +1,22 @@
+id = "amazon.nova-sonic-v1:0"
+name = "Nova Sonic"
+doc_url = "https://docs.aws.amazon.com/nova/latest/userguide/speech.html"
+catalog_only = true
+
+[modalities]
+input = ["audio"]
+output = ["audio", "text"]
+
+[capabilities]
+chat = false
+
+[capabilities.streaming]
+text = false
+tool_calls = false
+
+# https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle-legacy.html
+[lifecycle]
+status = "retired"
+deprecated_at = "2026-03-13"
+retires_at = "2026-09-14"
+replacement = "amazon.nova-2-sonic-v1:0"
