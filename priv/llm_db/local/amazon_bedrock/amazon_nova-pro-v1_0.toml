@@ -1,0 +1,6 @@
+id = "amazon.nova-pro-v1:0"
+
+# AWS lists us-east-1 for single-region batch inference.
+# https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-supported.html
+[capabilities.batch]
+supported = true
