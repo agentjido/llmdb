@@ -319,6 +319,7 @@ defmodule LLMDB.Sources.LLMAPITest do
         refute Map.has_key?(model, :cost)
         refute model.catalog_only
         assert model.extra.free
+        assert model.execution.text.supported
         refute Map.has_key?(model.limits, :output)
       end
     end
