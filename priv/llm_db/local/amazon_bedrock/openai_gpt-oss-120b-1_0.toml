@@ -1,0 +1,8 @@
+id = "openai.gpt-oss-120b-1:0"
+
+[extra.experimental.modes.flex]
+supported = true
+apis = ["converse"]
+source_url = "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-openai-gpt-oss-120b.html#service-tiers"
+constraints = { endpoint = "bedrock-runtime", routing = "in_region" }
+provider = { body = { serviceTier = { type = "flex" } } }

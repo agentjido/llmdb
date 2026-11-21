@@ -15,3 +15,19 @@ name = "api_version"
 type = "string"
 required = false
 doc = "Azure AI Foundry API version to use (e.g. 2024-06-01)"
+
+[extra.experimental.modes.flex]
+supported = true
+apis = ["responses", "chat_completions"]
+source_url = "https://learn.microsoft.com/en-us/azure/foundry/openai/how-to/flex-processing"
+constraints = { deployment_type = "Global Standard", endpoint_path = "/openai/v1" }
+provider = { body = { service_tier = "flex" } }
+
+[extra.experimental.modes.flex.models]
+"gpt-5.6-luna" = "2026-07-09"
+"gpt-5.6-sol" = "2026-07-09"
+"gpt-5.6-terra" = "2026-07-09"
+"gpt-6-astra" = "2026-09-03"
+"gpt-6-luna" = "2026-09-22"
+"gpt-6-sol" = "2026-09-22"
+"gpt-6.1-sol" = "2026-09-29"

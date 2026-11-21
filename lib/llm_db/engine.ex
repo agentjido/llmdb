@@ -45,7 +45,7 @@ defmodule LLMDB.Engine do
   require Logger
 
   alias LLMDB.{Config, Enrich, Merge, Normalize, Source, Validate}
-  alias LLMDB.Enrich.RuntimeContract
+  alias LLMDB.Enrich.{Flex, RuntimeContract}
 
   # List fields that should be unioned when merging models from multiple sources
   @list_union_keys [:aliases, :tags, :input, :output]
@@ -233,6 +233,7 @@ defmodule LLMDB.Engine do
       |> Enrich.enrich_models()
 
     {providers, models} = RuntimeContract.enrich_for_validation(merged.providers, models)
+    models = Flex.enrich_models(providers, models)
     nested_providers = build_nested_providers(providers, models)
 
     snapshot = %{

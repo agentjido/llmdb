@@ -1,0 +1,26 @@
+id = "gemini-3.8-flash-cyber"
+name = "Gemini 3.8 Flash Cyber"
+family = "gemini-flash"
+doc_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/3-8-flash-cyber"
+
+[limits]
+context = 1048576
+output = 65536
+
+[modalities]
+input = ["text", "image", "video", "audio", "pdf"]
+output = ["text"]
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.json]
+native = true
+schema = true
+
+[extra.experimental.modes.flex]
+supported = true
+apis = ["generate_content", "stream_generate_content"]
+source_url = "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/flex-paygo"
+constraints = { region = "global", endpoint = "https://aiplatform.googleapis.com", account = "allowlisted" }
+provider = { headers = { "X-Vertex-AI-LLM-Request-Type" = "shared", "X-Vertex-AI-LLM-Shared-Request-Type" = "flex" } }

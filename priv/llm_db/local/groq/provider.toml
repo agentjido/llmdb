@@ -50,3 +50,11 @@ object = "openai_chat_compatible"
 embed = "openai_embeddings"
 image = "openai_images"
 transcription = "openai_transcription"
+
+[extra.experimental.modes.flex]
+supported = true
+models = "all"
+apis = ["chat_completions"]
+source_url = "https://console.groq.com/docs/flex-processing"
+constraints = { account = "paid" }
+provider = { body = { service_tier = "flex" } }

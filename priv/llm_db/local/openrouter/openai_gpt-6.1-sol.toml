@@ -1,0 +1,17 @@
+id = "openai/gpt-6.1-sol"
+
+# Pin an exact tier endpoint using provider.only.
+# https://openrouter.ai/docs/guides/features/service-tiers#how-routing-works
+[extra.experimental.modes.flex]
+supported = true
+apis = ["responses", "chat_completions"]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol/endpoints"
+constraints = { endpoint = "https://openrouter.ai/api/v1" }
+provider = { body = { provider = { only = ["openai/flex"] } } }
+
+[extra.experimental.modes.priority]
+supported = true
+apis = ["responses", "chat_completions"]
+source_url = "https://openrouter.ai/api/v1/models/openai/gpt-6.1-sol/endpoints"
+constraints = { endpoint = "https://openrouter.ai/api/v1" }
+provider = { body = { provider = { only = ["openai/fast"] } } }
