@@ -1,26 +1,27 @@
 defmodule LLMDB.FlexMetadataTest do
   use ExUnit.Case, async: false
 
-  alias LLMDB.{Catalog, Loader, Pricing}
+  alias LLMDB.{Catalog, Engine, Loader, Pricing}
   alias LLMDB.Enrich.Flex
   alias LLMDB.Snapshot.Builder
+  alias LLMDB.Sources.Config
 
   test "cached Flex prices retain provider eligibility and model overrides" do
     route = %{"body" => %{"service_tier" => "flex"}}
     cost = %{"input" => 5, "output" => 25, "cache_read" => 0.5, "cache_write" => 6.25}
     cached_flex = %{"cost" => cost, "provider" => route}
-    disabled_flex = %{supported: false}
+    disabled_flex = %{"supported" => false}
 
     policy = %{
-      models: ["priced", "disabled"],
-      supported: true,
-      apis: ["responses", "chat_completions"],
-      provider: %{body: %{service_tier: "flex"}}
+      "models" => ["priced", "disabled"],
+      "supported" => true,
+      "apis" => ["responses", "chat_completions"],
+      "provider" => route
     }
 
-    provider = %{id: :openai, extra: %{experimental: %{modes: %{flex: policy}}}}
+    provider = %{id: :openai, extra: %{experimental: %{"modes" => %{"flex" => policy}}}}
     cached_extra = %{experimental: %{"modes" => %{"flex" => cached_flex}}}
-    disabled_extra = %{experimental: %{modes: %{flex: disabled_flex}}}
+    disabled_extra = %{experimental: %{"modes" => %{"flex" => disabled_flex}}}
 
     models = [
       %{id: "priced", provider: :openai, extra: cached_extra},
@@ -37,9 +38,36 @@ defmodule LLMDB.FlexMetadataTest do
     assert %{
              "cost" => ^cost,
              "provider" => ^route,
-             supported: true,
-             apis: ["responses", "chat_completions"]
+             "supported" => true,
+             "apis" => ["responses", "chat_completions"]
            } = priced_flex
+  end
+
+  test "cached Fast metadata and a local Flex opt-out survive layer merging" do
+    fast = %{"cost" => %{"input" => 16, "output" => 80}}
+
+    upstream = %{
+      id: "gpt-6.2-astra",
+      provider: :openai,
+      extra: %{experimental: %{"modes" => %{"fast" => fast}}}
+    }
+
+    local = %{
+      id: "gpt-6.2-astra",
+      provider: :openai,
+      extra: %{experimental: %{modes: %{flex: %{supported: false}}}}
+    }
+
+    sources = [
+      {Config, %{overrides: %{providers: [%{id: :openai, name: "OpenAI"}], models: [upstream]}}},
+      {Config, %{overrides: %{models: [local]}}}
+    ]
+
+    assert {:ok, snapshot} = Engine.run(sources: sources)
+
+    assert snapshot.providers.openai.models["gpt-6.2-astra"].extra.experimental == %{
+             "modes" => %{"fast" => fast, "flex" => %{"supported" => false}}
+           }
   end
 
   @tag :tmp_dir
