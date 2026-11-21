@@ -1,0 +1,23 @@
+id = "gemini-4-neon"
+name = "Gemini 4 Neon"
+family = "gemini"
+doc_url = "https://aistudio.google.com/docs/models/gemini-4-neon"
+
+[limits]
+context = 1048576
+# Long decode can use up to the full unified context.
+output = 1048576
+
+[modalities]
+input = ["text", "image", "video", "audio", "pdf"]
+output = ["text"]
+
+[capabilities.tools]
+enabled = true
+
+[capabilities.json]
+native = true
+schema = true
+
+[capabilities.reasoning]
+enabled = true

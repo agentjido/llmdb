@@ -367,10 +367,10 @@ modifiers so it cannot also receive a Flex discount or Fast premium.
 
 `regional_processing` is a caller-supplied boolean indicating use of a regional
 processing endpoint; it is not an OpenAI request parameter. The 1.1 multiplier
-stacks with processing and context tiers. Pricing selection does not validate
-endpoint eligibility: GPT-6 Sol and Luna allow EU residency only with Standard
-processing; Astra Fast mode is unavailable with EU residency. These restrictions
-are also recorded in `extra.pricing`.
+stacks with processing and context tiers. Check endpoint eligibility separately.
+GPT-6 Sol and Luna support Flex with EU data residency. GPT-6 Astra and GPT-6 Sol
+exclude Fast mode with EU data residency. These restrictions are also recorded in
+`extra.pricing`. [OpenAI data residency](https://developers.openai.com/api/docs/guides/data-residency#which-models-and-features-are-eligible-for-data-residency)
 
 GPT-5.6 uses the same context boundary and processing multipliers, with its own
 base rates. Its Sol rates are promotional, available at least through November
@@ -380,6 +380,33 @@ refreshing a long-lived estimate.
 
 Reasoning effort changes usage, not the per-token rate. Count billed reasoning
 tokens within output usage, rather than charging for them a second time.
+
+#### Discovering Flex support
+
+The resolved catalog model exposes Flex through the string-keyed
+`extra["experimental"]["modes"]["flex"]` map. A `provider.body` or
+`provider.headers` map gives the request fields with their wire names. An
+explicit `supported: false` means the provider excludes the model. Older
+entries may supply a request mapping without a `supported` flag.
+
+Check the map's `apis` and `constraints` before offering Flex on a route.
+For example, Gemini API Flex uses an Interactions request body field. Vertex
+Flex PayGo uses request headers and requires the global endpoint. Groq requires
+a paid account, and Azure requires the documented model version on a Global
+Standard deployment. The consumer also needs an adapter that can send the
+request fields. A missing mapping means the catalog has no confirmed route.
+
+OpenRouter publishes a service tier for each eligible endpoint. For curated
+OpenRouter models, the Flex and Priority mappings restrict `provider.only` to
+endpoint slugs for that tier. The `:floor` and `:nitro` variants admit tier
+endpoints into a pool that can also select standard endpoints.
+[OpenRouter service tiers](https://openrouter.ai/docs/guides/features/service-tiers#how-routing-works)
+
+Provider declarations in TOML use the same path and can supply a `models`
+selector with exact model IDs, an ID-to-version table, or `"all"`. The build
+copies the matching declaration to each model and preserves model-specific
+declarations. Model versions from a selector table appear in
+`constraints.model_version` on the resolved model.
 
 #### Claude cache duration and modifiers
 

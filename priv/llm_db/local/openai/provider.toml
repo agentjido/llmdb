@@ -114,3 +114,16 @@ image = "openai_images"
 transcription = "openai_transcription"
 speech = "openai_speech"
 realtime = "openai_realtime"
+
+[extra.experimental.modes.flex]
+supported = true
+models = [
+  "gpt-6-astra",
+  "gpt-6-luna",
+  "gpt-6-sol",
+  "gpt-6.1-sol",
+  "gpt-6.1-terra",
+]
+apis = ["responses", "chat_completions"]
+source_url = "https://developers.openai.com/api/docs/pricing?latest-pricing=flex"
+provider = { body = { service_tier = "flex" } }

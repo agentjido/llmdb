@@ -132,17 +132,6 @@ source = "provider_docs"
 mode = "batch"
 
 [[pricing.components]]
-id = "pricing.flex"
-kind = "other"
-unit = "other"
-multiplier = 0.5
-applies_to = ["token.*"]
-applies_when = { service_tier = "flex" }
-source = "provider_docs"
-excludes_when = { api = "batch" }
-mode = "flex"
-
-[[pricing.components]]
 id = "pricing.fast"
 kind = "other"
 unit = "other"
@@ -227,7 +216,7 @@ protocol = "openai_responses"
 [extra.pricing]
 sources_checked_at = "2026-11-17"
 source_urls = ["https://developers.openai.com/api/docs/models/gpt-6.2-astra", "https://openai.com/index/introducing-gpt-6-2-astra-sol/"]
-mode_multipliers = { batch = 0.5, flex = 0.5, fast = 2.0, ultrafast = 3.0 }
+mode_multipliers = { batch = 0.5, fast = 2.0, ultrafast = 3.0 }
 mode_multiplier_scope = "Apply to the selected Standard token rates, for both short and long context."
 ultrafast_introductory_ends = "2027-02-28T23:59:59-08:00"
 ultrafast_standard_multiplier = 6.0
@@ -236,3 +225,6 @@ ultrafast_standard_multiplier = 6.0
 supported = true
 status = "beta"
 
+[extra.experimental.modes.flex]
+supported = false
+source_url = "https://developers.openai.com/api/docs/guides/flex-processing"

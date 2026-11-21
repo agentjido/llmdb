@@ -174,4 +174,4 @@ protocol = "openai_responses"
 [extra.pricing]
 sources_checked_at = "2026-09-22"
 source_urls = ["https://developers.openai.com/api/docs/models/gpt-6-sol", "https://developers.openai.com/api/docs/pricing"]
-eu_data_residency_processing = ["standard"]
+eu_data_residency_processing = ["standard", "flex", "batch"]

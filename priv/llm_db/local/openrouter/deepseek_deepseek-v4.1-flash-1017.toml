@@ -1,0 +1,16 @@
+id = "deepseek/deepseek-v4.1-flash-1017"
+
+# https://openrouter.ai/docs/guides/features/service-tiers#how-routing-works
+[extra.experimental.modes.flex]
+supported = true
+apis = ["responses", "chat_completions"]
+source_url = "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-1017/endpoints"
+constraints = { endpoint = "https://openrouter.ai/api/v1" }
+provider = { body = { provider = { only = ["particle-ai/us/flex", "deepinfra/fp8/flex"] } } }
+
+[extra.experimental.modes.priority]
+supported = true
+apis = ["responses", "chat_completions"]
+source_url = "https://openrouter.ai/api/v1/models/deepseek/deepseek-v4.1-flash-1017/endpoints"
+constraints = { endpoint = "https://openrouter.ai/api/v1" }
+provider = { body = { provider = { only = ["deepinfra/fp8/priority", "morph/fast", "baseten/fast"] } } }

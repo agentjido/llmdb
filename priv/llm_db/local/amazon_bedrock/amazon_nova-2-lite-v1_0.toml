@@ -1,0 +1,8 @@
+id = "amazon.nova-2-lite-v1:0"
+
+[extra.experimental.modes.flex]
+supported = true
+apis = ["converse"]
+source_url = "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-2-lite.html#service-tiers"
+constraints = { endpoint = "bedrock-runtime", inference_profile_required = true }
+provider = { body = { serviceTier = { type = "flex" } } }

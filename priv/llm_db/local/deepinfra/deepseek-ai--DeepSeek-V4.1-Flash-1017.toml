@@ -1,0 +1,7 @@
+id = "deepseek-ai/DeepSeek-V4.1-Flash-1017"
+
+[extra.experimental.modes.flex]
+supported = true
+apis = ["chat_completions"]
+source_url = "https://deepinfra.com/blog/deepseek-v4-1-flash-model-overview-integration"
+provider = { body = { service_tier = "flex" } }
