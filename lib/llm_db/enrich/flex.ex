@@ -1,11 +1,11 @@
 defmodule LLMDB.Enrich.Flex do
   @moduledoc false
 
-  @path [:experimental, :modes, :flex]
+  @path [:experimental, "modes", "flex"]
 
   def enrich_models(providers, models) do
     policies =
-      for %{id: id, extra: %{experimental: %{modes: %{flex: %{models: _} = policy}}}} <-
+      for %{id: id, extra: %{experimental: %{"modes" => %{"flex" => %{"models" => _} = policy}}}} <-
             providers,
           into: %{} do
         {id, policy}
@@ -19,58 +19,44 @@ defmodule LLMDB.Enrich.Flex do
     end)
   end
 
-  defp model_mode(%{models: "all"} = policy, _id), do: Map.delete(policy, :models)
+  defp model_mode(%{"models" => "all"} = policy, _id), do: Map.delete(policy, "models")
 
-  defp model_mode(%{models: ids} = policy, id) when is_list(ids) do
-    if id in ids, do: Map.delete(policy, :models)
+  defp model_mode(%{"models" => ids} = policy, id) when is_list(ids) do
+    if id in ids, do: Map.delete(policy, "models")
   end
 
-  defp model_mode(%{models: versions} = policy, id) when is_map(versions) do
-    case Enum.find(versions, fn {model_id, _version} -> to_string(model_id) == id end) do
-      {_, version} ->
+  defp model_mode(%{"models" => versions} = policy, id) when is_map(versions) do
+    case Map.fetch(versions, id) do
+      {:ok, version} ->
         policy
-        |> Map.delete(:models)
+        |> Map.delete("models")
         |> Map.update(
-          :constraints,
-          %{model_version: version},
-          &Map.put(&1, :model_version, version)
+          "constraints",
+          %{"model_version" => version},
+          &Map.put(&1, "model_version", version)
         )
 
-      nil ->
+      :error ->
         nil
     end
   end
 
   defp model_mode(_policy, _id), do: nil
 
-  # TOML uses atom keys. Cached upstream metadata can contain JSON string keys.
   defp put_default(map, [key], value) when is_map(map) do
-    Map.update(map, existing_key(map, key), value, &merge_policy_defaults(&1, value))
+    Map.update(map, key, value, &merge_policy_defaults(&1, value))
   end
 
   defp put_default(map, [key | rest], value) when is_map(map) do
-    Map.update(map, existing_key(map, key), put_default(%{}, rest, value), fn child ->
+    Map.update(map, key, put_default(%{}, rest, value), fn child ->
       put_default(child, rest, value)
     end)
   end
 
   defp put_default(value, _path, _default), do: value
 
-  defp merge_policy_defaults(mode, defaults) when is_map(mode) do
-    # Cached rates can supply a Flex entry without declaring eligibility.
-    if Map.has_key?(mode, existing_key(mode, :supported)) do
-      mode
-    else
-      Enum.reduce(defaults, mode, fn {key, value}, mode ->
-        Map.put_new(mode, existing_key(mode, key), value)
-      end)
-    end
-  end
-
+  # Cached rates can supply a Flex entry without declaring eligibility.
+  defp merge_policy_defaults(%{"supported" => _} = mode, _defaults), do: mode
+  defp merge_policy_defaults(mode, defaults) when is_map(mode), do: Map.merge(defaults, mode)
   defp merge_policy_defaults(mode, _defaults), do: mode
-
-  defp existing_key(map, key) do
-    string_key = Atom.to_string(key)
-    if Map.has_key?(map, string_key), do: string_key, else: key
-  end
 end

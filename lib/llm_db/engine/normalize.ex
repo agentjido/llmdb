@@ -161,7 +161,9 @@ defmodule LLMDB.Normalize do
   """
   @spec normalize_providers([map()]) :: [map()]
   def normalize_providers(providers) when is_list(providers) do
-    Enum.map(providers, &normalize_provider/1)
+    Enum.map(providers, fn provider ->
+      provider |> normalize_provider() |> normalize_experimental()
+    end)
   end
 
   @doc """
@@ -176,7 +178,9 @@ defmodule LLMDB.Normalize do
   """
   @spec normalize_models([map()]) :: [map()]
   def normalize_models(models) when is_list(models) do
-    Enum.map(models, &normalize_model/1)
+    Enum.map(models, fn model ->
+      model |> normalize_model() |> normalize_experimental()
+    end)
   end
 
   # Private helpers
@@ -221,6 +225,21 @@ defmodule LLMDB.Normalize do
     |> normalize_lifecycle()
     |> remove_nil_values()
   end
+
+  # Use the same keys for experimental metadata from JSON and TOML before merging layers.
+  defp normalize_experimental(%{extra: %{experimental: metadata} = extra} = entry)
+       when is_map(metadata) do
+    %{entry | extra: %{extra | experimental: stringify_keys(metadata)}}
+  end
+
+  defp normalize_experimental(entry), do: entry
+
+  defp stringify_keys(value) when is_map(value) and not is_struct(value) do
+    Map.new(value, fn {key, child} -> {to_string(key), stringify_keys(child)} end)
+  end
+
+  defp stringify_keys(value) when is_list(value), do: Enum.map(value, &stringify_keys/1)
+  defp stringify_keys(value), do: value
 
   defp normalize_modalities(%{modalities: modalities} = model) when is_map(modalities) do
     normalized_modalities =
