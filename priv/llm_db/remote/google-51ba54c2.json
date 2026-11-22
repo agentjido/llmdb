@@ -600,6 +600,60 @@
       "version": "3.0"
     },
     {
+      "description": "Gemini 4 Carbon",
+      "displayName": "Gemini 4 Carbon",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/gemini-4-carbon",
+      "outputTokenLimit": 32768,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.0"
+    },
+    {
+      "description": "Gemini 4 Hydrogen",
+      "displayName": "Gemini 4 Hydrogen",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/gemini-4-hydrogen",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.0"
+    },
+    {
+      "description": "Gemini 4 Neon",
+      "displayName": "Gemini 4 Neon",
+      "inputTokenLimit": 1048576,
+      "maxTemperature": 2,
+      "name": "models/gemini-4-neon",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "generateContent",
+        "countTokens",
+        "batchGenerateContent"
+      ],
+      "temperature": 1,
+      "thinking": true,
+      "topK": 64,
+      "topP": 0.95,
+      "version": "3.0"
+    },
+    {
       "description": "Lyria 3 30s model Preview",
       "displayName": "Lyria 3 Clip Preview",
       "inputTokenLimit": 1048576,
@@ -773,7 +827,7 @@
     {
       "description": "Preview release (April 21st, 2026) of Deep Research Max",
       "displayName": "Deep Research Max Preview (Apr-21-2026)",
-      "inputTokenLimit": 131072,
+      "inputTokenLimit": 1048576,
       "maxTemperature": 2,
       "name": "models/deep-research-max-preview-04-2026",
       "outputTokenLimit": 65536,
@@ -790,26 +844,9 @@
     {
       "description": "Preview release (April 21th, 2026) of Deep Research",
       "displayName": "Deep Research Preview (Apr-21-2026)",
-      "inputTokenLimit": 131072,
+      "inputTokenLimit": 1048576,
       "maxTemperature": 2,
       "name": "models/deep-research-preview-04-2026",
-      "outputTokenLimit": 65536,
-      "supportedGenerationMethods": [
-        "generateContent",
-        "countTokens"
-      ],
-      "temperature": 1,
-      "thinking": true,
-      "topK": 64,
-      "topP": 0.95,
-      "version": "deepthink-exp-05-20"
-    },
-    {
-      "description": "Deprecated preview agent; automatically rerouting traffic to deep-research-preview-04-2026.",
-      "displayName": "Deep Research Pro Preview (Dec-12-2025) [Rerouted]",
-      "inputTokenLimit": 131072,
-      "maxTemperature": 2,
-      "name": "models/deep-research-pro-preview-12-2025",
       "outputTokenLimit": 65536,
       "supportedGenerationMethods": [
         "generateContent",
@@ -990,6 +1027,17 @@
       "version": "3.1-flash-live-03-2026"
     },
     {
+      "description": "Real-time audio-video generation model",
+      "displayName": "Genie 4",
+      "inputTokenLimit": 1048576,
+      "name": "models/genie-4",
+      "outputTokenLimit": 65536,
+      "supportedGenerationMethods": [
+        "bidiGenerateContent"
+      ],
+      "version": "001"
+    },
+    {
       "description": "Gemini Robotics-ER 2 Streaming Preview",
       "displayName": "Gemini Robotics-ER 2 Streaming Preview",
       "inputTokenLimit": 131072,
@@ -1029,6 +1077,17 @@
         "bidiGenerateMusic"
       ],
       "version": "lyria-realtime-exp"
+    },
+    {
+      "description": "Gemini Decision 1",
+      "displayName": "Gemini Decision 1",
+      "inputTokenLimit": 262144,
+      "name": "models/gemini-decision-1",
+      "outputTokenLimit": 1,
+      "supportedGenerationMethods": [
+        "createDecision"
+      ],
+      "version": "gemini-decision-1"
     }
   ]
 }

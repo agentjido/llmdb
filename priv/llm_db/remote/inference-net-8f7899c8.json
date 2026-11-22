@@ -432,14 +432,13 @@
       ]
     },
     {
-      "access_status": "rejected",
-      "context_length": 262144,
+      "context_length": 1040000,
       "id": "deepseek-v4.1-flash-1017-cyber",
       "input_modalities": [
         "text",
         "image"
       ],
-      "max_completion_tokens": 262144,
+      "max_completion_tokens": 393216,
       "object": "model",
       "output_modalities": [
         "text"
@@ -450,7 +449,6 @@
         "input_cache_read": "0.000000007000",
         "prompt": "0.000000300000"
       },
-      "requires_approved_access": true,
       "supported_endpoints": [
         "chat",
         "responses",
