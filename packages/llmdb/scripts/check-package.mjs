@@ -42,6 +42,8 @@ const requiredFiles = [
   "dist/generated/compact-keys.js",
   "dist/generated/compact-strings.d.ts",
   "dist/generated/compact-strings.js",
+  "dist/generated/compact-structures.d.ts",
+  "dist/generated/compact-structures.js",
   "dist/generated/manifest.d.ts",
   "dist/generated/manifest.js",
   "dist/generated/provider-loaders.d.ts",

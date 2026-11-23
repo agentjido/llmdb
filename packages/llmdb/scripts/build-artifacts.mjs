@@ -1,6 +1,11 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 
-import { compactKeys, compactStrings, compactValue } from "./compact.mjs";
+import {
+  compactKeys,
+  compactStrings,
+  compactStructures,
+  compactValue,
+} from "./compact.mjs";
 import {
   distributionDirectory,
   distributionProvidersDirectory,
@@ -27,6 +32,12 @@ const keyIndexes = new Map(sharedKeys.map((key, index) => [key, index]));
 const sharedStrings = compactStrings(providers.values());
 const stringIndexes = new Map(
   sharedStrings.map((value, index) => [value, index]),
+);
+const sharedStructures = compactStructures(
+  providers.values(), keyIndexes, stringIndexes,
+);
+const structureIndexes = new Map(
+  sharedStructures.map((value, index) => [JSON.stringify(value), index]),
 );
 
 await mkdir(distributionProvidersDirectory, { recursive: true });
@@ -82,14 +93,15 @@ console.log(
 
 async function buildProviderJavaScript(providerId, provider) {
   const source = JSON.stringify(
-    compactValue(provider, keyIndexes, stringIndexes),
+    compactValue(provider, keyIndexes, stringIndexes, structureIndexes),
   );
   const output = `import { expandCompactValue } from "../compact.js";
 import { compactKeys } from "../generated/compact-keys.js";
 import { compactStrings } from "../generated/compact-strings.js";
+import { compactStructures } from "../generated/compact-structures.js";
 import { createProviderCatalog } from "../provider.js";
 
-export const data = expandCompactValue(compactKeys, compactStrings, ${source});
+export const data = expandCompactValue(compactKeys, compactStrings, ${source}, compactStructures);
 const provider = /* @__PURE__ */ createProviderCatalog(data);
 export default provider;
 `;
