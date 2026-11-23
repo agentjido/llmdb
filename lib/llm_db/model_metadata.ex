@@ -9,14 +9,14 @@ defmodule LLMDB.ModelMetadata do
   @fields ~w(id provider name release_date last_updated knowledge limits cost pricing
              modalities capabilities tags deprecated retired lifecycle catalog_only aliases)
 
-  def fetch(spec, opts) do
+  def fetch(spec, opts, origin \\ @origin) do
     timeout = Keyword.get(opts, :timeout, 5_000)
 
     with true <- is_integer(timeout) and timeout in 1..30_000,
-         {:ok, {provider, id}} <- Spec.parse_spec(spec),
+         {:ok, {provider, id}} <- Spec.parse_registered_spec(spec),
          {:ok, ^provider} <- ProviderRegistry.fetch(Atom.to_string(provider)),
          {:ok, path} <- encode_path(id),
-         {:ok, body} <- request("#{@origin}/#{provider}/#{path}", timeout, opts[:plug]) do
+         {:ok, body} <- request("#{origin}/#{provider}/#{path}", timeout, opts[:plug]) do
       decode(body, Atom.to_string(provider), id)
     else
       false -> {:error, :invalid_timeout}
@@ -36,28 +36,22 @@ defmodule LLMDB.ModelMetadata do
   end
 
   defp request(url, timeout, plug) do
-    deadline = System.monotonic_time(:millisecond) + timeout
-
     options = [
       retry: false,
       redirect: false,
       raw: true,
       compressed: false,
       connect_options: [timeout: timeout],
-      finch: [pool_timeout: timeout],
       receive_timeout: timeout,
       headers: [accept: "application/json"],
       into: fn {:data, chunk}, {request, response} ->
-        receive_chunk(request, response, chunk, deadline)
+        receive_chunk(request, response, chunk)
       end
     ]
 
     options = if plug, do: Keyword.put(options, :plug, plug), else: options
 
-    case Req.get(url, options) do
-      {:ok, %{body: :timeout}} ->
-        {:error, :timeout}
-
+    case request_with_timeout(url, options, timeout) do
       {:ok, %{body: :response_too_large}} ->
         {:error, :response_too_large}
 
@@ -81,18 +75,35 @@ defmodule LLMDB.ModelMetadata do
     end
   end
 
-  defp receive_chunk(request, response, chunk, deadline) do
+  defp request_with_timeout(url, options, timeout) do
+    task =
+      Task.async(fn ->
+        try do
+          Req.get(url, options)
+        rescue
+          error -> {:error, error}
+        catch
+          :exit, reason -> {:error, reason}
+        end
+      end)
+
+    case Task.yield(task, timeout) do
+      {:ok, response} ->
+        response
+
+      nil ->
+        Task.shutdown(task, :brutal_kill)
+        {:error, %Req.TransportError{reason: :timeout}}
+    end
+  end
+
+  defp receive_chunk(request, response, chunk) do
     current = response.body || ""
 
-    cond do
-      System.monotonic_time(:millisecond) > deadline ->
-        {:halt, {request, %{response | body: :timeout}}}
-
-      byte_size(current) + byte_size(chunk) > @max_bytes ->
-        {:halt, {request, %{response | body: :response_too_large}}}
-
-      true ->
-        {:cont, {request, %{response | body: current <> chunk}}}
+    if byte_size(current) + byte_size(chunk) > @max_bytes do
+      {:halt, {request, %{response | body: :response_too_large}}}
+    else
+      {:cont, {request, %{response | body: current <> chunk}}}
     end
   end
 

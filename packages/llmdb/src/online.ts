@@ -1,15 +1,31 @@
 /// <reference lib="dom" preserve="true" />
 
-import { formatModelSpec, parseModelSpec } from "./spec.js";
+import { parseModelSpec } from "./spec.js";
 import type { JsonValue, ModelSpec } from "./types.js";
 
 const origin = "https://llmcatalog.dev/api/v1/models";
 const maxBytes = 65_536;
-const displayFields = [
-  "name", "release_date", "last_updated", "knowledge", "limits", "cost",
-  "pricing", "modalities", "capabilities", "tags", "deprecated", "retired",
-  "lifecycle", "catalog_only", "aliases",
-] as const;
+const displayFields = {
+  name: nullableString,
+  release_date: nullableString,
+  last_updated: nullableString,
+  knowledge: nullableString,
+  limits: nullableNumbers,
+  cost: nullableNumbers,
+  pricing: (value: unknown) => value === null || (isObject(value) &&
+    nullableString(value.currency) && Array.isArray(value.components) &&
+    value.components.every(isObject)),
+  modalities: (value: unknown) => value === null || (isObject(value) &&
+    nullableStringList(value.input) && nullableStringList(value.output)),
+  capabilities: (value: unknown) => value === null || isObject(value),
+  tags: nullableStringList,
+  deprecated: isBoolean,
+  retired: isBoolean,
+  lifecycle: (value: unknown) => value === null || (isObject(value) &&
+    Object.values(value).every(nullableString)),
+  catalog_only: isBoolean,
+  aliases: isStringList,
+};
 
 export interface ModelMetadata {
   readonly id: string;
@@ -27,9 +43,12 @@ export async function fetchModel(
   spec: ModelSpec,
   options: FetchModelOptions = {},
 ): Promise<ModelMetadata> {
-  const { providerId, modelId } = parseModelSpec(
-    typeof spec === "string" ? spec : formatModelSpec(spec, "at"),
-  );
+  const { providerId, modelId } = typeof spec === "string" ? parseModelSpec(spec) : spec;
+  if (typeof providerId !== "string" || !/^[a-z0-9][a-z0-9_.-]{0,63}$/.test(providerId)) {
+    throw new RangeError("Invalid provider ID");
+  }
+  if (typeof modelId !== "string") throw new RangeError("Invalid model ID");
+
   const pieces = modelId.split("/");
   const timeout = options.timeoutMs ?? 5_000;
 
@@ -59,11 +78,14 @@ export async function fetchModel(
     throw new Error("Invalid model metadata");
   }
 
-  const result: Record<string, JsonValue> = { id: modelId, provider: providerId };
-  for (const field of displayFields) {
-    if (Object.hasOwn(payload.model, field)) result[field] = payload.model[field] as JsonValue;
+  const result: ModelMetadata & Record<string, JsonValue> = { id: modelId, provider: providerId };
+  for (const [field, validate] of Object.entries(displayFields)) {
+    if (!Object.hasOwn(payload.model, field)) continue;
+    const value = payload.model[field];
+    if (!validate(value)) throw new Error(`Invalid model metadata field: ${field}`);
+    result[field] = value as JsonValue;
   }
-  return result as ModelMetadata;
+  return result;
 }
 
 async function readBounded(response: Response): Promise<string> {
@@ -91,4 +113,26 @@ async function readBounded(response: Response): Promise<string> {
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+
+function nullableString(value: unknown): boolean {
+  return value === null || typeof value === "string";
+}
+
+function isBoolean(value: unknown): boolean {
+  return typeof value === "boolean";
+}
+
+function isStringList(value: unknown): boolean {
+  return Array.isArray(value) && value.every(item => typeof item === "string");
+}
+
+function nullableStringList(value: unknown): boolean {
+  return value === null || isStringList(value);
+}
+
+function nullableNumbers(value: unknown): boolean {
+  return value === null || (isObject(value) &&
+    Object.values(value).every(item => item === null || (typeof item === "number" && Number.isFinite(item))));
 }

@@ -34,6 +34,24 @@ test("rejects mismatched IDs and large responses", async () => {
   }), /byte limit/);
 });
 
+test("preserves structured model IDs for providers outside the installed catalog", async () => {
+  const model = await fetchModel({ providerId: "future_provider", modelId: "example:version" }, {
+    fetch(url) {
+      assert.equal(url, "https://llmcatalog.dev/api/v1/models/future_provider/example%3Aversion");
+      return response({ id: "example:version", provider: "future_provider" });
+    },
+  });
+  assert.equal(model.id, "example:version");
+});
+
+test("rejects malformed known metadata fields", async () => {
+  for (const fields of [{ retired: "false" }, { pricing: "not-pricing" }, { cost: { input: "free" } }]) {
+    await assert.rejects(fetchModel(spec, {
+      fetch: async () => response({ id, provider, ...fields }),
+    }), /Invalid model metadata field/);
+  }
+});
+
 test("loads a full disk-format snapshot into the offline catalog", () => {
   const catalog = createCatalogFromSnapshot(snapshot);
   assert.equal(catalog.manifest.snapshot_id, snapshot.snapshot_id);
