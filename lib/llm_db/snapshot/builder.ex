@@ -76,11 +76,18 @@ defmodule LLMDB.Snapshot.Builder do
   @spec up_to_date?(artifact(), keyword()) :: boolean()
   def up_to_date?(artifact, opts \\ []) do
     if Keyword.get(opts, :install_source, false) do
-      compare_file(Snapshot.source_packaged_path(), artifact.snapshot)
+      same_snapshot?(Snapshot.source_packaged_path(), artifact.snapshot_id)
     else
-      compare_file(artifact.snapshot_path, artifact.snapshot) and
+      same_snapshot?(artifact.snapshot_path, artifact.snapshot_id) and
         compare_file(artifact.metadata_path, artifact.metadata)
     end
+  end
+
+  defp same_snapshot?(path, expected_id) do
+    match?(
+      {:ok, %{"snapshot_id" => ^expected_id}},
+      Snapshot.read(path, integrity_policy: :strict)
+    )
   end
 
   defp default_policy(opts) do
