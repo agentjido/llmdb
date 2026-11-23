@@ -694,6 +694,13 @@ defmodule LLMDB.Loader do
     end
   end
 
+  @doc false
+  def normalize_metadata_model(%{"provider" => provider} = model) when is_binary(provider) do
+    with {:ok, provider} <- ProviderRegistry.fetch(provider) do
+      model |> Map.put("provider", provider) |> normalize_model_item()
+    end
+  end
+
   defp normalize_model_item(%Model{} = model), do: {:ok, model}
 
   defp normalize_model_item(model) when is_map(model) do

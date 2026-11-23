@@ -219,3 +219,17 @@ config :llm_db, sources: [{MyApp.InternalModels, %{}}]
 Custom sources are supported build-time extensions. Their output contract is
 stable, while Engine implementation modules are internal and may change behind
 that contract.
+
+
+## Family lifecycle policy
+
+The canonical build reads `priv/llm_db/local/deprecated-families.toml` after the
+source merge. Each family table lists exact provider and model IDs. Review the
+matched offers when you add a family. The policy sets the existing deprecation
+fields and keeps explicit retirements and lifecycle dates. The full snapshot
+retains the matched records.
+
+Each LLMDB version release includes `catalog-full.json` and
+`catalog-manifest.json`. The manifest links the version to the full snapshot
+ID, asset name, byte count, and SHA-256 digest. The release workflow verifies
+the downloaded asset against the canonical snapshot at the tag.

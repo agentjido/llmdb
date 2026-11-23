@@ -45,6 +45,7 @@ defmodule LLMDB.Engine do
   require Logger
 
   alias LLMDB.{Config, Enrich, Merge, Normalize, Source, Validate}
+  alias LLMDB.Engine.LifecyclePolicy
   alias LLMDB.Enrich.{Flex, RuntimeContract}
 
   # List fields that should be unioned when merging models from multiple sources
@@ -89,7 +90,8 @@ defmodule LLMDB.Engine do
          {:ok, validated} <- validate_layers(normalized),
          {:ok, merged} <- merge_layers(validated),
          {:ok, merged_validated} <- validate_merged(merged),
-         {:ok, snapshot} <- finalize(merged_validated),
+         {:ok, policy} <- LifecyclePolicy.read(opts[:lifecycle_policy]),
+         {:ok, snapshot} <- finalize(merged_validated, policy),
          :ok <- validate_runtime_contract(snapshot),
          snapshot <- publish_runtime_contract(snapshot),
          :ok <- ensure_viable(snapshot) do
@@ -227,10 +229,11 @@ defmodule LLMDB.Engine do
   end
 
   # Stage 5: Finalize (Enrich → Nest)
-  defp finalize(merged) do
+  defp finalize(merged, policy) do
     models =
       merged.models
       |> Enrich.enrich_models()
+      |> LifecyclePolicy.apply(policy)
 
     {providers, models} = RuntimeContract.enrich_for_validation(merged.providers, models)
     models = Flex.enrich_models(providers, models)

@@ -1,6 +1,6 @@
 export type * from "./types.js";
 export * from "./errors.js";
-export { createCatalog } from "./catalog.js";
+export { createCatalog, createCatalogFromSnapshot } from "./catalog.js";
 export {
   createLLMDB,
   type CreateLLMDBOptions,

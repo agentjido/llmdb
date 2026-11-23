@@ -21,6 +21,7 @@ Runtime implementation modules are internal even though they remain shipped:
 | Modules | Ownership |
 | --- | --- |
 | LLMDB.Catalog, LLMDB.Loader, LLMDB.Packaged, LLMDB.Query, LLMDB.Runtime | Lazy loading, indexing, storage, and query execution |
+| LLMDB.ModelMetadata | Explicit online metadata lookup and validation |
 | LLMDB.ModelResolver, LLMDB.ModelResolver.Defaults | General model ID prefix resolution and compatibility rule data |
 | LLMDB.Config, LLMDB.ExecutionContract, LLMDB.Merge, LLMDB.Normalize, LLMDB.Pricing, LLMDB.Schema.Pricing | Shared runtime normalization, filtering, execution inference, and pricing support |
 | LLMDB.Generated.ProviderRegistry, LLMDB.Generated.ProviderRegistry.Source, LLMDB.Generated.ValidModalities | Generated bounded decode registries and fail-closed trusted snapshot compiler input |
@@ -72,6 +73,7 @@ No module or task is removed in this minor release.
 | `LLMDB.Application` direct callback | Rely on lazy queries; use `LLMDB.load/1` for explicit loading | Compiler-deprecated for one minor release |
 | `LLMDB.Dotenv.load!/1` | `mix llm_db.pull` | Compiler-deprecated; pull remains task-scoped |
 | `LLMDB.Store` query calls | Equivalent `LLMDB` query/load calls | Compatibility facade; direct use is documentation-deprecated |
+| `LLMDB.Engine.LifecyclePolicy` | `mix llm_db.build` | Build-only family deprecation input |
 | `LLMDB.Engine.run/1`, `LLMDB.Snapshot.Builder` | `mix llm_db.build` | Documentation-deprecated maintainer orchestration |
 | `LLMDB.History.Backfill` | One-time `mix llm_db.history.migrate_git --publish`, then `mix llm_db.history.rebuild --publish` | Compiler- and runtime-deprecated; remains callable until no earlier than `v2027.0.0` |
 | `LLMDB.History.Migrator`, `LLMDB.History.Rebuilder`, `LLMDB.History.Bundle`, `LLMDB.History.Diff`, `LLMDB.History.Lineage` | Corresponding `mix llm_db.history.*` task | Documentation-deprecated maintainer orchestration with internal shared diff/lineage logic |

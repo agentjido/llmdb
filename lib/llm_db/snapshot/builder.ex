@@ -10,6 +10,8 @@ defmodule LLMDB.Snapshot.Builder do
 
   alias LLMDB.{Config, Engine, Snapshot}
 
+  @lifecycle_policy "priv/llm_db/local/deprecated-families.toml"
+
   @type artifact :: %{
           snapshot: map(),
           snapshot_id: String.t(),
@@ -27,6 +29,7 @@ defmodule LLMDB.Snapshot.Builder do
     with {:ok, engine_snapshot} <-
            Engine.run(
              sources: Keyword.get(opts, :sources, Config.sources!()),
+             lifecycle_policy: Keyword.get(opts, :lifecycle_policy, default_policy(opts)),
              allow: config.allow,
              deny: config.deny,
              prefer: config.prefer
@@ -73,11 +76,22 @@ defmodule LLMDB.Snapshot.Builder do
   @spec up_to_date?(artifact(), keyword()) :: boolean()
   def up_to_date?(artifact, opts \\ []) do
     if Keyword.get(opts, :install_source, false) do
-      compare_file(Snapshot.source_packaged_path(), artifact.snapshot)
+      same_snapshot?(Snapshot.source_packaged_path(), artifact.snapshot_id)
     else
-      compare_file(artifact.snapshot_path, artifact.snapshot) and
+      same_snapshot?(artifact.snapshot_path, artifact.snapshot_id) and
         compare_file(artifact.metadata_path, artifact.metadata)
     end
+  end
+
+  defp same_snapshot?(path, expected_id) do
+    match?(
+      {:ok, %{"snapshot_id" => ^expected_id}},
+      Snapshot.read(path, integrity_policy: :strict)
+    )
+  end
+
+  defp default_policy(opts) do
+    if !Keyword.has_key?(opts, :sources), do: @lifecycle_policy
   end
 
   defp compare_file(path, expected) do

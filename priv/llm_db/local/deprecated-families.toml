@@ -1,0 +1,11 @@
+# Explicit provider-model IDs. Family labels are build inputs only.
+[families.gpt-3-5-turbo]
+azure = ["gpt-3.5-turbo-0125", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-instruct"]
+azure_cognitive_services = ["gpt-3.5-turbo-0125", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-instruct"]
+impossibl = ["openai/gpt-3.5-turbo"]
+kilo = ["openai/gpt-3.5-turbo-0613", "openai/gpt-3.5-turbo-16k"]
+merge_gateway = ["openai/gpt-3.5-turbo"]
+openai = ["ft-gpt-3.5-turbo", "gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-3.5-turbo-1106", "gpt-3.5-turbo-16k", "gpt-3.5-turbo-instruct", "gpt-3.5-turbo-instruct-0914"]
+openrouter = ["openai/gpt-3.5-turbo-0613", "openai/gpt-3.5-turbo-16k"]
+orcarouter = ["openai/gpt-3.5-turbo"]
+poe = ["openai/gpt-3.5-turbo", "openai/gpt-3.5-turbo-instruct", "openai/gpt-3.5-turbo-raw"]

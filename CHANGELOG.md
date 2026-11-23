@@ -7,6 +7,34 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.6](https://github.com/agentjido/llmdb/compare/2026.11.5...2026.11.6) (2026-11-23)
+
+
+
+
+## [2026.11.5](https://github.com/agentjido/llmdb/compare/2026.11.4...2026.11.5) (2026-11-23)
+
+
+
+
+### Features:
+
+* catalog: expose provider-specific Flex eligibility (#404) by houllette
+
+### Bug Fixes:
+
+* reduce npm catalog size and gate metadata publication (#413) by mikehostetler
+
+* catalog: normalize experimental mode keys before merging (#407) by mikehostetler
+
+* catalog: preserve Flex eligibility with cached prices (#406) by mikehostetler
+
+* catalog: handle retired Grok model and LLM API drift (#405) by mikehostetler
+
+* bedrock: record Nova Sonic retirement and successor (#403) by houllette
+
+* bedrock: record Nova Lite and Nova Pro batch support (#402) by houllette
+
 ## [2026.11.4](https://github.com/agentjido/llmdb/compare/2026.11.3...2026.11.4) (2026-11-18)
 
 

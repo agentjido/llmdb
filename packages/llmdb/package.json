@@ -1,6 +1,6 @@
 {
   "name": "@agentjido/llmdb",
-  "version": "2026.11.4",
+  "version": "2026.11.6",
   "description": "Offline-first, provider-sharded LLM model metadata catalog.",
   "license": "Apache-2.0",
   "author": "Mike Hostetler",
@@ -57,6 +57,11 @@
       "types": "./dist/providers/*.d.ts",
       "import": "./dist/providers/*.js",
       "default": "./dist/providers/*.js"
+    },
+    "./online": {
+      "types": "./dist/online.d.ts",
+      "import": "./dist/online.js",
+      "default": "./dist/online.js"
     },
     "./package.json": "./package.json"
   },

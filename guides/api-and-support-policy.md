@@ -26,6 +26,7 @@ Primary return shapes are:
 | `LLMDB.provider/1` | `{:ok, %LLMDB.Provider{}}` | `{:error, :not_found}` |
 | `LLMDB.models/0,1` | `[%LLMDB.Model{}]` | `[]` |
 | `LLMDB.model/1,2` | `{:ok, %LLMDB.Model{}}` | `{:error, reason}` |
+| `LLMDB.fetch_model/1,2` | `{:ok, %LLMDB.Model{}}` from LLMCatalog | `{:error, reason}` |
 | `LLMDB.select/0,1` | `{:ok, {provider, model_id}}` | `{:error, :no_match}` |
 | `LLMDB.candidates/0,1` | `[{provider, model_id}]` | `[]` |
 | `LLMDB.allowed?/1` | boolean | `false` |
