@@ -44,8 +44,23 @@ test("preserves structured model IDs for providers outside the installed catalog
   assert.equal(model.id, "example:version");
 });
 
+test("accepts an offer with input modalities and no output modalities", async () => {
+  const id = "bge-reranker-v2-m3";
+  const provider = "albert";
+  const modalities = { input: ["text"] };
+  const model = await fetchModel({ modelId: id, providerId: provider }, {
+    fetch: async () => response({ id, provider, modalities }),
+  });
+  assert.deepEqual(model.modalities, modalities);
+});
+
 test("rejects malformed known metadata fields", async () => {
-  for (const fields of [{ retired: "false" }, { pricing: "not-pricing" }, { cost: { input: "free" } }]) {
+  for (const fields of [
+    { retired: "false" },
+    { pricing: "not-pricing" },
+    { cost: { input: "free" } },
+    { modalities: { input: "text" } },
+  ]) {
     await assert.rejects(fetchModel(spec, {
       fetch: async () => response({ id, provider, ...fields }),
     }), /Invalid model metadata field/);

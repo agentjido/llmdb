@@ -16,7 +16,7 @@ const displayFields = {
     nullableString(value.currency) && Array.isArray(value.components) &&
     value.components.every(isObject)),
   modalities: (value: unknown) => value === null || (isObject(value) &&
-    nullableStringList(value.input) && nullableStringList(value.output)),
+    nullableStringList(value.input ?? null) && nullableStringList(value.output ?? null)),
   capabilities: (value: unknown) => value === null || isObject(value),
   tags: nullableStringList,
   deprecated: isBoolean,
@@ -114,7 +114,6 @@ async function readBounded(response: Response): Promise<string> {
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
-
 
 function nullableString(value: unknown): boolean {
   return value === null || typeof value === "string";
