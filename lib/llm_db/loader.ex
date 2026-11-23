@@ -27,6 +27,8 @@ defmodule LLMDB.Loader do
 
   require Logger
 
+  @shared_model_fields ~w(limits cost pricing modalities capabilities lifecycle execution extra tags)a
+
   @known_snapshot_keys [
     :alias_of,
     :aliases,
@@ -212,13 +214,14 @@ defmodule LLMDB.Loader do
          :ok <- warn_unknown_providers(runtime.unknown, providers2),
          models3 <- Pricing.apply_cost_components(models2),
          models4 <- Pricing.apply_provider_defaults(providers2, models3),
-         filtered_models <- Engine.apply_filters(models4, runtime.filters),
+         shared_models <- share_model_fields(models4, String.to_integer(System.otp_release())),
+         filtered_models <- Engine.apply_filters(shared_models, runtime.filters),
          :ok <- validate_not_empty(filtered_models, runtime),
          snapshot <-
            build_snapshot(
              providers2,
              filtered_models,
-             models4,
+             shared_models,
              runtime,
              generated_at,
              source_snapshot_id
@@ -541,6 +544,26 @@ defmodule LLMDB.Loader do
     else
       :ok
     end
+  end
+
+  # Older Erlang releases treat positive and negative zero as the same map key.
+  defp share_model_fields(models, otp_release) when otp_release < 27, do: models
+
+  # Reuse equal immutable values in the catalog copied to persistent_term.
+  defp share_model_fields(models, _otp_release) do
+    {models, _values} =
+      Enum.map_reduce(models, %{}, fn model, values ->
+        Enum.reduce(@shared_model_fields, {model, values}, fn field, {model, values} ->
+          value = Map.fetch!(model, field)
+
+          case Map.fetch(values, value) do
+            {:ok, shared} -> {Map.put(model, field, shared), values}
+            :error -> {model, Map.put(values, value, value)}
+          end
+        end)
+      end)
+
+    models
   end
 
   defp build_snapshot(

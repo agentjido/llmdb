@@ -34,6 +34,25 @@ defmodule LLMDB.LoaderSnapshotSafetyTest do
     assert_not_existing_atom(unknown_key)
   end
 
+  test "signed zero values stay distinct across model metadata" do
+    provider = "test_provider_alpha"
+
+    models =
+      Map.new([{"positive-zero", +0.0}, {"negative-zero", -0.0}], fn {id, offset} ->
+        {id, %{"id" => id, "provider" => provider, "extra" => %{"offset" => offset}}}
+      end)
+
+    path = write_snapshot!(%{provider => %{"id" => provider, "models" => models}})
+    on_exit(fn -> File.rm(path) end)
+
+    assert {:ok, snapshot} = Loader.load(snapshot_source: {:file, path})
+    positive = snapshot.models_by_key[{:test_provider_alpha, "positive-zero"}].extra["offset"]
+    negative = snapshot.models_by_key[{:test_provider_alpha, "negative-zero"}].extra["offset"]
+
+    assert <<positive::float>> == <<+0.0::float>>
+    assert <<negative::float>> == <<-0.0::float>>
+  end
+
   test "unknown provider IDs are rejected without creating atoms" do
     provider_id = unique_identifier("unknown_provider")
     assert_not_existing_atom(provider_id)

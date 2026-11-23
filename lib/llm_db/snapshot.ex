@@ -243,7 +243,8 @@ defmodule LLMDB.Snapshot do
   """
   @spec decode(binary(), keyword()) :: {:ok, map()} | {:error, term()}
   def decode(content, opts \\ []) when is_binary(content) and is_list(opts) do
-    with {:ok, snapshot} <- Jason.decode(content),
+    # Copy strings so a live model does not retain the full JSON buffer.
+    with {:ok, snapshot} <- Jason.decode(content, strings: :copy),
          {:ok, prepared} <- prepare(snapshot, opts) do
       {:ok, prepared}
     end
