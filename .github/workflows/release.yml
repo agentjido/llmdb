@@ -156,6 +156,11 @@ jobs:
           set -euo pipefail
           mix hex.build --output "$RUNNER_TEMP/llm_db-$RELEASE_VERSION.tar"
           npm publish --workspace @agentjido/llmdb --access public --dry-run
+          mkdir -p "$RUNNER_TEMP/full-catalog"
+          node scripts/catalog-release.mjs prepare "$RELEASE_VERSION" \
+            priv/llm_db/snapshot.json "$RUNNER_TEMP/full-catalog"
+          node scripts/catalog-release.mjs verify "$RELEASE_VERSION" \
+            "$RUNNER_TEMP/full-catalog/catalog-full.json" "$RUNNER_TEMP/full-catalog"
 
       - name: Generate changelog and create local tag
         env:
@@ -446,6 +451,20 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
+      - name: Checkout release tag
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.publish_context.outputs.version }}
+          persist-credentials: false
+
+      - name: Prepare full catalog assets
+        env:
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          mkdir -p /tmp/catalog-release
+          node scripts/catalog-release.mjs prepare "$RELEASE_VERSION" \
+            priv/llm_db/snapshot.json /tmp/catalog-release
+
       - name: Create GitHub release
         env:
           RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
@@ -453,9 +472,15 @@ jobs:
           set -euo pipefail
 
           if gh release view "$RELEASE_VERSION" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            echo "GitHub release $RELEASE_VERSION already exists."
+            gh release view "$RELEASE_VERSION" --json assets --jq '.assets[].name' > /tmp/release-assets
+            for asset in catalog-full.json catalog-manifest.json; do
+              if ! grep -Fxq "$asset" /tmp/release-assets; then
+                gh release upload "$RELEASE_VERSION" "/tmp/catalog-release/$asset"
+              fi
+            done
           else
-            gh release create "$RELEASE_VERSION" \
+            gh release create "$RELEASE_VERSION" /tmp/catalog-release/catalog-full.json \
+              /tmp/catalog-release/catalog-manifest.json \
               --repo "$GITHUB_REPOSITORY" \
               --verify-tag \
               --title "Release v$RELEASE_VERSION" \
@@ -489,6 +514,19 @@ jobs:
 
       - name: Use the pinned NPM version
         run: npm install --global npm@11.19.0
+
+      - name: Verify published full catalog assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_VERSION: ${{ needs.publish_context.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/catalog-verify
+          gh release download "$RELEASE_VERSION" --dir /tmp/catalog-verify \
+            --pattern catalog-full.json --pattern catalog-manifest.json
+          node scripts/catalog-release.mjs verify "$RELEASE_VERSION" \
+            /tmp/catalog-verify/catalog-full.json /tmp/catalog-verify
+          cmp priv/llm_db/snapshot.json /tmp/catalog-verify/catalog-full.json
 
       - name: Wait for public registries
         env:

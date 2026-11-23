@@ -34,5 +34,8 @@ defmodule LLMDB.SnapshotBuilderInstallTest do
     assert File.exists?(artifact.snapshot_path)
     assert File.read!(Snapshot.source_packaged_path()) == source_before
     assert Builder.up_to_date?(artifact, install: true)
+
+    Snapshot.write!(artifact.snapshot_path, Map.put(snapshot, "providers", %{}))
+    refute Builder.up_to_date?(artifact, install: true)
   end
 end
