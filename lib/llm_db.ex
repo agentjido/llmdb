@@ -308,6 +308,19 @@ defmodule LLMDB do
   @spec model(provider(), model_id()) :: {:ok, Model.t()} | {:error, term()}
   defdelegate model(provider, model_id), to: Store
 
+  @doc """
+  Fetches display and pricing metadata for an exact provider-model ID from LLMCatalog.
+
+  This explicit HTTP request leaves the local catalog unchanged. Use `model/1`
+  for offline lookups. Execution settings and provider URLs are outside this
+  API. Configure the request timeout in milliseconds with `:timeout`.
+
+      LLMDB.fetch_model({:openrouter, "openai/gpt-3.5-turbo-0613"}, timeout: 5_000)
+  """
+  @spec fetch_model(String.t() | {provider_input(), model_id()}, keyword()) ::
+          {:ok, Model.t()} | {:error, term()}
+  def fetch_model(spec, opts \\ []), do: LLMDB.ModelMetadata.fetch(spec, opts)
+
   # Selection (delegated to Query)
 
   @doc """

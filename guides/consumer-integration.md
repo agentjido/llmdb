@@ -327,3 +327,25 @@ end
 - [Using the Data](using-the-data.md) - Alias resolution examples
 - [Runtime Filters](runtime-filters.md) - Filter configuration details
 - [Schema System](schema-system.md) - Model alias field documentation
+
+
+## Get metadata outside the local catalog
+
+`LLMDB.model/1` uses the local catalog. Use `LLMDB.fetch_model/2` to make an
+explicit request for one exact offer. The result contains display, pricing,
+and lifecycle metadata. Use your local configuration for execution.
+
+```elixir
+LLMDB.model({:openrouter, "openai/gpt-3.5-turbo-0613"})
+LLMDB.fetch_model({:openrouter, "openai/gpt-3.5-turbo-0613"}, timeout: 5_000)
+```
+
+For bulk use, download `catalog-full.json` and `catalog-manifest.json` from the
+GitHub release that matches your dependency version. Compare the manifest's
+release version, snapshot ID, byte count, and SHA-256 with the download before
+loading it. Pass the verified file to `LLMDB.load/1` from an application that
+needs to use the complete catalog offline.
+
+```elixir
+LLMDB.load(snapshot_source: {:file, "/path/to/catalog-full.json"})
+```

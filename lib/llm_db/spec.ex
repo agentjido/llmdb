@@ -125,20 +125,38 @@ defmodule LLMDB.Spec do
              | :bad_provider
              | :invalid_chars
              | :empty_segment}
-  def parse_spec(input, opts \\ [])
+  def parse_spec(input, opts \\ []) do
+    parse_spec_with(input, opts, &parse_provider/1)
+  end
 
-  def parse_spec({provider, model_id}, _opts) when is_atom(provider) and is_binary(model_id) do
+  @doc false
+  def parse_registered_spec(input) do
+    parse_spec_with(input, [], &parse_registered_provider/1)
+  end
+
+  defp parse_registered_provider(input) do
+    with {:ok, atom} <- Normalize.normalize_provider_id(input),
+         {:ok, ^atom} <- LLMDB.Generated.ProviderRegistry.fetch(Atom.to_string(atom)) do
+      {:ok, atom}
+    else
+      :error -> {:error, :unknown_provider}
+      error -> error
+    end
+  end
+
+  defp parse_spec_with({provider, model_id}, _opts, _lookup)
+       when is_atom(provider) and is_binary(model_id) do
     {:ok, {provider, model_id}}
   end
 
-  def parse_spec({provider, model_id}, _opts)
-      when is_binary(provider) and is_binary(model_id) do
-    with {:ok, provider_atom} <- parse_provider(provider) do
+  defp parse_spec_with({provider, model_id}, _opts, lookup)
+       when is_binary(provider) and is_binary(model_id) do
+    with {:ok, provider_atom} <- lookup.(provider) do
       {:ok, {provider_atom, model_id}}
     end
   end
 
-  def parse_spec(spec, opts) when is_binary(spec) do
+  defp parse_spec_with(spec, opts, lookup) when is_binary(spec) do
     has_colon = String.contains?(spec, ":")
     has_at = String.contains?(spec, "@")
 
@@ -149,31 +167,31 @@ defmodule LLMDB.Spec do
         case String.split(spec, "@", parts: 2) do
           [_model_part, provider_part] ->
             # Check if the part after @ could be a valid provider
-            case parse_provider(provider_part) do
+            case lookup.(provider_part) do
               {:ok, _} ->
                 # @ format works, use it
-                parse_at_format(spec)
+                parse_at_format(spec, lookup)
 
               {:error, _} ->
                 # @ format doesn't work, try colon format
-                parse_colon_format(spec)
+                parse_colon_format(spec, lookup)
             end
 
           _ ->
-            parse_colon_format(spec)
+            parse_colon_format(spec, lookup)
         end
 
       {true, true, :colon} ->
-        parse_colon_format(spec)
+        parse_colon_format(spec, lookup)
 
       {true, true, :at} ->
-        parse_at_format(spec)
+        parse_at_format(spec, lookup)
 
       {true, false, _} ->
-        parse_colon_format(spec)
+        parse_colon_format(spec, lookup)
 
       {false, true, _} ->
-        parse_at_format(spec)
+        parse_at_format(spec, lookup)
 
       {false, false, _} ->
         {:error, :invalid_format}
@@ -308,12 +326,12 @@ defmodule LLMDB.Spec do
 
   # Private parsing helpers
 
-  defp parse_colon_format(spec) do
+  defp parse_colon_format(spec, lookup) do
     case String.split(spec, ":", parts: 2) do
       [provider_str, model_id] ->
         with {:ok, _} <- validate_provider_segment(provider_str),
              {:ok, _} <- validate_model_segment(model_id, :colon),
-             {:ok, provider_atom} <- parse_provider(provider_str) do
+             {:ok, provider_atom} <- lookup.(provider_str) do
           {:ok, {provider_atom, String.trim(model_id)}}
         end
 
@@ -322,12 +340,12 @@ defmodule LLMDB.Spec do
     end
   end
 
-  defp parse_at_format(spec) do
+  defp parse_at_format(spec, lookup) do
     case String.split(spec, "@", parts: 2) do
       [model_id, provider_str] ->
         with {:ok, _} <- validate_model_segment(model_id, :at),
              {:ok, _} <- validate_provider_segment(provider_str),
-             {:ok, provider_atom} <- parse_provider(provider_str) do
+             {:ok, provider_atom} <- lookup.(provider_str) do
           {:ok, {provider_atom, String.trim(model_id)}}
         end
 
