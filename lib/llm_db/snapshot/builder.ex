@@ -10,6 +10,8 @@ defmodule LLMDB.Snapshot.Builder do
 
   alias LLMDB.{Config, Engine, Snapshot}
 
+  @lifecycle_policy "priv/llm_db/local/deprecated-families.toml"
+
   @type artifact :: %{
           snapshot: map(),
           snapshot_id: String.t(),
@@ -27,6 +29,7 @@ defmodule LLMDB.Snapshot.Builder do
     with {:ok, engine_snapshot} <-
            Engine.run(
              sources: Keyword.get(opts, :sources, Config.sources!()),
+             lifecycle_policy: Keyword.get(opts, :lifecycle_policy, default_policy(opts)),
              allow: config.allow,
              deny: config.deny,
              prefer: config.prefer
@@ -78,6 +81,10 @@ defmodule LLMDB.Snapshot.Builder do
       compare_file(artifact.snapshot_path, artifact.snapshot) and
         compare_file(artifact.metadata_path, artifact.metadata)
     end
+  end
+
+  defp default_policy(opts) do
+    if !Keyword.has_key?(opts, :sources), do: @lifecycle_policy
   end
 
   defp compare_file(path, expected) do
