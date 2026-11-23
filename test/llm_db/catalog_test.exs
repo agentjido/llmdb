@@ -99,6 +99,19 @@ defmodule LLMDB.CatalogTest do
     assert model.id == "canonical-target"
   end
 
+  test "bare aliases keep the declaring row when a legacy catalog repeats an ID" do
+    provider = Provider.new!(%{id: :openai})
+    older = Model.new!(%{provider: :openai, id: "duplicate", name: "Older", aliases: ["alias"]})
+    newer = Model.new!(%{provider: :openai, id: "duplicate", name: "Newer"})
+    catalog = build_catalog([provider], [older, newer])
+
+    assert {:ok, {:openai, "duplicate", ^older}} = Catalog.resolve_bare(catalog, "alias")
+    assert {:ok, {:openai, "duplicate", ^newer}} = Catalog.resolve_bare(catalog, "duplicate")
+
+    assert {:ok, {:openai, "duplicate", ^newer}} =
+             Catalog.resolve_model(catalog, :openai, "alias")
+  end
+
   test "Bedrock-prefixed IDs resolve to their regional entry when the catalog has one" do
     provider = Provider.new!(%{id: :amazon_bedrock, name: "Amazon Bedrock"})
 

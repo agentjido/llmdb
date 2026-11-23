@@ -6,6 +6,7 @@ import {
   compactStructures,
   compactValue,
 } from "./compact.mjs";
+import { modelTypes } from "./model-types.mjs";
 import {
   distributionDirectory,
   distributionProvidersDirectory,
@@ -47,7 +48,7 @@ const providerVariables = providerIds.map(
 );
 
 await Promise.all(
-  providerIds.flatMap((providerId) => {
+  providerIds.flatMap((providerId, index) => {
     const provider = providers.get(providerId);
 
     if (provider === undefined) {
@@ -56,12 +57,16 @@ await Promise.all(
 
     return [
       buildProviderJavaScript(providerId, provider),
-      buildProviderDeclaration(providerId, provider),
+      buildProviderDeclaration(providerId, index),
     ];
   }),
 );
 
 await Promise.all([
+  writeFile(
+    new URL("../dist/generated/model-ids.d.ts", import.meta.url),
+    providerTypes(providers),
+  ),
   writeFile(
     new URL("../dist/full.js", import.meta.url),
     fullModule(providerIds, providerVariables),
@@ -112,35 +117,23 @@ export default provider;
   );
 }
 
-async function buildProviderDeclaration(providerId, provider) {
-  const modelNames = new Set(Object.keys(provider.models));
-
-  for (const model of Object.values(provider.models)) {
-    for (const alias of model.aliases ?? []) {
-      modelNames.add(alias);
-    }
-  }
-
-  const modelUnion =
-    [...modelNames].sort().map(JSON.stringify).join(" | ") || "never";
-
-  const output = `import type {
-  Provider,
-  ProviderCatalog,
-} from "../types.js";
-
-export declare const data: Provider;
-declare const provider: ProviderCatalog<
-  ${JSON.stringify(providerId)},
-  ${modelUnion}
->;
-export default provider;
-`;
-
+async function buildProviderDeclaration(providerId, index) {
   await writeFile(
     new URL(`../dist/providers/${providerId}.d.ts`, import.meta.url),
-    output,
+    `export { data, P${index} as default } from "../generated/model-ids.js";\n`,
   );
+}
+
+function providerTypes(providers) {
+  const declarations = [...providers.keys()].map((id, index) =>
+    `export declare const P${index}: ProviderEntry<${JSON.stringify(id)}>;`
+  );
+  return `import type { Provider, ProviderCatalog } from "../types.js";
+export declare const data: Provider;
+type ProviderEntry<Id extends keyof CatalogModelIds> =
+  ProviderCatalog<Id, CatalogModelIds[Id]>;
+${modelTypes(providers)}${declarations.join("\n")}
+`;
 }
 
 function fullModule(providerIds, variables) {
