@@ -32,7 +32,6 @@ defmodule LLMDB.InferenceCatalogTest do
     assert {:ok, model} = LLMDB.model("inference:deepseek-v4.1-flash-1017")
     refute model.catalog_only
     assert model.limits == %{context: 1_040_000, output: 393_216}
-    assert model.cost == %{input: 0.3, output: 1.0, cache_read: 0.007}
     assert model.capabilities.reasoning.effort.values == ~w(none low high max)
     assert model.capabilities.tools.enabled
     assert model.capabilities.json.strict
@@ -43,6 +42,15 @@ defmodule LLMDB.InferenceCatalogTest do
       assert contract.family == "openai_chat_compatible"
       assert contract.wire_protocol == "openai_chat"
       assert contract.path == "/chat/completions"
+    end
+  end
+
+  test "packages the prices from the cached Inference.net catalog" do
+    {:ok, source} = InferenceNet.load(%{})
+
+    for source_model <- source["inference"].models do
+      assert {:ok, model} = LLMDB.model({:inference, source_model.id})
+      assert model.cost == source_model.cost
     end
   end
 
