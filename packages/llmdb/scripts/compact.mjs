@@ -39,11 +39,58 @@ export function compactStrings(values, maximumEntries = 256) {
     .map(({ value }) => value);
 }
 
-export function compactValue(value, keyIndexes, stringIndexes) {
+export function compactStructures(
+  values,
+  keyIndexes,
+  stringIndexes,
+  maximumEntries = 64,
+) {
+  const counts = new Map();
+
+  for (const value of values) {
+    countStructures(value, counts);
+  }
+
+  const tokenSize = JSON.stringify([3, Math.max(0, maximumEntries - 1)]).length;
+
+  return [...counts]
+    .filter(([, { count }]) => count > 1)
+    .map(([source, { count, value }]) => {
+      const size = Buffer.byteLength(
+        JSON.stringify(compactValue(value, keyIndexes, stringIndexes)),
+      );
+
+      return {
+        estimatedSavings: count * (size - tokenSize) - size - 1,
+        source,
+        value,
+      };
+    })
+    .filter(({ estimatedSavings }) => estimatedSavings > 0)
+    .sort(
+      (left, right) =>
+        right.estimatedSavings - left.estimatedSavings ||
+        left.source.localeCompare(right.source),
+    )
+    .slice(0, maximumEntries)
+    .map(({ value }) => value);
+}
+
+export function compactValue(value, keyIndexes, stringIndexes, structureIndexes) {
+  if (value !== null && typeof value === "object" && structureIndexes) {
+    const structureIndex = structureIndexes.get(JSON.stringify(value));
+
+    if (structureIndex !== undefined) {
+      return [3, structureIndex];
+    }
+  }
+
   if (Array.isArray(value)) {
     return [
       1,
-      ...value.map((item) => compactValue(item, keyIndexes, stringIndexes)),
+      ...value.map((item) =>
+        compactValue(item, keyIndexes, stringIndexes, structureIndexes),
+      ),
     ];
   }
 
@@ -53,7 +100,7 @@ export function compactValue(value, keyIndexes, stringIndexes) {
     for (const [key, childValue] of Object.entries(value)) {
       result.push(
         keyIndexes.get(key) ?? key,
-        compactValue(childValue, keyIndexes, stringIndexes),
+        compactValue(childValue, keyIndexes, stringIndexes, structureIndexes),
       );
     }
 
@@ -65,6 +112,23 @@ export function compactValue(value, keyIndexes, stringIndexes) {
   }
 
   return value;
+}
+
+function countStructures(value, counts) {
+  if (value === null || typeof value !== "object") {
+    return;
+  }
+
+  const source = JSON.stringify(value);
+
+  if (source.length >= 32 && source.length <= 20_000) {
+    const previous = counts.get(source);
+    counts.set(source, { count: (previous?.count ?? 0) + 1, value });
+  }
+
+  for (const child of Object.values(value)) {
+    countStructures(child, counts);
+  }
 }
 
 function countObjectKeys(value, counts) {

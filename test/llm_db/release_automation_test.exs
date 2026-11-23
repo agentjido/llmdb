@@ -3,6 +3,7 @@ defmodule LLMDB.ReleaseAutomationTest do
 
   @workflow_path ".github/workflows/release.yml"
   @integration_workflow_path ".github/workflows/integrate-snapshot.yml"
+  @metadata_workflow_path ".github/workflows/build-metadata.yml"
   @ci_workflow_path ".github/workflows/ci.yml"
   @config_path "config/config.exs"
   @changelog_path "CHANGELOG.md"
@@ -90,6 +91,28 @@ defmodule LLMDB.ReleaseAutomationTest do
     assert task =~ ~S|put_in(artifact, [:metadata, "source_commit"], source_commit!())|
     assert task =~ ~S|System.cmd("git", ["status", "--porcelain"|
     assert task =~ ~S|System.cmd("git", ["rev-parse", "HEAD"]|
+  end
+
+  test "metadata automation checks the NPM package before commits and publication" do
+    for path <- [@metadata_workflow_path, @integration_workflow_path] do
+      workflow = File.read!(path)
+
+      assert workflow =~ "uses: actions/setup-node@"
+      assert workflow =~ ~s(node-version: "24")
+      {install, _} = :binary.match(workflow, "npm ci")
+      {check, _} = :binary.match(workflow, "npm run npm:check")
+      {commit, _} = :binary.match(workflow, "git add ")
+      {publish, _} = :binary.match(workflow, "mix llm_db.snapshot.publish")
+
+      assert install < check
+      assert check < commit
+      assert check < publish
+    end
+
+    integration = File.read!(@integration_workflow_path)
+    {rebase, _} = :binary.match(integration, "git rebase origin/main")
+    {install, _} = :binary.match(integration, "npm ci")
+    assert rebase < install
   end
 
   test "git_ops reads the previous version from the changelog" do

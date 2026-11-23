@@ -258,7 +258,7 @@ defmodule LLMDB.Catalog do
   def resolve_bare(nil, _model_id), do: {:error, :not_found}
 
   def resolve_bare(catalog, model_id) when is_map(catalog) and is_binary(model_id) do
-    direct = Map.get(resolutions_by_model_id(catalog), model_id, [])
+    direct = direct_resolutions(catalog, model_id)
 
     lookup = fn provider_id, lookup_id, mode ->
       lookup_model(catalog, provider_id, lookup_id, mode)
@@ -322,7 +322,8 @@ defmodule LLMDB.Catalog do
   defp put_resolution_indexes(catalog, models) do
     Map.merge(catalog, %{
       __llm_db_provider_lookup_ids__: index_provider_lookup_ids(catalog.providers),
-      __llm_db_resolutions_by_model_id__: index_resolutions(models),
+      __llm_db_model_keys_by_id__:
+        index_resolution_keys(models, catalog.models_by_key, catalog.aliases_by_key),
       __llm_db_model_id_prefixes__: LLMDB.ModelResolver.prefix_rules(catalog.providers)
     })
   end
@@ -377,34 +378,47 @@ defmodule LLMDB.Catalog do
     end)
   end
 
-  defp index_resolutions(models) do
+  defp index_resolution_keys(models, models_by_key, aliases_by_key) do
     direct =
-      Map.new(models, fn model ->
-        provider = field(model, :provider)
-        canonical_id = field(model, :id)
-        {{provider, canonical_id}, {provider, canonical_id, model}}
+      Enum.reduce(models_by_key, %{}, fn {{_provider, id} = key, _model}, acc ->
+        # An alias takes precedence over a canonical ID within the same provider.
+        if Map.has_key?(aliases_by_key, key) do
+          acc
+        else
+          Map.update(acc, id, [key], &[key | &1])
+        end
       end)
 
-    aliases =
-      Enum.reduce(models, %{}, fn model, acc ->
-        provider = field(model, :provider)
-        canonical_id = field(model, :id)
-        resolution = {provider, canonical_id, model}
+    models
+    |> alias_resolution_keys(models_by_key, aliases_by_key)
+    |> Enum.reduce(direct, fn {{_provider, alias_name}, reference}, acc ->
+      Map.update(acc, alias_name, [reference], &[reference | &1])
+    end)
+    |> Map.new(fn {lookup_id, keys} ->
+      {lookup_id, Enum.sort_by(keys, &elem(&1, 0))}
+    end)
+  end
 
-        Enum.reduce(field(model, :aliases) || [], acc, fn alias_name, entries ->
-          Map.put(entries, {provider, alias_name}, resolution)
+  defp alias_resolution_keys(models, models_by_key, aliases_by_key) do
+    if length(models) == map_size(models_by_key) do
+      Map.new(aliases_by_key, fn {{provider, _alias} = key, id} -> {key, {provider, id}} end)
+    else
+      # Legacy flat snapshots can contain duplicate model IDs. Bare aliases
+      # resolve to the row that declared the alias, even if a later row wins
+      # the canonical ID. Only those shadowed rows need an inline value.
+      Enum.reduce(models, %{}, fn model, index ->
+        provider = field(model, :provider)
+        id = field(model, :id)
+        key = {provider, id}
+
+        reference =
+          if Map.fetch!(models_by_key, key) === model, do: key, else: {provider, id, model}
+
+        Enum.reduce(field(model, :aliases) || [], index, fn name, acc ->
+          Map.put(acc, {provider, name}, reference)
         end)
       end)
-
-    direct
-    |> Map.merge(aliases)
-    |> Enum.group_by(
-      fn {{_provider, lookup_id}, _resolution} -> lookup_id end,
-      fn {_key, resolution} -> resolution end
-    )
-    |> Map.new(fn {lookup_id, resolutions} ->
-      {lookup_id, Enum.sort_by(resolutions, fn {provider, _canonical_id, _model} -> provider end)}
-    end)
+    end
   end
 
   defp provider_lookup_ids(catalog, provider_id) do
@@ -418,11 +432,17 @@ defmodule LLMDB.Catalog do
 
   defp provider_lookup_index(catalog), do: index_provider_lookup_ids(providers(catalog))
 
-  defp resolutions_by_model_id(%{__llm_db_resolutions_by_model_id__: index})
-       when is_map(index),
-       do: index
+  defp direct_resolutions(%{__llm_db_model_keys_by_id__: index, models_by_key: models}, model_id),
+    do: fetch_resolutions(index, models, model_id)
 
-  defp resolutions_by_model_id(catalog) do
+  defp direct_resolutions(
+         %{__llm_db_resolutions_by_model_id__: index},
+         model_id
+       )
+       when is_map(index),
+       do: Map.get(index, model_id, [])
+
+  defp direct_resolutions(catalog, model_id) do
     models =
       cond do
         is_map(Map.get(catalog, :models)) ->
@@ -438,7 +458,16 @@ defmodule LLMDB.Catalog do
           []
       end
 
-    index_resolutions(models)
+    models_by_key = index_models(models)
+    index = index_resolution_keys(models, models_by_key, index_aliases(models))
+    fetch_resolutions(index, models_by_key, model_id)
+  end
+
+  defp fetch_resolutions(index, models, model_id) do
+    Enum.map(Map.get(index, model_id, []), fn
+      {provider, canonical_id} = key -> {provider, canonical_id, Map.fetch!(models, key)}
+      {_provider, _canonical_id, _model} = resolution -> resolution
+    end)
   end
 
   defp fetch_model(catalog, provider, lookup_id, mode) do
