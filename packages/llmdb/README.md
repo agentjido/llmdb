@@ -139,3 +139,31 @@ imports and common bundlers need no file-system access or decompression.
 
 The NPM version is downstream from the `@version` value in `mix.exs`. Run
 `npm run npm:sync` at the repository root after the Elixir version changes.
+
+
+## Explicit metadata lookup and full downloads
+
+Use the existing lookup APIs for local data. Use the online entry point to
+query LLMCatalog for display, pricing, and lifecycle metadata for one exact offer.
+
+```ts
+import { fetchModel } from "@agentjido/llmdb/online";
+
+const model = await fetchModel("openrouter:openai/gpt-3.5-turbo-0613", {
+  timeoutMs: 5_000,
+});
+```
+
+For the complete offline catalog, get `catalog-full.json` and
+`catalog-manifest.json` from the GitHub release that matches your package
+version. Verify the release version, snapshot ID, byte count, and SHA-256 before
+loading the trusted file. This example loads the verified file in Node.
+
+```ts
+import { readFile } from "node:fs/promises";
+import { createCatalogFromSnapshot, type Snapshot } from "@agentjido/llmdb";
+
+const snapshot: Snapshot = JSON.parse(await readFile("catalog-full.json", "utf8"));
+const catalog = createCatalogFromSnapshot(snapshot);
+const model = catalog.get("openrouter:openai/gpt-3.5-turbo-0613");
+```

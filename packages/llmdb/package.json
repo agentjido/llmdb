@@ -58,6 +58,11 @@
       "import": "./dist/providers/*.js",
       "default": "./dist/providers/*.js"
     },
+    "./online": {
+      "types": "./dist/online.d.ts",
+      "import": "./dist/online.js",
+      "default": "./dist/online.js"
+    },
     "./package.json": "./package.json"
   },
   "publishConfig": {
