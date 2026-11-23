@@ -7,6 +7,11 @@ This project uses [Calendar Versioning](https://calver.org/) with the format `YY
 
 <!-- changelog -->
 
+## [2026.11.6](https://github.com/agentjido/llmdb/compare/2026.11.5...2026.11.6) (2026-11-23)
+
+
+
+
 ## [2026.11.5](https://github.com/agentjido/llmdb/compare/2026.11.4...2026.11.5) (2026-11-23)
 
 
