@@ -25941,7 +25941,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-20T15:02:44.7865033Z",
+      "modifiedTime": "2026-11-22T20:38:07.3838454Z",
       "name": "o1",
       "orginAssetId": null,
       "parentModelId": null,
@@ -25966,7 +25966,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 264,
+    "updateSequence": 326,
     "usage": {
       "popularity": 67.9,
       "totalCount": 4
@@ -29411,7 +29411,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-20T15:02:46.8146341Z",
+      "modifiedTime": "2026-11-22T20:38:26.679765Z",
       "name": "o3-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -29437,7 +29437,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 265,
+    "updateSequence": 327,
     "usage": {
       "popularity": 69.01,
       "totalCount": 0
@@ -73092,7 +73092,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-20T15:02:45.2084273Z",
+      "modifiedTime": "2026-11-22T20:39:09.7800755Z",
       "name": "o3",
       "orginAssetId": null,
       "parentModelId": null,
@@ -73117,7 +73117,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 277,
+    "updateSequence": 339,
     "usage": {
       "popularity": 69.37,
       "totalCount": 2
@@ -73387,7 +73387,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-20T16:53:22.5869864Z",
+      "modifiedTime": "2026-11-22T20:38:57.1489599Z",
       "name": "o4-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -73413,7 +73413,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 345,
+    "updateSequence": 407,
     "usage": {
       "popularity": 69.13,
       "totalCount": 0
@@ -84145,7 +84145,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-20T15:02:46.1243668Z",
+      "modifiedTime": "2026-11-22T20:37:56.0569106Z",
       "name": "o3-pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -84170,7 +84170,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 225,
+    "updateSequence": 287,
     "usage": {
       "popularity": 68.56,
       "totalCount": 0
@@ -84416,7 +84416,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-17T18:36:37.6157277Z",
+      "modifiedTime": "2026-11-22T20:37:47.878776Z",
       "name": "codex-mini",
       "orginAssetId": null,
       "parentModelId": null,
@@ -84441,7 +84441,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 172,
+    "updateSequence": 234,
     "usage": {
       "popularity": 68.71,
       "totalCount": 0
@@ -300015,7 +300015,7 @@
         "toolResponseStart": null,
         "benchmark": null,
         "maapSurcharge": null,
-        "inferenceDeprecationDate": "2027-11-04T00:00:00Z",
+        "inferenceDeprecationDate": null,
         "deploymentOptions": [
           "UnifiedEndpointMaaS",
           "Serverless API"
@@ -300039,7 +300039,8 @@
         "skuToNumReplicasMap": null,
         "fineTuningTasks": null,
         "inferenceTasks": [
-          "chat-completion"
+          "chat-completion",
+          "responses"
         ],
         "maasFinetuningOffer": null,
         "evaluationComputeAllowed": null,
@@ -300099,7 +300100,7 @@
         "modelPath": null,
         "filterAuthor": null,
         "inferenceComputeAllowed": null,
-        "licenseDescription": "Use of the Moonshot AI Kimi-K3.1-Pro model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Kimi K3.1 Pro License, available at <https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/LICENSE>.",
+        "licenseDescription": "Use of the Moonshot AI Kimi-K3.1-Pro model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Kimi K3.1 Pro License, available at <https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/LICENSE>. (*Note- Access through Microsoft Foundry is considered access through \"**Certified Inference Partners**\"*).",
         "fineTuneOnlyModel": null,
         "longContextRetirementDate": null,
         "contactInformation": null,
@@ -300131,7 +300132,6 @@
       },
       "tags": {
         "Featured": "",
-        "InferenceDeprecationDate": "11/04/2027 00:00:00 +00:00",
         "author": "Moonshot AI",
         "deploymentOptions": "UnifiedEndpointMaaS,Serverless API",
         "disable-batch": "true",
@@ -300143,7 +300143,7 @@
         "keywords": "Reasoning,Multilingual,Coding,Agents",
         "languages": "en",
         "license": "other",
-        "licenseDescription": "Use of the Moonshot AI Kimi-K3.1-Pro model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Kimi K3.1 Pro License, available at <https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/LICENSE>.",
+        "licenseDescription": "Use of the Moonshot AI Kimi-K3.1-Pro model as an [Azure Direct Model](https://www.microsoft.com/licensing/terms/product/Glossary/all) is subject to the terms of the Kimi K3.1 Pro License, available at <https://huggingface.co/moonshotai/Kimi-K3.1-Pro/blob/main/LICENSE>. (*Note- Access through Microsoft Foundry is considered access through \"**Certified Inference Partners**\"*).",
         "lifecycle": "Generally Available",
         "maas-inference": "true",
         "maxOutputTokens": "262144",
@@ -300152,7 +300152,7 @@
         "outputModalities": "text",
         "pricingLink": "https://aka.ms/Kimi-k3-Pricing",
         "summary": "Kimi K3.1-Pro is an open-weight, native multimodal agentic model and Moonshot Ai's most capable model to date.",
-        "task": "chat-completion",
+        "task": "chat-completion,responses",
         "textContextWindow": "1048576"
       }
     },
@@ -300193,7 +300193,7 @@
       "modelFormat": "CUSTOM",
       "modelFramework": "Custom",
       "modelFrameworkVersion": null,
-      "modifiedTime": "2026-11-11T20:49:22.5250497Z",
+      "modifiedTime": "2026-11-23T19:58:24.077206Z",
       "name": "Kimi-K3.1-Pro",
       "orginAssetId": null,
       "parentModelId": null,
@@ -300214,7 +300214,7 @@
     "resourceType": "Registry",
     "schemaId": "d75e6b90-80e8-5138-a655-37b58801194c",
     "type": "models",
-    "updateSequence": 28,
+    "updateSequence": 32,
     "usage": {
       "popularity": 72.69,
       "totalCount": 0

@@ -2,6 +2,92 @@
   "data": [
     {
       "capabilities": {
+        "reasoning": false
+      },
+      "context_length": 20000,
+      "created": 1795144060,
+      "display_name": "KlingAI: Kling-4.0",
+      "id": "klingai/kling-4.0",
+      "input_modalities": [
+        "text",
+        "image",
+        "video"
+      ],
+      "object": "model",
+      "output_modalities": [
+        "video"
+      ],
+      "owned_by": "klingai",
+      "pricings": {
+        "audio_and_video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.094
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.141
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.157
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.235
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.329
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.549
+          }
+        ],
+        "video": [
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.094
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.141
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.157
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.235
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.329
+          },
+          {
+            "currency": "USD",
+            "unit": "perSecond",
+            "value": 0.549
+          }
+        ]
+      },
+      "publish_time": "2026-11-20"
+    },
+    {
+      "capabilities": {
         "reasoning": true
       },
       "context_length": 1048576,
@@ -336,24 +422,24 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.2
+            "value": 3.78
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7
+            "value": 6.3
           }
         ],
         "video": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.2
+            "value": 3.78
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7
+            "value": 6.3
           }
         ]
       },
@@ -2847,75 +2933,6 @@
     },
     {
       "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 8000,
-      "created": 1790148935,
-      "display_name": "inclusionAI: Ming Image 0.1 Design",
-      "id": "inclusionai/ming-image-0.1-design",
-      "input_modalities": [
-        "text"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "image"
-      ],
-      "owned_by": "inclusionai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-09-22"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 8000,
-      "created": 1790215997,
-      "display_name": "inclusionAI: Ming Image 0.1 Design Layer",
-      "id": "inclusionai/ming-image-0.1-design-layer",
-      "input_modalities": [
-        "text",
-        "image"
-      ],
-      "object": "model",
-      "output_modalities": [
-        "image"
-      ],
-      "owned_by": "inclusionai",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0
-          }
-        ]
-      },
-      "publish_time": "2026-09-22"
-    },
-    {
-      "capabilities": {
         "reasoning": true
       },
       "context_length": 1048576,
@@ -5149,84 +5166,84 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2.85
+            "value": 2.565
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.65
+            "value": 4.185
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.4
+            "value": 5.76
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.4
+            "value": 5.76
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7
+            "value": 6.3
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 10.7
+            "value": 9.63
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 10.7
+            "value": 9.63
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 11.7
+            "value": 10.53
           }
         ],
         "video": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2.85
+            "value": 2.565
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.65
+            "value": 4.185
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.4
+            "value": 5.76
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.4
+            "value": 5.76
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7
+            "value": 6.3
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 10.7
+            "value": 9.63
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 10.7
+            "value": 9.63
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 11.7
+            "value": 10.53
           }
         ]
       },
@@ -8086,6 +8103,13 @@
       ],
       "owned_by": "google",
       "pricings": {
+        "audio_input": [
+          {
+            "currency": "USD",
+            "unit": "perMTokens",
+            "value": 6.5
+          }
+        ],
         "completion": [
           {
             "currency": "USD",
@@ -8980,84 +9004,84 @@
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2.353
+            "value": 2.1177
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 3.8236
+            "value": 3.44124
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.1177
+            "value": 3.70593
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.1177
+            "value": 3.70593
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.5589
+            "value": 4.10301
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.7649
+            "value": 6.08841
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.7649
+            "value": 6.08841
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7.5002
+            "value": 6.75018
           }
         ],
         "video": [
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 2.353
+            "value": 2.1177
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 3.8236
+            "value": 3.44124
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.1177
+            "value": 3.70593
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.1177
+            "value": 3.70593
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 4.5589
+            "value": 4.10301
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.7649
+            "value": 6.08841
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 6.7649
+            "value": 6.08841
           },
           {
             "currency": "USD",
             "unit": "perMTokens",
-            "value": 7.5002
+            "value": 6.75018
           }
         ]
       },
@@ -14895,41 +14919,6 @@
         ]
       },
       "publish_time": "2025-04-04"
-    },
-    {
-      "capabilities": {
-        "reasoning": false
-      },
-      "context_length": 128000,
-      "created": 1764216354,
-      "display_name": "Meta: Llama 3.3 70B Instruct",
-      "id": "meta/llama-3.3-70b-instruct",
-      "input_modalities": [
-        "text"
-      ],
-      "max_tokens": 4096,
-      "object": "model",
-      "output_modalities": [
-        "text"
-      ],
-      "owned_by": "meta",
-      "pricings": {
-        "completion": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 1.2
-          }
-        ],
-        "prompt": [
-          {
-            "currency": "USD",
-            "unit": "perMTokens",
-            "value": 0.6
-          }
-        ]
-      },
-      "publish_time": "2024-12-06"
     },
     {
       "capabilities": {
