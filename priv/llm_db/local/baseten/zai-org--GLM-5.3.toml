@@ -1,0 +1,11 @@
+# Verified 2026-11-27 against the provider's model example.
+id = "zai-org/GLM-5.3"
+doc_url = "https://www.baseten.co/resources/changelog/glm-53-available-on-baseten/"
+catalog_only = false
+
+[execution.text]
+supported = true
+family = "openai_chat_compatible"
+wire_protocol = "openai_chat"
+transport = "http_request"
+path = "/chat/completions"

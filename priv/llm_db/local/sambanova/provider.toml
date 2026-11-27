@@ -1,0 +1,12 @@
+id = "sambanova"
+base_url = "https://api.sambanova.ai/v1"
+env = ["SAMBANOVA_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.sambanova.ai/v1"
+doc_url = "https://docs.sambanova.ai/docs/en/features/openai-compatibility"
+
+[runtime.auth]
+type = "bearer"
+env = ["SAMBANOVA_API_KEY"]

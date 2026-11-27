@@ -1,0 +1,12 @@
+id = "huggingface"
+base_url = "https://router.huggingface.co/v1"
+env = ["HF_TOKEN"]
+catalog_only = false
+
+[runtime]
+base_url = "https://router.huggingface.co/v1"
+doc_url = "https://huggingface.co/docs/inference-providers/guides/gpt-oss"
+
+[runtime.auth]
+type = "bearer"
+env = ["HF_TOKEN"]

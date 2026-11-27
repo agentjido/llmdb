@@ -1,0 +1,5 @@
+# https://docs.ollama.com/api/openai-compatibility
+id = "gemma4:31b"
+
+[capabilities.streaming]
+text = true

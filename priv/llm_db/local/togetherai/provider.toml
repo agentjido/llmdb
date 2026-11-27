@@ -1,7 +1,8 @@
 id = "togetherai"
+base_url = "https://api.together.ai/v1"
 
 [runtime]
-base_url = "https://api.together.xyz/v1"
+base_url = "https://api.together.ai/v1"
 doc_url = "https://docs.together.ai/docs/serverless-models"
 
 [runtime.auth]

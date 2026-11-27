@@ -1,0 +1,12 @@
+id = "baseten"
+base_url = "https://inference.baseten.co/v1"
+env = ["BASETEN_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://inference.baseten.co/v1"
+doc_url = "https://www.baseten.co/resources/changelog/glm-53-available-on-baseten/"
+
+[runtime.auth]
+type = "bearer"
+env = ["BASETEN_API_KEY"]

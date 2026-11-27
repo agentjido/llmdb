@@ -18,7 +18,6 @@ defmodule LLMDB.ProviderRuntimeDataTest do
     :fireworks_ai,
     :minimax,
     :friendli,
-    :ollama_cloud,
     :deepseek,
     :alibaba,
     :venice,
@@ -56,6 +55,10 @@ defmodule LLMDB.ProviderRuntimeDataTest do
       assert runtime.execution.text == family
       assert is_list(runtime.auth.env) and runtime.auth.env != []
     end
+
+    ollama_cloud = provider_runtime(providers, :ollama_cloud)
+    assert ollama_cloud.execution.text == "openai_chat_compatible"
+    refute Map.has_key?(ollama_cloud.execution, :object)
 
     albert = provider_runtime(providers, :albert)
     assert albert.base_url == "https://albert.api.etalab.gouv.fr/v1"

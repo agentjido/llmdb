@@ -1,0 +1,12 @@
+id = "deepinfra"
+base_url = "https://api.deepinfra.com/v1/openai"
+env = ["DEEPINFRA_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.deepinfra.com/v1/openai"
+doc_url = "https://deepinfra.com/openai/gpt-oss-120b/api"
+
+[runtime.auth]
+type = "bearer"
+env = ["DEEPINFRA_API_KEY"]

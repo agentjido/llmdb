@@ -1,0 +1,70 @@
+# https://ollama.com/pricing and https://ollama.com/library/deepseek-v4-pro/tags
+id = "deepseek-v4-pro"
+
+[pricing]
+currency = "USD"
+
+[[pricing.components]]
+id = "token.input"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 0.66
+applies_when = { pricing_period = "off_peak" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 1.98
+applies_when = { pricing_period = "off_peak" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.022
+applies_when = { pricing_period = "off_peak" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.input.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "input_tokens"
+rate = 1.32
+applies_when = { pricing_period = "peak" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.output.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "output_tokens"
+rate = 3.96
+applies_when = { pricing_period = "peak" }
+source = "provider_docs"
+
+[[pricing.components]]
+id = "token.cache_read.peak"
+kind = "token"
+unit = "token"
+per = 1000000
+meter = "cache_read_tokens"
+rate = 0.044
+applies_when = { pricing_period = "peak" }
+source = "provider_docs"
+
+[extra.pricing]
+source_urls = ["https://ollama.com/pricing"]
+sources_checked_at = "2026-11-27"
+peak_window = "Weekdays 12:00 to 18:00 UTC. Off-peak at other times."

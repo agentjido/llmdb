@@ -1,0 +1,12 @@
+id = "nebius"
+base_url = "https://api.tokenfactory.nebius.com/v1"
+env = ["NEBIUS_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.tokenfactory.nebius.com/v1"
+doc_url = "https://github.com/nebius/token-factory-cookbook/blob/main/models/gpt_oss_1.ipynb"
+
+[runtime.auth]
+type = "bearer"
+env = ["NEBIUS_API_KEY"]
