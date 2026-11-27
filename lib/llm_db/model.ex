@@ -353,8 +353,8 @@ defmodule LLMDB.Model do
 
   defp put_field(attrs, key, value) do
     attrs
+    |> Map.delete(Atom.to_string(key))
     |> Map.put(key, value)
-    |> Map.put(to_string(key), value)
   end
 
   defp normalize_execution_attrs(attrs) do
@@ -387,11 +387,7 @@ defmodule LLMDB.Model do
   defp update_in_nested_map(attrs, key, fun) when is_map(attrs) do
     case Map.get(attrs, key) || Map.get(attrs, to_string(key)) do
       nested when is_map(nested) ->
-        normalized = fun.(nested)
-
-        attrs
-        |> Map.put(key, normalized)
-        |> Map.put(to_string(key), normalized)
+        put_field(attrs, key, fun.(nested))
 
       _other ->
         attrs
@@ -408,9 +404,7 @@ defmodule LLMDB.Model do
         other -> other
       end
 
-    map
-    |> Map.put(key, normalized)
-    |> Map.put(to_string(key), normalized)
+    put_field(map, key, normalized)
   end
 
   @doc """

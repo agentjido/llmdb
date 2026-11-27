@@ -169,11 +169,9 @@ defmodule LLMDB.Provider do
   defp update_in_nested_map(attrs, key, fun) when is_map(attrs) do
     case Map.get(attrs, key) || Map.get(attrs, to_string(key)) do
       nested when is_map(nested) ->
-        normalized = fun.(nested)
-
         attrs
-        |> Map.put(key, normalized)
-        |> Map.put(to_string(key), normalized)
+        |> Map.delete(Atom.to_string(key))
+        |> Map.put(key, fun.(nested))
 
       _other ->
         attrs
@@ -190,7 +188,7 @@ defmodule LLMDB.Provider do
       end
 
     map
+    |> Map.delete(Atom.to_string(key))
     |> Map.put(key, normalized)
-    |> Map.put(to_string(key), normalized)
   end
 end
