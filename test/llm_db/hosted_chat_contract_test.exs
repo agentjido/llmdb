@@ -56,6 +56,16 @@ defmodule LLMDB.HostedChatContractTest do
     end
   end
 
+  test "Novita uses the documented versioned chat endpoint", %{sources: sources} do
+    source = sources["novita_ai"]
+    assert source.base_url == "https://api.novita.ai/openai/v1"
+    assert source.runtime.base_url == source.base_url
+    model = Enum.find(source.models, &(&1.id == "openai/gpt-oss-120b"))
+
+    assert source.runtime.base_url <> model.execution.text.path ==
+             "https://api.novita.ai/openai/v1/chat/completions"
+  end
+
   test "the published Ollama Cloud prices require a pricing period for aliases and dated tags", %{
     sources: sources
   } do
