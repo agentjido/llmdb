@@ -1,0 +1,5 @@
+# https://docs.together.ai/docs/inference/chat/overview#stream-responses
+id = "Qwen/Qwen3.5-9B"
+
+[capabilities.streaming]
+text = true

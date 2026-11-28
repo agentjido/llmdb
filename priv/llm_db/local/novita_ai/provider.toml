@@ -1,2 +1,12 @@
 id = "novita_ai"
-base_url = "https://api.novita.ai/openai"
+base_url = "https://api.novita.ai/openai/v1"
+env = ["NOVITA_API_KEY"]
+catalog_only = false
+
+[runtime]
+base_url = "https://api.novita.ai/openai/v1"
+doc_url = "https://docs.novita.ai/api-reference/model-apis-llm-create-chat-completion"
+
+[runtime.auth]
+type = "bearer"
+env = ["NOVITA_API_KEY"]
